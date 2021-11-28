@@ -9,7 +9,7 @@ import com.tlab.mvc.member.model.vo.Member;
 
 /**
  * Application Lifecycle Listener implementation class SessionAttrListener
- *
+ * 
  */
 @WebListener
 public class SessionAttrListener implements HttpSessionAttributeListener {
@@ -33,6 +33,10 @@ public class SessionAttrListener implements HttpSessionAttributeListener {
         	Member loginMember = (Member) value;
         	System.out.println(loginMember.getMemberName() + "님이 로그인 했습니다.");
         }
+//       HttpSession session = se.getSession();
+//       세션리스너를 이용하여 팝업이나 행사 페이지 띄우기-> 쿠키방식이 나음
+//       if (!("denied").equals(session.getAttribute("coupon")))
+//       		session.setAttribute("coupon", "getCoupon");
     }
 
 	/**
