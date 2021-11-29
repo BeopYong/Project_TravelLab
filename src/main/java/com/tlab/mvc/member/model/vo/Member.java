@@ -2,6 +2,7 @@ package com.tlab.mvc.member.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Objects;
 
 public class Member implements Serializable {
 
@@ -68,6 +69,24 @@ public class Member implements Serializable {
 
 	
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(memberId, memberName, password);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Member other = (Member) obj;
+		return Objects.equals(memberId, other.memberId) && Objects.equals(memberName, other.memberName)
+				&& Objects.equals(password, other.password);
+	}
+	
 	public int getNo() {
 		return no;
 	}
