@@ -20,7 +20,7 @@ public class LogFilter implements Filter {
 			throws IOException, ServletException {
 		//전처리
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		String uri = httpRequest.getRequestURI();  // /mvc/member/
+		String uri = httpRequest.getRequestURI();  // /mvc/member/memberList, memberView
 		String queryString = httpRequest.getQueryString();
 		System.out.println("=============================");
 		System.out.println(uri);

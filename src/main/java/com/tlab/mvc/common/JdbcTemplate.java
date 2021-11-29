@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 /**
  * static 자원을 사용하는 jdbc 공용클래스
  */
@@ -18,6 +20,7 @@ public class JdbcTemplate {
 	private static String url; // 접속프로토콜@url:port:sid
 	private static String user;
 	private static String password;
+	
 	
 	static {
 		// build-path의 절대경로 가져오기
@@ -50,6 +53,7 @@ public class JdbcTemplate {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
