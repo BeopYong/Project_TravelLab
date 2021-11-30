@@ -47,9 +47,9 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				member = new Member();
-				member.setMemberId(rset.getString("user_id"));
+				member.setMemberId(rset.getString("member_id"));
 				member.setPassword(rset.getString("password"));
-				member.setMemberName(rset.getString("user_name"));
+				member.setMemberName(rset.getString("member_name"));
 				member.setEmail(rset.getString("email"));
 				member.setPayCode(rset.getInt("paycode"));
 				member.setTel(rset.getString("tel"));
@@ -184,7 +184,7 @@ public class MemberDao {
 		String query = prop.getProperty("updateMemberValid"); 
 		
 		// member-query.properties에서 쿼리를 작성하고 가져온다.
-		// 회원의 id 칼럼명: user_id , 회원명의 칼럼명: user_name 
+		// 회원의 id 칼럼명: member_id , 회원명의 칼럼명: member_name 
 		
 		return result;
 	}
@@ -212,8 +212,8 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Member member = new Member();
-				member.setMemberId(rset.getString("user_id"));
-				member.setMemberName(rset.getString("user_name"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberName(rset.getString("member_name"));
 				member.setEmail(rset.getString("email"));
 				member.setTel(rset.getString("tel"));
 				member.setRegDate(rset.getDate("reg_date"));
