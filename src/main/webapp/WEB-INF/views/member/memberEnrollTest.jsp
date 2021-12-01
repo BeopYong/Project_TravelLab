@@ -156,8 +156,8 @@
 		    	else if (regExp1.test(memberId)) {
 		
 		    		$.ajax({
-		    			url: "<%= request.getContextPath() %>/member/checkIdDuplicateByAjax",
-		    			dataType: "json",
+		    			url: "<%= request.getContextPath() %>/member/checkIdDuplicateByAjax?memberId="+"",
+		    			type: "get",
 		    			data: {
 		    				memberId: $(memberId).val()
 		    			},
