@@ -17,6 +17,7 @@
 				<input type="text"  name="memberName" id="memberName" value="<%= loginMember.getMemberName() %>"  required><br>
 				</td>
 			</tr>
+			
 			<tr>
 				<th>이메일</th>
 				<td>	
@@ -33,7 +34,7 @@
 			<tr>
 				<th>휴대폰</th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="tel" id="tel" maxlength="11" value="<%=loginMember.getMemberName() %>" required><br>
+					<input type="tel" placeholder="(-없이)01012345678" name="tel" id="tel" maxlength="11" value="<%=loginMember.getTel() %>" required><br>
 				</td>
 			</tr>
 		</table>
@@ -43,6 +44,11 @@
         <input type="button" onclick="deleteMember();" value="탈퇴"/>
 	</form>
 </section>
+<!-- 회원탈퇴폼 : POST /member/memberDelete 전송을 위해 시각화되지 않는 폼태그 이용 -->
+<form name="memberDelFrm" action="<%= request.getContextPath() %>/member/memberDelete" method="POST">
+	<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
+</form>
+
 <script>
 /**
  * 회원정보 수정폼 제출
@@ -59,12 +65,14 @@ const updateMember = () => {
 const updatePassword = () => {
 	//다른 경로 요청
 	$(memberUpdateFrm)
-		.attr("action","location.href='<%= request.getContextPath() %>/member/updatePassword';");
+		.attr("action","<%= request.getContextPath() %>/member/updatePassword")
+		.attr("method","GET")
+		.submit();
 }
-
 
 const deleteMember = () => {
 	// 폼의 action값을 할당후 제출!
+	const deleteChk = confirm("Confirm your secession")
 	$(memberUpdateFrm)
 		.attr("action", "<%= request.getContextPath() %>/member/memberDelete")
 		.submit();
@@ -86,8 +94,8 @@ $(memberUpdateFrm).submit((e) => {
 	}
 	
 	//phone
-	const $phone = $(phone);
-	if(!/^010[0-9]{8}$/.test($phone.val())){
+	const $tel = $(tel);
+	if(!/^010[0-9]{8}$/.test($tel.val())){
 		alert("유효한 전화번호가 아닙니다.");
 		return false;
 	}

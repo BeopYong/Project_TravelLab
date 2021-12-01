@@ -23,17 +23,19 @@ public class CheckDuplicateByAjax extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Member member =null;
+		Member member = null;
 		
 		try {
 			// 1.사용자입력값
 			String checkId = request.getParameter("memberId");
+			System.out.println(checkId+"@[chkIdByAjax]");
 			// 2.업무로직 : 1명 조회
 			member = memberService.selectOneMember(checkId);
+			
 		} catch (Exception e) {
 			//아무것도 없으면 성공이므로 메시지 출력 처리 x
 		}
-		System.out.println("[JsonCelebOneServlet] celeb = " + member);
+		System.out.println("[memberCheckIdByAjax] member = " + member);
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(member, response.getWriter());
