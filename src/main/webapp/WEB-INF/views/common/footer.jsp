@@ -2,9 +2,15 @@
     pageEncoding="UTF-8"%>
 		</section>
 
-		<footer>
-			<p>&lt;Copyright 2021- <strong>Travel-Lab</strong>. All rights reserved.&gt;</p>
-		</footer>
+			<footer>
+		<div class="footer">
+			<p>㈜ Travle Lap</p>
+			<p>서울특별시 강남구 강남구 테헤란로14길 6</p>
+			<p>사업자 등록번호: 001-01-0001</p>
+			<p>고객센터 02)1234-1234</p>
+		</div>
+	</footer>
 	</div>
 </body>
 </html>
+	
