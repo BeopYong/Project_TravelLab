@@ -55,10 +55,11 @@ public class MemberDao {
 				member.setTel(rset.getString("tel"));
 				member.setValid(rset.getString("valid"));
 				member.setRegDate(rset.getDate("reg_date"));
+				member.setMemberRole(rset.getString("member_role"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage()+pstmt.toString());
+			logger.debug(e.getMessage() + pstmt.toString());
 		} finally {
 			// 4.자원반납
 			close(rset);
@@ -80,11 +81,11 @@ public class MemberDao {
 			pstmt.setString(4, member.getEmail());
 			pstmt.setInt(5, member.getPayCode());
 			pstmt.setString(6, member.getTel());
-
+			pstmt.setString(7, member.getMemberRole());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage()+pstmt.toString());
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원가입 오류!", e);
 		} finally {
 			// 3.자원반납
@@ -108,7 +109,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage()+pstmt.toString());
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("업데이트 오류!", e);
 		} finally {
 			close(pstmt);
@@ -127,7 +128,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage()+pstmt.toString());
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원 삭제 오류!", e);
 		} finally {
 			close(pstmt);
@@ -147,7 +148,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage()+pstmt.toString());
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("비밀번호 수정 오류!", e);
 		} finally {
 			close(pstmt);
@@ -156,67 +157,84 @@ public class MemberDao {
 	}
 
 	/*
-	 * @혜미님 작업 : 관리자-멤버조회 권한
-	 * 추가 해야 하는 부분  
-	 * 1. 관리자가 member에 대한 valid(차단여부)를 변경하는 부분
+	 * @혜미님 작업 : 관리자-멤버조회 권한 추가 해야 하는 부분 1. 관리자가 member에 대한 valid(차단여부)를 변경하는 부분
 	 * 
-	 * 다음 요청에 대한 Servlet생성한다. ("/admin/updateMemberValid")
-	 * member가 자신의 정보를 업데이트 하듯이 관리자가 updateValid하는 쿼리를 작성한다.
+	 * 다음 요청에 대한 Servlet생성한다. ("/admin/updateMemberValid") member가 자신의 정보를 업데이트 하듯이
+	 * 관리자가 updateValid하는 쿼리를 작성한다.
 	 * 
 	 * 2. 관리자가 member를 삭제하는 부분
 	 * 
 	 * 다음 요청에 대한 Servlet생성 ("/admin/deleteMember")
 	 * 
-	 * member가 delete 하듯이 admin서블릿에서 deleteMember요청을 수행한다.
-	 * 기존의 Dao 명령을 쓰되 서블릿에서 admin의 역할을 확인하고 진행하도록 한다.
+	 * member가 delete 하듯이 admin서블릿에서 deleteMember요청을 수행한다. 기존의 Dao 명령을 쓰되 서블릿에서
+	 * admin의 역할을 확인하고 진행하도록 한다.
 	 * 
-	 * 관리자는 admin이고 admin_role은 'A' 와 'B' 등급으로 나뉘며,
-	 * B등급 관리자는 회원을 삭제할 수 없다. 
+	 * 관리자는 admin이고 admin_role은 'A' 와 'B' 등급으로 나뉘며, B등급 관리자는 회원을 삭제할 수 없다.
 	 * 
 	 */
-	
-	
+
 	// 관리자용 요청처리 DAO
-	
+
 	public int updateValid(Connection conn, Member member) {
-		int result =0;
+		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateMemberValid"); 
-		
+		String query = prop.getProperty("updateMemberValid");
+
 		// member-query.properties에서 쿼리를 작성하고 가져온다.
-		// 회원의 id 칼럼명: member_id , 회원명의 칼럼명: member_name 
-		
+		// 회원의 id 칼럼명: member_id , 회원명의 칼럼명: member_name
+
 		return result;
 	}
-	
-	
-	
+
+	public int updateMemberRole(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateMemberRole");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberRole());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원권한변경 오류!", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	public List<Member> searchMember(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("searchMember");
 		ResultSet rset = null;
 		List<Member> list = new ArrayList<>();
-		
+
 		String searchType = (String) param.get("searchType");
-		
+
 		String searchKeyword = (String) param.get("searchKeyword");
-		
-		switch(searchType) {
-			case "memberId": sql += " member_id like '%" + searchKeyword + "%'"; break;
-			case "memberName": sql += " member_name like '%" + searchKeyword + "%'"; break;
+
+		switch (searchType) {
+		case "memberId":
+			sql += " member_id like '%" + searchKeyword + "%'";
+			break;
+		case "memberName":
+			sql += " member_name like '%" + searchKeyword + "%'";
+			break;
 		}
 		System.out.println("sql@dao = " + sql);
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				Member member = new Member();
 				member.setMemberId(rset.getString("member_id"));
 				member.setMemberName(rset.getString("member_name"));
 				member.setEmail(rset.getString("email"));
 				member.setTel(rset.getString("tel"));
 				member.setRegDate(rset.getDate("reg_date"));
+				member.setMemberRole("member_role");
 				list.add(member);
 			}
 		} catch (SQLException e) {
@@ -228,12 +246,7 @@ public class MemberDao {
 		}
 		return list;
 	}
-	
-	
-	
-	
-	
-	
+
 	public List<Member> selectAllMember(Connection conn, Map<String, Object> param) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllMember");
@@ -266,16 +279,17 @@ public class MemberDao {
 		}
 		return list;
 	}
+
 	public int totalMemberCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectTotalMemberCount");
 		ResultSet rset = null;
 		int totalCount = 0;
 		try {
-			pstmt =conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			if(rset.next())
-				totalCount = rset.getInt(1); //컬럼 인덱스
+			if (rset.next())
+				totalCount = rset.getInt(1); // 컬럼 인덱스
 		} catch (SQLException e) {
 			logger.debug(e.getMessage());
 			e.printStackTrace();
@@ -285,5 +299,5 @@ public class MemberDao {
 		}
 		return totalCount;
 	}
-	
+
 }

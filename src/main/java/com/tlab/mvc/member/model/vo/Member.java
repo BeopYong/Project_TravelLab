@@ -21,6 +21,7 @@ public class Member implements Serializable {
 	private String tel;
 	private String valid;
 	private Date regDate;
+	private String memberRole;
 
 	// 생성자 
 	public Member() {
@@ -51,6 +52,8 @@ public class Member implements Serializable {
 		this.email=email;
 		this.tel=tel;		
 	}
+	// admin용 생성자 
+	
 	
 	// 전체 정보 입력 생성자 
 	public Member(int no, String memberId, String password, String memberName, String email, int payCode, String tel,
@@ -67,8 +70,8 @@ public class Member implements Serializable {
 		this.regDate = regDate;
 	}
 
-	
 
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(memberId, memberName, password);
@@ -141,6 +144,14 @@ public class Member implements Serializable {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	public String getMemberRole() {
+		return memberRole;
+	}
+	public void setMemberRole(String memberRole) {
+		this.memberRole = memberRole;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", memberId=" + memberId + ", password=" + password + ", memberName=" + memberName
