@@ -1,6 +1,5 @@
 package com.tlab.mvc.member.model.service;
 
-
 import static com.tlab.mvc.common.JdbcTemplate.*;
 
 import com.tlab.mvc.member.model.dao.MemberDao;
@@ -12,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class MemberService {
+
+	public static final String USER_ROLE = "U";
+	public static final String SELLER_ROLE = "S";
+	public static final String ADMIN_ROLE = "A";
 
 	private MemberDao memberDao = new MemberDao();
 
@@ -96,19 +99,36 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	
+
 	public List<Member> searchMember(Map<String, Object> param) {
 		Connection conn = getConnection();
 		List<Member> list = memberDao.searchMember(conn, param);
 		close(conn);
 		return list;
 	}
-	
+
 	public int selectTotalMemberCount() {
 		Connection conn = getConnection();
 		int totalCount = memberDao.totalMemberCount(conn);
 		close(conn);
 		return totalCount;
+	}
+
+	public int updateMemberRole(Member member) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = memberDao.updateMemberRole(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+
+		return result;
 	}
 
 }
