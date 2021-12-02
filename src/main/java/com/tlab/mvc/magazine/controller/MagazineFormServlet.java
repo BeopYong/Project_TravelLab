@@ -1,4 +1,4 @@
-package com.tlab.mvc.megazine.controller;
+package com.tlab.mvc.magazine.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MegazineListServlet
+ * Servlet implementation class magazineFormServlet
  */
-@WebServlet("/megazine/megazineList")
-public class MegazineListServlet extends HttpServlet {
+@WebServlet("/magazine/magazineForm")
+public class MagazineFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MegazineListServlet() {
+    public MagazineFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
