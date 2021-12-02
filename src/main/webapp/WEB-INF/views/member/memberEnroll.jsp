@@ -33,21 +33,46 @@
 				</td>
 			</tr>
 			<tr>
+				<th>생년월일</th>
+				<td>	
+				<input type="date" name="birthday" id="birthday" value="2000-09-09"><br />
+				</td>
+			</tr> 
+			<tr>
 				<th>이메일</th>
 				<td>	
 					<input type="email" placeholder="abc@xyz.com" name="email" id="email" value="sinsa@naver.com"><br>
 				</td>
 			</tr>
 			<tr>
-				<th>결제정보</th>
+				<th>휴대폰<sup>*</sup></th>
 				<td>	
-					<input type="text" placeholder="213221" name="payCode" id="payCode" value=""><br>
+					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" value="01012341234" required><br>
 				</td>
 			</tr>
 			<tr>
-				<th>휴대폰<sup>*</sup></th>
+				<th>주소</th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="tel" id="tel" maxlength="11" value="01012341234" required><br>
+					<input type="text" placeholder="" name="address" id="address" value="서울시 강남구 테헤란로"><br>
+				</td>
+			</tr>
+			<tr>
+				<th>성별 </th>
+				<td>
+					<input type="radio" name="gender" id="gender0" value="M" checked>
+					<label for="gender0">남</label>
+					<input type="radio" name="gender" id="gender1" value="F">
+					<label for="gender1">여</label>
+				</td>
+			</tr>
+			<tr>
+				<th>취미 </th>
+				<td>
+					<input type="checkbox" name="hobby" id="hobby0" value="운동" checked><label for="hobby0">운동</label>
+					<input type="checkbox" name="hobby" id="hobby1" value="등산" checked><label for="hobby1">등산</label>
+					<input type="checkbox" name="hobby" id="hobby2" value="독서" checked><label for="hobby2">독서</label><br />
+					<input type="checkbox" name="hobby" id="hobby3" value="게임"><label for="hobby3">게임</label>
+					<input type="checkbox" name="hobby" id="hobby4" value="여행"><label for="hobby4">여행</label><br />
 				</td>
 			</tr>
 		</table>
@@ -119,8 +144,8 @@ $(document.memberEnrollFrm).submit((e) => {
 	}
 	
 	//phone
-	const $tel= $(tel);
-	if(!/^010[0-9]{8}$/.test($tel.val())){
+	const $phone = $(phone);
+	if(!/^010[0-9]{8}$/.test($phone.val())){
 		alert("유효한 전화번호가 아닙니다.");
 		return false;
 	}
