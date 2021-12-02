@@ -17,14 +17,14 @@ public class MemberAttached extends Member {
 		super();
 	}
 
-	public MemberAttached(int no, String id, String password, String userName, String email, int payCode, String tel,
+	public MemberAttached( String id, String password, String userName, String email, int payCode, String tel,
 			String valid, Date regDate) {
-		super(no, id, password, userName, email, payCode, tel, valid, regDate);
+		super( id, password, userName, email, payCode, tel, valid, regDate);
 	}
 
-	public MemberAttached(int no, String id, String password, String userName, String email, int payCode, String tel,
+	public MemberAttached( String id, String password, String userName, String email, int payCode, String tel,
 			String valid, Date regDate, List<MemberAttachment> mAttachments) {
-		super(no, id, password, userName, email, payCode, tel, valid, regDate);
+		super( id, password, userName, email, payCode, tel, valid, regDate);
 		this.mAttachments = mAttachments;
 	}
 

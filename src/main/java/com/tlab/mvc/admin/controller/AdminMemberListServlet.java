@@ -48,36 +48,39 @@ public class AdminMemberListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1.사용자입력값
-		final int numPerPage = 10;
-		int cPage = 1;
 		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch (NumberFormatException e) {}
-		
-		int startNum = (cPage - 1) * numPerPage + 1;
-		int endNum = cPage * numPerPage;
-		
-		Map<String, Object> param = new HashMap<>();
-		param.put("startNum", startNum);
-		param.put("endNum", endNum);
-		
-		// 2.업무로직
-		// 2-a. content영역
-		List<Member> list = memberService.selectAllMember(param);
-		System.out.println("list@servlet = " + list);
-		// 2-b. pagebar영역
-		int totalContent = memberService.selectTotalMemberCount();
-		String url = request.getRequestURI(); // /mvc/admin/memberList
-		System.out.println(totalContent);
-		System.out.println(url);
-		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
-		System.out.println("pagebar@servlet = " + pagebar);
-		
-		// 3.view단처리
-		request.setAttribute("list", list);
-		request.setAttribute("pagebar", pagebar);
-		request
-			.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
-			.forward(request, response);
+			final int numPerPage = 10;
+			int cPage = 1;
+			try {
+				cPage = Integer.parseInt(request.getParameter("cPage"));
+			} catch (NumberFormatException e) {}
+			int start = (cPage - 1) * numPerPage + 1;
+			int end = cPage * numPerPage;
+			Map<String, Integer> param = new HashMap<>();
+			param.put("start", start);
+			param.put("end", end);
+			
+			// 2.업무로직
+			// 2-a. content영역
+			List<Member> list = memberService.selectAllMember(param);
+			System.out.println("list@servlet = " + list);
+			// 2-b. pagebar영역
+			int totalContent = memberService.selectTotalMemberCount();
+			String url = request.getRequestURI(); // /mvc/admin/memberList
+			System.out.println(totalContent);
+			System.out.println(url);
+			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
+			System.out.println("pagebar@servlet = " + pagebar);
+			
+			// 3.view단처리
+			request.setAttribute("list", list);
+			request.setAttribute("pagebar", pagebar);
+			request
+				.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
+				.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} 
 	}
 }

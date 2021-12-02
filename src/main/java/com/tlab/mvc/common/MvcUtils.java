@@ -56,7 +56,8 @@ public class MvcUtils {
 	 */
 	public static String getPagebar(int cPage, int numPerPage, int totalContent, String url) {
 		StringBuilder pagebar = new StringBuilder();
-		url = url +"?cPage = "; // pageNo 추가전 상태
+		//"?cpage= "띄어쓰기 하지말것 띄어쓰기도 parameter에 포함되서 오류남.
+		url = url +"?cPage="; // pageNo 추가전 상태
 		final int pagebarSize = 5;
 		final int totalPage = (int) Math.ceil((double) totalContent/numPerPage);
 		final int pageStart = ((cPage -1 ) / pagebarSize) * pagebarSize +1;
