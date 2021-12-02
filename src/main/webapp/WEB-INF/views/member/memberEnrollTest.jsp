@@ -328,8 +328,8 @@
 		    	}
 		
 		    });
+		    
 		    $(document.signUpForm).submit((e) => {
-		    	
 		    	return true;
 		    	saveMember();
 		    });
