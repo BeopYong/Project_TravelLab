@@ -3,17 +3,17 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script>
 /**
- * megazine 유효성 검사(제목, 내용을 작성안한 경우 제출불가)
+ * magazine 유효성 검사(제목, 내용을 작성안한 경우 제출불가)
  */
 
  
 </script>
 
-<section id="megazine-container">
+<section id="magazine-container">
 <h2>매거진 작성</h2>
 <form 
-	name="megazineEnrollFrm"
-	action="<%= request.getContextPath() %>/megazine/megazineEnroll"
+	name="magazineEnrollFrm"
+	action="<%= request.getContextPath() %>/magazine/magazineEnroll"
 	method="post"
 	>
 	<table>
