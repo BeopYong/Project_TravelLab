@@ -6,7 +6,6 @@
  * magazine 유효성 검사(제목, 내용을 작성안한 경우 제출불가)
  */
 
- 
 </script>
 
 <section id="magazine-container">
