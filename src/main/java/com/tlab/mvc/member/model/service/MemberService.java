@@ -93,7 +93,7 @@ public class MemberService {
 	}
 
 	// 관리자용 Service
-	public List<Member> selectAllMember(Map<String, Object> param) {
+	public List<Member> selectAllMember(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<Member> list = memberDao.selectAllMember(conn, param);
 		close(conn);
