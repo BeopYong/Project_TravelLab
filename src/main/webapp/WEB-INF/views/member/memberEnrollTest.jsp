@@ -23,9 +23,16 @@
           <h1 class="main-name">Enrollment</h1>
         </div>
           <div class="row">
-            <div class="signUpform" onselectstart="return false">
-                <form action="javascript:alert('제출성공');" name="signUpform">    
-                <fieldset id="signUpform">
+            <!--<div class="signUpForm" onselectstart="return false">-->
+            <div class="signUpForm">
+                <form 
+                	name="checkIdDuplicateFrm" 
+					action="<%= request.getContextPath() %>/member/memberEnroll"
+					method="POST"
+					>
+				<!-- <form action="javascript:alert('제출성공');" name="signUpForm" method="POST"> -->
+                	    
+                <fieldset id="signUpForm">
                   <div class="wrap-input100">
                     <span class="label-input100">Id *</span>
                     <input class="input100" type="text" name="memberId" id="memberId" required placeholder="Enter your Id">
@@ -60,7 +67,7 @@
                   </div>  
                   <div class="wrap-input100" data-validate="Name is required">
                       <span class="label-input100">PhoneNumber  *</span>
-                      <input class="input100" type="text" name="tel" id="tel"placeholder="Enter your phone number">
+                      <input class="input100" type="text" name="tel" id="tel" required placeholder="Enter your phone number">
                       <span class="focus-input100"></span>
                   </div>
                   <div>
@@ -76,7 +83,7 @@
                   </div>
                   <div class="wrap-input100 ">
                     <span class="label-input100">PayCode</span>
-                    <input class="input100" type="text" name="payCode" id="payCode" required placeholder="Enter your payCode">
+                    <input class="input100" type="text" name="payCode" id="payCode" placeholder="Enter your payCode">
                     <span class="focus-input100"></span>
                   </div>
                   <div>
@@ -96,7 +103,7 @@
                   </div>
                   <div class="wrap-contact100-form-btn">
                     <div class="contact100-form-bgbtn"></div>
-                    <button class="contact100-form-btn" id="signUpButton" onclick="location.href='<%= request.getContextPath()%>/';">
+                    <button class="contact100-form-btn" id="resetButton" onclick="location.href='<%= request.getContextPath()%>/';">
                       <span>
                         Return
                       </span>
@@ -154,21 +161,25 @@
 		    		return false;
 		    	}
 		    	else if (regExp1.test(memberId)) {
-		
+					const memberId = $("#memberId").val();
+					//console.log(memberId);
 		    		$.ajax({
-		    			url: "<%= request.getContextPath() %>/member/checkIdDuplicateByAjax?memberId="+"",
+		    			url: "<%= request.getContextPath() %>/member/checkIdDuplicateByAjax?memberId="+memberId,
 		    			type: "get",
-		    			data: {
-		    				memberId: $(memberId).val()
-		    			},
+		    			data: {memberId : memberId},
+		    			dataType: 'json',
 		    			success(data) {
 		    				console.log(data);
-		    				if (data == null) {
+		    				if (data == "allowed") {
 		    					idConfirm.innerText = "사용가능한 아이디입니다.";
 		    					text.css({ "color": "#7675EE", "font-size": "14px" });
 		    					return true;
-		    				} else {
+		    				} else if(data=="not allowed"){
 		    					idConfirm.innerText = "사용중인 아이디입니다.";
+		    					text.css({ "color": "red", "font-size": "14px" });
+		    					return false;
+		    				} else {
+		    					idConfirm.innerText = "파라미터 전달오류";
 		    					text.css({ "color": "red", "font-size": "14px" });
 		    					return false;
 		    				}
@@ -317,7 +328,7 @@
 		    	}
 		
 		    });
-		    $(document.signUpform).submit((e) => {
+		    $(document.signUpForm).submit((e) => {
 		    	
 		    	return true;
 		    	saveMember();
@@ -372,7 +383,52 @@
 		    	el.focus();
 		    	return false;
 		    }
-		
+			
+		    $(document.signUpForm).submit((e)=>{
+		    	//memberId
+		    	const $memberId = $('#memberId');
+		    	//아이디는 영문자/숫자  4글자이상만 허용 
+		    	if(!/^\w{4,}$/.test($memberId.val())){
+		    		alert("아이디는 최소 4자리이상이어야 합니다.");
+		    		return false;
+		    	}
+		    	
+		    	//memberId 중복검사
+		    	const $idValid = $(idValid);
+		    	if($idValid.val() == 0){
+		    		alert("아이디 중복 검사해주세요.");
+		    		return false;
+		    	}
+		    	
+		    	//password
+		    	const $password = $(_password);
+		    	const $passwordCheck = $(passwordCheck);
+		    	
+		    	if(!/^[a-zA-Z0-9!@#$+/=]{4,}$/.test($password.val())){
+		    		alert("유효한 패스워드를 입력하세요.");
+		    		return false;
+		    	}
+		    	if($password.val() != $passwordCheck.val()){
+		    		alert("패스워드가 일치하지 않습니다.");
+		    		return false;
+		    	}
+		    	
+		    	//memberName
+		    	const $memberName = $(memberName);
+		    	if(!/^[가-힣]{2,}$/.test($memberName.val())){
+		    		alert("이름은 한글 2글자 이상이어야 합니다.");
+		    		return false;
+		    	}
+		    	
+		    	//phone
+		    	const $tel = $(tel);
+		    	if(!/^010[0-9]{8}$/.test($tel.val())){
+		    		alert("유효한 전화번호가 아닙니다.");
+		    		return false;
+		    	}
+		    	return true;
+		    });
+		    
 		    function signUpCheck() {
 		    	var memberId = document.getElementById("memberId");
 		    	var password = document.getElementById("password");
@@ -433,7 +489,8 @@
 		    	if (!regExpTest(/^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/, email, "이메일 형식에 어긋납니다."))
 		    		return false;
 		
-		    	document.signUpform.submit();
+		    	//document.signUpForm.submit();
+		    	return true;
 		
 		    }
 		
