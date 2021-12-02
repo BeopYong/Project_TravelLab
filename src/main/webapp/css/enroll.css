@@ -44,7 +44,7 @@
     font-size: 14px;
   }
 
-  #signUpButton {
+  #signUpButton, #resetButton {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -81,6 +81,7 @@
     font-weight: 700;
     text-decoration: none;
   }
+   
   .copyright, .reference{
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -309,7 +310,7 @@
 
 
   /*-----------------Button제어-----------------*/
-  div.signUpform {
+  div.signUpForm {
     min-height: 20px;
     width: 260px;
     margin-left: auto;
@@ -331,7 +332,7 @@
     margin-top: 10px;
   }
   
-  #signUpform {
+  #signUpForm {
     margin-left: 10px;
     margin-right: 10px;
     padding: 0px 0px 1px 5px;
