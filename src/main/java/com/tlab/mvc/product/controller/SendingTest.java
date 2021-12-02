@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ProductEnrollServlet
  */
 @WebServlet("/photo/photoList")
-public class ProductEnrollServlet extends HttpServlet {
+public class SendingTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -21,7 +21,7 @@ public class ProductEnrollServlet extends HttpServlet {
 		
 		
 		request
-		.getRequestDispatcher("/WEB-INF/views/product/productUpdate.jsp")
+		.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
 		.forward(request, response);
 	}
 
