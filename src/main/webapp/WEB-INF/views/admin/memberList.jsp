@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <% 
 	List<Member> list = (List<Member>) request.getAttribute("list"); 
+	System.out.println("memberList@memberList.jsp"+list);
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 	/* HttpSession session = request.getSession(); */
@@ -14,7 +15,6 @@
 div#search-container {margin:0 0 10px 0; padding:3px; background-color: rgba(0, 188, 212, 0.3);}
 div#search-memberId {display: <%= searchType == null || "memberId".equals(searchType) ? "inline-block" : "none" %>;}
 div#search-memberName{display: <%= "memberName".equals(searchType) ? "inline-block" : "none" %>;}
-div#search-gender{display: <%= "gender".equals(searchType) ? "inline-block" : "none" %>;}
 </style>
 
 <section id="memberList-container">
@@ -25,7 +25,6 @@ div#search-gender{display: <%= "gender".equals(searchType) ? "inline-block" : "n
         <select id="searchType">
             <option value="memberId" <%= "memberId".equals(searchType) ? "selected" : "" %>>아이디</option>		
             <option value="memberName" <%= "memberName".equals(searchType) ? "selected" : "" %>>회원명</option>
-            <option value="gender" <%= "gender".equals(searchType) ? "selected" : "" %>>성별</option>
         </select>
         <div id="search-memberId" class="search-type">
             <form action="<%=request.getContextPath()%>/admin/memberFinder">
@@ -41,7 +40,6 @@ div#search-gender{display: <%= "gender".equals(searchType) ? "inline-block" : "n
                 <button type="submit">검색</button>			
             </form>	
         </div>
-        
     </div>
 	
 	
@@ -92,6 +90,7 @@ div#search-gender{display: <%= "gender".equals(searchType) ? "inline-block" : "n
 /**
  * 검색 div 노출
  */
+
 $(searchType).change((e) => {
 	$(".search-type").hide();
 	

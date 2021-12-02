@@ -247,7 +247,7 @@ public class MemberDao {
 		return list;
 	}
 
-	public List<Member> selectAllMember(Connection conn, Map<String, Object> param) {
+	public List<Member> selectAllMember(Connection conn, Map<String, Integer> param) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllMember");
 		ResultSet rset = null;
@@ -255,20 +255,23 @@ public class MemberDao {
 		try {
 			// 1.pstmt객체생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("startNum"));
-			pstmt.setInt(2, (int) param.get("endNum"));
+			pstmt.setInt(1, param.get("start"));
+			pstmt.setInt(2, param.get("end"));
 
 			// 2.실행
 			rset = pstmt.executeQuery();
 			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
 			while (rset.next()) {
-				Member member = new Member();
-				member.setMemberId(rset.getString("member_id"));
-				member.setPassword(rset.getString("password"));
-				member.setMemberName(rset.getString("member_name"));
-				member.setEmail(rset.getString("email"));
-				member.setTel(rset.getString("phone"));
-				member.setRegDate(rset.getDate("reg_date"));
+				Member member = new Member(
+									rset.getString("member_id"),
+									rset.getString("password"),
+									rset.getString("member_name"),
+									rset.getString("email"),
+									rset.getString("tel"),
+									rset.getString("valid"),
+									rset.getDate("reg_date"),
+									rset.getString("member_role")
+									);
 				list.add(member);
 			}
 		} catch (SQLException e) {
