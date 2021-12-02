@@ -122,8 +122,11 @@ $(() => {
 						<li class="notice"><a href="#">공지사항</a></li>
 						<li class="board"><a href="<%= request.getContextPath() %>/board/boardList">게시판</a></li>
 						<li class="photo"><a href="<%= request.getContextPath() %>/photo/photoList">사진게시판</a></li>
-						<li class="megazine"><a href="<%= request.getContextPath() %>/megazine/megazineList">매거진</a></li>
+						<li class="magazine"><a href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
 						<li class="chat"><a href="<%= request.getContextPath() %>/chat/chatroom">고객센터</a></li>
+<% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
+						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
+<% } %>
  <%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
 <% } %>  --%>
