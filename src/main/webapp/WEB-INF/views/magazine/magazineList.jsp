@@ -6,6 +6,10 @@
 
 <section id="megazine-container">
 	<h2>매거진</h2>
+<!-- 매거진 글쓰기 로그인 안된사람에겐 버튼 보이지 않음 -->
+<% if(loginMember != null) { %>
+	<input type="button" value="글쓰기" id="btn-add" onclick="location.href='<%= request.getContextPath() %>/magazine/magazineForm'"/>
+<% } %>
 	
 
 <!-- 매거진 내용 상세페이지에 들어가기위해 일단 내용입력해놓음-->
@@ -38,20 +42,12 @@
 		</tr>
 
 
+
 <%
 	}
 %>
-
 	</table>
-	
-
 		
-
-<!-- 매거진 글쓰기 로그인 안된사람에겐 버튼 보이지 않음 -->
-<% if(loginMember != null) { %>
-	<input type="button" value="글쓰기" id="btn-add" onclick="location.href='<%= request.getContextPath() %>/magazine/magazineForm'"/>
-<% } %>
-	
 <!-- 페이지바 -->	
 	<div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 	

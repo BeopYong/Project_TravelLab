@@ -36,8 +36,8 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 	name="magazineEnrollFrm"
 	action="<%= request.getContextPath() %>/magazine/magazineEnroll"
 	method="post"
-	>
-	<table>
+	enctype="multipart/form-data">
+	<table id="tbl-magazine-view">
 	<!-- 제목 추후에 수정 -->
 	<tr>
 		<th>제목</th>
@@ -55,7 +55,7 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 	<tr>
 		<th>첨부파일</th>
 		<td>
-		<input type="text" />
+		<input type="file" name="upFile1"/>
 		</td>
 	</tr>
 	<tr>

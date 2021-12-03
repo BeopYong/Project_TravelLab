@@ -12,8 +12,8 @@ public class Attachment implements Serializable {
 
 	private int no;
 	private int magazineNo;
-	private String orginalFilename;
-	private String renamedFilename;
+	private String originalFilename; //업로드파일
+	private String renamedFilename; //서버에 저장된 파일
 	/**
 	 * 
 	 */
@@ -24,14 +24,14 @@ public class Attachment implements Serializable {
 	/**
 	 * @param no
 	 * @param magazineNo
-	 * @param orginalFilename
+	 * @param originalFilename
 	 * @param renamedFilename
 	 */
-	public Attachment(int no, int magazineNo, String orginalFilename, String renamedFilename) {
+	public Attachment(int no, int magazineNo, String originalFilename, String renamedFilename) {
 		super();
 		this.no = no;
 		this.magazineNo = magazineNo;
-		this.orginalFilename = orginalFilename;
+		this.originalFilename = originalFilename;
 		this.renamedFilename = renamedFilename;
 	}
 	public int getNo() {
@@ -46,11 +46,11 @@ public class Attachment implements Serializable {
 	public void setmagazineNo(int magazineNo) {
 		this.magazineNo = magazineNo;
 	}
-	public String getOrginalFilename() {
-		return orginalFilename;
+	public String getOriginalFilename() {
+		return originalFilename;
 	}
-	public void setOrginalFilename(String orginalFilename) {
-		this.orginalFilename = orginalFilename;
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
 	}
 	public String getRenamedFilename() {
 		return renamedFilename;
@@ -61,7 +61,7 @@ public class Attachment implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Attachment [no=" + no + ", magazineNo=" + magazineNo + ", orginalFilename=" + orginalFilename
+		return "Attachment [no=" + no + ", magazineNo=" + magazineNo + ", originalFilename=" + originalFilename
 				+ ", renamedFilename=" + renamedFilename + "]";
 	}
 	

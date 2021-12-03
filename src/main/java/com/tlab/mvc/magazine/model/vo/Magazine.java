@@ -6,15 +6,27 @@ import java.util.List;
 
 public class Magazine extends MagazineEntity implements Serializable {
 
-	//DB테이블엔 없지만 필요한 것
+	// DB테이블엔 없지만 필요한 것
 	private List<Attachment> attachments;
-	private int attachCount; //첨부파일 수
-	
-	
+	private int attachCount; // 첨부파일 수
 
 	public Magazine() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Magazine(int no, String title, String writer, String content, String region) {
+		super(no, title, writer, content, region);
+	}
+
+	public Magazine( String title, String writer, String content, String region) {
+		super( title, writer, content, region);
+	}
+	public Magazine(String title, String writer, String content, String region, List<Attachment> attachments,
+			int attachCount) {
+		super(title, writer, content, region);
+		this.attachments = attachments;
+		this.attachCount = attachCount;
 	}
 
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
@@ -23,7 +35,6 @@ public class Magazine extends MagazineEntity implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
 			String valid, List<Attachment> attachments, int attachCount) {
 		super(no, title, writer, content, regDate, readCount, region, valid);
@@ -49,13 +60,7 @@ public class Magazine extends MagazineEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Magazine ["+ super.toString()
-			+ ", attachments=" + attachments 
-			+ ", attachCount=" + attachCount + "]";
+		return "Magazine [" + super.toString() + ", attachments=" + attachments + ", attachCount=" + attachCount + "]";
 	}
-	
-	
-	
-	
-	
+
 }

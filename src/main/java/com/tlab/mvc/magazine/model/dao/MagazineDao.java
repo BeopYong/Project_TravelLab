@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.tlab.mvc.magazine.model.exception.MagazineException;
+import com.tlab.mvc.magazine.model.vo.Attachment;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 
 public class MagazineDao {
@@ -90,6 +91,7 @@ public class MagazineDao {
 	public int insertMagazine(Connection conn, Magazine magazine) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertMagazine");
+		System.out.println(sql+"@MagazineDao");
 		int result = 0;
 		
 		try {
@@ -102,6 +104,51 @@ public class MagazineDao {
 		} catch (SQLException e) {
 			throw new MagazineException("게시물 등록 오류", e);
 		
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	//등록하는 magazineNo과 일치하는지
+	public int selectLastMagazineNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectLastMagazineNo");
+		System.out.println(sql + "selectlastMagazineDao");
+		ResultSet rset = null;
+		int magazineNo = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { //다음행이있는지 확인
+				magazineNo = rset.getInt(1); //첫번째 컬럼값 가져오기
+			}
+		} catch (SQLException e) {
+			throw new MagazineException("최근게시글번호 조회 오류", e);
+		}finally {
+			close(pstmt);
+		}
+		
+		return magazineNo;
+	}
+
+	public int insertAttachment(Connection conn, Attachment attach) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		System.out.println("inserAttachMagazineDao = " + sql);
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getmagazineNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MagazineException("첨부파일 등록 오류", e);
 		}finally {
 			close(pstmt);
 		}
