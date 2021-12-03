@@ -37,5 +37,27 @@ public class ProductService {
 		return list;
 	}
 
+	public int selectTotalFoodList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		int totalCount = productDao.selectTotalFoodList(conn, param);
+		close(conn);
+		return totalCount;
+	}
+
+	public List<Product> productPlaceList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.productPlaceList(conn, param);
+		close(conn);
+		
+		return list;
+	}
+	
+	public int selectTotalPlaceList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		int totalCount = productDao.selectTotalPlaceList(conn, param);
+		close(conn);
+		return totalCount;
+	}
+
 
 }

@@ -17,7 +17,7 @@ import com.tlab.mvc.product.model.vo.Product;
 /**
  * Servlet implementation class ProductEnrollServlet
  */
-@WebServlet("/photo/photoList")
+@WebServlet("/product/productList")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
