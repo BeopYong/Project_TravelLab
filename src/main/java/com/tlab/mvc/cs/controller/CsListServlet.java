@@ -12,7 +12,7 @@ import com.tlab.mvc.cs.model.service.CsService;
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/board/boardList")
+@WebServlet("/cs/csList")
 public class CsListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CsService boardService = new CsService();

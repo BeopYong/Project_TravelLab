@@ -31,17 +31,18 @@
 
 					<tr>
 						<!-- 테스트 -->
-						<td>1</td>
-						<td>테스트</td>
+						<td>번호</td>
+						<td>제목</td>
 						<td>admin</td>
 						<td>2021-11-30</td>
 					</tr>
+
 				</tbody>
 			</table>
 		</div>
 
 		<input type="button" value="글쓰기" class="btn btn-default"
-			onclick="location.href='<%=request.getContextPath()%>/board/boardForm'" />
+			onclick="location.href='<%= request.getContextPath()%>/cs/csForm'" />
 
 	</div>
 
