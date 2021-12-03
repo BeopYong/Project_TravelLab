@@ -41,7 +41,8 @@ public class AdminMemberFinderServlet extends HttpServlet {
 			// 3.
 			request.setAttribute("list", list);
 			request
-				.getRequestDispatcher("/WEB-INF/views/admin/memberFinder.jsp")
+				.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
+//				.getRequestDispatcher("/WEB-INF/views/admin/memberFinder.jsp")
 				.forward(request, response);
 				
 	}

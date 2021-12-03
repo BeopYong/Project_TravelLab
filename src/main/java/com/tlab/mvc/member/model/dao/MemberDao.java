@@ -267,7 +267,7 @@ public class MemberDao {
 				member.setPassword(rset.getString("password"));
 				member.setMemberName(rset.getString("member_name"));
 				member.setEmail(rset.getString("email"));
-				member.setTel(rset.getString("phone"));
+				member.setTel(rset.getString("tel"));
 				member.setRegDate(rset.getDate("reg_date"));
 				list.add(member);
 			}
