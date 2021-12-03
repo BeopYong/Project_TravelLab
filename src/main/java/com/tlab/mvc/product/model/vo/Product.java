@@ -12,14 +12,19 @@ public class Product extends ProductEntity implements Serializable {
 	
 	private int attachCount; //첨부파일 수
 	private List<Attachment> attachments; //하나의 게시물은 여러 개의 첨부파일을 가질 수 있음!
+
 	
 	
-	public Product(int no, String region, int p_category, String p_name, String p_content, Date p_day, int p_stock,
-			int unit_price, String valid, Date reg_date, int attachCount, List<Attachment> attachments) {
-		super(no, region, p_category, p_name, p_content, p_day, p_stock, unit_price, valid, reg_date);
-		this.attachCount = attachCount;
-		this.attachments = attachments;
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
+	public Product(int no, String region, int p_category, String p_name, String p_content, Date p_day, int p_stock,
+			int unit_price, String valid, Date reg_date) {
+		super(no, region, p_category, p_name, p_content, p_day, p_stock, unit_price, valid, reg_date);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getAttachCount() {
 		return attachCount;
 	}
