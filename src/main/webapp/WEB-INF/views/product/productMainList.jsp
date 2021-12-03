@@ -10,7 +10,7 @@
   <table class="product-table">
     <tr>
       <td colspan="3">뜨는 맛집</td>
-      <td><a href="<%= request.getContextPath() %>/product/productFoodList.jsp">더 보기</a></td>
+      <td><a href="<%= request.getContextPath() %>/product/productFoodList">더 보기</a></td>
     </tr>
     <tr>
     
@@ -28,7 +28,7 @@
   <table class="product-table">
     <tr>
       <td colspan="3">많이 찾는 장소</td>
-      <td><a href="<%= request.getContextPath() %>/product/productPlaceList.jsp">더 보기</a></td>
+      <td><a href="<%= request.getContextPath() %>/product/productPlaceList">더 보기</a></td>
     </tr>
        <tr>
     
