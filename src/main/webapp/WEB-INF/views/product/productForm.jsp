@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <section>
 
-<form name="productEnrollFrm" method="POST">
+<form name="productEnrollFrm" method="POST" action="<%=request.getContextPath() %>/product/productEnroll">
 
 	<div class="inputArea"> 
 		 <label>카테고리</label>

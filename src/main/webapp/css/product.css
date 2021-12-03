@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+  .container {
+    margin: 0;
+    padding : 0;
+  }
+
+  .product-view {
+    width: 180px;
+    height: 240px;
+    border: 1px solid black;
+    float: left;
+    margin: 10px;
+    text-align: center;
+  }
+
+  .product-view p{
+    margin: 0;
+  }
+
+  .product-view img {
+    width : 130px;
+    height: 180px;
+    margin : 15px;
+    margin-bottom: 0;
+    
+  }
+  
