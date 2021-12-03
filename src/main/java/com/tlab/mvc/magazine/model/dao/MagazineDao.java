@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 
 public class MagazineDao {
@@ -83,6 +84,29 @@ public class MagazineDao {
 			close(pstmt);
 		}
 		return totalCount;
+	}
+
+	//DML
+	public int insertMagazine(Connection conn, Magazine magazine) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMagazine");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, magazine.getTitle());
+			pstmt.setString(2, magazine.getWriter());
+			pstmt.setString(3, magazine.getContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MagazineException("게시물 등록 오류", e);
+		
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

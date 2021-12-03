@@ -10,20 +10,23 @@ public class Magazine extends MagazineEntity implements Serializable {
 	private List<Attachment> attachments;
 	private int attachCount; //첨부파일 수
 	
+	
+	
 	public Magazine() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String vaild) {
-		super(no, title, writer, content, regDate, readCount, vaild);
+
+	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String vaild,
+			String region) {
+		super(no, title, writer, content, regDate, readCount, vaild, region);
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String vaild,
-			List<Attachment> attachments, int attachCount) {
-		super(no, title, writer, content, regDate, readCount, vaild);
+			String region, List<Attachment> attachments, int attachCount) {
+		super(no, title, writer, content, regDate, readCount, vaild, region);
 		this.attachments = attachments;
 		this.attachCount = attachCount;
 	}
