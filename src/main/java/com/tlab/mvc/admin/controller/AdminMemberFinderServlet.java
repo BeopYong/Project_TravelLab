@@ -66,12 +66,7 @@ public class AdminMemberFinderServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request
-<<<<<<< HEAD
-				.getRequestDispatcher("/WEB-INF/views/admin/memberList.jsp")
-//				.getRequestDispatcher("/WEB-INF/views/admin/memberFinder.jsp")
-=======
 				.getRequestDispatcher("/WEB-INF/views/admin/memberListTest.jsp")
->>>>>>> branch 'master' of https://github.com/Jimmerland/tlab_beta.git
 				.forward(request, response);
 				
 	}
