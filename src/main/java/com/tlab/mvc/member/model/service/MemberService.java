@@ -16,6 +16,9 @@ public class MemberService {
 	public static final String SELLER_ROLE = "S";
 	public static final String ADMIN_ROLE = "A";
 
+	public static final String VALID_Y="Y";
+	public static final String VALID_N="N";
+	
 	private MemberDao memberDao = new MemberDao();
 
 	public Member selectOneMember(String memberId) {
@@ -93,16 +96,16 @@ public class MemberService {
 	}
 
 	// 관리자용 Service
-	public List<Member> selectAllMember(Map<String, Object> param) {
+	public List<Member> selectAllMember(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<Member> list = memberDao.selectAllMember(conn, param);
 		close(conn);
 		return list;
 	}
 
-	public List<Member> searchMember(Map<String, Object> param) {
+	public List<Member> searchMember(Map<String, Object> searchParam) {
 		Connection conn = getConnection();
-		List<Member> list = memberDao.searchMember(conn, param);
+		List<Member> list = memberDao.searchMember(conn, searchParam);
 		close(conn);
 		return list;
 	}
@@ -120,6 +123,23 @@ public class MemberService {
 		try {
 			conn = getConnection();
 			result = memberDao.updateMemberRole(conn, member);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+
+		return result;
+	}
+
+	public int updateMemberValid(Member member) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = memberDao.updateMemberValid(conn, member);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

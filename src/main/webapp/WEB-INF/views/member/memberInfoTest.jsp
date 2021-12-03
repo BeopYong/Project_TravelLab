@@ -121,6 +121,18 @@
                     </button>
                   </div>
                   
+                  <div>
+                    <span>&nbsp;</span>
+                  </div>
+                  <div class="wrap-contact100-form-btn">
+                    <div class="contact100-form-bgbtn"></div>
+                    <button class="contact100-form-btn" id="resetButton" onclick="location.href='<%= request.getContextPath()%>/';">
+                      <span>
+                        
+                      </span>
+                    </button>
+                  </div>
+                  
                 </fieldset>
                 </form>  
             </div>

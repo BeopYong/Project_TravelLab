@@ -175,17 +175,6 @@ public class MemberDao {
 
 	// 관리자용 요청처리 DAO
 
-	public int updateValid(Connection conn, Member member) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateMemberValid");
-
-		// member-query.properties에서 쿼리를 작성하고 가져온다.
-		// 회원의 id 칼럼명: member_id , 회원명의 칼럼명: member_name
-
-		return result;
-	}
-
 	public int updateMemberRole(Connection conn, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -204,15 +193,33 @@ public class MemberDao {
 		return result;
 	}
 
-	public List<Member> searchMember(Connection conn, Map<String, Object> param) {
+	public int updateMemberValid(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateMemberValid");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getValid());
+			pstmt.setString(2, member.getMemberId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MemberException("회원유효성변경 오류!", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Member> searchMember(Connection conn, Map<String, Object> searchParam) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("searchMember");
 		ResultSet rset = null;
 		List<Member> list = new ArrayList<>();
 
-		String searchType = (String) param.get("searchType");
+		String searchType = (String) searchParam.get("searchType");
 
-		String searchKeyword = (String) param.get("searchKeyword");
+		String searchKeyword = (String) searchParam.get("searchKeyword");
 
 		switch (searchType) {
 		case "memberId":
@@ -247,7 +254,7 @@ public class MemberDao {
 		return list;
 	}
 
-	public List<Member> selectAllMember(Connection conn, Map<String, Object> param) {
+	public List<Member> selectAllMember(Connection conn, Map<String, Integer> param) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllMember");
 		ResultSet rset = null;
@@ -255,20 +262,16 @@ public class MemberDao {
 		try {
 			// 1.pstmt객체생성
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (int) param.get("startNum"));
-			pstmt.setInt(2, (int) param.get("endNum"));
+			pstmt.setInt(1, param.get("start"));
+			pstmt.setInt(2, param.get("end"));
 
 			// 2.실행
 			rset = pstmt.executeQuery();
 			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
 			while (rset.next()) {
-				Member member = new Member();
-				member.setMemberId(rset.getString("member_id"));
-				member.setPassword(rset.getString("password"));
-				member.setMemberName(rset.getString("member_name"));
-				member.setEmail(rset.getString("email"));
-				member.setTel(rset.getString("tel"));
-				member.setRegDate(rset.getDate("reg_date"));
+				Member member = new Member(rset.getString("member_id"), rset.getString("password"),
+						rset.getString("member_name"), rset.getString("email"), rset.getString("tel"),
+						rset.getString("valid"), rset.getDate("reg_date"), rset.getString("member_role"));
 				list.add(member);
 			}
 		} catch (SQLException e) {

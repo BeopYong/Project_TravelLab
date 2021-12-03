@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+section#memberList-container h2 {
+	text-align: center;
+}
+
+section#memberList-container table#tbl-member {
+	/* width: 100%; */
+	/* border:1px solid gray;  */
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table#tbl-member td {
+	border: 1px solid #FFF0F5; /*#FFFBFC , #FFF6F9. ##FFF1FA, #F7F1F4 */
+	padding: 10px;
+}
+
+section#memberList-container div#numPerPage-container {
+	float: right;
+	margin-top: 10px;
+}
+
+section#memberList-container form#numPerPageFrm {
+	display: inline;
+}
+
+section#memberList-container div#pageBar {
+	margin-top: 10px;
+	text-align: center;
+	background-color: tranparent;
+}
+
+section#memberList-container div#pageBar span.cPage {
+	color: #0066ff;
+	margin-right: 5px;
+}
+
+section#memberList-container div#pageBar a {
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+section#memberList-container div#pageBar a:hover {
+	text-decoration: underline;
+}
+
+#tbl-member {
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+}
+
+#tbl-member thead th {
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: black;
+	border-bottom: 3px solid #036;
+}
+
+/* #tbl-member td {
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}   */
+.member-id {
+	width: 110px;
+	table-layout: fixed;
+}
+
+.member-name {
+	width: 130px;
+}
+
+.tel {
+	width: 20px;
+}
+.email {
+	width:200px;
+}
+.memberRole {
+	width: 30px;
+}
+
+.valid {
+	width: 15px;
+}
+
+.regDate {
+	width: 150px;
+}
+
+table#tbl-member .even {
+	background: #efefef;
+}
