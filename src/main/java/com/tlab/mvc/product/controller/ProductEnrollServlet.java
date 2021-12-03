@@ -31,7 +31,6 @@ public class ProductEnrollServlet extends HttpServlet {
 		int p_category = Integer.parseInt(request.getParameter("p_category"));
 		String p_name = request.getParameter("p_name");
 		String p_content = request.getParameter("p_content");
-		String p_day_ = request.getParameter("p_day");
 		int p_stock = Integer.parseInt(request.getParameter("p_stock"));
 		int unit_price = Integer.parseInt(request.getParameter("unit_price"));
 		
