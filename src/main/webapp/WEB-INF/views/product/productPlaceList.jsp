@@ -7,23 +7,22 @@
 
 <section>
 
-  <table class="product-table">
-    <tr>
-      <td colspan="3"><h1>핫! 플레이스</h1></td>
-      <td></td>
-    </tr>
-    <tr>
    
+     <div class="container">
    <%
    	List<Product> placeList = (List<Product>) request.getAttribute("placeList");
    for(Product product : placeList) {
    %>
-
-	<td><%=product.getAttachCount()%><br /><%=product.getP_name() %></td>
-
+   
+      <div class="product-view">
+		<p><%=product.getAttachCount()%></p>
+        <p><%=product.getP_name() %></p>
+     </div>
     <% } %>
-    </tr>
-  </table>
+    </div>
+    <div style="clear: both;"></div>
+    
+
   
 
 </section>
