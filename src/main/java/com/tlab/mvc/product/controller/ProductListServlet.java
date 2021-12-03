@@ -35,16 +35,21 @@ public class ProductListServlet extends HttpServlet {
 		} catch (NumberFormatException e) {}
 		
 		int end = cPage * numPerPage;
+		int food = 301;
+		int festival = 302;
 		
 		Map<String, Integer>param = new HashMap<>();
 		param.put("end", end);
+		param.put("301", food);
+		param.put("302", festival);
 		
-		List<Product> list = productService.randomProductList(param);
-		System.out.println("list@servlet = " + list);
+		List<Product> foodList = productService.randomProductFoodList(param);
+		List<Product> placeList = productService.randomProductPlaceList(param);
 		
-		request.setAttribute("list", list);
+		request.setAttribute("foodList", foodList);
+		request.setAttribute("placeList", placeList);
 		request
-		.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
+		.getRequestDispatcher("/WEB-INF/views/product/productMainList.jsp")
 		.forward(request, response);
 	}
 

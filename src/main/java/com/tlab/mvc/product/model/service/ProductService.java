@@ -14,12 +14,23 @@ public class ProductService {
 
 	
 
-	public List<Product> randomProductList(Map<String, Integer> param) {
+	public List<Product> randomProductFoodList(Map<String, Integer> param) {
 		Connection conn = getConnection();
-		List<Product> list = productDao.randomProductList(conn, param);
+		List<Product> list = productDao.randomProductFoodList(conn, param);
 		close(conn);
 		
 		return list;
+	}
+
+
+
+	public List<Product> randomProductPlaceList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.randomProductPlaceList(conn, param);
+		close(conn);
+		
+		return list;
+		
 	}
 
 }

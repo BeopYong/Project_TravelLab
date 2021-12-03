@@ -4,20 +4,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <section>
 
   <table class="product-table">
     <tr>
       <td colspan="3">뜨는 맛집</td>
-      <td><button>더 보기</button></td>
+      <td><a href="<%= request.getContextPath() %>/product/productFoodList.jsp">더 보기</a></td>
     </tr>
     <tr>
     
-<% List<Product> list = (List<Product>) request.getAttribute("list");
-	for(Product product :list) { 
+<% 
+	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
+	for(Product product :foodList) { 
 %>
 	<td><%=product.getAttachCount()%><br /><%=product.getP_name() %></td>
-               
+       
 <% } %> 
     
     </tr>
@@ -26,33 +28,20 @@
   <table class="product-table">
     <tr>
       <td colspan="3">많이 찾는 장소</td>
-      <td><button>더 보기</button></td>
+      <td><a href="<%= request.getContextPath() %>/product/productPlaceList.jsp">더 보기</a></td>
     </tr>
-    <tr>
-      <td>상품img1</td>
-      <td>상품img2</td>
-      <td>상품img3</td>
-      <td>상품img4</td>
-    </tr>
-    <tr>
-      <td>상품1</td>
-      <td>상품2</td>
-      <td>상품3</td>
-      <td>상품4</td>
-    </tr>
-    <tr>
-      <td>상품img1</td>
-      <td>상품img2</td>
-      <td>상품img3</td>
-      <td>상품img4</td>
-    </tr>
-    <tr>
-      <td>상품1</td>
-      <td>상품2</td>
-      <td>상품3</td>
-      <td>상품4</td>
-    </tr>
+       <tr>
     
+<% 
+	List<Product> placeList = (List<Product>) request.getAttribute("placeList");
+	for(Product product : placeList) { 
+%>
+	<td><%=product.getAttachCount()%><br /><%=product.getP_name() %></td>
+       
+<% } %> 
+    
+    </tr>
+   
   </table>
 
 </section>
