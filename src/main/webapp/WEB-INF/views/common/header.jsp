@@ -30,6 +30,7 @@
 <meta charset="UTF-8">
 <title>당신의 여행을 응원합니다</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/product.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
 $(() => {
@@ -123,7 +124,7 @@ $(() => {
 						<li class="board"><a href="<%= request.getContextPath() %>/board/boardList">게시판</a></li>
 						<li class="photo"><a href="<%= request.getContextPath() %>/product/productList">사진게시판</a></li>
 						<li class="magazine"><a href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
-						<li class="chat"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
+						<li class="cs"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
 <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>

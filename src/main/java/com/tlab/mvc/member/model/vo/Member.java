@@ -58,8 +58,8 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		this.email = email;
 		this.tel = tel;
 	}
+	
 	// admin용 생성자
-
 	public Member(String memberId, String password, String memberName, String email, String tel, String valid,
 			Date regDate, String memberRole) {
 		super();
@@ -73,7 +73,7 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		this.memberRole = memberRole;
 	}
 
-	// 전체 정보 입력 생성자
+	// 사용자의 전체 정보 입력 생성자
 	public Member(String memberId, String password, String memberName, String email, int payCode, String tel,
 			String valid, Date regDate) {
 		super();
@@ -86,7 +86,7 @@ public class Member implements Serializable, HttpSessionBindingListener {
 		this.valid = valid;
 		this.regDate = regDate;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(memberId, memberName, password);
