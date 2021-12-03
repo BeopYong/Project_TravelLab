@@ -8,22 +8,25 @@
 
 <section>
 
-  <table class="product-table">
-    <tr>
-      <td colspan="3"><h1>추천 맛집</h1></td>
-      <td></td>
-    </tr>
-    <tr> 
+
+	<div class="container">
    <%
    	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
    for(Product product : foodList) {
    %>
-
-	<td><%=product.getAttachCount()%><br /><%=product.getP_name() %></td>
-
+   
+      <div class="product-view">
+		<p><%=product.getAttachCount()%></p>
+        <p><%=product.getP_name() %></p>
+     </div>
     <% } %>
-    </tr>
-  </table>
+    </div>
+    <div style="clear: both;"></div>
+    
+
+  
+
+</section>
   
 
 </section>
