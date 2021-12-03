@@ -1,9 +1,10 @@
+<%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-List<Member> list = (List<Member>) request.getAttribute("list");
-System.out.println("memberList@memberList.jsp" + list);
+List<Product> list = (List<Product>) request.getAttribute("list");
+System.out.println("productList@productList.jsp" + list);
 String searchType = request.getParameter("searchType");
 String searchKeyword = request.getParameter("searchKeyword");
 /* HttpSession session = request.getSession(); */
@@ -28,12 +29,12 @@ div#search-container {
 	background-color: #B6EAE4;
 }
 
-div#search-memberId {
-	display: <%=searchType == null || "memberId".equals(searchType) ? "inline-block" : "none"%>;
+div#search-cateCode {
+	display: <%=searchType == null || "cateCode".equals(searchType) ? "inline-block" : "none"%>;
 }
 
-div#search-memberName {
-	display: <%="memberName".equals(searchType) ? "inline-block" : "none"%>;
+div#search-gdsName {
+	display: <%="gdsName".equals(searchType) ? "inline-block" : "none"%>;
 }
 </style>
 
@@ -71,28 +72,33 @@ div#search-memberName {
 	<table id="tbl-member">
 		<thead>
 			<tr>
-				<th class="member-id" style="table-layout: fixed">아이디</th>
-				<th class="member-name" style="table-layout: fixed">이름</th>
-				<th style="table-layout: fixed">회원권한</th>
-				<th style="table-layout: fixed">이메일</th>
-				<th style="table-layout: fixed">전화번호</th>
+				<th style="table-layout: fixed">지역번호</th>
+				<th style="table-layout: fixed">상품카테고리</th>
+				<th style="table-layout: fixed">상품명</th>
+				<th style="table-layout: fixed">재고</th>
+				<th style="table-layout: fixed">단위가격</th>
 				<th style="table-layout: fixed">유효</th>
-				<th style="table-layout: fixed">가입일</th>
+				<th style="table-layout: fixed">등록날짜</th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
-			for (Member member : list) {
+			for (Product product : list) {
 			%>
 			<tr>
-				<td class="member-id" width="100px" style="table-layout: fixed"><%=member.getMemberId()%></td>
-				<td class="member-name" width="40px" style="table-layout: fixed"><%=member.getMemberName()%></td>
-				<td class="member-role" style="table-layout: fixed">
+				<td width="40px" style="table-layout: fixed"><%=product.getRegion()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getP_category()%></td>
+				<td width="100px" style="table-layout: fixed"><%=product.getP_name()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getP_stock()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getUnit_price()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getValid()%></td>
+				<td width="100px" style="table-layout: fixed"><%=product.getReg_date()%></td>
+				<%-- <td style="table-layout: fixed">
 					<form 
 						name="memberRoleUpdateFrm"
 						action="<%= request.getContextPath() %>/admin/memberRoleUpdate"
 						method="POST">
-						<input type="hidden" name="memberId" value="<%= member.getMemberId() %>" />
+						<input type="hidden" name="memberId" value="<%= product.getP_name() %>" />
 						<select name="memberRole" class="member-role">
 							<option value="<%= MemberService.USER_ROLE%>" 
 								<%= MemberService.USER_ROLE.equals(member.getMemberRole()) ? "selected" : "" %>>일반</option>
@@ -100,10 +106,8 @@ div#search-memberName {
 								<%= MemberService.SELLER_ROLE.equals(member.getMemberRole()) ? "selected" : "" %>>사업자</option>
 						</select>
 					</form>
-				</td>
-				<td width="180px" style="table-layout: fixed"><%=member.getEmail() != null ? member.getEmail() : ""%></td>
-				<td style="table-layout: fixed"><%=member.getTel()%></td>
-				<td style="table-layout: fixed">
+				</td> --%>
+				<%-- <td style="table-layout: fixed">
 					 <form name="memberValidUpdateFrm"
 						action="<%=request.getContextPath()%>/admin/memberValidUpdate"
 						method="POST">
@@ -116,9 +120,7 @@ div#search-memberName {
 								<%=MemberService.VALID_N.equals(member.getValid()) ? "selected" : ""%>>N</option>
 						</select>
 					</form> 
-				</td>	
-				<%-- <td><%=member.getValid()%></td> --%>
-				<td style="table-layout: fixed"><%=member.getRegDate()%></td>
+				</td> --%>
 			</tr>
 			<%
 			}

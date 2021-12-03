@@ -4,6 +4,7 @@ import static com.tlab.mvc.common.JdbcTemplate.*;
 
 import com.tlab.mvc.member.model.dao.MemberDao;
 import com.tlab.mvc.member.model.vo.Member;
+import com.tlab.mvc.product.model.vo.Product;
 import com.tlab.mvc.member.model.exception.MemberException;
 
 import java.sql.Connection;
@@ -149,6 +150,27 @@ public class MemberService {
 		}
 
 		return result;
+	}
+
+	public List<Product> selectAllProduct(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = memberDao.selectAllProduct(conn, param);
+		close(conn);
+		return list;
+	}
+
+	public int selectTotalProductCount() {
+		Connection conn = getConnection();
+		int totalCount = memberDao.selectTotalProductCount(conn);
+		close(conn);
+		return totalCount;
+	}
+
+	public List<Product> searchProduct(Map<String, Object> searchParam) {
+		Connection conn = getConnection();
+		List<Product> list = memberDao.searchProduct(conn, searchParam);
+		close(conn);
+		return list;
 	}
 
 }

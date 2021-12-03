@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.common.MvcUtils;
 import com.tlab.mvc.member.model.service.MemberService;
-import com.tlab.mvc.member.model.vo.Member;
+import com.tlab.mvc.product.model.vo.Product;
 
 /**
  * Servlet implementation class AdminProductFinderServlet
@@ -47,8 +47,8 @@ public class AdminProductFinderServlet extends HttpServlet {
 			System.out.println("param@servlet = "+ searchParam);
 			
 			// 2. 업무로직
-			List<Member> list = memberService.searchMember(searchParam);
-			System.out.println("list@servlet = " + list);
+			List<Product> list = memberService.searchProduct(searchParam);
+			System.out.println("[AdminProductFinderServlet] = " + list);
 			
 			// 2-b. pagebar영역
 			int totalContent = 1;
@@ -56,7 +56,7 @@ public class AdminProductFinderServlet extends HttpServlet {
 			System.out.println(totalContent);
 			System.out.println(url);
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
-			System.out.println("pagebar@servlet = " + pagebar);
+			System.out.println("[AdminProductFinderServlet.pagebar] = " + pagebar);
 			
 			// 3.view단처리
 			request.setAttribute("list", list);
