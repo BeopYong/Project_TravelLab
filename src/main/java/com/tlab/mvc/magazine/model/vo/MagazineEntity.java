@@ -17,26 +17,15 @@ public class MagazineEntity implements Serializable {
 	private Date regDate;
 	private int readCount;
 	private String vaild;
+	private String region;
 	
-	/**
-	 * 
-	 */
 	public MagazineEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @param no
-	 * @param title
-	 * @param writer
-	 * @param content
-	 * @param regDate
-	 * @param readCount
-	 * @param vaild
-	 */
 	public MagazineEntity(int no, String title, String writer, String content, Date regDate, int readCount,
-			String vaild) {
+			String vaild, String region) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -45,7 +34,9 @@ public class MagazineEntity implements Serializable {
 		this.regDate = regDate;
 		this.readCount = readCount;
 		this.vaild = vaild;
+		this.region = region;
 	}
+	
 
 	public int getNo() {
 		return no;
@@ -103,11 +94,20 @@ public class MagazineEntity implements Serializable {
 		this.vaild = vaild;
 	}
 
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
 	@Override
 	public String toString() {
 		return "MagazineEntity [no=" + no + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", regDate=" + regDate + ", readCount=" + readCount + ", vaild=" + vaild + "]";
+				+ ", regDate=" + regDate + ", readCount=" + readCount + ", vaild=" + vaild + ", region=" + region + "]";
 	}
+	
 	
 	
 	
