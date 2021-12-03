@@ -9,6 +9,7 @@ String searchKeyword = request.getParameter("searchKeyword");
 /* HttpSession session = request.getSession(); */
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/memberList.css" />
@@ -36,7 +37,6 @@ div#search-memberName {
 	display: <%="memberName".equals(searchType) ? "inline-block" : "none"%>;
 }
 </style>
-
 <section id="memberList-container">
 	<h2>회원관리</h2>
 
@@ -85,9 +85,9 @@ div#search-memberName {
 			for (Member member : list) {
 			%>
 			<tr>
-				<td class="member-id" width="100px" style="table-layout: fixed"><%=member.getMemberId()%></td>
-				<td class="member-name" width="40px" style="table-layout: fixed"><%=member.getMemberName()%></td>
-				<td class="member-role" style="table-layout: fixed">
+				<td width="100px" style="table-layout: fixed"><%=member.getMemberId()%></td>
+				<td width="40px" style="table-layout: fixed"><%=member.getMemberName()%></td>
+				<td style="table-layout: fixed">
 					<form 
 						name="memberRoleUpdateFrm"
 						action="<%= request.getContextPath() %>/admin/memberRoleUpdate"
@@ -129,6 +129,7 @@ div#search-memberName {
 		<%=request.getAttribute("pagebar")%>
 	</div>
 </section>
+
 <script>
 /**
  * 검색 div 노출
