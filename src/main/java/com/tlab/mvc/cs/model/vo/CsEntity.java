@@ -1,9 +1,9 @@
-package com.tlab.mvc.board.model.vo;
+package com.tlab.mvc.cs.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class BoardEntity implements Serializable {
+public class CsEntity implements Serializable {
 
 	private static final long seriavlVersionUID = 1L;
 	
@@ -14,11 +14,11 @@ public class BoardEntity implements Serializable {
 	private int boardRef;
 	private Date regDate;
 	
-	public BoardEntity() {
+	public CsEntity() {
 		super();
 	}
 
-	public BoardEntity(int no, String title, String write, String content, int boardRef, Date regDate) {
+	public CsEntity(int no, String title, String write, String content, int boardRef, Date regDate) {
 		super();
 		this.no = no;
 		this.title = title;

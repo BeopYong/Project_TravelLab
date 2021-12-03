@@ -1,8 +1,8 @@
-package com.tlab.mvc.board.model.vo;
+package com.tlab.mvc.cs.model.vo;
 
 import java.io.Serializable;
 
-public class Attachment implements Serializable {
+public class CsAttachment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -11,11 +11,11 @@ public class Attachment implements Serializable {
 	private String originalFilename;
 	private String renamedFilename;
 	
-	public Attachment() {
+	public CsAttachment() {
 		super();
 	}
 
-	public Attachment(int no, int csBoardno, String originalFilename, String renamedFilename) {
+	public CsAttachment(int no, int csBoardno, String originalFilename, String renamedFilename) {
 		super();
 		this.no = no;
 		this.csBoardno = csBoardno;
