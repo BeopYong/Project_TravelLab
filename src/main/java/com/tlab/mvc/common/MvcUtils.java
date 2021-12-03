@@ -6,11 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class MvcUtils {
 
-	
-	
-	
 	/**
 	 * 비밀번호 암호화 처리 메소드
 	 * 
@@ -96,5 +95,14 @@ public class MvcUtils {
 		
 		return pagebar.toString();
 	}
-			
+		
+	public static Attachment makeAttachment(MultipartRequest multipartRequest,String string) {
+		Attachment attach = new Attachment();
+		String originalFilename= multipartRequest.getOriginalFileName(string);
+		String renamedFilename = multipartRequest.getFilesystemName(string);
+		attach.setOriginalFilename(originalFilename);
+		attach.setRenamedFilename(renamedFilename);
+		return attach;
+	}
+	
 }
