@@ -6,144 +6,42 @@ import java.util.List;
 
 import com.tlab.mvc.magazine.model.vo.Attachment;
 
-public class Product implements Serializable {
+public class Product extends ProductEntity implements Serializable {
 	
 	public static final long serialVersionUID = 1L;
-
-	private int no;
-	private String region;
-	private int p_category;
-	private String p_name;
-	private String p_content;
-	private Date p_day;
-	private int p_stock;
-	private int unit_price;
-	private String valid;
-	private Date reg_date;
 	
-	private List<Attachment> attachments; //-> 한 개의 게시글은 여러 개의 첨부파일을 가질 수도 있다!
-
-	//기본 생성자
+	private int attachCount; //첨부파일 수
+	private List<Attachment> attachments; //하나의 게시물은 여러 개의 첨부파일을 가질 수 있음!
+	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	//파라미터 생성자
+	
 	public Product(int no, String region, int p_category, String p_name, String p_content, Date p_day, int p_stock,
-			int unit_price, String valid, Date reg_date, List<Attachment> attachments) {
-		super();
-		this.no = no;
-		this.region = region;
-		this.p_category = p_category;
-		this.p_name = p_name;
-		this.p_content = p_content;
-		this.p_day = p_day;
-		this.p_stock = p_stock;
-		this.unit_price = unit_price;
-		this.valid = valid;
-		this.reg_date = reg_date;
+			int unit_price, String valid, Date reg_date, int attachCount, List<Attachment> attachments) {
+		super(no, region, p_category, p_name, p_content, p_day, p_stock, unit_price, valid, reg_date);
+		this.attachCount = attachCount;
 		this.attachments = attachments;
 	}
-
-	//getter, setter
-	public int getNo() {
-		return no;
+	public int getAttachCount() {
+		return attachCount;
 	}
-
-	public void setNo(int no) {
-		this.no = no;
+	public void setAttachCount(int attachCount) {
+		this.attachCount = attachCount;
 	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public int getP_category() {
-		return p_category;
-	}
-
-	public void setP_category(int p_category) {
-		this.p_category = p_category;
-	}
-
-	public String getP_name() {
-		return p_name;
-	}
-
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
-	}
-
-	public String getP_content() {
-		return p_content;
-	}
-
-	public void setP_content(String p_content) {
-		this.p_content = p_content;
-	}
-
-	public Date getP_day() {
-		return p_day;
-	}
-
-	public void setP_day(Date p_day) {
-		this.p_day = p_day;
-	}
-
-	public int getP_stock() {
-		return p_stock;
-	}
-
-	public void setP_stock(int p_stock) {
-		this.p_stock = p_stock;
-	}
-
-	public int getUnit_price() {
-		return unit_price;
-	}
-
-	public void setUnit_price(int unit_price) {
-		this.unit_price = unit_price;
-	}
-
-	public String getValid() {
-		return valid;
-	}
-
-	public void setValid(String valid) {
-		this.valid = valid;
-	}
-
-	public Date getReg_date() {
-		return reg_date;
-	}
-
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
-
 	public List<Attachment> getAttachments() {
 		return attachments;
 	}
-
 	public void setAttachments(List<Attachment> attachments) {
 		this.attachments = attachments;
 	}
 
-	//override toString
 	@Override
 	public String toString() {
-		return "Product [no=" + no + ", region=" + region + ", p_category=" + p_category + ", p_name=" + p_name
-				+ ", p_content=" + p_content + ", p_day=" + p_day + ", p_stock=" + p_stock + ", unit_price="
-				+ unit_price + ", valid=" + valid + ", reg_date=" + reg_date + ", attachments=" + attachments + "]";
+		return "Product [attachCount=" + attachCount + ", attachments=" + attachments + ", toString()="
+				+ super.toString() + "]";
 	}
-	
-	
-	
+
 	
 }
