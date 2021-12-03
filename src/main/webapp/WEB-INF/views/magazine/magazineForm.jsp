@@ -4,7 +4,27 @@
 <script>
 /**
  * magazine 유효성 검사(제목, 내용을 작성안한 경우 제출불가)
+ * 
  */
+function magazineValidate(){
+	const $title = $("[name=title]");
+	const $content = $("[name=content]");
+	
+	//제목 작성하지 않은 경우
+	if(!/^.+$/.test($title.val())){
+		alert("제목을 입력하세요.")
+		return false;
+	}
+	
+	//내용을 작성하지 않은 경우
+	if(/^.+$/.test($content.val())){
+		alert("내용을 입력하세요.")
+		return false;
+	}
+	return true;
+}
+
+$(document.magazineEnrollFrm).submit(magazineValidate);
 
 </script>
 

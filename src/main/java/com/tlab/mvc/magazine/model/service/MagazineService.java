@@ -28,5 +28,23 @@ public class MagazineService {
 		close(conn);
 		return totalCount;
 	}
+	
+	//DML
+	public int insertMagazine(Magazine magazine) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			result = magazineDao.insertMagazine(conn, magazine);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}		
+		return result;
+	}
 
 }
