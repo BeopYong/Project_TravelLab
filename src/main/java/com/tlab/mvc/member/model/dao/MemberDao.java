@@ -241,7 +241,7 @@ public class MemberDao {
 				member.setEmail(rset.getString("email"));
 				member.setTel(rset.getString("tel"));
 				member.setRegDate(rset.getDate("reg_date"));
-				member.setMemberRole("member_role");
+				member.setMemberRole(rset.getString("member_role"));
 				list.add(member);
 			}
 		} catch (SQLException e) {
@@ -269,10 +269,17 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
 			while (rset.next()) {
-				Member member = new Member(rset.getString("member_id"), rset.getString("password"),
-						rset.getString("member_name"), rset.getString("email"), rset.getString("tel"),
-						rset.getString("valid"), rset.getDate("reg_date"), rset.getString("member_role"));
+				Member member = new Member(rset.getString("member_id"), 
+											rset.getString("password"),
+											rset.getString("member_name"), 
+											rset.getString("email"), 
+											rset.getString("tel"),
+											rset.getString("valid"), 
+											rset.getDate("reg_date"), 
+											rset.getString("member_role")
+										);
 				list.add(member);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
