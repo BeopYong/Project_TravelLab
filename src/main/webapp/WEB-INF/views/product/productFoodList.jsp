@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="com.tlab.mvc.product.model.vo.Product"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<h2>asdfaw 푸드</h2>
+  <table class="product-table">
+    <tr>
+      <td colspan="3">뜨는 맛집</td>
+      <td><a href="<%= request.getContextPath() %>/product/productFoodList">더 보기</a></td>
+    </tr>
+    <tr>
+    
+<% 
+	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
+	for(Product product :foodList) { 
+%>
+	<td><%=product.getAttachCount()%><br /><%=product.getP_name() %></td>
+       
+<% } %> 
+    
+    </tr>
+  </table>
 
 
 

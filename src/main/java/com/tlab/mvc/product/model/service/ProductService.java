@@ -12,8 +12,6 @@ import com.tlab.mvc.product.model.vo.Product;
 public class ProductService {
 	private ProductDao productDao = new ProductDao();
 
-	
-
 	public List<Product> randomProductFoodList(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<Product> list = productDao.randomProductFoodList(conn, param);
@@ -21,8 +19,6 @@ public class ProductService {
 		
 		return list;
 	}
-
-
 
 	public List<Product> randomProductPlaceList(Map<String, Integer> param) {
 		Connection conn = getConnection();
@@ -32,5 +28,14 @@ public class ProductService {
 		return list;
 		
 	}
+	
+	public List<Product> productFoodList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.productFoodList(conn, param);
+		close(conn);
+		
+		return list;
+	}
+
 
 }

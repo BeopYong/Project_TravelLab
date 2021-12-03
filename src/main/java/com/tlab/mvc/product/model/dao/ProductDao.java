@@ -117,4 +117,52 @@ public class ProductDao {
 		return placeList;
 	}
 
+
+	public List<Product> productFoodList(Connection conn, Map<String, Integer> param) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("AllProductList");
+		System.out.println(sql);
+		ResultSet rs = null;
+		List<Product> foodList = new ArrayList();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, param.get("301"));
+			pstmt.setInt(2, param.get("end"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Product product = new Product();
+				
+				product.setNo(rs.getInt("no"));
+				product.setRegion(rs.getString("region"));
+				product.setP_category(rs.getInt("p_category"));
+				product.setP_name(rs.getString("p_name"));
+				product.setP_content(rs.getString("p_content"));
+				product.setP_stock(rs.getInt("p_stock"));
+				product.setUnit_price(rs.getInt("unit_price"));
+				product.setValid(rs.getString("valid"));
+				product.setReg_date(rs.getDate("reg_date"));
+				
+				foodList.add(product);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(foodList);
+			
+		return foodList;
+		
+	}
+
+
+
+
 }
