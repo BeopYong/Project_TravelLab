@@ -18,7 +18,7 @@ import com.tlab.mvc.member.model.vo.Member;
 /**
  * Servlet Filter implementation class AdminFilter
  */
-@WebFilter("/admin/memberList")
+@WebFilter("/admin/*")
 public class AdminFilter implements Filter {
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
