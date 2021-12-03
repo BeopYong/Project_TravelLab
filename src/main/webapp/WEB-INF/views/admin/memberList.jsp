@@ -99,19 +99,6 @@ $(searchType).change((e) => {
 });
 
 
-$(".member-role").change((e) => {
-	const $select = $(e.target);
-	const memberRole = $select.val();
-	console.log(memberRole);
-	if(confirm(`회원의 권한을 [\${memberRole}]로 변경하시겠습니까?`)){
-		const $frm = $select.parent();
-		$frm.submit();
-	}
-	else {
-		// selected 초기값으로 복원
-		$select.children("[selected]").prop("selected", true);
-	}
-});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
