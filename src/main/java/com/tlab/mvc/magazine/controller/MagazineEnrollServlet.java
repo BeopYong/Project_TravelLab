@@ -26,7 +26,7 @@ public class MagazineEnrollServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			String writer = request.getParameter("writer");
 			String content = request.getParameter("content");
-			Magazine magazine = new Magazine(0, title, writer, content, null, 0, writer, content);		
+			Magazine magazine = new Magazine(0, title, writer, content, null, 0, writer, content);
 			System.out.println("[magazineServlet] magazine" + magazine);
 			
 			//업무로직
