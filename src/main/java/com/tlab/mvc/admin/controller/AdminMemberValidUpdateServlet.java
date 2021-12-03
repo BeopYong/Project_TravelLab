@@ -28,14 +28,19 @@ public class AdminMemberValidUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		String memberValid = request.getParameter("memberValid");
-		Member member = new Member();
-		member.setMemberId(memberId);
-		member.setValid(memberValid);
+		try {
+			String memberId = request.getParameter("memberId");
+			String memberValid = request.getParameter("memberValid");
+			Member member = new Member();
+			member.setMemberId(memberId);
+			member.setValid(memberValid);
 
-		// 2. 업무로직
-		int result = memberService.updateMemberValid(member);
+			// 2. 업무로직
+			int result = memberService.updateMemberValid(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 
 		// 3. redirect
 		response.sendRedirect(request.getContextPath() + "/admin/memberList");

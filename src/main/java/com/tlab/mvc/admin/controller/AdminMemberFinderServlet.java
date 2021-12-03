@@ -28,7 +28,6 @@ public class AdminMemberFinderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		
-		
 			final int numPerPage = 10;
 			int cPage = 1;
 			try {

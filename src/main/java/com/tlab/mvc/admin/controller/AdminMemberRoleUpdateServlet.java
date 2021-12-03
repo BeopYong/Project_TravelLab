@@ -25,15 +25,20 @@ public class AdminMemberRoleUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. 사용자입력값처리
-		String memberId = request.getParameter("memberId");
-		String memberRole = request.getParameter("memberRole");
-		Member member = new Member();
-		member.setMemberId(memberId);
-		member.setMemberRole(memberRole);
+		try {
+			String memberId = request.getParameter("memberId");
+			String memberRole = request.getParameter("memberRole");
+			Member member = new Member();
+			member.setMemberId(memberId);
+			member.setMemberRole(memberRole);
 
-		// 2. 업무로직
-		int result = memberService.updateMemberRole(member);
-
+			// 2. 업무로직
+			int result = memberService.updateMemberRole(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
 		// 3. redirect
 		response.sendRedirect(request.getContextPath() + "/admin/memberList");
 	}
