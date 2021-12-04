@@ -1,6 +1,7 @@
 package com.tlab.mvc.product.model.dao;
 
-import java.io.File;
+import static com.tlab.mvc.common.JdbcTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
