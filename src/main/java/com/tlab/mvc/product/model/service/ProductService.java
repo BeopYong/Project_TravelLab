@@ -10,12 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.tlab.mvc.product.model.dao.ProductDao;
-<<<<<<< HEAD
 import com.tlab.mvc.product.model.vo.Product;
 import com.tlab.mvc.product.model.vo.ProductAttachment;
-=======
 import com.tlab.mvc.product.model.vo.ProductEntity;
->>>>>>> branch 'master' of https://github.com/Jimmerland/tlab_beta.git
 
 public class ProductService {
 	public static final String VALID_Y = "Y";
@@ -69,8 +66,6 @@ public class ProductService {
 		close(conn);
 		return totalCount;
 	}
-
-<<<<<<< HEAD
 	
 	/**
 	 * 첨부파일 있으면 insertBoard랑 insertAttachment*n 이 하나로 묶여서 트랜잭션 처리 되어야 함.
@@ -115,7 +110,6 @@ public class ProductService {
 		return product;
 	}
 
-=======
 	public List<ProductEntity> selectAllProduct(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<ProductEntity> list = productDao.selectAllProduct(conn, param);
@@ -170,6 +164,5 @@ public class ProductService {
 
 		return result;
 	}
->>>>>>> branch 'master' of https://github.com/Jimmerland/tlab_beta.git
 
 }
