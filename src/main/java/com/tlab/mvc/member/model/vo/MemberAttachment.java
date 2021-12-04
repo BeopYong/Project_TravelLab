@@ -1,41 +1,102 @@
 package com.tlab.mvc.member.model.vo;
 
-import java.io.Serializable;
+import java.util.Objects;
 
+import com.tlab.mvc.common.Attachment;
 
 /**
  * 프로필 사진 파일용 (선택사항)
+ * 
  * @author jimmerland
  */
 
-public class MemberAttachment implements Serializable {
+public class MemberAttachment extends Attachment {
 
-	
+
 	private static final long serialVersionUID = 1L;
 
-	private int no;
 	private String userId;
-	private String oFileName; //original
-	private String rFileName; //renamed
 
 	public MemberAttachment() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public MemberAttachment(int no, String userId, String oFileName, String rFileName) {
-		super();
-		this.no = no;
+	public MemberAttachment(int no, String originalFilename, String renamedFilename) {
+		super(no, originalFilename, renamedFilename);
+	}
+
+	public MemberAttachment(String originalFilename, String renamedFilename) {
+		super(originalFilename, renamedFilename);
+	}
+
+	public MemberAttachment(String originalFilename, String renamedFilename, String userId) {
+		super(originalFilename, renamedFilename);
 		this.userId = userId;
-		this.oFileName = oFileName;
-		this.rFileName = rFileName;
 	}
 
+	public MemberAttachment(int no, String originalFilename, String renamedFilename, String userId) {
+		super(no, originalFilename, renamedFilename);
+		this.userId = userId;
+	}
+
+	@Override
 	public int getNo() {
-		return no;
+		// TODO Auto-generated method stub
+		return super.getNo();
+	}
+	
+	@Override
+	public void setNo(int no) {
+		// TODO Auto-generated method stub
+		super.setNo(no);
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	@Override
+	public String getOriginalFilename() {
+		// TODO Auto-generated method stub
+		return super.getOriginalFilename();
+	}
+
+	@Override
+	public void setOriginalFilename(String originalFilename) {
+		// TODO Auto-generated method stub
+		super.setOriginalFilename(originalFilename);
+	}
+
+	@Override
+	public String getRenamedFilename() {
+		// TODO Auto-generated method stub
+		return super.getRenamedFilename();
+	}
+
+	@Override
+	public void setRenamedFilename(String renamedFilename) {
+		// TODO Auto-generated method stub
+		super.setRenamedFilename(renamedFilename);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(userId);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof MemberAttachment)) {
+			return false;
+		}
+		MemberAttachment other = (MemberAttachment) obj;
+		return Objects.equals(userId, other.userId);
 	}
 
 	public String getUserId() {
@@ -46,30 +107,9 @@ public class MemberAttachment implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getoFileName() {
-		return oFileName;
-	}
-
-	public void setoFileName(String oFileName) {
-		this.oFileName = oFileName;
-	}
-
-	public String getrFileName() {
-		return rFileName;
-	}
-
-	public void setrFileName(String rFileName) {
-		this.rFileName = rFileName;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public String toString() {
-		return "MemberAttachment [no=" + no + ", userId=" + userId + ", oFileName=" + oFileName + ", rFileName="
-				+ rFileName + "]";
+		return "MemberAttachment [" + super.toString() + ", userId=" + userId + "]";
 	}
 
 }
