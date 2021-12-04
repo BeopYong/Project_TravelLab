@@ -15,7 +15,9 @@ import java.util.Properties;
 import static com.tlab.mvc.common.JdbcTemplate.*;
 
 import com.tlab.mvc.member.model.dao.MemberDao;
+import com.tlab.mvc.product.model.exception.ProductExcpetion;
 import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.vo.ProductAttachment;
 
 public class ProductDao {
 	
@@ -259,6 +261,124 @@ public class ProductDao {
 			close(pstmt);
 		}
 		return totalCount;
+	}
+
+
+	public int insertProduct(Connection conn, Product product) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProduct");
+		//insert into product (no, region, p_category, p_name, p_stock, unit_price) 
+		//values (seq_product_no.nextval, ?, ?, ?, ?, ?)
+		int result = 0;
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, product.getRegion());
+			pstmt.setInt(2, product.getP_category());
+			pstmt.setString(3, product.getP_name());
+			pstmt.setString(4, product.getP_content());
+			pstmt.setInt(5, product.getP_stock());
+			pstmt.setInt(6, product.getUnit_price());
+			
+			result = pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			throw new ProductExcpetion("상품 등록 오류.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+
+	public Product selectOneProduct(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		Product product = null;
+		String sql = prop.getProperty("selectOneProduct");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				product = new Product();
+				product.setNo(no);
+				product.setRegion(rset.getString("region"));
+				product.setP_category(rset.getInt("p_category"));
+				product.setP_name(rset.getString("p_name"));
+				product.setP_content(rset.getString("p_content"));
+				product.setP_stock(rset.getInt("p_stock"));
+				product.setUnit_price(rset.getInt("unit_price"));
+				product.setValid(rset.getString("valid"));
+				product.setReg_date(rset.getDate("reg_date"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return product;
+	}
+
+
+	public int selectLastProductNo(Connection conn) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectLastProductNo");
+		ResultSet rset = null;
+		int productNo = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				productNo = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			throw new ProductExcpetion("상품 번호 조회 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return productNo;
+	}
+
+
+	public int insertProductAttachment(Connection conn, ProductAttachment pAtt) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertProductAttachment");
+		int result = 0;
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pAtt.getProductNo());
+			pstmt.setString(2, pAtt.getOriginalFilename());
+			pstmt.setString(3, pAtt.getRenamedFilename());
+			
+			result = pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			throw new ProductExcpetion("첨부파일 등록 오류.", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	
 	}
 
 

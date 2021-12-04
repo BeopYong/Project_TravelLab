@@ -11,7 +11,7 @@ public class Product extends ProductEntity implements Serializable {
 	public static final long serialVersionUID = 1L;
 	
 	private int attachCount; //첨부파일 수
-	private List<Attachment> attachments; //하나의 게시물은 여러 개의 첨부파일을 가질 수 있음!
+	private List<ProductAttachment> attachments; //하나의 게시물은 여러 개의 첨부파일을 가질 수 있음!
 
 	
 	
@@ -31,10 +31,10 @@ public class Product extends ProductEntity implements Serializable {
 	public void setAttachCount(int attachCount) {
 		this.attachCount = attachCount;
 	}
-	public List<Attachment> getAttachments() {
+	public List<ProductAttachment> getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(List<Attachment> attachments) {
+	public void setAttachments(List<ProductAttachment> attachments) {
 		this.attachments = attachments;
 	}
 
