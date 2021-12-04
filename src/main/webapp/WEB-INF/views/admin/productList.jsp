@@ -1,9 +1,10 @@
-<%@page import="com.tlab.mvc.product.model.vo.Product"%>
+<%@page import="com.tlab.mvc.product.model.service.ProductService"%>
+<%@page import="com.tlab.mvc.product.model.vo.ProductEntity"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-List<Product> list = (List<Product>) request.getAttribute("list");
+List<ProductEntity> list = (List<ProductEntity>) request.getAttribute("list");
 System.out.println("productList@productList.jsp" + list);
 String searchType = request.getParameter("searchType");
 String searchKeyword = request.getParameter("searchKeyword");
@@ -12,7 +13,7 @@ String searchKeyword = request.getParameter("searchKeyword");
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/memberList.css" />
+	href="<%=request.getContextPath()%>/css/productList.css" />
 <style>
 section#content {
 	background-color: #FAFDFF;
@@ -38,7 +39,7 @@ div#search-gdsName {
 }
 </style>
 
-<section id="memberList-container">
+<section id="productList-container">
 	<h2>상품관리</h2>
 
 	<div id="search-container">
@@ -69,58 +70,71 @@ div#search-gdsName {
 	</div>
 
 
-	<table id="tbl-member">
+	<table id="tbl-product">
 		<thead>
 			<tr>
-				<th style="table-layout: fixed">지역번호</th>
-				<th style="table-layout: fixed">상품카테고리</th>
-				<th style="table-layout: fixed">상품명</th>
-				<th style="table-layout: fixed">재고</th>
-				<th style="table-layout: fixed">단위가격</th>
-				<th style="table-layout: fixed">유효</th>
-				<th style="table-layout: fixed">등록날짜</th>
+				<th class="region" style="table-layout: fixed">지역번호</th>
+				<th class="productCategory" style="table-layout: fixed">상품카테고리</th>
+				<th class="productName" style="table-layout: fixed">상품명</th>
+				<th class="price" style="table-layout: fixed">단위가격</th>
+				<th class="stock" style="table-layout: fixed">재고</th>
+				<th class="valid" style="table-layout: fixed">유효</th>
+				<th class="regDate" style="table-layout: fixed">등록날짜</th>
 			</tr>
 		</thead>
 		<tbody>
 			<%
-			for (Product product : list) {
+			for (ProductEntity product : list) {
 			%>
 			<tr>
-				<td width="40px" style="table-layout: fixed"><%=product.getRegion()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getRegion() != null ? product.getRegion() : ""%></td>
 				<td width="40px" style="table-layout: fixed"><%=product.getP_category()%></td>
-				<td width="100px" style="table-layout: fixed"><%=product.getP_name()%></td>
-				<td width="40px" style="table-layout: fixed"><%=product.getP_stock()%></td>
-				<td width="40px" style="table-layout: fixed"><%=product.getUnit_price()%></td>
-				<td width="40px" style="table-layout: fixed"><%=product.getValid()%></td>
-				<td width="100px" style="table-layout: fixed"><%=product.getReg_date()%></td>
-				<%-- <td style="table-layout: fixed">
+				<td width="150px" style="table-layout: fixed"><%=product.getP_name()%></td>
+				<td width="40px" style="table-layout: fixed"><%=product.getUnit_price() != 0 ? product.getUnit_price() : ""%></td>
+				
+				<td style="table-layout: fixed">
 					<form 
 						name="memberRoleUpdateFrm"
-						action="<%= request.getContextPath() %>/admin/memberRoleUpdate"
+						action="<%= request.getContextPath() %>/admin/productStockUpdate"
 						method="POST">
-						<input type="hidden" name="memberId" value="<%= product.getP_name() %>" />
-						<select name="memberRole" class="member-role">
-							<option value="<%= MemberService.USER_ROLE%>" 
-								<%= MemberService.USER_ROLE.equals(member.getMemberRole()) ? "selected" : "" %>>일반</option>
-							<option value="<%= MemberService.SELLER_ROLE%>" 
-								<%= MemberService.SELLER_ROLE.equals(member.getMemberRole()) ? "selected" : "" %>>사업자</option>
+						<input type="hidden" name="productName"
+							value="<%= product.getP_name() %>" />
+						<select name="productStock" class="product-stock">
+							<option value="<%= product.getP_stock() %> selected"><%= product.getP_stock() %></option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
 						</select>
 					</form>
-				</td> --%>
-				<%-- <td style="table-layout: fixed">
-					 <form name="memberValidUpdateFrm"
-						action="<%=request.getContextPath()%>/admin/memberValidUpdate"
+				</td>
+				<td style="table-layout: fixed">
+					 <form name="productValidUpdateFrm"
+						action="<%=request.getContextPath()%>/admin/productValidUpdate"
 						method="POST">
-						<input type="hidden" name="memberId"
-							value="<%=member.getMemberId()%>" /> 
-						<select name="memberValid" class="member-valid">
-							<option value="<%=MemberService.VALID_Y%>"
-								<%=MemberService.VALID_Y.equals(member.getValid()) ? "selected" : ""%>>Y</option>
-							<option value="<%=MemberService.VALID_N%>"
-								<%=MemberService.VALID_N.equals(member.getValid()) ? "selected" : ""%>>N</option>
+						<input type="hidden" name="productName"
+							value="<%= product.getP_name() %>" /> 
+						<select name="productValid" class="product-valid">
+							<option value="<%=ProductService.VALID_Y%>"
+								<%=ProductService.VALID_Y.equals(product.getValid()) ? "selected" : ""%>>Y</option>
+							<option value="<%=ProductService.VALID_N%>"
+								<%=ProductService.VALID_N.equals(product.getValid()) ? "selected" : ""%>>N</option>
 						</select>
 					</form> 
-				</td> --%>
+				</td>
+				<td width="100px" style="table-layout: fixed"><%=product.getReg_date()%></td>
 			</tr>
 			<%
 			}
@@ -144,11 +158,11 @@ $(searchType).change((e) => {
 });
 
 
-$(".member-valid").change((e) => {
+$(".product-valid").change((e) => {
 	const $select = $(e.target);
-	const memberValid = $select.val();
-	console.log(memberValid);
-	if(confirm(`회원의 권한을 [\${memberValid}]로 변경하시겠습니까?`)){
+	const productValid = $select.val();
+	console.log(productValid);
+	if(confirm(`상품의 구매가능 여부를 [\${productValid}]로 변경하시겠습니까?`)){
 		const $frm = $select.parent();
 		$frm.submit();
 	}
@@ -160,11 +174,11 @@ $(".member-valid").change((e) => {
 
 
 
-$(".member-role").change((e) => {
+$(".product-stock").change((e) => {
 	const $select = $(e.target);
-	const memberRole = $select.val();
-	console.log(memberRole);
-	if(confirm(`회원의 권한을 [\${memberRole}]로 변경하시겠습니까?`)){
+	const productStock = $select.val();
+	console.log(productStock);
+	if(confirm(`수량을 [\${productStock}]로 변경하시겠습니까?`)){
 		const $frm = $select.parent();
 		$frm.submit();
 	}

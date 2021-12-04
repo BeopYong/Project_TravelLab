@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.common.MvcUtils;
-import com.tlab.mvc.member.model.service.MemberService;
-import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.service.ProductService;
+import com.tlab.mvc.product.model.vo.ProductEntity;
 
 /**
  * Servlet implementation class AdminProductListServlet
@@ -21,7 +21,7 @@ import com.tlab.mvc.product.model.vo.Product;
 @WebServlet("/admin/productList")
 public class AdminProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberService memberService = new MemberService();
+	private ProductService productService = new ProductService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,10 +41,10 @@ public class AdminProductListServlet extends HttpServlet {
 			
 			// 2.업무로직
 			// 2-a. content영역
-			List<Product> list = memberService.selectAllProduct(param);
+			List<ProductEntity> list = productService.selectAllProduct(param);
 			System.out.println("[AdminProductListServlet] = " + list);
 			// 2-b. pagebar영역
-			int totalContent = memberService.selectTotalProductCount();
+			int totalContent = productService.selectTotalProductCount();
 			String url = request.getRequestURI(); // /mvc/admin/memberList
 			System.out.println(totalContent);
 			System.out.println(url);

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.common.MvcUtils;
-import com.tlab.mvc.member.model.service.MemberService;
-import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.service.ProductService;
+import com.tlab.mvc.product.model.vo.ProductEntity;
 
 /**
  * Servlet implementation class AdminProductFinderServlet
@@ -21,7 +21,7 @@ import com.tlab.mvc.product.model.vo.Product;
 @WebServlet("/admin/productFinder")
 public class AdminProductFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberService memberService = new MemberService();
+	private ProductService productService = new ProductService();
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,7 @@ public class AdminProductFinderServlet extends HttpServlet {
 			System.out.println("param@servlet = "+ searchParam);
 			
 			// 2. 업무로직
-			List<Product> list = memberService.searchProduct(searchParam);
+			List<ProductEntity> list = productService.searchProduct(searchParam);
 			System.out.println("[AdminProductFinderServlet] = " + list);
 			
 			// 2-b. pagebar영역

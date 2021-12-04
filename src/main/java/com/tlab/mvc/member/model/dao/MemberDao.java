@@ -15,7 +15,6 @@ import java.util.Properties;
 
 import com.tlab.mvc.member.model.exception.MemberException;
 import com.tlab.mvc.member.model.vo.Member;
-import com.tlab.mvc.product.model.vo.Product;
 
 import org.apache.log4j.Logger;
 
@@ -311,97 +310,6 @@ public class MemberDao {
 		return totalCount;
 	}
 
-	public List<Product> selectAllProduct(Connection conn, Map<String, Integer> param) {
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectAllProduct");
-		ResultSet rset = null;
-		List<Product> list = new ArrayList<>();
-		try {
-			// 1.pstmt객체생성
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, param.get("start"));
-			pstmt.setInt(2, param.get("end"));
 
-			// 2.실행
-			rset = pstmt.executeQuery();
-			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
-			while (rset.next()) {
-				Product product = new Product();
-				product.setRegion(rset.getString("region"));
-				product.setP_category(rset.getInt("p_category"));
-				product.setP_name(rset.getString("p_name"));
-				product.setP_stock(rset.getInt("p_stock"));
-				product.setUnit_price(rset.getInt("unit_price"));
-				product.setValid(rset.getString("valid"));
-				product.setReg_date(rset.getDate("reg_date"));
-				list.add(product);		}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-
-	public int selectTotalProductCount(Connection conn) {
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("selectTotalProductCount");
-		ResultSet rset = null;
-		int totalCount = 0;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			if (rset.next())
-				totalCount = rset.getInt(1); // 컬럼 인덱스
-		} catch (SQLException e) {
-			logger.debug(e.getMessage());
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return totalCount;
-	}
-
-	public List<Product> searchProduct(Connection conn, Map<String, Object> searchParam) {
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("searchProduct");
-		ResultSet rset = null;
-		List<Product> list = new ArrayList<>();
-		String searchType = (String) searchParam.get("searchType");
-		String searchKeyword = (String) searchParam.get("searchKeyword");
-
-		switch (searchType) {
-		case "cateCode":
-			sql += " region like '%" + searchKeyword + "%'";
-			break;
-		case "gdsName":
-			sql += " p_name like '%" + searchKeyword + "%'";
-			break;
-		}
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			while (rset.next()) {
-				Product product = new Product();
-				product.setRegion(rset.getString("region"));
-				product.setP_category(rset.getInt("p_category"));
-				product.setP_name(rset.getString("p_name"));
-				product.setP_stock(rset.getInt("p_stock"));
-				product.setUnit_price(rset.getInt("unit_price"));
-				product.setValid(rset.getString("valid"));
-				product.setReg_date(rset.getDate("reg_date"));
-				list.add(product);
-			}
-		} catch (SQLException e) {
-			logger.debug(e.getMessage());
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
 
 }
