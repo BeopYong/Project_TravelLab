@@ -20,7 +20,7 @@ import com.tlab.mvc.member.model.vo.Member;
  */
 @WebFilter(urlPatterns = { "/member/memberView", "/member/memberUpdate", "/member/updatePassword",
 							"/member/myProfile",
-							"/board/deleteBoard", "/schedule/*"})
+							"/board/deleteBoard", "/schedule/*", "/member/orderList"})
 public class LoginFilter implements Filter {
 
     /**
