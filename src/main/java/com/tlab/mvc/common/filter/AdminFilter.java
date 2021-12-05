@@ -20,7 +20,10 @@ import com.tlab.mvc.member.model.vo.Member;
  */
 @WebFilter("/admin/*")
 public class AdminFilter implements Filter {
-	
+
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -34,6 +37,7 @@ public class AdminFilter implements Filter {
 			return;
 		}
 		
+		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 
