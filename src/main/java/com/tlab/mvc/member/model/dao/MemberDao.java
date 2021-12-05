@@ -156,25 +156,7 @@ public class MemberDao {
 		return result;
 	}
 
-	/*
-	 * @혜미님 작업 : 관리자-멤버조회 권한 추가 해야 하는 부분 1. 관리자가 member에 대한 valid(차단여부)를 변경하는 부분
-	 * 
-	 * 다음 요청에 대한 Servlet생성한다. ("/admin/updateMemberValid") member가 자신의 정보를 업데이트 하듯이
-	 * 관리자가 updateValid하는 쿼리를 작성한다.
-	 * 
-	 * 2. 관리자가 member를 삭제하는 부분
-	 * 
-	 * 다음 요청에 대한 Servlet생성 ("/admin/deleteMember")
-	 * 
-	 * member가 delete 하듯이 admin서블릿에서 deleteMember요청을 수행한다. 기존의 Dao 명령을 쓰되 서블릿에서
-	 * admin의 역할을 확인하고 진행하도록 한다.
-	 * 
-	 * 관리자는 admin이고 admin_role은 'A' 와 'B' 등급으로 나뉘며, B등급 관리자는 회원을 삭제할 수 없다.
-	 * 
-	 */
-
 	// 관리자용 요청처리 DAO
-
 	public int updateMemberRole(Connection conn, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -270,16 +252,16 @@ public class MemberDao {
 			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
 			while (rset.next()) {
 				Member member = new Member(rset.getString("member_id"), 
-											rset.getString("password"),
-											rset.getString("member_name"), 
-											rset.getString("email"), 
-											rset.getString("tel"),
-											rset.getString("valid"), 
-											rset.getDate("reg_date"), 
-											rset.getString("member_role")
-										);
+									rset.getString("password"),
+									rset.getString("member_name"), 
+									rset.getString("email"), 
+									rset.getString("tel"),
+									rset.getString("valid"), 
+									rset.getDate("reg_date"), 
+									rset.getString("member_role")
+								);
+
 				list.add(member);
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

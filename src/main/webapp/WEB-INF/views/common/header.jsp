@@ -127,6 +127,7 @@ $(() => {
 						<li class="cs"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
 <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
+						<li class="admin"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
 <% } %>
  <%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
