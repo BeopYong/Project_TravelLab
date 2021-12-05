@@ -10,25 +10,25 @@ import java.util.List;
 import java.util.Map;
 
 import com.tlab.mvc.magazine.model.dao.MagazineDao;
-import com.tlab.mvc.magazine.model.vo.Attachment;
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
+import com.tlab.mvc.magazine.model.vo.MagazineComment;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 import com.tlab.mvc.magazine.model.exception.MagazineException;
-import com.tlab.mvc.magazine.model.vo.Attachment;
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 import com.tlab.mvc.magazine.model.exception.MagazineException;
-import com.tlab.mvc.magazine.model.vo.Attachment;
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 
 public class MagazineService {
 
 	private MagazineDao magazineDao = new MagazineDao();
 	
-	//페이징처리a
+	//페이징처리a /게시물 목록조회
 	public List<Magazine> selectAllMagazine(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<Magazine> list = magazineDao.selectAllMagazine(conn, param);
 		close(conn);
-		
 		return list;
 	}
 	//페이징처리b
@@ -39,29 +39,32 @@ public class MagazineService {
 		return totalCount;
 	}
 	
-	//DML
+	/**
+	 * DML 트래잭션 
+	 * @param magazine
+	 * @return
+	 */
 	public int insertMagazine(Magazine magazine) {
 		Connection conn = getConnection();
 		int result = 0;
-		
 		try {
 			conn = getConnection();
 			result = magazineDao.insertMagazine(conn, magazine);
 			
 			//보드넘버 조회해 맞는지 확인 : select seq_magazine_no.currval from dual
 			int magazineNo = magazineDao.selectLastMagazineNo(conn);
-			System.out.println("[MagazineService] magazineNo = " + magazineNo);
+			System.out.println("[MagazineService insertMagazine()] magazineNo = " + magazineNo);
+			magazine.setNo(magazineNo); //servlet에서 참조
 			
 			//첨부파일
-			List<Attachment> attachments = magazine.getAttachments();
+			List<MagazineAttachment> attachments = magazine.getAttachments();
 			if(attachments != null) {
 				//insert into attachment values(seq_attachment_no.nextval,.?,?, default)
-				for(Attachment attach : attachments) {
-					attach.setmagazineNo(magazineNo);
+				for(MagazineAttachment attach : attachments) {
+					attach.setMagazineNo(magazineNo);
 					result = magazineDao.insertAttachment(conn, attach);
 				}
 			}
-			
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -70,6 +73,156 @@ public class MagazineService {
 			close(conn);
 		}		
 		return result;
+	}
+	
+	//DQL
+	public Magazine selectOneMagazineAttachments(int no) {
+		Connection conn = getConnection();
+		Magazine magazine = magazineDao.selectOneMagazineAttachment(conn, no);
+		close(conn);
+		return magazine;
+	}
+	
+	//DML
+	public int updateReadCount(int no) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = magazineDao.updateReadCount(conn, no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	//매거진 게시물 상세보기
+	//DQL
+	public Magazine selectOneMagazine(int no) {
+		Magazine magazine;
+		Connection conn = getConnection();
+
+		conn = getConnection();
+		magazine = magazineDao.selectOneMagazine(conn, no);
+//		List<MagazineAttachment> attachments = magazineDao.selectAttachmentByMagazineNo(conn, no);
+//		magazine.setAttachments(attachments);
+		close(conn);
+		
+		return magazine;
+	}
+	//매거진 게시물 수정
+	public int updateMagazine(Magazine magazine) {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			//트랙잭션
+			//1 매거진 업데이트
+			result = magazineDao.updateMagazine(conn, magazine);
+			
+//			//2 attachment insert
+//			List<MagazineAttachment> attachments = magazine.getAttachments();
+//			if(attachments != null && !attachments.isEmpty()) {
+//				for(MagazineAttachment attach : attachments) {
+//					result = magazineDao.insertAttachment(conn, attach);
+//				}
+//			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+	public int deleteAttachment(int delFileNo) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = magazineDao.deleteAttachment(conn, delFileNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+	
+	public MagazineAttachment selectOneAttachment(int no) {
+		Connection conn = getConnection();
+		MagazineAttachment attach = magazineDao.selectOneAttachment(conn, no);
+		close(conn);
+		return attach;
+	}
+	
+	public int deleteMagazineComment(int no) {
+		Connection conn = getConnection(); 
+		int result = 0;
+		try {
+			result = magazineDao.deleteMagazineComment(conn, no);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return result;
+	}
+	public int insertMagazineComment(MagazineComment mc) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = magazineDao.insertMagazineComment(conn, mc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	public List<MagazineAttachment> selectAttachmentByMagazineNo(int no) {
+		Connection conn = getConnection();
+		List<MagazineAttachment> attachments = magazineDao.selectAttachmentByMagazineNo(conn, no);
+		close(conn);
+		return attachments;
+	}
+	
+	//매거진 게시물 삭제
+	//DML
+	public int deleteMagazine(int no) {
+		Connection conn = getConnection();;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = magazineDao.deleteMagazine(conn, no);
+			//에러 없으면 if절로 이동
+			if(result == 0)
+				throw new IllegalArgumentException("해당 게시글이 존재하지 않아 삭제할 수 없습니다. : " + no);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+	public List<MagazineComment> selectMagazineCommentList(int magazineNo) {
+		Connection conn = getConnection();
+		List<MagazineComment> commentList = magazineDao.selectMagazineCommentList(conn, magazineNo);
+		close(conn);
+		return commentList;
 	}
 
 }

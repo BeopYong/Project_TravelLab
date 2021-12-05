@@ -27,4 +27,6 @@ public class MagazineException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 }

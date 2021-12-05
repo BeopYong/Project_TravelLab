@@ -19,9 +19,20 @@ public class MagazineFormServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request
-			.getRequestDispatcher("/WEB-INF/views/magazine/magazineForm.jsp")
-			.forward(request, response);
+		try {
+			request.setCharacterEncoding("utf-8");
+			request
+				.getRequestDispatcher("/WEB-INF/views/magazine/magazineForm.jsp")
+				.forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 

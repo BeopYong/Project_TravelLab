@@ -1,6 +1,6 @@
 package com.tlab.mvc.magazine.model.dao;
 
-import static com.tlab.mvc.common.JdbcTemplate.*;
+import static com.tlab.mvc.common.JdbcTemplate.close;
 
 import java.io.File;
 import java.io.FileReader;
@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.tlab.mvc.common.Attachment;
 import com.tlab.mvc.magazine.model.exception.MagazineException;
-import com.tlab.mvc.magazine.model.vo.Attachment;
 import com.tlab.mvc.magazine.model.vo.Magazine;
+import com.tlab.mvc.magazine.model.vo.MagazineComment;
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 
 public class MagazineDao {
 
@@ -32,7 +34,7 @@ public class MagazineDao {
 		} 
 	}
 	
-	//페이징a
+	//페이징a /게시물 목록조회
 	public List<Magazine> selectAllMagazine(Connection conn, Map<String, Integer> param) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllMagazine");
@@ -41,25 +43,30 @@ public class MagazineDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, param.get("start"));
-			pstmt.setInt(1, param.get("end"));
+			pstmt.setInt(1, param.get("start")); 
+			pstmt.setInt(2, param.get("end"));
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Magazine magazine = new Magazine();
-				magazine.setNo(rset.getInt("nooooo"));
+				magazine.setNo(rset.getInt("no")); //number
 				magazine.setTitle(rset.getString("title"));
 				magazine.setWriter(rset.getString("writer"));
 				magazine.setContent(rset.getString("content"));
-				magazine.setReadCount(rset.getInt("read_count"));
 				magazine.setRegDate(rset.getDate("reg_date"));
+				magazine.setReadCount(rset.getInt("read_count"));
 			
 //				magazine.setCommentCount(rset.getInt("comment_count")); //댓글
-				magazine.setAttachCount(rset.getInt("attach_count"));
+//				magazine.setAttachCount(rset.getInt("attach_count"));
+				list.add(magazine);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new MagazineException("게시글 목록 조회 오류!", e);
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		return list;
 	}
@@ -73,7 +80,6 @@ public class MagazineDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				totalCount = rset.getInt(1);
@@ -91,7 +97,7 @@ public class MagazineDao {
 	public int insertMagazine(Connection conn, Magazine magazine) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertMagazine");
-		System.out.println(sql+"@MagazineDao");
+//		System.out.println(sql+"@MagazineDao");
 		int result = 0;
 		
 		try {
@@ -103,7 +109,6 @@ public class MagazineDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new MagazineException("게시물 등록 오류", e);
-		
 		}finally {
 			close(pstmt);
 		}
@@ -115,13 +120,11 @@ public class MagazineDao {
 	public int selectLastMagazineNo(Connection conn) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectLastMagazineNo");
-		System.out.println(sql + "selectlastMagazineDao");
 		ResultSet rset = null;
 		int magazineNo = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			
 			if(rset.next()) { //다음행이있는지 확인
 				magazineNo = rset.getInt(1); //첫번째 컬럼값 가져오기
 			}
@@ -130,21 +133,19 @@ public class MagazineDao {
 		}finally {
 			close(pstmt);
 		}
-		
 		return magazineNo;
 	}
 
-	public int insertAttachment(Connection conn, Attachment attach) {
+	public int insertAttachment(Connection conn, MagazineAttachment attach) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertAttachment");
-		System.out.println("inserAttachMagazineDao = " + sql);
 		int result = 0;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, attach.getmagazineNo());
-			pstmt.setString(2, attach.getOriginalFilename());
-			pstmt.setString(3, attach.getRenamedFilename());
+			pstmt.setString(1, attach.getOriginalFilename());
+			pstmt.setString(2, attach.getRenamedFilename());
+			pstmt.setInt(3, attach.getMagazineNo());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -152,8 +153,319 @@ public class MagazineDao {
 		}finally {
 			close(pstmt);
 		}
-		
 		return result;
 	}
+	//게시물상세보기
+	//DQL
+	public Magazine selectOneMagazine(Connection conn, int no) {
+		Magazine magazine = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOneMagazine");
+		try{
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			//쿼리문미완성
+			pstmt.setInt(1, no);
+			//쿼리문실행
+			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				magazine = new Magazine();
+				magazine.setNo(rset.getInt("no"));
+				magazine.setTitle(rset.getString("title"));
+				magazine.setWriter(rset.getString("writer"));
+				magazine.setContent(rset.getString("content"));
+				magazine.setRegDate(rset.getDate("reg_date"));
+				magazine.setReadCount(rset.getInt("read_count"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+//			throw new MagazineException("게시글 상세보기 오류", e);
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return magazine;
+	}
+	public List<MagazineAttachment> selectAttachmentByMagazineNo(Connection conn, int magazineNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAttachmentByMagazineNo");
+		ResultSet rset = null;
+		List<MagazineAttachment> attachments = new ArrayList<>();
+		
+		try{
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			//쿼리문미완성
+			pstmt.setInt(1, magazineNo);
+			//쿼리문실행
+			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				MagazineAttachment attach = new MagazineAttachment();
+				attach.setNo(rset.getInt("no"));
+				attach.setOriginalFilename(rset.getString("original_filename"));
+				attach.setRenamedFilename(rset.getString("renamed_filename"));
+				attach.setMagazineNo(rset.getInt("magazine_no"));
+//				attach.setRegDate(rset.getDate("reg_date"));
+				attachments.add(attach);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return attachments;
+	}
+
+	//DQL
+	public Magazine selectOneMagazineAttachment(Connection conn, int no) {
+		Magazine magazine = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOneMagazineAttachments");
+		try{
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			//쿼리문미완성
+			pstmt.setInt(1, no);
+			//쿼리문실행
+			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				magazine = new Magazine();
+				magazine.setNo(rset.getInt("no"));
+				magazine.setTitle(rset.getString("title"));
+				magazine.setWriter(rset.getString("writer"));
+				magazine.setContent(rset.getString("content"));
+				magazine.setRegDate(rset.getDate("reg_date"));
+				magazine.setReadCount(rset.getInt("read_count"));
+				
+				int attachNo = rset.getInt("attach_no");
+				if(attachNo != 0) {
+					// 첨부파일이 있는 경우 1행 또는 2행이다.
+					List<MagazineAttachment> attachments = new ArrayList<>();
+					do {
+						MagazineAttachment attach = new MagazineAttachment();
+						attach.setNo(rset.getInt("attach_no"));
+						attach.setMagazineNo(rset.getInt("magazine_no"));
+						attach.setOriginalFilename(rset.getString("original_filename"));
+						attach.setRenamedFilename(rset.getString("renamed_filename"));
+//						attach.setRegDate(rset.getDate("reg_date")); //magazineattachment 생성자 경로 확인하기
+						attachments.add(attach);
+					} while (rset.next());
+					magazine.setAttachments(attachments);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return magazine;
+	}
+
+	//DML
+	public int updateReadCount(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReadCount");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MagazineException("조회수 증가 처리 오류!", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public MagazineAttachment selectOneAttachment(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectOneAttachment");		
+		ResultSet rset = null;
+		MagazineAttachment attach = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				attach = new MagazineAttachment();
+				attach.setNo(rset.getInt("no"));
+				attach.setOriginalFilename(rset.getString("original_filename"));
+				attach.setRenamedFilename(rset.getString("renamed_filename"));
+				attach.setMagazineNo(rset.getInt("magazine_no"));
+			}
+		} catch (Exception e) {
+			throw new MagazineException("첨부파일 조회 오류 ", e);
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return attach;
+	}
+
+	//매거진 게시물 삭제
+	//DML
+	public int deleteMagazine(Connection conn, int no) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMagazine"); 
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(sql);
+			//쿼리문미완성
+			pstmt.setInt(1, no);
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MagazineException("게시물 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateMagazine(Connection conn, Magazine magazine) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMagazine");
+		
+		try {
+			//미완성 커리로 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			//쿼리문 미완성
+			pstmt.setString(1, magazine.getTitle());
+			pstmt.setString(2, magazine.getContent());
+			pstmt.setInt(3, magazine.getNo());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MagazineException("게시글 수정 오류", e);
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteAttachment(Connection conn, int delFileNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try {
+			//미완성쿼리문 가지고 객체생성
+			pstmt = conn.prepareStatement(sql);
+			
+			//쿼리문미완성
+			pstmt.setInt(1, delFileNo);
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터없음)
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public List<MagazineComment> selectMagazineCommentList(Connection conn, int magazineNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectMagazineCommentList");
+		ResultSet rset = null;
+		List<MagazineComment> commentList = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, magazineNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				MagazineComment mc = new MagazineComment();
+				mc.setNo(rset.getInt("no"));
+				mc.setCommentLevel(rset.getInt("comment_level"));
+				mc.setWriter(rset.getString("writer"));
+				mc.setContent(rset.getString("content"));
+				mc.setMagazineNo(rset.getInt("magazine_no"));
+				mc.setCommentRef(rset.getInt("comment_ref")); // 댓글인 경우 null이고, 이는 0으로 치환된다.
+				mc.setRegDate(rset.getDate("reg_date"));
+				commentList.add(mc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return commentList;
+	}
+
+
+	public int deleteMagazineComment(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteMagazineComment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new MagazineException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertMagazineComment(Connection conn, MagazineComment mc) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMagazineComment");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mc.getCommentLevel()); 	// 1, 2
+			pstmt.setString(2, mc.getWriter()); 	// memberId
+			pstmt.setString(3, mc.getContent()); 	// ..
+			pstmt.setInt(4, mc.getMagazineNo());		// magazineNo
+			pstmt.setObject(5, mc.getCommentRef() == 0 ? null : mc.getCommentRef());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
 
 }

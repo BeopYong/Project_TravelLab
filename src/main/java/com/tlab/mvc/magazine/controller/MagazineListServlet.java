@@ -32,9 +32,6 @@ public class MagazineListServlet extends HttpServlet {
 	 *  - numPerPage 한페이지의 게시물수 10
 	 * 	- startNum, endNum
 	 * 
-	 * 
-	 * 
-	 * 
 	 * 2. pagebar section
 	 * 	- totalContent 총게시물수
 	 *  - totalPage 12
@@ -62,13 +59,13 @@ public class MagazineListServlet extends HttpServlet {
 			//2. 업루로직
 			//2-a. content영역 : 페이징
 			List<Magazine> list = magazineService.selectAllMagazine(param);
-			System.out.println("list@magazinlistServlet = " + list);
+			System.out.println("list@magazinlistServlet paging = " + list);
 			
 			//2-b.pagebar영역 : Mvcutil에서 불러오기 totalContent, url
 			int totalCount = magazineService.selectTotalMagazineCount();
 			String url = request.getRequestURI(); // -> /tlab/magazine/magazineList
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalCount, url);
-			System.out.println("pagebar@magazinlistServlet = " + pagebar);
+//			System.out.println("pagebar@magazinlistServlet = pagebar " + pagebar);
 			
 			//3. view단처리
 			request.setAttribute("list", list);
@@ -77,7 +74,12 @@ public class MagazineListServlet extends HttpServlet {
 				.getRequestDispatcher("/WEB-INF/views/magazine/magazineList.jsp")
 				.forward(request, response);
 		
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		}
