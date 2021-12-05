@@ -1,5 +1,7 @@
 package com.tlab.mvc.cart.controller;
 
+import com.tlab.mvc.product.model.vo.ProductAttachment;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +31,7 @@ public class CartServlet extends HttpServlet {
 		
 		//상품 상세 페이지 다시 보여줘야 함!!!!!!!!!! -> 리다이렉트
 		
-		request.getRequestDispatcher("/WEB-INF/views/cart/cart.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/productView.jsp")
 		.forward(request, response);
 	}
 

@@ -35,7 +35,7 @@
  	<tr>
  		<th>가격</th>
  		<th>
- 		<p name="unit_price"><%= product.getUnit_price() %></p></td>
+ 		<p name="product_bill"><%= product.getUnit_price() %></p></td>
  	</tr>
 	<tr>
 		<th>수량</th>
@@ -53,37 +53,38 @@
  		<th>상세 설명</th>
  		<th><%= product.getP_content() %></td>
  	</tr>
+ 	<tr>
+ 		<input type="submit" value="장바구니" />
+ 		<input type="hidden" name="member_Id" value = <%=member.getMemberId() %> />
+ 	</tr>
  	
 	</form>
+	
+	
+	
  
  <% if (loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) { 
  %>
  	<tr>
  		<td>
- 		<input type="button" value="상품 업로드" onclick="updateProduct()" />
- 		<input type="button" value="수정하기"	onclick="updateProduct()" />
- 		<input type="button" value="삭제하기" onclick="deleteProduct()">
-			</th>
-		</tr>
+ 		<input type="button" value="장바구니" onclick="cartIn()" />
+		</td>
+	</tr>
 		<% 	} %>
 	</table>
 </section>
 
+
+
 <form
 	name="productDelFrm"
 	method="POST" 
-	action="<%=request.getContextPath()%>/product/productDelete" >
-	 	
+	action="<%=request.getContextPath()%>/product/productDelete" >	 	
 	<tr>
 	<input type="submit" value="삭제하기2" />
 	<input type="hidden" name="no" value="<%= product.getNo() %>" />	
 	</tr>
-
 </form>
-<script>
-
-</script>
-
 
 
 

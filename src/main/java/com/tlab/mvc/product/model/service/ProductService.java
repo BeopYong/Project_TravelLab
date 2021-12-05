@@ -167,9 +167,10 @@ public class ProductService {
 
 	public List<ProductAttachment> selectAttachmentByProductNo(int productNo) {
 		Connection conn = getConnection();
-		List<ProductAttachment> attachments = productDao.selectAttachmentByProductNo(conn, productNo);
+		List<ProductAttachment> productAttachments = productDao.selectAttachmentByProductNo(conn, productNo);
+		
 		close(conn);
-		return attachments;
+		return productAttachments;
 	}
 
 	public int deleteProduct(int productNo) {
