@@ -4,6 +4,7 @@ import static com.tlab.mvc.common.JdbcTemplate.*;
 
 import com.tlab.mvc.member.model.dao.MemberDao;
 import com.tlab.mvc.member.model.vo.Member;
+import com.tlab.mvc.member.model.vo.MemberAttachment;
 import com.tlab.mvc.member.model.exception.MemberException;
 
 import java.sql.Connection;
@@ -148,6 +149,22 @@ public class MemberService {
 			close(conn);
 		}
 
+		return result;
+	}
+
+	public int insertMemberAttachment(MemberAttachment mAttach) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn=getConnection();
+			result= memberDao.insertMemberAttachment(conn,mAttach);
+			commit(conn);
+		}catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
 		return result;
 	}
 
