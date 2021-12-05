@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.tlab.mvc.member.model.exception.MemberException;
 import com.tlab.mvc.member.model.vo.Member;
+import com.tlab.mvc.member.model.vo.MemberAttachment;
 
 import org.apache.log4j.Logger;
 
@@ -94,6 +95,26 @@ public class MemberDao {
 		return result;
 	}
 
+
+	public int insertMemberAttachment(Connection conn, MemberAttachment mAttach) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMemberAttachment");
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,mAttach.getOriginalFilename());
+			pstmt.setString(2,mAttach.getRenamedFilename());
+			pstmt.setString(3,mAttach.getMemberId());
+		} catch(Exception e) {
+			e.printStackTrace();
+			logger.debug(e.getMessage()+pstmt.toString());
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 	public int updateMember(Connection conn, Member member) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateMember");
@@ -168,6 +189,7 @@ public class MemberDao {
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원권한변경 오류!", e);
 		} finally {
 			close(pstmt);
@@ -186,6 +208,7 @@ public class MemberDao {
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
+			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원유효성변경 오류!", e);
 		} finally {
 			close(pstmt);
@@ -227,7 +250,7 @@ public class MemberDao {
 				list.add(member);
 			}
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+			logger.debug(e.getMessage() + pstmt.toString());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -264,6 +287,7 @@ public class MemberDao {
 				list.add(member);
 			}
 		} catch (SQLException e) {
+			logger.debug(e.getMessage() + pstmt.toString());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -291,5 +315,6 @@ public class MemberDao {
 		}
 		return totalCount;
 	}
+
 
 }

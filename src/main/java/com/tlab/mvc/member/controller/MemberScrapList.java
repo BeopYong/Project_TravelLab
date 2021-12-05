@@ -21,7 +21,7 @@ import com.tlab.mvc.magazine.model.vo.Magazine;
 @WebServlet("/member/magazineScrapList")
 public class MemberScrapList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MagazineService magazineService = new Magazine();
+	private MagazineService magazineService = new MagazineService();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -46,7 +46,7 @@ public class MemberScrapList extends HttpServlet {
 			List<Magazine> magazineList = magazineService.selectAllMyScrap(param,writer);
 			System.out.println("list@MyScrapListServlet = " + magazineList);
 			int totalContent = magazineService.selectTotalMyScrapCount(writer);
-			String url = request.getRequestURI(); // /mvc/admin/magazineScrapList
+			String url = request.getRequestURI(); // /mvc/member/magazineScrapList
 			System.out.println(totalContent);
 			System.out.println(url);
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
