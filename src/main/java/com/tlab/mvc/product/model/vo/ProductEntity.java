@@ -15,7 +15,6 @@ public class ProductEntity implements Serializable {
 	private int p_category;
 	private String p_name;
 	private String p_content;
-	private Date p_day;
 	private int p_stock;
 	private int unit_price;
 	private String valid;
@@ -26,7 +25,7 @@ public class ProductEntity implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ProductEntity(int no, String region, int p_category, String p_name, String p_content, Date p_day,
+	public ProductEntity(int no, String region, int p_category, String p_name, String p_content,
 			int p_stock, int unit_price, String valid, Date reg_date) {
 		super();
 		this.no = no;
@@ -34,7 +33,6 @@ public class ProductEntity implements Serializable {
 		this.p_category = p_category;
 		this.p_name = p_name;
 		this.p_content = p_content;
-		this.p_day = p_day;
 		this.p_stock = p_stock;
 		this.unit_price = unit_price;
 		this.valid = valid;
@@ -71,12 +69,6 @@ public class ProductEntity implements Serializable {
 	public void setP_content(String p_content) {
 		this.p_content = p_content;
 	}
-	public Date getP_day() {
-		return p_day;
-	}
-	public void setP_day(Date p_day) {
-		this.p_day = p_day;
-	}
 	public int getP_stock() {
 		return p_stock;
 	}
@@ -105,7 +97,7 @@ public class ProductEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "ProductEntity [no=" + no + ", region=" + region + ", p_category=" + p_category + ", p_name=" + p_name
-				+ ", p_content=" + p_content + ", p_day=" + p_day + ", p_stock=" + p_stock + ", unit_price="
+				+ ", p_content=" + p_content + ", p_stock=" + p_stock + ", unit_price="
 				+ unit_price + ", valid=" + valid + ", reg_date=" + reg_date + "]";
 	}
 	
