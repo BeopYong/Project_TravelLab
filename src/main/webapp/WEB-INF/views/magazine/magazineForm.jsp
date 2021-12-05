@@ -37,9 +37,23 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 	name="magazineEnrollFrm"
 	action="<%= request.getContextPath() %>/magazine/magazineEnroll"
 	method="post"
-	enctype="multipart/form-data">
+	>
+	<!-- enctype="multipart/form-data" -->
+	
 	<table id="tbl-magazine-view">
 	<!-- 제목 추후에 수정 -->
+	<tr>
+	<!-- <th>지역</th>
+		<td>
+			<select name="region" id="">
+				<option value="부산">부산</option>
+				<option value="강원도">강원도</option>
+				<option value="제주도">제주도</option>
+			</select>
+		</td>  -->
+		
+			
+	</tr>
 	<tr>
 		<th>제목</th>
 		<td>
@@ -61,10 +75,11 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 		<input type="file" name="upFile2" />
 		</td>
 	</tr>
+	
 	<tr>
 		<th>내 용</th>
 		<td>
-		<textarea id="content" name="content" rows="10" cols="40"></textarea>
+		<textarea id="content" name="content" rows="10" cols="40" required></textarea>
 		</td>		
 		
 	</tr>
