@@ -41,9 +41,20 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 	<table id="tbl-magazine-view">
 	<!-- 제목 추후에 수정 -->
 	<tr>
+		<th>지역</th>
+		<td>
+			<select name="region" id="">
+				<option value="부산">부산</option>
+				<option value="강원도">강원도</option>
+				<option value="제주도">제주도</option>
+			</select>
+		</td>
+			
+	</tr>
+	<tr>
 		<th>제목</th>
 		<td>
-		<input type="text" name="title" value="<%= loginMember.getMemberName()%>" required/>
+		<input type="text" name="title" value="<%= loginMember.getMemberName()%>님의 레시피입니다." required/>
 		</td>
 	</tr>
 	<tr>
@@ -61,6 +72,7 @@ $(document.magazineEnrollFrm).submit(magazineValidate);
 		<input type="file" name="upFile2" />
 		</td>
 	</tr>
+	
 	<tr>
 		<th>내 용</th>
 		<td>
