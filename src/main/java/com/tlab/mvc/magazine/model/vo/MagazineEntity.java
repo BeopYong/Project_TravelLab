@@ -24,6 +24,38 @@ public class MagazineEntity implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public MagazineEntity(String title, String writer, String content, String region) {
+		super();
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.region = region;
+	}
+	
+
+	public MagazineEntity(int no, String title, String writer, String content, String region) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.region = region;
+	}
+
+
+	public MagazineEntity(int no, String title, String writer, String content, Date regDate, int readCount) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.regDate = regDate;
+		this.readCount = readCount;
+	}
+
+
 	public MagazineEntity(int no, String title, String writer, String content, Date regDate, int readCount,
 			String region, String valid) {
 		super();
