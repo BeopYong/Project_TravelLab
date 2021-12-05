@@ -2,7 +2,9 @@ package com.tlab.mvc.cs.model.vo;
 
 import java.io.Serializable;
 
-public class CsAttachment implements Serializable {
+import com.tlab.mvc.common.Attachment;
+
+public class CsAttachment extends Attachment {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -39,25 +41,26 @@ public class CsAttachment implements Serializable {
 		this.csBoardno = csBoardno;
 	}
 
-	public String getOriginalFilename() {
+	public String getOriginal_filename() {
 		return originalFilename;
 	}
 
-	public void setOriginalFilename(String originalFilename) {
+	public void setOriginal_filename(String originalFilename) {
 		this.originalFilename = originalFilename;
 	}
 
-	public String getRenamedFilename() {
+	public String getRenamed_filename() {
 		return renamedFilename;
 	}
 
-	public void setRenamedFilename(String renamedFilename) {
-		this.renamedFilename = renamedFilename;
+	public void setRenamed_filename(String renamed_filename) {
+		this.renamedFilename = renamed_filename;
 	}
 
 	@Override
 	public String toString() {
-		return "Attachment [no=" + no + ", csBoardno=" + csBoardno + ", originalFilename=" + originalFilename
+		return "CsAttachment [no=" + no + ", csBoardno=" + csBoardno + ", originalFilename=" + originalFilename
 				+ ", renamedFilename=" + renamedFilename + "]";
 	}
+
 }

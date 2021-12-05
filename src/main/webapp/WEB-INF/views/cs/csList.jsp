@@ -3,7 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap.css" />
 <title>고객센터</title>
 </head>
 <body>
@@ -21,31 +22,39 @@
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #cecece; text-align: center;">번호</th>
+						<th style="background-color: #cecece; text-align: center; width:15%;">번호</th>
 						<th style="background-color: #cecece; text-align: center;">제목</th>
 						<th style="background-color: #cecece; text-align: center;">작성자</th>
 						<th style="background-color: #cecece; text-align: center;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
-
+<%
+		List<Cs> list = (List<Cs>) request.getAttribute("list");
+		for (Cs cs : list) {
+%>
 					<tr>
-						<!-- 테스트 -->
-						<td>번호</td>
-						<td>제목</td>
-						<td>admin</td>
-						<td>2021-11-30</td>
+						<td><%=cs.getNo()%></td>
+						<td>[<%=cs.getOptions()%>] 
+						<a href="<%=request.getContextPath()%>/cs/csView?no=<%=cs.getNo()%>"><%= cs.getTitle()%></a>
+						</td>
+						<td><%=cs.getWriter()%></td>
+						<td><%=cs.getRegDate()%></td>
 					</tr>
-
+<%
+		 }
+%>
 				</tbody>
 			</table>
 		</div>
-
+		
+<% if(loginMember != null){ %>
 		<input type="button" value="글쓰기" class="btn btn-default"
-			onclick="location.href='<%= request.getContextPath()%>/cs/csForm'" />
+			onclick="location.href='<%=request.getContextPath()%>/cs/csForm'" />
+<% } %>	
 
 	</div>
-
+	<div id='pageBar'><%=request.getAttribute("pagebar")%></div>
 	</section>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
