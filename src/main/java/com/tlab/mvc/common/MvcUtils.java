@@ -99,7 +99,9 @@ public class MvcUtils {
 	public static Attachment makeAttachment(MultipartRequest multipartRequest,String string) {
 		Attachment attach = new Attachment();
 		String originalFilename= multipartRequest.getOriginalFileName(string);
+		System.out.println(originalFilename+"@[MvcUtils]");
 		String renamedFilename = multipartRequest.getFilesystemName(string);
+		System.out.println(renamedFilename);
 		attach.setOriginalFilename(originalFilename);
 		attach.setRenamedFilename(renamedFilename);
 		return attach;
