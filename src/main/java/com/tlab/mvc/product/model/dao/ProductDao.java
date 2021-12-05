@@ -487,6 +487,60 @@ public class ProductDao {
 		return result;
 	
 	}
+
+	public List<ProductAttachment> selectAttachmentByProductNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAttachmentByProductNo");
+		ResultSet rset = null;
+		List<ProductAttachment> pAttachs = new ArrayList<>();
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, productNo);
+			//쿼리문실행
+			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				ProductAttachment pAttach = new ProductAttachment();
+				pAttach.setNo(rset.getInt("no"));
+				pAttach.setProductNo(rset.getInt("product_no"));
+				pAttach.setOriginalFilename(rset.getString("original_filename"));
+				pAttach.setRenamedFilename(rset.getString("renamed_filename"));
+				
+				pAttachs.add(pAttach);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return pAttachs;
+
+	}
+	
+
+	public int deleteBoard(Connection conn, int productNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteProduct"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		
+		return result;
+	}
   
     
 }

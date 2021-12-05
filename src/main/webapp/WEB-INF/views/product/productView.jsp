@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
+<%@page import="com.tlab.mvc.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-<script>
-	
-function cartIn() {
-	
-	const quantity = document.getElementById("quantity");
-	
-	console.log(quantity.options[quantity.selectedIndex].value);
-}
-	
-</script>
-
 
 <%
+	Member member = new Member();
 	ProductAttachment productAttachment = new ProductAttachment();
 	Product product = (Product) request.getAttribute("product");
 %>
@@ -27,11 +18,14 @@ function cartIn() {
 <form
 	name="ProductFrm"
 	method="post"
-	enctype="multipart/form-data">
+	enctype="multipart/form-data"
+	action="<%= request.getContextPath()%>/cart">
 	<table id="tbl-board-view">
 	
 <div>
-	<img src="<%= request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="" />
+	<!-- 
+	<img src="<%= request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="" />	
+	 -->
 </div>
 	
  <table>
@@ -46,7 +40,8 @@ function cartIn() {
  	</tr>
  	<tr>
  		<th>가격</th>
- 		<th><%= product.getUnit_price() %></td>
+ 		<th>
+ 		<p name="unit_price"><%= product.getUnit_price() %></p></td>
  	</tr>
 	<tr>
 		<th>수량</th>
@@ -66,14 +61,36 @@ function cartIn() {
  	</tr>
  	
  
- </table>
- 	<input type="button" value="장바구니" onclick="cartIn();"/>
- 	<input type="submit" value="구매하기"/>
- 		
- 	<input type="submit" value="수정하기"/>
- 	<input type="submit" value="삭제하기"/>
-</form>
+ <% if (loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) { 
+ %>
+ 	<tr>
+ 		<td>
+ 		<input type="button" value="상품 업로드" onclick="updateProduct()" />
+ 		<input type="button" value="수정하기"	onclick="updateProduct()" />
+ 		<input type="button" value="삭제하기" onclick="deleteProduct()">
+			</th>
+		</tr>
+		<% 	} %>
+	</table>
 </section>
+<form
+	name="productDelFrm"
+	method="POST" 
+	action="<%=request.getContextPath()%>/product/productDelete" >
+	<input type="hidden" name="no" value="<%= product.getNo() %>" />
+</form>
+<script>
+const deleteProduct = () => {
+	if(confirm("이 게시물을 정말 삭제하시겠습니까?")){
+		$(document.productDelFrm).submit();		
+		console.log("제출 완료");
+	}
+};
+</script>
+
+
+
+
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -165,4 +165,26 @@ public class ProductService {
 		return result;
 	}
 
+	public List<ProductAttachment> selectAttachmentByProductNo(int productNo) {
+		Connection conn = getConnection();
+		List<ProductAttachment> attachments = productDao.selectAttachmentByProductNo(conn, productNo);
+		close(conn);
+		return attachments;
+	}
+
+	public int deleteProduct(int productNo) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = productDao.deleteBoard(conn, productNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 }

@@ -20,16 +20,19 @@
 	<div class="container">
    <%
    	ProductAttachment productAttachment = new ProductAttachment();
+   String attach = productAttachment.getRenamedFilename();
    	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
    for(Product product : foodList) {
+	   if("Y".equals(product.getValid())) {
    %>
    
       <div class="product-view">
-      <img src="<%= request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="" />
 		<p><a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>"></p>
         <p><%=product.getP_name() %></p>
      </div>
-    <% } %>
+    <% } 
+   }
+    %>
     </div>
     <div style="clear: both;"></div>
     

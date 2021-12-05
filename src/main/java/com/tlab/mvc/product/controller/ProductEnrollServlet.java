@@ -83,7 +83,6 @@ public class ProductEnrollServlet extends HttpServlet {
 				productAttachments.add(pAttach);
 				
 				product.setAttachments(productAttachments);
-				System.out.println("[BoardEnrollServlet] productAttachments = " + productAttachments);
 			
 			}			
 			
