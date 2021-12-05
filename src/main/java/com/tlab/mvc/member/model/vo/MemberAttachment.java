@@ -15,7 +15,7 @@ public class MemberAttachment extends Attachment {
 
 	private static final long serialVersionUID = 1L;
 
-	private String userId;
+	private String memberId;
 
 	public MemberAttachment() {
 		super();
@@ -30,14 +30,14 @@ public class MemberAttachment extends Attachment {
 		super(originalFilename, renamedFilename);
 	}
 
-	public MemberAttachment(String originalFilename, String renamedFilename, String userId) {
+	public MemberAttachment(String originalFilename, String renamedFilename, String memberId) {
 		super(originalFilename, renamedFilename);
-		this.userId = userId;
+		this.memberId = memberId;
 	}
 
-	public MemberAttachment(int no, String originalFilename, String renamedFilename, String userId) {
+	public MemberAttachment(int no, String originalFilename, String renamedFilename, String memberId) {
 		super(no, originalFilename, renamedFilename);
-		this.userId = userId;
+		this.memberId = memberId;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class MemberAttachment extends Attachment {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(userId);
+		result = prime * result + Objects.hash(memberId);
 		return result;
 	}
 
@@ -96,20 +96,20 @@ public class MemberAttachment extends Attachment {
 			return false;
 		}
 		MemberAttachment other = (MemberAttachment) obj;
-		return Objects.equals(userId, other.userId);
+		return Objects.equals(memberId, other.memberId);
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberAttachment [" + super.toString() + ", userId=" + userId + "]";
+		return "MemberAttachment [" + super.toString() + ", memberId=" + memberId + "]";
 	}
 
 }
