@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.tlab.mvc.magazine.model.vo.Attachment;
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 
 public class ProductEntity implements Serializable {
 	
