@@ -31,50 +31,51 @@ public class MagazineEnrollServlet extends HttpServlet {
 	//DML
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//1)서버에 사용자 업로드파일저장
-			String saveDirectory = getServletContext().getRealPath("/upload/magazine");
-			System.out.println("[MagazineEnrollServlet] saveDirectory 서버에 업로드파일 저장=" + saveDirectory);
-			
-			int maxPostSize = 1024 * 1024 * 10; // 10mb
-			String encoding = "utf-8";
-			
-			//파일명 재지정 정책 객체
-//			FileRenamePolicy policy = new DefaultFileRenamePolicy();
-			FileRenamePolicy policy = new MvcFileRenamePolicy();
-			
-			MultipartRequest multipartRequest = 
-					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+//			//1)서버에 사용자 업로드파일저장
+//			String saveDirectory = getServletContext().getRealPath("/upload/magazine");
+//			System.out.println("[MagazineEnrollServlet] saveDirectory 서버에 업로드파일 저장=" + saveDirectory);
+//			
+//			int maxPostSize = 1024 * 1024 * 10; // 10mb
+//			String encoding = "utf-8";
+//			
+//			//파일명 재지정 정책 객체
+////			FileRenamePolicy policy = new DefaultFileRenamePolicy();
+//			FileRenamePolicy policy = new MvcFileRenamePolicy();
+//			
+//			MultipartRequest multipartRequest = 
+//					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
 			//2)업로드파일 저장 :attachment에 파일하나당 1행저장
 			
 			//사용자입력값
-			String title = multipartRequest.getParameter("title");
-			String writer = multipartRequest.getParameter("writer");
-			String content = multipartRequest.getParameter("content");
+			String title = request.getParameter("title");
+			String writer = request.getParameter("writer");
+			String content = request.getParameter("content");
+//			String region = request.getParameter("region");
 			System.out.println("title, writer, content" + title+", "+writer+", "+content);
 			Magazine magazine = new Magazine(title, writer, content,null);
 			System.out.println("[magazineServlet] magazine 사용자입력값 = " + magazine);
 			
 			//저장된 파일정보를 꺼내 어태치에 만들고 list어태치에 전달 후 매거진 객체에 추가
-			File upFile1 = multipartRequest.getFile("upFile1");
-			File upFile2 = multipartRequest.getFile("upFile2");
+//			File upFile1 = multipartRequest.getFile("upFile1");
+//			File upFile2 = multipartRequest.getFile("upFile2");
 			
-			if(upFile1 != null || upFile2 != null) {
-				List<MagazineAttachment> attachments = new ArrayList<>();
-				
-				//magazineNo 필드
-				if(upFile1 != null) {
-					MagazineAttachment attach1 = (MagazineAttachment) MvcUtils.makeAttachment(multipartRequest, "upFile1");
-					 attachments.add(attach1);
-				}
-				if(upFile1 != null) {
-					MagazineAttachment attach2 = (MagazineAttachment) MvcUtils.makeAttachment(multipartRequest, "upFile2");
-					attachments.add(attach2);
-				}	
-				magazine.setAttachments(attachments);
+//			if(upFile1 != null || upFile2 != null) {
+//				List<MagazineAttachment> attachments = new ArrayList<>();
+//				
+//				//magazineNo 필드
+//				if(upFile1 != null) {
+//					MagazineAttachment attach1 = (MagazineAttachment) MvcUtils.makeAttachment(multipartRequest, "upFile1");
+//					 attachments.add(attach1);
+//				}
+//				if(upFile1 != null) {
+//					MagazineAttachment attach2 = (MagazineAttachment) MvcUtils.makeAttachment(multipartRequest, "upFile2");
+//					attachments.add(attach2);
+//				}	
+//				magazine.setAttachments(attachments);
 //				System.out.println("[MagazineenrollServlet] attachments = " + attachments);
-			}
-			System.out.println("[MagazineenrollServlet] magazine = " + magazine);
+//			}
+//			System.out.println("[MagazineenrollServlet] magazine = " + magazine);
 						
 			
 			//업무로직

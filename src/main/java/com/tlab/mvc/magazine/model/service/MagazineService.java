@@ -55,7 +55,6 @@ public class MagazineService {
 		int result = 0;
 
 		try {
-			conn = getConnection();
 			result = magazineDao.insertMagazine(conn, magazine);
 			
 			//보드넘버 조회해 맞는지 확인 : select seq_magazine_no.currval from dual
@@ -63,15 +62,15 @@ public class MagazineService {
 			System.out.println("[MagazineService insertMagazine()] magazineNo = " + magazineNo);
 			magazine.setNo(magazineNo); //servlet에서 참조
 			
-			//첨부파일
-			List<MagazineAttachment> attachments = magazine.getAttachments();
-			if(attachments != null) {
-				//insert into attachment values(seq_attachment_no.nextval,.?,?, default)
-				for(MagazineAttachment attach : attachments) {
-					attach.setMagazineNo(magazineNo);
-					result = magazineDao.insertAttachment(conn, attach);
-				}
-			}
+//			//첨부파일
+//			List<MagazineAttachment> attachments = magazine.getAttachments();
+//			if(attachments != null) {
+//				//insert into attachment values(seq_attachment_no.nextval,.?,?, default)
+//				for(MagazineAttachment attach : attachments) {
+//					attach.setMagazineNo(magazineNo);
+//					result = magazineDao.insertAttachment(conn, attach);
+//				}
+//			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

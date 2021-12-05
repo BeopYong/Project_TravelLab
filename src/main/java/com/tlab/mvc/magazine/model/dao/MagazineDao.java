@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 import com.tlab.mvc.common.Attachment;
 
 import com.tlab.mvc.magazine.model.exception.MagazineException;
@@ -466,7 +468,13 @@ public class MagazineDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+		
 	//관리자용
 	public int updateMagazineValid(Connection conn, Magazine magazine) {
 		int result = 0;

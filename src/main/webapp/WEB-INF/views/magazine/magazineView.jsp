@@ -24,6 +24,12 @@ pageEncoding="UTF-8"%>
 			<th>글번호</th>
 			<td><%= magazine.getNo() %></td>
 		</tr>
+		
+		<tr>
+			<th>지 역</th>
+			<td><%= magazine.getRegion() %></td>
+		</tr>
+		<tr>
 		<tr>
 			<th>제 목</th>
 			<td><%= magazine.getTitle() %></td>

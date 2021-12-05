@@ -4,13 +4,19 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
-	
+	String searchType = request.getParameter("searchType");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
-<section id="megazine-container">
+<!-- 매거진 전체페이지 -->
+<section id="megazine-container" class="csboard-container">
 		
-	<h2>매거진</h2>
-
+	<h2>MAGAZINE</h2>
+	
+	<div class="serarch-container">
+		<select name="" id="serchType">
+			<option value="region" <%= "region".equals(searchType) ? "selected" : "" %>>지역</option>
+		</select>
+	</div>
 <!-- 매거진 내용 상세페이지에 들어가기위해 일단 내용입력해놓음-->
 	<table id ="tbl-magazine">
 		<tr>
