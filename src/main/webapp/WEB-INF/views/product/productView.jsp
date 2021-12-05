@@ -21,13 +21,7 @@
 	enctype="multipart/form-data"
 	action="<%= request.getContextPath()%>/cart">
 	<table id="tbl-board-view">
-	
-<div>
-	<!-- 
-	<img src="<%= request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="" />	
-	 -->
-</div>
-	
+
  <table>
 
  	<tr>
@@ -60,6 +54,7 @@
  		<th><%= product.getP_content() %></td>
  	</tr>
  	
+	</form>
  
  <% if (loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) { 
  %>
@@ -73,19 +68,20 @@
 		<% 	} %>
 	</table>
 </section>
+
 <form
 	name="productDelFrm"
 	method="POST" 
 	action="<%=request.getContextPath()%>/product/productDelete" >
-	<input type="hidden" name="no" value="<%= product.getNo() %>" />
+	 	
+	<tr>
+	<input type="submit" value="삭제하기2" />
+	<input type="hidden" name="no" value="<%= product.getNo() %>" />	
+	</tr>
+
 </form>
 <script>
-const deleteProduct = () => {
-	if(confirm("이 게시물을 정말 삭제하시겠습니까?")){
-		$(document.productDelFrm).submit();		
-		console.log("제출 완료");
-	}
-};
+
 </script>
 
 
