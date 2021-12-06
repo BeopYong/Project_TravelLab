@@ -120,7 +120,7 @@ div#search-title {
 					</form> 
 				</td>
 				<td width="40px" style="table-layout: fixed"><%=magazine.getRegDate()%></td>
-				<td width="40px" style="table-layout: fixed"><button onclick="deleteMagazine()">삭제</button></td>
+				<td style="table-layout: fixed"><button onclick="deleteMagazine()">삭제</button></td>
 			</tr>
 			<%
 			}
