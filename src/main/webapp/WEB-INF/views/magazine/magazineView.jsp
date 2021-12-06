@@ -15,11 +15,11 @@ pageEncoding="UTF-8"%>
 	System.out.println("editable@magazineView.jsp = " + editable);
 %>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
-
-<section id="magazine-container">
+<!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" /> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine.css" />
+<section id="magazineForm-container" class="magazine-container">
 	<h2>게시판</h2>
-	<table id="tbl-ㅡmagazine-view">
+	<table id="tbl-magazine-view">
 		<tr>
 			<th>글번호</th>
 			<td><%= magazine.getNo() %></td>

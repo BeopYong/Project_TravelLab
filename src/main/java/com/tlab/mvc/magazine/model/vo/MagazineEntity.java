@@ -55,6 +55,18 @@ public class MagazineEntity implements Serializable {
 		this.readCount = readCount;
 	}
 
+	public MagazineEntity(int no, String title, String writer, String content, Date regDate, int readCount,
+			String region) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.regDate = regDate;
+		this.readCount = readCount;
+		this.region = region;
+	}
+		
 
 	public MagazineEntity(int no, String title, String writer, String content, Date regDate, int readCount,
 			String region, String valid) {

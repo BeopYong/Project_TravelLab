@@ -1,5 +1,5 @@
+<%@page import="com.tlab.mvc.orderlist.model.vo.OrderList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.tlab.mvc.order.model.vo.OrderList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>	
