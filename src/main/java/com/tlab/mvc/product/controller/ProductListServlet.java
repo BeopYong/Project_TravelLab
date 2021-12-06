@@ -47,7 +47,7 @@ public class ProductListServlet extends HttpServlet {
 		request.setAttribute("foodList", foodList);
 		request.setAttribute("placeList", placeList);
 		request
-		.getRequestDispatcher("/WEB-INF/views/product/productMainList.jsp")
+		.getRequestDispatcher("/WEB-INF/views/product/productMainPage.jsp")
 		.forward(request, response);
 	}
 
