@@ -63,16 +63,19 @@ public class MagazineUpdateServlet extends HttpServlet {
 //		
 //		MultipartRequest multipartRequest = 
 //				new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-//		//B. 업로드한 파일정보 db에 저장 
-//		
+		
+		//B. 업로드한 파일정보 db에 저장 
+		
 		//사용자입력값
 		int no = Integer.parseInt(request.getParameter("no"));
 		String title = request.getParameter("title");
 		String writer = request.getParameter("writer");
 		String content = request.getParameter("content");
-		String[] delFiles = request.getParameterValues("delFile");
+		String region = request.getParameter("region");
 		
-		Magazine magazine = new Magazine(no, title, writer, content, null);
+//		String[] delFiles = request.getParameterValues("delFile");
+		
+		Magazine magazine = new Magazine(no, title, writer, content, region);
 		
 //		//저장된 파일정보 -> Attach객체 생성 -> list<attach>객체에추가 -> magazine객체 추가
 //		Enumeration fileNames = multipartRequest.getFileNames();
@@ -125,7 +128,7 @@ public class MagazineUpdateServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;

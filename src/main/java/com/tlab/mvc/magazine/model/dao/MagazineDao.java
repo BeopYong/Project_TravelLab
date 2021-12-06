@@ -17,12 +17,11 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import com.tlab.mvc.common.Attachment;
-
 import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.Magazine;
-import com.tlab.mvc.magazine.model.vo.MagazineComment;
 import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
+import com.tlab.mvc.magazine.model.vo.MagazineComment;
+import com.tlab.mvc.magazine.model.vo.MagazineEntity;
 
 public class MagazineDao {
 
@@ -65,6 +64,7 @@ public class MagazineDao {
 				magazine.setContent(rset.getString("content"));
 				magazine.setRegDate(rset.getDate("reg_date"));
 				magazine.setReadCount(rset.getInt("read_count"));
+				magazine.setRegion(rset.getString("region"));
 			
 //				magazine.setCommentCount(rset.getInt("comment_count")); //댓글
 //				magazine.setAttachCount(rset.getInt("attach_count"));
@@ -114,6 +114,7 @@ public class MagazineDao {
 			pstmt.setString(1, magazine.getTitle());
 			pstmt.setString(2, magazine.getWriter());
 			pstmt.setString(3, magazine.getContent());
+			pstmt.setString(4, magazine.getRegion());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -189,6 +190,7 @@ public class MagazineDao {
 				magazine.setContent(rset.getString("content"));
 				magazine.setRegDate(rset.getDate("reg_date"));
 				magazine.setReadCount(rset.getInt("read_count"));
+				magazine.setRegion(rset.getString("region"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -257,6 +259,7 @@ public class MagazineDao {
 				magazine.setContent(rset.getString("content"));
 				magazine.setRegDate(rset.getDate("reg_date"));
 				magazine.setReadCount(rset.getInt("read_count"));
+				magazine.setRegion(rset.getString("region"));
 				
 				int attachNo = rset.getInt("attach_no");
 				if(attachNo != 0) {
@@ -368,7 +371,9 @@ public class MagazineDao {
 			//쿼리문 미완성
 			pstmt.setString(1, magazine.getTitle());
 			pstmt.setString(2, magazine.getContent());
-			pstmt.setInt(3, magazine.getNo());
+			pstmt.setString(3, magazine.getRegion());
+			pstmt.setInt(4, magazine.getNo());
+			
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			result = pstmt.executeUpdate();
@@ -586,6 +591,54 @@ public class MagazineDao {
 		} finally {
 			close(pstmt);
 			close(rset);
+		}
+		return list;
+	}
+	//DQL 매거진 게시물 검색
+	public List<Magazine> searchMagazine(Connection conn, Map<String, Object> finder) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		//0행이 조회되도 Arraylist<>()는 리턴되어야함.
+		List<Magazine> list = new ArrayList<>();
+		String sql = prop.getProperty("searchMagazineByRegion"); //미완성쿼리
+		String searchType = (String) finder.get("searchType");
+		String searchWord = (String) finder.get("searchword");
+		
+		switch(searchType) {
+		case "region":
+			sql+= " region like '%" + searchWord + "%'";
+			break;
+//		case "writer":
+//			sql = prop.getProperty("searchMagazineByWriter");searchWord
+//			finder.put("searchWord", "%" + finder.get("searcWord") + "%");
+//			break;
+		}
+		System.out.println("finder sql@dao searchmagazine method = " + sql);
+		
+		try {
+			//pstmt객체생성, 미완성쿼리대입
+			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, (String) finder.get("searchWord"));
+			
+			//쿼리실행, rset대입
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Magazine magazine = new Magazine();
+				magazine.setNo(rset.getInt("no"));
+				magazine.setTitle(rset.getString("title"));
+				magazine.setWriter(rset.getString("writer"));
+				magazine.setContent(rset.getString("content"));
+				magazine.setRegDate(rset.getDate("reg_date"));
+				magazine.setReadCount(rset.getInt("read_count"));
+				magazine.setRegion(rset.getString("region"));
+				list.add(magazine);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		return list;
 	}

@@ -5,9 +5,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
-Magazine magazine = (Magazine) request.getAttribute("magazine");
+	Magazine magazine = (Magazine) request.getAttribute("magazine");
+	List<MagazineAttachment> attachments = magazine.getAttachments();
 %>
-
+<!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" /> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine.css" />
 <script>
 /**
  * 유효성검사
@@ -36,30 +38,44 @@ $(() => {
 });
 
 </script>
-<section id="magazine-container">
+<section id="magazineForm-container" class="magazine-container">
 	<h2>게시판 수정</h2>
-	<div style="padding: 200px 300px;">
+	<div style="">
+	<!-- padding: 200px 300px; -->
 		<form name="magazineUpdateFrm"
 			action="<%=request.getContextPath()%>/magazine/magazineUpdate"
-			method="post" 
-			>
-			<!-- enctype="multipart/form-data" -->
+			method="post" >
+			<input type="hidden" name="no" value="<%= magazine.getNo() %>"/>
 			
-			<input type="hidden" name="no" value="<%=magazine.getNo()%>" />
-			<table id="tbl-board-view">
+			<!-- enctype="multipart/form-data"
+	accept-charset="UTF-8"   --> 
+						
+			
+			<table id="tbl-magazine-view">
+				<tr>
+					<th>지역</th>
+					<td class="text-td">
+					<select name="region" id="region"><%= magazine.getRegion() %>
+						<option value="강원도">강원도</option>
+						<option value="부산">부산</option>
+						<option value="제주도">제주도</option>
+					</select>
+					</td>
+				</tr>
 				<tr>
 					<th>제 목</th>
-					<td>
-					<input type="text" name="title" value="<%=magazine.getTitle()%>" required>
+					<td class="text-td">
+						<input type="text" name="title" value="<%=magazine.getTitle()%>" style="width: 300px" required>
 					</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="writer"
-						value="<%=magazine.getWriter()%>" readonly /></td>
+					<td class="text-td">
+						<input type="text" name="writer" value="<%=magazine.getWriter()%>" readonly />
+					</td>
 				</tr>
 				<%
-				List<MagazineAttachment> attachments = magazine.getAttachments();
+				
 				if (attachments != null && !attachments.isEmpty()) {
 				%>
 				<tr>
@@ -93,7 +109,10 @@ $(() => {
 					<td><textarea rows="5" cols="40" name="content"><%=magazine.getContent()%></textarea></td>
 				</tr>
 				<tr>
-					<th colspan="2"><input type="submit" value="수정하기"></th>
+					<th colspan="2">
+					<input type="submit" class="modified-btn"value="수정하기" />
+					<input type="button" class="cancell-btn" value="취소" onclick="history.go(-1);" />
+					</th>
 				</tr>
 			</table>
 		</form>
