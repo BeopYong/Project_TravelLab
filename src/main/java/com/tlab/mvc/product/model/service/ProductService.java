@@ -188,4 +188,12 @@ public class ProductService {
 		}
 		return result;
 	}
+
+	public ProductAttachment selectOneProductAttachment(int no) {
+		Connection conn = getConnection();
+		ProductAttachment pAttach = productDao.selectOneProductAttachment(conn, no);
+		close(conn);
+		
+		return pAttach;
+	}
 }

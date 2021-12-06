@@ -541,6 +541,37 @@ public class ProductDao {
 		
 		return result;
 	}
+
+	public ProductAttachment selectOneProductAttachment(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		ProductAttachment pAttach = null;
+		String sql = prop.getProperty("selectOneProductAttachment");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				pAttach = new ProductAttachment();
+				pAttach.setNo(no);
+				pAttach.setProductNo(rset.getInt("product_no"));
+				pAttach.setOriginalFilename(rset.getString("original_filename"));
+				pAttach.setRenamedFilename(rset.getString("renamed_filename"));
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pAttach;
+		
+		
+	}
   
     
 }
