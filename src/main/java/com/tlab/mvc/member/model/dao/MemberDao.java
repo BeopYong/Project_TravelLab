@@ -138,14 +138,15 @@ public class MemberDao {
 		return result;
 	}
 
-	public int deleteMember(Connection conn, String membmerId) {
+	public int deleteMember(Connection conn, Member member) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteMember");
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, membmerId);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getPassword());
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {

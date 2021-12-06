@@ -27,7 +27,7 @@ public class MemberScrapList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String writer = request.getParameter("memberId");
+			String memberId = request.getParameter("memberId");
 			final int numPerPage = 6;
 			int cPage =1;
 			try {
@@ -41,11 +41,10 @@ public class MemberScrapList extends HttpServlet {
 			param.put("start", start);
 			param.put("end", end);
 			
-			
 			//내가 스크랩한 매거진을 모두 받아오기 
-			List<Magazine> magazineList = magazineService.selectAllMyScrap(param,writer);
+			List<Magazine> magazineList = magazineService.selectAllMyScrap(param,memberId);
 			System.out.println("list@MyScrapListServlet = " + magazineList);
-			int totalContent = magazineService.selectTotalMyScrapCount(writer);
+			int totalContent = magazineService.selectTotalMyScrapCount(memberId);
 			String url = request.getRequestURI(); // /mvc/member/magazineScrapList
 			System.out.println(totalContent);
 			System.out.println(url);
@@ -55,7 +54,7 @@ public class MemberScrapList extends HttpServlet {
 			request.setAttribute("list", magazineList);
 			request.setAttribute("pagebar", pagebar);
 			request
-				.getRequestDispatcher("/WEB-INF/views/admin/memberListTest.jsp")
+				.getRequestDispatcher("/WEB-INF/views/member/myScrapList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
