@@ -29,45 +29,44 @@ public class MagazineFinderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			//파라미터 검색타입, 검색단어
-			String searchType = request.getParameter("searchType");
-			String searchWord = request.getParameter("searchWord");
-			System.out.println("searchType / searchWord @magazinefinderServlet = " + searchType + searchWord);
-			
-			//tostring 처리 되어있는 map key = value가 열람가능
-			Map<String, Object> finder = new HashMap<>();
-			finder.put("searchType", searchType);
-			finder.put("searchKeyword", searchWord);
-			System.out.println("param@magazinefinderservlet = " + finder);
-			
-			//업무로직
-			List<Magazine> list = magazineService.searchMagazine(finder);
-//		System.out.println("searchmagazinelist@magazinrfiderservlet = ", list);
-			
-			//페이징
-			//a
-			int cPage = 1;
-			final int numPerPage = 5;
-			
-			try {
-				cPage = Integer.parseInt(request.getParameter("cPage"));
-			} catch (NumberFormatException e) {	}
-			int start = (cPage - 1) * numPerPage + 1;
-			int end = cPage * numPerPage;
-			Map<String, Integer> param = new HashMap<>();
-			param.put("start", start);
-			param.put("end", end);
-			//b
-//			int totalCount = magazineService.selectTotalMagazineCount();
-			int totalCount = 1;
-			String url = request.getRequestURI(); // -> /tlab/magazine/magazineList
-			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalCount, url);
-			
-			//view단 처리
-			request.setAttribute("pagebar", pagebar);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("/WEB-INF/views/magazine/magazineList.jsp")
-					.forward(request, response);
+		final int numPerPage = 10;
+		int cPage = 1;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {}
+		int start = (cPage - 1) * numPerPage + 1;
+		int end = cPage * numPerPage;
+		Map<String, Integer> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+	// 1. 사용자 입력값 처리
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		Map<String, Object> searchParam = new HashMap<>();
+		searchParam.put("searchType", searchType);
+		searchParam.put("searchKeyword", searchKeyword);
+		System.out.println("param@servlet = "+ searchParam);
+		
+		// 2. 업무로직
+		List<Magazine> list = magazineService.searchMagazine(searchParam);
+		System.out.println("magazineList@servlet = " + list);
+		
+		// 3.
+		// 2-b. pagebar영역
+		int totalContent = 1;
+		String url = request.getRequestURI();
+		System.out.println(totalContent);
+		System.out.println(url);
+		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
+		System.out.println("magazineList@servlet.pagebar = " + pagebar);
+		
+		// 3.view단처리
+		request.setAttribute("list", list);
+		request.setAttribute("pagebar", pagebar);
+		request
+			.getRequestDispatcher("/WEB-INF/views/magazine/magazineList.jsp")
+			.forward(request, response);
 		
 	}
 

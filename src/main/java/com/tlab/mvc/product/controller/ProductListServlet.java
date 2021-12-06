@@ -1,5 +1,3 @@
-package com.tlab.mvc.product.controller;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;

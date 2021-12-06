@@ -78,14 +78,14 @@ public class MemberService {
 		return result;
 	}
 
-	public int deleteMember(String memberId) {
+	public int deleteMember(Member member) {
 		Connection conn = null;
 		int result = 0;
 		try {
 			conn = getConnection();
-			result = memberDao.deleteMember(conn, memberId);
+			result = memberDao.deleteMember(conn, member);
 			if (result == 0)
-				throw new MemberException("해당 회원은 존재하지 않습니다.");
+				throw new MemberException("비밀번호가 일치하지 않습니다");
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

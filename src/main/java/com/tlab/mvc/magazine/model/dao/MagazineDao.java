@@ -597,53 +597,53 @@ public class MagazineDao {
 		return list;
 	}
 	//DQL 매거진 게시물 검색
-	public List<Magazine> searchMagazine(Connection conn, Map<String, Object> finder) {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		//0행이 조회되도 Arraylist<>()는 리턴되어야함.
-		List<Magazine> list = new ArrayList<>();
-		String sql = prop.getProperty("searchMagazineByRegion"); //미완성쿼리
-		String searchType = (String) finder.get("searchType");
-		String searchWord = (String) finder.get("searchword");
-		
-		switch(searchType) {
-		case "region":
-			sql+= " region like '%" + searchWord + "%'";
-			break;
+//	public List<Magazine> searchMagazine(Connection conn, Map<String, Object> finder) {
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		//0행이 조회되도 Arraylist<>()는 리턴되어야함.
+//		List<Magazine> list = new ArrayList<>();
+//		String sql = prop.getProperty("searchMagazineByRegion"); //미완성쿼리
+//		String searchType = (String) finder.get("searchType");
+//		String searchWord = (String) finder.get("searchword");
+//		
+//		switch(searchType) {
+//		case "region":
+//			sql+= " region like '%" + searchWord + "%'";
+//			break;
 //		case "writer":
 //			sql = prop.getProperty("searchMagazineByWriter");searchWord
 //			finder.put("searchWord", "%" + finder.get("searcWord") + "%");
 //			break;
-		}
-		System.out.println("finder sql@dao searchmagazine method = " + sql);
-		
-		try {
-			//pstmt객체생성, 미완성쿼리대입
-			pstmt = conn.prepareStatement(sql);
+//		}
+//		System.out.println("finder sql@dao searchmagazine method = " + sql);
+//		
+//		try {
+//			//pstmt객체생성, 미완성쿼리대입
+//			pstmt = conn.prepareStatement(sql);
 //			pstmt.setString(1, (String) finder.get("searchWord"));
-			
-			//쿼리실행, rset대입
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				Magazine magazine = new Magazine();
-				magazine.setNo(rset.getInt("no"));
-				magazine.setTitle(rset.getString("title"));
-				magazine.setWriter(rset.getString("writer"));
-				magazine.setContent(rset.getString("content"));
-				magazine.setRegDate(rset.getDate("reg_date"));
-				magazine.setReadCount(rset.getInt("read_count"));
-				magazine.setRegion(rset.getString("region"));
-				list.add(magazine);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
+//			
+//			//쿼리실행, rset대입
+//			rset = pstmt.executeQuery();
+//			while(rset.next()) {
+//				Magazine magazine = new Magazine();
+//				magazine.setNo(rset.getInt("no"));
+//				magazine.setTitle(rset.getString("title"));
+//				magazine.setWriter(rset.getString("writer"));
+//				magazine.setContent(rset.getString("content"));
+//				magazine.setRegDate(rset.getDate("reg_date"));
+//				magazine.setReadCount(rset.getInt("read_count"));
+//				magazine.setRegion(rset.getString("region"));
+//				list.add(magazine);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return list;
+//	}
 
 	public List<Magazine> searchMagazine(Connection conn, Map<String, Object> searchParam) {
 		PreparedStatement pstmt = null;
@@ -653,22 +653,23 @@ public class MagazineDao {
         String searchType = (String) searchParam.get("searchType");
         String searchKeyword = (String) searchParam.get("searchKeyword");
         switch (searchType) {
-        case "cateCode":
-            sql += " region like '%" + searchKeyword + "%'";
-            break;
+        case "region":
+            sql += "region like '%" + searchKeyword + "%' order by no desc";
+            break; 
         case "writer":
-            sql += " writer like '%" + searchKeyword + "%'";
+            sql += "writer like '%" + searchKeyword + "%' order by no desc" ;
             break;
         case "title":
-            sql += " title like '%" + searchKeyword + "%'";
+            sql += "title like '%" + searchKeyword + "%' order by no desc";
             break;
-        }
+        } System.out.println(sql);
         
         try {
             pstmt = conn.prepareStatement(sql);
             rset = pstmt.executeQuery();
             while (rset.next()) {
             	Magazine magazine = new Magazine();
+            	magazine.setNo(rset.getInt("no"));
             	magazine.setWriter(rset.getString("writer"));
             	magazine.setTitle(rset.getString("title"));
             	magazine.setRegion(rset.getString("region"));
@@ -676,9 +677,10 @@ public class MagazineDao {
                 magazine.setValid(rset.getString("valid"));
                 magazine.setRegDate(rset.getDate("reg_date"));
                 list.add(magazine);
-            }
+            } 
         } catch (SQLException e) {
             e.printStackTrace();
+            
         } finally {
             close(rset);
             close(pstmt);

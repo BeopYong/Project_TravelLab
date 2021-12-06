@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.tlab.mvc.member.model.service.MemberService;
+import com.tlab.mvc.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberDeleteServlet
@@ -22,35 +23,43 @@ public class MemberDeleteServlet extends HttpServlet {
 	private MemberService memberService = new MemberService();
 	private Logger logger = Logger.getRootLogger();
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/member/memberDelete.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		try {
+			// 로그인용 생성자
 			String memberId = request.getParameter("memberId");
+			String pwd = request.getParameter("password");
+			Member member = new Member(memberId, pwd);
+			System.out.println("@memberDeleteServlet = " + memberId +", "+ pwd);
+			int result = memberService.deleteMember(member);
 
-			int result = memberService.deleteMember(memberId);
-
-			HttpSession session = request.getSession();
 			if (result > 0) {
-				session.setAttribute("msg", "성공적으로 회원정보 삭제하였습니다.");
+				session.setAttribute("msg", "회원정보 삭제성공");
 				session.removeAttribute("loginMember");
 
-				Cookie c = new Cookie("saveId", memberId);
+				Cookie c = new Cookie("saveId", member.getMemberId());
 				c.setPath(request.getContextPath());
 				c.setMaxAge(0);
 				response.addCookie(c);
 
-			} else {
-				session.setAttribute("msg", "회원 정보삭제를 실패하였습니다.");
 			}
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage());
-			throw e;
+			session.setAttribute("msg", "회원 정보삭제 실패");
+			response.sendRedirect(request.getContextPath()+"/member/myPage");
 		}
 	}
 
