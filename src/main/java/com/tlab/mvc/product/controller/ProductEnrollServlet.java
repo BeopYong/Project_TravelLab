@@ -1,14 +1,13 @@
 package com.tlab.mvc.product.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import com.sun.jimi.core.Jimi;
-import com.sun.jimi.core.JimiException;
-import com.sun.jimi.core.JimiUtils;
-import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,29 +87,30 @@ public class ProductEnrollServlet extends HttpServlet {
 				productAttachments.add(pAttach);
 				
 				product.setAttachments(productAttachments);
-			
-						
-//			//썸네일 동시에 저장
-//			
-//			String thumbnail_path = "C:/Workspaces/web_server_workspace/tlab_beta" + request.getContextPath() + "/upload/product/";
-//			String thumbImg = thumbnail_path + "thumbs";
-//			System.out.println(thumbnail_path);
-//			System.out.println(thumbImg);
-//			System.out.println(pAttach);
-//			
-//			Image thumnail = 
-//					JimiUtils.getThumbnail(thumbnail_path+pAttach.getRenamedFilename(), 130, 180, Jimi.IN_MEMORY);
-//			
-//			try {
-//				Jimi.putImage(thumnail, thumbImg + pAttach.getRenamedFilename());
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			
-			}			
+					
 				
+				//썸네일 생성
+				try {
+		            //썸네일 가로사이즈
+		            int thumbnail_width = 130;
+		            //썸네일 세로사이즈
+		            int thumbnail_height = 180;
+		            //원본이미지파일의 경로+파일명
+		            File origin_file_name 
+		            	= new File(saveDirectory+File.separator+pAttach.getRenamedFilename());
+		            //생성할 썸네일파일의 경로+썸네일파일명
+		            File thumb_file_name = new File(saveDirectory+"/thumbs"+File.separator+pAttach.getRenamedFilename()+"_thumb.jpg");
+		 
+		            BufferedImage buffer_original_image = ImageIO.read(origin_file_name);
+		            BufferedImage buffer_thumbnail_image = new BufferedImage(thumbnail_width, thumbnail_height, BufferedImage.TYPE_3BYTE_BGR);
+		            Graphics2D graphic = buffer_thumbnail_image.createGraphics();
+		            graphic.drawImage(buffer_original_image, 0, 0, thumbnail_width, thumbnail_height, null);
+		            ImageIO.write(buffer_thumbnail_image, "jpg", thumb_file_name);
+		            System.out.println("썸네일 생성완료");
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		}				
 			
 			//값 반환
 			int result = productService.insertProduct(product);
@@ -124,7 +124,7 @@ public class ProductEnrollServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+//			throw e;
 		}
 	
 	//redirect

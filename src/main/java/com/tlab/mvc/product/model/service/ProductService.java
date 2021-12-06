@@ -196,4 +196,13 @@ public class ProductService {
 		
 		return pAttach;
 	}
+
+	public List<Product> productTicketPassList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.productTicketPassList(conn, param);
+		close(conn);
+		
+		return list;
+	}
+	
 }

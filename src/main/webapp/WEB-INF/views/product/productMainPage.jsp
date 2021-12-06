@@ -1,3 +1,4 @@
+<%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@page import="java.util.List"%>
@@ -16,22 +17,20 @@
 
 	<div class="container">
    <%
+   	ProductAttachment productAttachment = new ProductAttachment();
    	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
    for(Product product : foodList) {
    %>
    
       <div class="product-view">
-		<p><a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>"><%=product.getAttachCount()%></p>
+		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
+		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
+		</a>
         <p><%=product.getP_name() %></p>
      </div>
     <% } %>
     </div>
     <div style="clear: both;"></div>
-
-
-
-
-
 
   
   <table class="product-table">
@@ -47,7 +46,8 @@
    %>
    
       <div class="product-view">
-		<p><a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>"><%=product.getAttachCount()%></p>
+		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
+        <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt=""></a>
         <p><%=product.getP_name() %></p>
      </div>
     <% } %>

@@ -7,15 +7,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@page import="java.awt.Image"%>
-<%@page import="com.sun.jimi.core.Jimi"%>
-<%@page import="com.sun.jimi.core.JimiException"%>
-<%@page import="com.sun.jimi.core.JimiUtils"%>
-
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 
 <section>
-
 
 	<div class="container">
    <%
