@@ -49,9 +49,11 @@ public class MemberChangeInfoServlet extends HttpServlet {
 			if(result>0) {
 				Member updateMember = memberService.selectOneMember(memberId);
 				session.setAttribute("loginMember",updateMember);
+			} else {
+				response.sendRedirect(request.getHeader("referer"));
 			}
 			session.setAttribute("msg", result > 0 ? "정보수정성공!" : "정보수정실패!" );
-			response.sendRedirect(request.getContextPath()+"/member/myInfo");
+			response.sendRedirect(request.getContextPath()+"/");
 			
 		} catch(Exception e) {
 			 e.printStackTrace();
