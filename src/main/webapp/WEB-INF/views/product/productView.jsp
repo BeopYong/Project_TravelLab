@@ -8,85 +8,82 @@
 
 
 <%
-	Member member = new Member();
-	ProductAttachment productAttachment = new ProductAttachment();
+	Member member = (Member) session.getAttribute("loginMember");
+	ProductAttachment productAttachment = (ProductAttachment) request.getAttribute("productAttachment");
 	Product product = (Product) request.getAttribute("product");
 %>
 
-<section>
-
-<form
+	<form
 	name="ProductFrm"
 	method="post"
 	enctype="multipart/form-data"
-	action="<%= request.getContextPath()%>/cart">
-	<table id="tbl-board-view">
+	action="<%= request.getContextPath()%>/cart/cartList">
+    
+    <div class="product-info-container">
 
- <table>
+      <div class="product-info-img-box">
+      	<img src="<%=request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="">
+      </div>
 
- 	<tr>
- 		<th><p name="p_name">상품</p></th>
- 		<th><%= product.getP_name() %></th>
- 	</tr>
- 	<tr>
- 		<th>지역</th>
- 		<th><p name="region"><%= product.getRegion() %></p></td>
- 	</tr>
- 	<tr>
- 		<th>가격</th>
- 		<th>
- 		<p name="unit_price"><%= product.getUnit_price() %></p></td>
- 	</tr>
-	<tr>
-		<th>수량</th>
+      <div class="product-info-box">
+        <table>
+          <tr>
+            <th>상품명</th>
+            <td colspan="2">
+            	<p><%=product.getP_name() %></p>
+            	<input type="hidden" name="p_name" value="<%=product.getP_name()%>"/>
+            </td>
+          </tr>
+          <tr>
+            <th>지역</th>
+            <td colspan="2">
+            	<p name="region"><%= product.getRegion() %></p>
+            	<input type="hidden" name="region" value="<%= product.getRegion()%>"/>
+            </td>
+          </tr>
+          <tr>
+            <th>가격</th>
+            <td><p><%= product.getUnit_price() %></p></td>
+            <td>
+              <select name="quantity" id="quantity">
+                <option value="" selected>수량을 선택하세요. (최대 5개)</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="3">총 결제 금액</th>
+            <td>
+            <p></p>
+            <input type="hidden" name="product_bill" value="4000" />         
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"><div class="product-info"><p><%=product.getP_content() %></p></div></td>
+          </tr>
+          <tr>
+          </tr>
+		<tr>	
 		<td>
- 		<select name="quantity" id="quantity">
- 			<option value="1">1</option>
- 			<option value="2">2</option>
- 			<option value="3">3</option>
- 			<option value="4">4</option>
- 			<option value="5">5</option>
- 		</select>		
+	       <input type="hidden" id="no" name="no" value="<%=product.getNo()%>"/>
+	       <input type="hidden" id="memberId" name="memberId" value="<%=member.getMemberId()%>"/>
 		</td>
-	</tr>
- 	<tr>
- 		<th>상세 설명</th>
- 		<th><%= product.getP_content() %></td>
- 	</tr>
- 	
-	</form>
+		</tr>          
+        </table>
+      </div>
+    
+    </form>
+    
+    <div class="btnbox">
+     <button type="button" class="btn btn-primary btn-lg" id="btn">바로 결제</button>
+	 <button type="submit" class="btn btn-secondary btn-lg" id="btn">장바구니</button>
+    </div>
+  </div>
  
- <% if (loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) { 
- %>
- 	<tr>
- 		<td>
- 		<input type="button" value="상품 업로드" onclick="updateProduct()" />
- 		<input type="button" value="수정하기"	onclick="updateProduct()" />
- 		<input type="button" value="삭제하기" onclick="deleteProduct()">
-			</th>
-		</tr>
-		<% 	} %>
-	</table>
-</section>
-
-<form
-	name="productDelFrm"
-	method="POST" 
-	action="<%=request.getContextPath()%>/product/productDelete" >
-	 	
-	<tr>
-	<input type="submit" value="삭제하기2" />
-	<input type="hidden" name="no" value="<%= product.getNo() %>" />	
-	</tr>
-
-</form>
-<script>
-
-</script>
-
-
-
-
-
+  
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
