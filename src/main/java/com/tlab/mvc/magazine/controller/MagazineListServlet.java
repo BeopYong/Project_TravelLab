@@ -44,8 +44,8 @@ public class MagazineListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			//1. 사용자 입력값
-			final int numPerPage = 5;
 			int cPage = 1;
+			final int numPerPage = 5;
 			
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
