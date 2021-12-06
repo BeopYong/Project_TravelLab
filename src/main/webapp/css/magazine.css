@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*magazine전체*/
+section{
+    
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif,"Nanum Barun Gothic", "Nanum Gothic";
+    margin: 0;
+}
+
+.magazine-container h2 {
+    font-weight: bold;
+}
+
+.magazine-container table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 15px; /* 글꼴 크기 */
+	line-height: 24px; /* 줄 간격 */
+	
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	
+	border-left: 1px solid white!important;
+	border-right: 1px solid white;
+}
+.magazine-container tr:hover {
+	background: #f0f0f0; 
+}
+.magazine-container a {
+	text-decoration: none; /* 링크 밑줄 없애기 */
+	color: black; /* 글 색상 */
+}
+
+.magazine-container a:HOVER {
+	text-decoration: underline; /* 밑줄 */
+	color: rgb(73, 155, 250); /* 글 색상 */
+}
+/*
+* 테이블 안 리스트
+*/
+#tbl-magazine {
+	background-color: rgb(236, 236, 236);
+}
+/*************
+* 페이징
+*************/
+#pagebar{
+    margin-top: 20px;
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+    width: 300px;
+    
+    display: flex;
+	justify-content: space-evenly;
+}
+.magazine-container div#pageBar a:hover {
+	color: black;
+	
+}
+
+.magazine-container div#pageBar a{
+	text-decoration: none;
+	color : gray;
+}
+
+
+/*상단*/
+/* 검색 컨테이너 */
+.search-container {
+	margin: 10px auto;
+	padding: 8px; 
+}
+
+/* 검색 select 태그 */
+#searchType {
+	text-align: center;
+	cursor: pointer;
+	
+}
+#searchType select{
+	display: inline-block;
+}
+/* 검색 input 태그 */
+.search-type input {
+	padding-left: 13px;
+	display: inline-block;
+}
+
+/* 검색 버튼 */
+.search-btn {
+	background-color: #939393;
+	font-weight: bold;
+	color: #fff;
+	position: relative;
+	top: 3px;
+	font-size: 13px;
+}
