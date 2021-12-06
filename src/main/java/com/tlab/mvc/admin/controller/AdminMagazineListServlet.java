@@ -12,17 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.common.MvcUtils;
-import com.tlab.mvc.product.model.service.ProductService;
-import com.tlab.mvc.product.model.vo.ProductEntity;
+import com.tlab.mvc.magazine.model.service.MagazineService;
+import com.tlab.mvc.magazine.model.vo.Magazine;
 
 /**
- * Servlet implementation class AdminProductListServlet
+ * Servlet implementation class AdminMagazineListServlet
  */
-@WebServlet("/admin/productList")
-public class AdminProductListServlet extends HttpServlet {
+@WebServlet("/admin/manageMagazineList")
+public class AdminMagazineListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProductService productService = new ProductService();
-
+	private MagazineService magazineService = new MagazineService();
+    
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,26 +42,25 @@ public class AdminProductListServlet extends HttpServlet {
 			
 			// 2.업무로직
 			// 2-a. content영역
-			List<ProductEntity> list = productService.selectAllProduct(param);
-			System.out.println("[AdminProductListServlet] = " + list);
+			List<Magazine> list = magazineService.selectAllMagazine(param);
+			System.out.println("[AdminMagazineListServlet] = " + list);
 			// 2-b. pagebar영역
-			int totalContent = productService.selectTotalProductCount();
+			int totalContent = magazineService.selectTotalMagazineCount();
 			String url = request.getRequestURI();
 			System.out.println(totalContent);
 			System.out.println(url);
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
-			System.out.println("AdminProductListServlet.pagebar] = " + pagebar);
+			System.out.println("AdminMagazineListServlet.pagebar] = " + pagebar);
 			
 			// 3.view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request
-				.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
+				.getRequestDispatcher("/WEB-INF/views/admin/manageMagazineList.jsp")
 				.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
-
 }

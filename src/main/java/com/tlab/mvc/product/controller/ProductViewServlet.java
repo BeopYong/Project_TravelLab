@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.product.model.service.ProductService;
 import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.vo.ProductAttachment;
 
 /**
  * Servlet implementation class ProductViewServlet
@@ -31,9 +32,12 @@ public class ProductViewServlet extends HttpServlet {
 		Product product = productService.selectOneProduct(no);
 		System.out.println("[productView@Servlet!!!!!!!!!!!!!!! = " + product);
 		//attachment 조회
-		
+		ProductAttachment productAttachment = productService.selectOneProductAttachment(no);
+		System.out.println("[productView@Servlet!!!!!!!!!!!!!!! = " + productAttachment);
+
 		//view
 		request.setAttribute("product", product);
+		request.setAttribute("productAttachment", productAttachment);
 		request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp")
 		.forward(request, response);
 		

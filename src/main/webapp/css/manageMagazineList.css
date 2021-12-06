@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+section#magazineList-container h2 {
+	text-align: center;
+}
+
+section#magazineList-container table#tbl-magazine {
+	/* width: 100%; */
+	/* border:1px solid gray;  */
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table#tbl-magazine td {
+	border: 1px solid #FFF0F5; /*#FFFBFC , #FFF6F9. ##FFF1FA, #F7F1F4 */
+	padding: 10px;
+}
+
+section#magazineList-container div#numPerPage-container {
+	float: right;
+	margin-top: 10px;
+}
+
+section#magazineList-container form#numPerPageFrm {
+	display: inline;
+}
+
+section#magazineList-container div#pageBar {
+	margin-top: 10px;
+	text-align: center;
+	background-color: tranparent;
+}
+
+section#magazineList-container div#pageBar span.cPage {
+	color: #0066ff;
+	margin-right: 5px;
+}
+
+section#magazineList-container div#pageBar a {
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+section#magazineList-container div#pageBar a:hover {
+	text-decoration: underline;
+}
+
+#tbl-magazine {
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	text-align: center;
+}
+
+#tbl-magazine thead th {
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: black;
+	border-bottom: 3px solid #036;
+}
+.region {
+	width: 110px;
+	table-layout: fixed;
+}
+
+.writer {
+	width: 130px;
+}
+
+.content {
+	width: 20px;
+}
+
+.valid {
+	width: 15px;
+}
+
+.regDate {
+	width: 150px;
+}
+.execute {
+	width: 10px;
+}
+table#tbl-magazine .even {
+	background: #efefef;
+}

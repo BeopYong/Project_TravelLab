@@ -1,8 +1,0 @@
-[23:31:04][DEBUG](MemberDao.java:111)-Missing IN or OUT parameter at index:: 6oracle.jdbc.driver.OraclePreparedStatementWrapper@6ebdbd5d 
-[23:31:04][DEBUG](MemberChangeInfoServlet.java:58)-업데이트 오류! 
-[23:31:08][DEBUG](MemberDao.java:111)-Missing IN or OUT parameter at index:: 6oracle.jdbc.driver.OraclePreparedStatementWrapper@5638f728 
-[23:31:08][DEBUG](MemberChangeInfoServlet.java:58)-업데이트 오류! 
-[23:36:49][DEBUG](MemberDao.java:111)-Missing IN or OUT parameter at index:: 6oracle.jdbc.driver.OraclePreparedStatementWrapper@18402bea 
-[23:36:49][DEBUG](MemberChangeInfoServlet.java:58)-업데이트 오류! 
-[23:43:15][DEBUG](MemberDao.java:111)-Missing IN or OUT parameter at index:: 6oracle.jdbc.driver.OraclePreparedStatementWrapper@4915c8c 
-[23:43:15][DEBUG](MemberChangeInfoServlet.java:58)-업데이트 오류! 

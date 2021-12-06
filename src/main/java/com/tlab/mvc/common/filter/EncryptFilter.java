@@ -15,7 +15,7 @@ import com.tlab.mvc.common.wrapper.EncryptWrapper;
 /**
  * Servlet Filter implementation class EncryptFilter
  */
-@WebFilter({ "/member/login", "/member/memberEnroll", "/member/updatePassword" }) 
+@WebFilter({ "/member/login", "/member/memberEnroll", "/member/updatePassword","/member/memberDelete" }) 
 public class EncryptFilter implements Filter {
 
     /**

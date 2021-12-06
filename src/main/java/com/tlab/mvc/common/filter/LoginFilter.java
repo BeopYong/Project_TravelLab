@@ -19,7 +19,7 @@ import com.tlab.mvc.member.model.vo.Member;
  * Servlet Filter implementation class LoginFilter
  */
 @WebFilter(urlPatterns = { "/member/memberView", "/member/memberUpdate", "/member/updatePassword",
-							"/member/myProfile",
+							"/member/myProfile", "/member/memberDelete", "/member/myPage",
 							"/board/deleteBoard", "/schedule/*", "/member/orderList"})
 public class LoginFilter implements Filter {
 

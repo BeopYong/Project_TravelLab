@@ -19,8 +19,10 @@ import org.apache.log4j.Logger;
 
 import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.Magazine;
-import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
+
 import com.tlab.mvc.magazine.model.vo.MagazineComment;
+import com.tlab.mvc.product.model.vo.ProductEntity; //기능구현을 위한게 아니라면 
+import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.MagazineEntity;
 
 public class MagazineDao {
@@ -641,6 +643,47 @@ public class MagazineDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public List<Magazine> searchMagazine(Connection conn, Map<String, Object> searchParam) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("searchMagazine");
+        ResultSet rset = null;
+        List<Magazine> list = new ArrayList<>();
+        String searchType = (String) searchParam.get("searchType");
+        String searchKeyword = (String) searchParam.get("searchKeyword");
+        switch (searchType) {
+        case "cateCode":
+            sql += " region like '%" + searchKeyword + "%'";
+            break;
+        case "writer":
+            sql += " writer like '%" + searchKeyword + "%'";
+            break;
+        case "title":
+            sql += " title like '%" + searchKeyword + "%'";
+            break;
+        }
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rset = pstmt.executeQuery();
+            while (rset.next()) {
+            	Magazine magazine = new Magazine();
+            	magazine.setWriter(rset.getString("writer"));
+            	magazine.setTitle(rset.getString("title"));
+            	magazine.setRegion(rset.getString("region"));
+                magazine.setContent(rset.getString("content"));
+                magazine.setValid(rset.getString("valid"));
+                magazine.setRegDate(rset.getDate("reg_date"));
+                list.add(magazine);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+        }
+        return list;
 	}
 
 }
