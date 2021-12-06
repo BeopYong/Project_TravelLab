@@ -7,6 +7,7 @@ public class Cart {
 	int quantity;
 	int product_bill;
 	String member_id;
+
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub

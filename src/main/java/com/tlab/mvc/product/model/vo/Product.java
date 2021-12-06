@@ -14,7 +14,6 @@ public class Product extends ProductEntity implements Serializable {
 	private List<ProductAttachment> attachments; //하나의 게시물은 여러 개의 첨부파일을 가질 수 있음!
 
 	
-	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
