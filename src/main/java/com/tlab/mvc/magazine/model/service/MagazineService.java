@@ -13,6 +13,7 @@ import java.util.Map;
 import com.tlab.mvc.magazine.model.dao.MagazineDao;
 import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.MagazineComment;
+import com.tlab.mvc.product.model.vo.ProductEntity;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
@@ -288,6 +289,13 @@ public class MagazineService {
 		} finally {
 			close(conn);
 		}
+		return list;
+	}
+
+	public List<Magazine> searchMagazine(Map<String, Object> searchParam) {
+		Connection conn = getConnection();
+		List<Magazine> list = magazineDao.searchMagazine(conn, searchParam);
+		close(conn);
 		return list;
 	}
 
