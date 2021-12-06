@@ -23,7 +23,7 @@ public class MemberMyInfoServlet extends HttpServlet {
 		
 		// 2. view단 jsp위임
 		request
-			.getRequestDispatcher("/WEB-INF/views/member/myInfo.jsp")
+			.getRequestDispatcher("/WEB-INF/views/member/myInfoTest.jsp")
 			.forward(request, response);
 	}
 

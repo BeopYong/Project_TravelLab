@@ -39,8 +39,7 @@ public class ScheduleEnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<Schedule> list = new ArrayList<>();
-		Gson gson = new Gson();
-		String =
+		Gson gson = new Gson();	
 	}
 
 }

@@ -93,12 +93,12 @@ public class MagazineService {
 		return result;
 	}
 
-	public List<Magazine> selectAllMyScrap(Map<String, Integer> param, String writer) {
+	public List<Magazine> selectAllMyScrap(Map<String, Integer> param, String memberId) {
 		List<Magazine> list = new ArrayList<>();
 		Connection conn=null;
 		try {
 			conn= getConnection();
-			list = magazineDao.selectAllMyScrap(conn,param,writer);
+			list = magazineDao.selectAllMyScrap(conn,param,memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -108,12 +108,12 @@ public class MagazineService {
 	}
 	
 	
-	public int selectTotalMyScrapCount(String writer) {
+	public int selectTotalMyScrapCount(String memberId) {
 		int result=0;
 		Connection conn = null;
 		try {
 			conn = getConnection();
-			result =magazineDao.selectTotalMyScrapCount(conn,writer);
+			result =magazineDao.selectTotalMyScrapCount(conn,memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
