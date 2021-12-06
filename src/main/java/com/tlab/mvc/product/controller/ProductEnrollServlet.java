@@ -1,6 +1,10 @@
 package com.tlab.mvc.product.controller;
 
 import java.io.File;
+import com.sun.jimi.core.Jimi;
+import com.sun.jimi.core.JimiException;
+import com.sun.jimi.core.JimiUtils;
+import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +52,7 @@ public class ProductEnrollServlet extends HttpServlet {
 			MultipartRequest multipartRequest = 
 					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
 			
+			
 			// 업로드한 파일 정보를 p_attachment 테이블에 저장
 			
 			//product객체
@@ -84,7 +89,28 @@ public class ProductEnrollServlet extends HttpServlet {
 				
 				product.setAttachments(productAttachments);
 			
+						
+//			//썸네일 동시에 저장
+//			
+//			String thumbnail_path = "C:/Workspaces/web_server_workspace/tlab_beta" + request.getContextPath() + "/upload/product/";
+//			String thumbImg = thumbnail_path + "thumbs";
+//			System.out.println(thumbnail_path);
+//			System.out.println(thumbImg);
+//			System.out.println(pAttach);
+//			
+//			Image thumnail = 
+//					JimiUtils.getThumbnail(thumbnail_path+pAttach.getRenamedFilename(), 130, 180, Jimi.IN_MEMORY);
+//			
+//			try {
+//				Jimi.putImage(thumnail, thumbImg + pAttach.getRenamedFilename());
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			
 			}			
+				
 			
 			//값 반환
 			int result = productService.insertProduct(product);

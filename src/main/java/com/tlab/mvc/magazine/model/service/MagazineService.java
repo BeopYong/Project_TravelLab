@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.tlab.mvc.magazine.model.dao.MagazineDao;
+import com.tlab.mvc.product.model.vo.ProductEntity; //혹시 기능구현을 위해서가 아니면 추후 삭제 예정 
+import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.Magazine;
 import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.MagazineComment;
@@ -285,17 +287,19 @@ public class MagazineService {
 		return list;
 	}
 
-	public List<Magazine> searchMagazine(Map<String, Object> finder) {
+
+	public List<Magazine> searchMagazine(Map<String, Object> searchParam) {
 		List<Magazine> list;
 		try {
 			Connection conn = getConnection();
-			list = magazineDao.searchMagazine(conn, finder);
+			list = magazineDao.searchMagazine(conn, searchParam);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
-		}
-		
+		} finally {
+      close(conn);
+    }
 		return null;
 	}
 

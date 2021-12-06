@@ -94,7 +94,7 @@ div#search-gdsName {
 				
 				<td style="table-layout: fixed">
 					<form 
-						name="memberRoleUpdateFrm"
+						name="productStockUpdateFrm"
 						action="<%= request.getContextPath() %>/admin/productStockUpdate"
 						method="POST">
 						<input type="hidden" name="productName"
