@@ -28,7 +28,26 @@ public class Magazine extends MagazineEntity implements Serializable {
 		super(no, title, writer, content, regDate, readCount, region);
 	}
 
+	public Magazine(int no, String title, String writer, String content, String region) {
+		super(no, title, writer, content, region);
+	}
 
+	public Magazine( String title, String writer, String content, String region) {
+		super( title, writer, content, region);
+	}
+	
+
+	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
+			String valid) {
+		super(no, title, writer, content, regDate, readCount, region, valid);
+		// TODO Auto-generated constructor stub
+	}
+	public Magazine(String title, String writer, String content, String region, List<MagazineAttachment> attachments,
+			int attachCount) {
+		super(title, writer, content, region);
+		this.attachments = attachments;
+		this.attachCount = attachCount;
+	}
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
 			String valid, int attachCount, List<MagazineAttachment> attachments, int commentCount) {
 		super(no, title, writer, content, regDate, readCount, region, valid);
@@ -52,27 +71,6 @@ public class Magazine extends MagazineEntity implements Serializable {
 		this.attachCount = attachCount;
 		this.attachments = attachments;
 		this.commentCount = commentCount;
-	}
-
-
-	public Magazine(int no, String title, String writer, String content, String region) {
-		super(no, title, writer, content, region);
-	}
-
-	public Magazine( String title, String writer, String content, String region) {
-		super( title, writer, content, region);
-	}
-	public Magazine(String title, String writer, String content, String region, List<MagazineAttachment> attachments,
-			int attachCount) {
-		super(title, writer, content, region);
-		this.attachments = attachments;
-		this.attachCount = attachCount;
-	}
-
-	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
-			String valid) {
-		super(no, title, writer, content, regDate, readCount, region, valid);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
