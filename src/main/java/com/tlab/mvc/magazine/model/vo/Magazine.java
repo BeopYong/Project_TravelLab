@@ -22,6 +22,11 @@ public class Magazine extends MagazineEntity implements Serializable {
 		super(no, title, writer, content, regDate, readCount);
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region) {
+		super(no, title, writer, content, regDate, readCount, region);
+	}
 
 
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,

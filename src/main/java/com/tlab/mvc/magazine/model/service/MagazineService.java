@@ -11,15 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.tlab.mvc.magazine.model.dao.MagazineDao;
+import com.tlab.mvc.product.model.vo.ProductEntity; //혹시 기능구현을 위해서가 아니면 추후 삭제 예정 
+import com.tlab.mvc.magazine.model.exception.MagazineException;
+import com.tlab.mvc.magazine.model.vo.Magazine;
 import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
 import com.tlab.mvc.magazine.model.vo.MagazineComment;
-import com.tlab.mvc.magazine.model.vo.Magazine;
-import com.tlab.mvc.magazine.model.exception.MagazineException;
-import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
-import com.tlab.mvc.magazine.model.vo.Magazine;
-import com.tlab.mvc.magazine.model.exception.MagazineException;
-import com.tlab.mvc.magazine.model.vo.MagazineAttachment;
-import com.tlab.mvc.magazine.model.vo.Magazine;
+import com.tlab.mvc.magazine.model.vo.MagazineEntity;
 
 public class MagazineService {
 
@@ -53,7 +50,6 @@ public class MagazineService {
 	public int insertMagazine(Magazine magazine) {
 		Connection conn = getConnection();
 		int result = 0;
-
 		try {
 			result = magazineDao.insertMagazine(conn, magazine);
 			
@@ -62,7 +58,7 @@ public class MagazineService {
 			System.out.println("[MagazineService insertMagazine()] magazineNo = " + magazineNo);
 			magazine.setNo(magazineNo); //servlet에서 참조
 			
-//			//첨부파일
+////			//첨부파일
 //			List<MagazineAttachment> attachments = magazine.getAttachments();
 //			if(attachments != null) {
 //				//insert into attachment values(seq_attachment_no.nextval,.?,?, default)
@@ -176,7 +172,7 @@ public class MagazineService {
 			//1 매거진 업데이트
 			result = magazineDao.updateMagazine(conn, magazine);
 			
-//			//2 attachment insert
+			//2 attachment insert
 //			List<MagazineAttachment> attachments = magazine.getAttachments();
 //			if(attachments != null && !attachments.isEmpty()) {
 //				for(MagazineAttachment attach : attachments) {
@@ -289,6 +285,22 @@ public class MagazineService {
 			close(conn);
 		}
 		return list;
+	}
+
+
+	public List<Magazine> searchMagazine(Map<String, Object> searchParam) {
+		List<Magazine> list;
+		try {
+			Connection conn = getConnection();
+			list = magazineDao.searchMagazine(conn, searchParam);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} finally {
+      close(conn);
+    }
+		return null;
 	}
 
 }
