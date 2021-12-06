@@ -290,17 +290,18 @@ public class MagazineService {
 
 	public List<Magazine> searchMagazine(Map<String, Object> searchParam) {
 		List<Magazine> list;
+		Connection conn = null;
 		try {
-			Connection conn = getConnection();
+			conn = getConnection();
 			list = magazineDao.searchMagazine(conn, searchParam);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		} finally {
-      close(conn);
-    }
-		return null;
+			close(conn);
+		}
+		return list;
 	}
 
 }
