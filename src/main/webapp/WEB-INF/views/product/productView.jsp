@@ -6,7 +6,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
-
 <%
 	Member member = (Member) session.getAttribute("loginMember");
 	ProductAttachment productAttachment = (ProductAttachment) request.getAttribute("productAttachment");
@@ -72,6 +71,7 @@
 	       <input type="hidden" id="no" name="no" value="<%=product.getNo()%>"/>
 	       <input type="hidden" id="memberId" name="memberId" value="<%=member.getMemberId()%>"/>
 		</td>
+
 		</tr>          
         </table>
       </div>
@@ -80,6 +80,7 @@
     
     <div class="btnbox">
      <button type="button" class="btn btn-primary btn-lg" id="btn">바로 결제</button>
+<!--	 <button type="submit" class="btn btn-secondary btn-lg" id="btn">장바구니</button> -->
 	 <button type="submit" class="btn btn-secondary btn-lg" id="btn">장바구니</button>
     </div>
   </div>
