@@ -46,7 +46,7 @@ $(document.updatePwdFrm).submit((e) => {
 		return false;
 	}
 	
-	if(!/^[a-zA-Z0-9!@#$+/=]{4,}$/.test($newPassword.val())){
+	if(!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/.test($newPassword.val())){
 		alert("유효한 패스워드를 입력하세요.");
 		return false;
 	}
