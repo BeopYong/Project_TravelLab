@@ -26,21 +26,24 @@ public class OrderListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			HttpSession session = request.getSession();
-			Member memberId = (Member) session.getAttribute("loginMember");
-//			String memberId = request.getParameter("memberId");
-			System.out.println("오더리스트서블릿멤버아이디 = " + memberId);
-			List<OrderList> orderList = orderListService.selectAllOrderList(memberId);
-			System.out.println("list@OrderListServlet = " + orderList);
-			
-			request.setAttribute("orderList", orderList);
-			request
-				.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
-				.forward(request, response);
-		 } catch(Exception e){
-			 e.printStackTrace();
-			 throw e;
-		 }
+//		try {
+//			HttpSession session = request.getSession();
+//			Member memberId = (Member) session.getAttribute("loginMember");
+////			String memberId = request.getParameter("memberId");
+//			System.out.println("오더리스트서블릿멤버아이디 = " + memberId);
+//			List<OrderList> orderList = orderListService.selectAllOrderList(memberId);
+//			System.out.println("list@OrderListServlet = " + orderList);
+//			
+//			request.setAttribute("orderList", orderList);
+//			request
+//				.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
+//				.forward(request, response);
+//		 } catch(Exception e){
+//			 e.printStackTrace();
+//			 throw e;
+//		 }
+		request
+		.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
+		.forward(request, response);
 	}
 }
