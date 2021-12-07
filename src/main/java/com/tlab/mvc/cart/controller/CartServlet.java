@@ -57,8 +57,10 @@ public class CartServlet extends HttpServlet {
 		int result = cartService.insertCart(cart);
 		
 		
-		
+		String msg = result > 0 ? "선택하신 상품이 장바구니에 담겼습니다." : "상품 담기 실패!";
+				
 		//상품 상세 페이지 다시 보여줘야 함!!!!!!!!!! -> 리다이렉트
+		request.getSession().setAttribute("msg", msg);
 		String location = request.getContextPath() + "/product/productView?no=" + no;
 		
 		response.sendRedirect(location);

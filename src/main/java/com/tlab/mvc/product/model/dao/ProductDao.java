@@ -157,7 +157,7 @@ public class ProductDao {
         return foodList;
         
     }
-    public int selectTotalFoodList(Connection conn, Map<String, Integer> param) {
+    public int selectTotalList(Connection conn, int p_category) {
         PreparedStatement pstmt = null;
         String sql = prop.getProperty("selectTotalListCount");
         ResultSet rs = null;
@@ -166,7 +166,7 @@ public class ProductDao {
         
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, param.get("301"));
+            pstmt.setInt(1, p_category);
             
             rs = pstmt.executeQuery();
             
@@ -521,7 +521,7 @@ public class ProductDao {
 	}
 	
 
-	public int deleteBoard(Connection conn, int productNo) {
+	public int deleteProduct(Connection conn, int productNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("deleteProduct"); 
@@ -572,6 +572,195 @@ public class ProductDao {
 		
 		
 	}
-  
-    
+
+	public List<Product> productTicketPassList(Connection conn, Map<String, Integer> param) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("selectAllProductList");
+        System.out.println(sql);
+        ResultSet rs = null;
+        List<Product> ticketList = new ArrayList();
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, param.get("101"));
+            pstmt.setInt(2, param.get("start"));
+            pstmt.setInt(3, param.get("end"));
+            
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()) {
+                Product product = new Product();
+                
+                product.setNo(rs.getInt("no"));
+                product.setRegion(rs.getString("region"));
+                product.setP_category(rs.getInt("p_category"));
+                product.setP_name(rs.getString("p_name"));
+                product.setP_content(rs.getString("p_content"));
+                product.setP_stock(rs.getInt("p_stock"));
+                product.setUnit_price(rs.getInt("unit_price"));
+                product.setValid(rs.getString("valid"));
+                product.setReg_date(rs.getDate("reg_date"));
+                
+                ticketList.add(product);
+                
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        System.out.println(ticketList);
+            
+        return ticketList;
+
+	}
+
+	public int updateProduct(Connection conn, Product product) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateProduct"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, product.getP_name());
+			pstmt.setString(2, product.getRegion());
+			pstmt.setInt(3, product.getP_category());
+			pstmt.setInt(4, product.getUnit_price());
+			pstmt.setInt(5, product.getP_stock());
+			pstmt.setString(6, product.getP_content());
+			pstmt.setInt(7, product.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		
+		return result;
+	}
+
+	public List<Product> selectAllProductList(Connection conn, Map<String, Integer> param, int p_category) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("selectAllProductList");
+        System.out.println(sql);
+        ResultSet rs = null;
+        List<Product> list = new ArrayList();
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, p_category);
+            pstmt.setInt(2, param.get("start"));
+            pstmt.setInt(3, param.get("end"));
+            
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()) {
+                Product product = new Product();
+                
+                product.setNo(rs.getInt("no"));
+                product.setRegion(rs.getString("region"));
+                product.setP_category(rs.getInt("p_category"));
+                product.setP_name(rs.getString("p_name"));
+                product.setP_content(rs.getString("p_content"));
+                product.setP_stock(rs.getInt("p_stock"));
+                product.setUnit_price(rs.getInt("unit_price"));
+                product.setValid(rs.getString("valid"));
+                product.setReg_date(rs.getDate("reg_date"));
+                
+                list.add(product);
+                
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        System.out.println(list);
+            
+        return list;
+		
+		
+	}
+
+	public List<Product> randomProductTicketList(Connection conn, Map<String, Integer> param) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("randomProductList");
+        ResultSet rs = null;
+        List<Product> foodList = new ArrayList();
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setInt(1, param.get("101"));
+            pstmt.setInt(2, param.get("end"));
+            
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()) {
+                Product product = new Product();
+                
+                product.setNo(rs.getInt("no"));
+                product.setRegion(rs.getString("region"));
+                product.setP_category(rs.getInt("p_category"));
+                product.setP_name(rs.getString("p_name"));
+                product.setP_content(rs.getString("p_content"));
+                product.setP_stock(rs.getInt("p_stock"));
+                product.setUnit_price(rs.getInt("unit_price"));
+                product.setValid(rs.getString("valid"));
+                product.setReg_date(rs.getDate("reg_date"));
+                
+                foodList.add(product);
+                
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+            
+        return foodList;
+    }
+
+	public List<ProductAttachment> productAttachment(Connection conn) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("productAttachment");
+        ResultSet rset = null;
+        List<ProductAttachment> productAttachment = new ArrayList();
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            rset = pstmt.executeQuery();
+            
+            while(rset.next()){
+				ProductAttachment pAttach = new ProductAttachment();
+				pAttach.setNo(rset.getInt("no"));
+				pAttach.setProductNo(rset.getInt("product_no"));
+				pAttach.setOriginalFilename(rset.getString("original_filename"));
+				pAttach.setRenamedFilename(rset.getString("renamed_filename"));
+				
+				productAttachment.add(pAttach);
+                
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+        }
+            
+        return productAttachment;
+	}
 }

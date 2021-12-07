@@ -52,7 +52,7 @@ public class ProductDeleteServlet extends HttpServlet {
 				// redirect
 				request.getSession().setAttribute("msg", msg);
 //				response.sendRedirect(request.getContextPath() + "/admin/productList");
-				response.sendRedirect(request.getContextPath() + "/product/productList");
+				response.sendRedirect(request.getContextPath() + "/product/productMain");
 	
 		} catch (Exception e) {
 			e.printStackTrace();

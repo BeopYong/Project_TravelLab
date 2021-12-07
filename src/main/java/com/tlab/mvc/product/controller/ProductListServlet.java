@@ -1,3 +1,5 @@
+package com.tlab.mvc.product.controller;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -8,9 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.tlab.mvc.common.MvcUtils;
 import com.tlab.mvc.product.model.service.ProductService;
 import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.vo.ProductAttachment;
 
 /**
  * Servlet implementation class ProductEnrollServlet
@@ -24,31 +29,52 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//1. 사용자 입력값
+	
+		int p_category = Integer.parseInt(request.getParameter("p_category"));
 		int cPage = 1;
-		final int numPerPage = 4;
+		final int numPerPage = productService.selectTotalList(p_category);
 			
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {}
 		
+		int start = (cPage - 1) * numPerPage + 1;
 		int end = cPage * numPerPage;
-		int food = 301;
-		int festival = 302;
 		
 		Map<String, Integer>param = new HashMap<>();
+		param.put("start", start);
 		param.put("end", end);
-		param.put("301", food);
-		param.put("302", festival);
 		
-		List<Product> foodList = productService.randomProductFoodList(param);
-		List<Product> placeList = productService.randomProductPlaceList(param);
 		
-		request.setAttribute("foodList", foodList);
-		request.setAttribute("placeList", placeList);
+		//업무로직
+		List<Product> productList = productService.selectAllProductList(param, p_category);	
+		System.out.println(productList);
+		
+		List<ProductAttachment> pAttach = productService.productAttachmentList();
+		
+		//페이지바 : MvcUtils.getPagebar 호출
+		//totalContent, url
+		
+		String url = request.getRequestURI(); // /mvc/product/productFoodList
+//		System.out.println("productfoodlist@url = " + url);
+		
+		int totalContent = productService.selectTotalList(p_category);
+		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
+		System.out.println("pagebar = " + pagebar);
+		
+		
+		
+		//view
+		HttpSession session = request.getSession();
+		
+		request.setAttribute("productList", productList);
+		request.setAttribute("pAttach", pAttach);
+		request.setAttribute("pagebar", pagebar);
 		request
-		.getRequestDispatcher("/WEB-INF/views/product/productMainPage.jsp")
+		.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
 		.forward(request, response);
+		
 	}
 
 }
+

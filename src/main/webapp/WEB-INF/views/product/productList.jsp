@@ -9,38 +9,50 @@
 <%@page import="java.awt.Image"%>
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
+
 <section>
-
-   <%
-	ProductAttachment productAttachment = (ProductAttachment) session.getAttribute("pAttach");
-   	List<Product> list = (List<Product>) request.getAttribute("list");	
-	%>
+	<td>
+            <form name="form" action="<%= request.getContextPath()%>/product/productList">
+			<select name="p_category" onchange="this.form.submit()">
+                <option value="">category</option>
+                <option value="101">교통/숙박</option>
+                <option value="301">맛집</option>
+                <option value="302">장소</option>
+			</select><br><br>
+            </td>
+          </tr>
+		  </form>
 	
-	<% 
-   	for(Product product : list) {
-   		if("Y".equals(product.getValid())) {
-   %>
-   
-	<div class="container">
-      <div class="product-view">
-		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
-		<%
-		if (productAttachment != null) {
-	 	%>
-      	<img src="<%=request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="">
-      <% } else { %>
-		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
-      	<% } %>
+<script>
 
+$(p_category).change((e) => {
+	const v = $(e.target).val();
+	
+});
+
+</script>
+
+
+	<div class="container">
+	
+   <%
+    List<ProductAttachment> pAttach = (List<ProductAttachment>) request.getAttribute("pAttach");
+   	List<Product> productList = (List<Product>) request.getAttribute("productList");
+ 
+   	for(Product product : productList) {
+   %>
+      <div class="product-view">
+		<a href="<%= request.getContextPath() %>/product/productView?no=<%=product.getNo()%>">
+		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
 		</a>
         <p><%=product.getP_name() %></p>
      </div>
-    <% } 
+    <% }
     %>
     </div>
     <div style="clear: both;"></div>
     
-<%} %>
+
   
 
 </section>
