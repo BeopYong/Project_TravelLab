@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.css" />
-<title>고객센터 문의사항</title>
+<title>고객센터</title>
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 							<td colspan="3"><input type="text" class="form-control" placeholder="제목을 입력하세요." name="csTitle" maxlength="50" required></td>
 						</tr>
 						<tr>
-							<td colspan="4"><textarea class="form-control" placeholder="문의사항을 입력하세요." name="csContent" maxlength="50000" style="height: 350px;" required></textarea></td>
+							<td colspan="4"><textarea class="form-control" placeholder="개인 정보를 보안하기 위해 첨부하신 파일은 관리자만 열람할 수 있습니다." name="csContent" maxlength="50000" style="height: 350px;" required></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2"><input type="file" name="upFile1"></td>

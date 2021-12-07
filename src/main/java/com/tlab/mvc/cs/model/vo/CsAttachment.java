@@ -41,20 +41,20 @@ public class CsAttachment extends Attachment {
 		this.csBoardno = csBoardno;
 	}
 
-	public String getOriginal_filename() {
+	public String getOriginalFilename() {
 		return originalFilename;
 	}
 
-	public void setOriginal_filename(String originalFilename) {
+	public void setOriginalFilename(String originalFilename) {
 		this.originalFilename = originalFilename;
 	}
 
-	public String getRenamed_filename() {
+	public String getRenamedFilename() {
 		return renamedFilename;
 	}
 
-	public void setRenamed_filename(String renamed_filename) {
-		this.renamedFilename = renamed_filename;
+	public void setRenamedFilename(String renamedFilename) {
+		this.renamedFilename = renamedFilename;
 	}
 
 	@Override
@@ -63,4 +63,5 @@ public class CsAttachment extends Attachment {
 				+ ", renamedFilename=" + renamedFilename + "]";
 	}
 
+	
 }
