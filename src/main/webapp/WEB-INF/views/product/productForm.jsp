@@ -2,10 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <script>
-/**
-* boardEnrollFrm 유효성 검사
-*/
 function productValidate(){
 	const $title = $("[name=title]");
 	const $content = $("[name=content]")
@@ -75,7 +73,7 @@ $(document.productEnrollFrm).submit(productValidate);
 
 <div class="inputArea">
  <label for="pDes">상품소개</label>
- <textarea rows="5" cols="50" id="p_content" name="p_content"></textarea>
+<textarea name="p_content" id="summernote" class="summernote"></textarea>
 </div>
 
 <div class="inputArea">
@@ -83,8 +81,6 @@ $(document.productEnrollFrm).submit(productValidate);
 </div>
 
 </form>
-
-
 
 </section>
 
