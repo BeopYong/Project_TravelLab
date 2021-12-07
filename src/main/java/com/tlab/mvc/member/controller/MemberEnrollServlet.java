@@ -17,7 +17,7 @@ import com.tlab.mvc.member.model.vo.Member;
 /**
  * Servlet implementation class MemberEnrollServlet
  */
-@WebServlet("/member/memberEnroll")
+@WebServlet("/new/memberEnroll")
 public class MemberEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();

@@ -8,22 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberViewServlet
+ * Servlet implementation class MemberWishList
  */
-@WebServlet("/member/myInfo")
-public class MemberMyInfoServlet extends HttpServlet {
+@WebServlet("/member/myWishList")
+public class MemberWishList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// 1. 업무로직 session에 저장되어있기때문에 jsp에서 바로 불러올 수 있다.
 		
-		// 2. view단 jsp위임
 		request
-			.getRequestDispatcher("/WEB-INF/views/member/myInfoUpdate.jsp")
+			.getRequestDispatcher("/WEB-INF/views/member/myWishList.jsp")
 			.forward(request, response);
 	}
 
