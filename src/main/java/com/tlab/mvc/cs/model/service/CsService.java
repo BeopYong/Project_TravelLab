@@ -14,6 +14,7 @@ import com.tlab.mvc.cs.model.vo.Cs;
 import com.tlab.mvc.cs.model.vo.CsAttachment;
 import com.tlab.mvc.cs.model.vo.CsComment;
 
+
 public class CsService {
 
 	private CsDao csDao = new CsDao();
@@ -39,7 +40,7 @@ public class CsService {
 			conn = getConnection();
 			result = csDao.insertCs(conn, cs);
 
-			int csBoardno = csDao.selectLastCsNo(conn); // FK칼럼값
+			int csBoardno = csDao.selectLastCsNo(conn); 
 			System.out.println("[CsService] csBoardno = " + csBoardno);
 			cs.setNo(csBoardno);
 
@@ -101,9 +102,8 @@ public class CsService {
 	public Cs selectOneCs(int no) {
 		Connection conn = getConnection();
 		Cs cs = csDao.selectOneCs(conn, no);
-		List<CsAttachment> attachments = csDao.selectAttachmentByCsNo(conn, no);
-		cs.setAttachments(attachments);
 		close(conn);
+		
 		return cs;
 	}
 
@@ -116,12 +116,12 @@ public class CsService {
 			result = csDao.updateCs(conn, cs);
 			
 			// 2. attachment insert
-			List<CsAttachment> attachments = cs.getAttachments();
-			if(attachments != null && !attachments.isEmpty()) {
-				for(CsAttachment attach : attachments) {
-					result = csDao.insertCsAttachment(conn, attach); 
-				}
-			}
+//			List<CsAttachment> attachments = cs.getAttachments();
+//			if(attachments != null && !attachments.isEmpty()) {
+//				for(CsAttachment attach : attachments) {
+//					result = csDao.insertCsAttachment(conn, attach); 
+//				}
+//			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -153,6 +153,35 @@ public class CsService {
 		List<CsComment> commentList = csDao.selectCsCommentList(conn, csBoardno);
 		close(conn);
 		return commentList;
+	}
+
+	public int insertCsComment(CsComment cc) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = csDao.insertCsComment(conn, cc);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteCsComment(int no) {
+		Connection conn = getConnection(); 
+		int result = 0;
+		try {
+			result = csDao.deleteCsComment(conn, no);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		}
+		return result;
 	}
 
 

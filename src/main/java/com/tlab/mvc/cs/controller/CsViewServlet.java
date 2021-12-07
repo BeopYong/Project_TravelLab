@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tlab.mvc.common.Attachment;
 import com.tlab.mvc.cs.model.exception.CsException;
 import com.tlab.mvc.cs.model.service.CsService;
 import com.tlab.mvc.cs.model.vo.Cs;
 import com.tlab.mvc.cs.model.vo.CsComment;
-
 
 /**
  * Servlet implementation class CsViewServlet
@@ -34,12 +34,12 @@ public class CsViewServlet extends HttpServlet {
 			Cs cs = csService.selectOneCs(no);
 //			Cs cs = csService.selectOneCsAttachments(no);
 			System.out.println("[CsViewServlet] cs = " + cs);
-			//게시글 가져오기에 실패한경우
+			//게시글 매칭 실패
 			if(cs == null) {
 				throw new CsException("해당 게시글이 존재하지 않습니다.");
 			}
 
-			// XSS공격대비 <> 변환처리
+			// 개행문자
 			String content = cs.getContent().replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 						
 			// 개행문자처리
@@ -48,7 +48,7 @@ public class CsViewServlet extends HttpServlet {
 			
 			// 댓글 목록 조회
 			List<CsComment> commentList = csService.selectCsCommentList(no);
-			System.out.println("[BoardViewServlet] commentList = " + commentList);
+			System.out.println("[CsViewServlet] commentList = " + commentList);
 			
 			//3. jsp forwarding
 			request.setAttribute("commentList", commentList);

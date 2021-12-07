@@ -9,14 +9,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" />
 <meta name="viewport" content="width-device-width", initial-scale="1">
 <link rel="stylesheet" href="css/bootstrap.css">
-<title>고객센터 문의사항</title>
+<title>고객센터</title>
 
 <%
 	Cs cs = (Cs) request.getAttribute("cs");
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cs.css" />
-<div class="container">
-	<div class="row">
+<section id="board-container">
+	<table id="tbl-board-view">
 	<h2>고객센터</h2>
 	<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 		<tr>
@@ -39,10 +39,9 @@
 			CsAttachment attach = attachments.get(i);
 %>
 		<tr>
-			<th>첨부파일<%= i + 1 %></th>
+			<th>첨부파일</th>
 			<td>
 				<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
-				<img alt="첨부파일" src="<%=request.getContextPath() %>/images/file.png" width=16px>
 				<a href="<%= request.getContextPath() %>/cs/fileDownload?no=<%= attach.getNo() %>"><%= attach.getOriginalFilename() %></a>
 			</td>
 		</tr>
@@ -53,9 +52,10 @@
 		<tr>
 			<th>내 용</th>
 			<td>
-				<%= cs.getContent() %> 
+				<%= cs.getContent() %>
 			</td>
 		</tr>
+	</table>
 		<% 	if(
 				loginMember != null && 
 				(
@@ -64,15 +64,14 @@
 				)
 			){ %>
 		<tr>
-			<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
+			<%-- 작성자와 관리자만 마지막행 삭제버튼이 보일수 있게 할 것 --%>
 			<th colspan="2">
-				<input type="button" value="수정하기" onclick="updateCs()">
+				<!-- <input type="button" value="수정하기" onclick="updateCs()">  -->
 				<input type="button" value="삭제하기" onclick="deleteCs()">
 			</th>
 		</tr>
 		<% 	} %>
 	</table>
-	
 	<hr style="margin-top:30px;" />	
     
 	<div class="comment-container">
@@ -80,8 +79,9 @@
             <form 
             	action="<%=request.getContextPath()%>/cs/csCommentEnroll" 
             	method="post" 
-            	name="csCommentFrm">
-                <input type="hidden" name="csNo" value="<%= cs.getNo() %>" />
+            	name="csCommentFrm"
+            	>
+                <input type="hidden" name="csBoardno" value="<%= cs.getNo() %>" />
                 <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
                 <input type="hidden" name="commentLevel" value="1" />
                 <input type="hidden" name="commentRef" value="0" />    
@@ -90,7 +90,7 @@
             </form>
         </div>
 		
-		<!--table#tbl-comment-->
+		<!--게시판 댓글!-->
 <% 
 	List<CsComment> commentList = (List<CsComment>) request.getAttribute("commentList"); 
 	if(commentList != null && !commentList.isEmpty()){
@@ -107,12 +107,12 @@
 
 			if(cc.getCommentLevel() == 1){
 %>
+			<!-- 댓글 -->
 			<tr class="level1">
 				<td>
 					<sub class="comment-writer"><%= cc.getWriter() %></sub>
 					<sub class="comment-date"><%= cc.getRegDate() %></sub>
 					<br />
-					<%-- 댓글내용 --%>
 					<%= cc.getContent() %>
 				</td>
 				<td>
@@ -125,13 +125,12 @@
 			</tr>
 <%
 			} else {
-%>
+%>          <!-- 대댓글 -->
 			<tr class="level2">
 				<td>
 					<sub class="comment-writer"><%= cc.getWriter() %></sub>
 					<sub class="comment-date"><%= cc.getRegDate() %></sub>
 					<br />
-					<%-- 대댓글내용 --%>
 					<%= cc.getContent() %>
 				</td>
 				<td>
@@ -150,8 +149,8 @@
 	}
 %>
 		</div>
-	</div>
-</div>
+
+</section>
 
 
 <form
@@ -160,7 +159,103 @@
 	action="<%= request.getContextPath() %>/cs/csDelete" >
 	<input type="hidden" name="no" value="<%= cs.getNo() %>" />
 </form>	
+<form 
+	action="<%= request.getContextPath() %>/cs/csCommentDelete" 
+	name="csCommentDelFrm"
+	method="POST">
+	<input type="hidden" name="no" />
+	<input type="hidden" name="csBoardno" value="<%= cs.getNo() %>"/>
+</form>
+
 <script>
+$(".btn-delete").click(function(){
+	if(confirm("해당 댓글을 삭제하시겠습니까?")){
+		var $frm = $(document.csCommentDelFrm);
+		var no = $(this).val();
+		$frm.find("[name=no]").val(no);
+		$frm.submit();
+	}
+});	
+
+/**
+ * 대댓글 
+ */
+$(".btn-reply").click((e) => {
+<% if(loginMember == null){ %>
+	loginAlert();
+	return;
+<% } %>
+
+	const commentRef = $(e.target).val();
+	console.log(commentRef);
+	
+	const tr = `<tr>
+	<td colspan="2" style="text-align:left">
+		<form 
+			action="<%=request.getContextPath()%>/cs/csCommentEnroll" 
+			method="post">
+		    <input type="hidden" name="csBoardno" value="<%= cs.getNo() %>" />
+		    <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
+		    <input type="hidden" name="commentLevel" value="2" />
+		    <input type="hidden" name="commentRef" value="\${commentRef}" />    
+			<textarea name="content" cols="60" rows="2"></textarea>
+		    <button type="submit" class="btn-comment-enroll2">등록</button>
+		</form>
+	</td>
+</tr>`;
+	console.log(tr);
+	
+	// e.target인 버튼태그의 부모tr을 찾고, 다음 형제요소로 추가
+	const $baseTr = $(e.target).parent().parent();
+	const $tr = $(tr);
+	
+	$tr.insertAfter($baseTr)
+		.find("form")
+		.submit((e) => {
+			const $content = $("[name=content]", e.target);
+			if(!/^(.|\n)+$/.test($content.val())){
+				alert("댓글을 작성해주세요.");
+				e.preventDefault();
+			}
+		});
+		
+	
+	// 클릭이벤트핸들러 제거
+	$(e.target).off("click");
+	
+});
+
+
+
+$("[name=content]", document.csCommentFrm).focus((e) => {
+
+<% if(loginMember == null){ %>
+	loginAlert();
+	return;
+<% } %>
+
+});
+
+$(document.csCommentFrm).submit((e) => {
+<% if(loginMember == null){ %>
+	loginAlert();
+	return false;
+<% } %>
+
+	const $content = $("[name=content]", e.target);
+	if(!/^(.|\n)+$/.test($content.val())){
+		alert("댓글을 작성해주세요.");
+		e.preventDefault();
+	}
+
+});
+
+const loginAlert = () => {
+	alert("로그인후 사용가능합니다.");
+	$(memberId).focus();
+};
+
+
 const deleteCs = () => {
 	if(confirm("이 게시물을 정말 삭제하시겠습니까?")){
 		$(document.csDelFrm).submit();		

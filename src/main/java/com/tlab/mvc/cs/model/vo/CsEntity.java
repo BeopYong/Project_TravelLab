@@ -91,5 +91,4 @@ public class CsEntity implements Serializable {
 				+ ", boardRef=" + boardRef + ", regDate=" + regDate + "]";
 	}
 	
-	
 }

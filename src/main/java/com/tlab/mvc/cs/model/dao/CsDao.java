@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.tlab.mvc.common.Attachment;
 import com.tlab.mvc.cs.model.exception.CsException;
 import com.tlab.mvc.cs.model.vo.Cs;
 import com.tlab.mvc.cs.model.vo.CsAttachment;
@@ -124,7 +123,7 @@ public class CsDao {
 				csNo = rset.getInt(1);
 			}
 		} catch (SQLException e) {
-			throw new CsException("최근 게시글번호 조회 오류!", e);
+			throw new CsException("최근 게시글 번호 조회 오류!", e);
 		} finally {
 			close(pstmt);
 		}
@@ -273,15 +272,11 @@ public class CsDao {
 		Cs cs = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String query = prop.getProperty("selectOneCs");
+		
 		try{
-			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
-			//쿼리문미완성
 			pstmt.setInt(1, no);
-			//쿼리문실행
-			//완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
@@ -304,10 +299,10 @@ public class CsDao {
 	public int updateCs(Connection conn, Cs cs) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateCs"); 
+		String sql = prop.getProperty("updateCs"); 
 		
 		try {
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cs.getTitle());
 			pstmt.setString(2, cs.getContent());
 			pstmt.setInt(3, cs.getNo());
@@ -362,6 +357,7 @@ public class CsDao {
 				cc.setCommentRef(rset.getInt("comment_ref")); // 댓글인 경우 null이고, 이는 0으로 치환된다.
 				cc.setRegDate(rset.getDate("reg_date"));
 				commentList.add(cc);
+				System.out.println(commentList);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -370,5 +366,45 @@ public class CsDao {
 			close(pstmt);
 		}
 		return commentList;
+	}
+
+	public int insertCsComment(Connection conn, CsComment cc) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertBoardComment");
+		int result = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cc.getCommentLevel()); 	// 번호
+			pstmt.setString(2, cc.getWriter()); 	// 작성자
+			pstmt.setString(3, cc.getContent()); 	// 댓글 내용
+			pstmt.setInt(4, cc.getCsBoardno());		// CsBoardno
+			pstmt.setObject(5, cc.getCommentRef() == 0 ? null : cc.getCommentRef());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int deleteCsComment(Connection conn, int no) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteCsComment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new CsException("댓글 삭제 오류", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

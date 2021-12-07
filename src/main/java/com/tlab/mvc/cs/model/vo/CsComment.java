@@ -93,5 +93,4 @@ public class CsComment implements Serializable{
 				+ ", csBoardno=" + csBoardno + ", commentRef=" + commentRef + ", regDate=" + regDate + "]";
 	}
 	
-	
 }
