@@ -245,5 +245,11 @@ public class ProductService {
 		
 		return list;
 	}
+
+	public List<ProductAttachment> productAttachmentList() {
+		Connection conn = getConnection();
+		List<ProductAttachment> list = productDao.productAttachment(conn);
+		return list;
+	}
 	
 }

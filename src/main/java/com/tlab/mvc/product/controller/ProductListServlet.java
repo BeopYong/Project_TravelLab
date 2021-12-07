@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.tlab.mvc.common.MvcUtils;
 import com.tlab.mvc.product.model.service.ProductService;
 import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.vo.ProductAttachment;
 
 /**
  * Servlet implementation class ProductEnrollServlet
@@ -49,6 +50,7 @@ public class ProductListServlet extends HttpServlet {
 		List<Product> productList = productService.selectAllProductList(param, p_category);	
 		System.out.println(productList);
 		
+		List<ProductAttachment> pAttach = productService.productAttachmentList();
 		
 		//페이지바 : MvcUtils.getPagebar 호출
 		//totalContent, url
@@ -66,6 +68,7 @@ public class ProductListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		request.setAttribute("productList", productList);
+		request.setAttribute("pAttach", pAttach);
 		request.setAttribute("pagebar", pagebar);
 		request
 		.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")

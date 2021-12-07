@@ -9,22 +9,29 @@
 <%@page import="java.awt.Image"%>
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
-
-
 <section>
 
-
-	<div class="container">
    <%
 	ProductAttachment productAttachment = (ProductAttachment) session.getAttribute("pAttach");
-   	List<Product> list = (List<Product>) request.getAttribute("list");
- 
+   	List<Product> list = (List<Product>) request.getAttribute("list");	
+	%>
+	
+	<% 
    	for(Product product : list) {
+   		if("Y".equals(product.getValid())) {
    %>
    
+	<div class="container">
       <div class="product-view">
 		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
-		 <img src="<%=request.getContextPath() %>/upload/product/thumbs/<%=productAttachment.getRenamedFilename() %>" alt="">
+		<%
+		if (productAttachment != null) {
+	 	%>
+      	<img src="<%=request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="">
+      <% } else { %>
+		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
+      	<% } %>
+
 		</a>
         <p><%=product.getP_name() %></p>
      </div>
@@ -33,7 +40,7 @@
     </div>
     <div style="clear: both;"></div>
     
-
+<%} %>
   
 
 </section>

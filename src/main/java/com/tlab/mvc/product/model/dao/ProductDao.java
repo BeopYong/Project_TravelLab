@@ -731,4 +731,36 @@ public class ProductDao {
             
         return foodList;
     }
+
+	public List<ProductAttachment> productAttachment(Connection conn) {
+		PreparedStatement pstmt = null;
+        String sql = prop.getProperty("productAttachment");
+        ResultSet rset = null;
+        List<ProductAttachment> productAttachment = new ArrayList();
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            
+            rset = pstmt.executeQuery();
+            
+            while(rset.next()){
+				ProductAttachment pAttach = new ProductAttachment();
+				pAttach.setNo(rset.getInt("no"));
+				pAttach.setProductNo(rset.getInt("product_no"));
+				pAttach.setOriginalFilename(rset.getString("original_filename"));
+				pAttach.setRenamedFilename(rset.getString("renamed_filename"));
+				
+				productAttachment.add(pAttach);
+                
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+        }
+            
+        return productAttachment;
+	}
 }
