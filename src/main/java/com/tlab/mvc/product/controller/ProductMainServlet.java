@@ -29,7 +29,7 @@ public class ProductMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 사용자 입력값
 			int cPage = 1;
-			final int numPerPage = 6;
+			final int numPerPage = 8;
 				
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -48,7 +48,9 @@ public class ProductMainServlet extends HttpServlet {
 			
 			List<Product> foodList = productService.randomProductFoodList(param);
 			List<Product> placeList = productService.randomProductPlaceList(param);
+			List<Product> ticketList = productService.randomProductTicketList(param);
 			
+			request.setAttribute("ticketList", ticketList);
 			request.setAttribute("foodList", foodList);
 			request.setAttribute("placeList", placeList);
 			request

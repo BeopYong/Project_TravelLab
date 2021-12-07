@@ -34,6 +34,29 @@ $(p_category).change((e) => {
 });
 
 </script>	
+
+	<table>
+	<tr>
+      <td colspan="3">여행을 떠나봅시다!</td>
+      <td><a href="<%= request.getContextPath()%>/product/productList?p_category=101">더 보기</a></td>
+    </tr>
+    </table>
+
+	<div class="container">
+   <%
+   	List<Product> ticketList = (List<Product>) request.getAttribute("ticketList");
+   for(Product product : ticketList) {
+   %>
+   
+      <div class="product-view">
+		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
+		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
+		</a>
+        <p><%=product.getP_name() %></p>
+     </div>
+    <% } %>
+    </div>
+    <div style="clear: both;"></div>
 	
 	
 

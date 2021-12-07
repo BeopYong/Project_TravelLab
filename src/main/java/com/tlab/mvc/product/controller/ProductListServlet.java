@@ -29,8 +29,9 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		int p_category = Integer.parseInt(request.getParameter("p_category"));
 		int cPage = 1;
-		final int numPerPage = 8;
+		final int numPerPage = productService.selectTotalList(p_category);
 			
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -38,7 +39,6 @@ public class ProductListServlet extends HttpServlet {
 		
 		int start = (cPage - 1) * numPerPage + 1;
 		int end = cPage * numPerPage;
-		int p_category = Integer.parseInt(request.getParameter("p_category"));
 		
 		Map<String, Integer>param = new HashMap<>();
 		param.put("start", start);

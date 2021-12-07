@@ -25,7 +25,7 @@
 	 	%>
       	<img src="<%=request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="">
       <% } else { %>
-      	<img src="<%=request.getContextPath() %>/upload/product/TT.jpeg" alt="">
+		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
       	<% } %>
       </div>
       <div class="product-info-box">

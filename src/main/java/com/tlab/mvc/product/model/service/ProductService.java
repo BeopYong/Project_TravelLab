@@ -237,5 +237,13 @@ public class ProductService {
 		
 		return list;
 	}
+
+	public List<Product> randomProductTicketList(Map<String, Integer> param) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.randomProductTicketList(conn, param);
+		close(conn);
+		
+		return list;
+	}
 	
 }
