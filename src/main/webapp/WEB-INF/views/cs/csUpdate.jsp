@@ -9,7 +9,7 @@
 %>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.css" />
-<title>고객센터 문의사항</title>
+<title>고객센터</title>
 </head>
 <body>
 
@@ -49,34 +49,7 @@
 						<tr>
 							<td colspan="4"><textarea class="form-control" placeholder="문의사항을 입력하세요." name="csContent" maxlength="50000" style="height: 350px;" required> <%= cs.getContent() %> </textarea></td>
                         </tr>
-<%
-	List<CsAttachment> attachments = cs.getAttachments();
-	if(attachments != null && !attachments.isEmpty()){ 
-%>
-	<tr>
-		<th>기존 첨부파일</th>
-		<td>
-<%
-		for(CsAttachment attach : attachments){
-%>			
-			<div style="padding:0; margin:3px;">
-				<%= attach.getOriginalFilename() %>
-				<label for="delFile<%= attach.getNo() %>">제거</label>
-				<input 
-					type="checkbox" 
-					name="delFile" 
-					id="delFile<%= attach.getNo() %>" 
-					value="<%= attach.getNo() %>" />
-			</div>
 
-<%
-		}
-%>
-		</td>
-	</tr>
-<% 
-	} 
-%>
                         <tr>
                             <td colspan="2"><input type="file" name="upFile1"></td>
                         </tr>
@@ -86,7 +59,7 @@
 					</tbody>
 				</table>
 				<!-- 버튼 -->
-				<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+				<input type="submit" class="btn btn-primary pull-right" value="수정하기">
 			</form>
 		</div>
 	</div>

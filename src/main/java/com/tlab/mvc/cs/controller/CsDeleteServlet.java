@@ -46,7 +46,7 @@ public class CsDeleteServlet extends HttpServlet {
 			
 			// 	b. cs 레코드(행) 삭제 (attachment는 on delete cascade에 의해 자동으로 제거된다.)
 			int result = csService.deleteCs(no);
-			String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
+			String msg = result > 0 ? "게시물이 삭제 되었습니다." : "게시물 삭제에 실패하였습니다.";
 
 			// 3. redirect : /mvc/cs/csList로 이동
 			request.getSession().setAttribute("msg", msg);

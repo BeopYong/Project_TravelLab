@@ -57,8 +57,6 @@ public class CsListServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace(); 
 			throw e; 
-		}
-	
+		}	
 	}
-
 }

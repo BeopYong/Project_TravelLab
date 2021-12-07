@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.tlab.mvc.cart.model.dao.CartDao;
 import com.tlab.mvc.cart.model.vo.Cart;
+import com.tlab.mvc.member.model.vo.Member;
+import com.tlab.mvc.orderlist.model.vo.OrderList;
 
 public class CartService {
 	
@@ -29,5 +31,12 @@ public class CartService {
 			close(conn);
 		}
 		return result;
+	}
+
+	public List<Cart> selectAllCartList(Member memberId) {
+		Connection conn = getConnection();
+		List<Cart> list = cartDao.selectAllCartList(conn, memberId);
+		close(conn);
+		return list;
 	}
 }

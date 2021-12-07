@@ -63,6 +63,5 @@ public class Cs extends CsEntity implements Serializable {
 	public String toString() {
 		return "Cs [csAttachments=" + csAttachments + ", commentCount=" + commentCount + "]";
 	}
-
 	
 }

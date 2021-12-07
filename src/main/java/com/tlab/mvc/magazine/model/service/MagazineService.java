@@ -295,7 +295,6 @@ public class MagazineService {
 			conn = getConnection();
 			list = magazineDao.searchMagazine(conn, searchParam);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		} finally {
