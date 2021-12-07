@@ -63,10 +63,60 @@ pageEncoding="UTF-8"%>
 		</div>
 	</table>
 
+	<div class="magazine-container">
+		<div class="magazine-view">
+			<div class="magazine-top">
+				<div class="no-container">
+					<p><span class="no-view">글 번호 : <%=magazine.getNo() %></span></p>
+				</div>
+				<div class="rv-container">
+					<p><span class="region-view"><%= magazine.getRegion() %></span></p>
+				</div>
+				<div class="rc-container">
+					<p><span class="readCount-view">조회수 : <%=magazine.getReadCount() %></span></p>
+				</div>
+				<div class="tv-container">
+					<p><span class="title-view"><%=magazine.getTitle() %></span></p>
+				</div>
+				<div class="wv-container">
+					<span class="writer_proflie"><a href=""><img src="<%= request.getContextPath() %>/images/magazine/nonameprofile.png" alt="<%=magazine.getWriter() %>>" /></a></span>
+					<i class="dot"> : </i>
+					<span class="writer-view"><%=magazine.getWriter() %></span>
+					
+					<span class="regDate-view"><%=magazine.getRegDate() %></span>
+				</div>
+				
+				<div class="cv-container">
+					<div class="content-view">
+					<%=magazine.getContent() %>
+					</div>
+				</div>
+				
+				<div class="fv-container">
+					<div class="file-view">
+						<span class="file1"><a href=""><img src="" alt="<%= request.getContextPath() %>/images/magazine/haeundae.jpg" alt="haeundae"/></a></span>
+					</div>
+				
+				</div>
+				
+				<div class="rcm-container">
+					<div class="recommend-view">
+						<span><a href=""><img src="" alt="<%= request.getContextPath() %>/images/magazine/haeundae.jpg" alt="haeundae"/></a></span>
+					</div>
+				</div>
+			
+				
+			</div>
+		
+		</div>
+	
+	</div>	
+	
+	
+	
+	
 	
 </section>
-
-
 
 <!-- 글쓴이 또는 관리자만 deletemagazine 권한생성 -->
 <% if (editable) { %>
