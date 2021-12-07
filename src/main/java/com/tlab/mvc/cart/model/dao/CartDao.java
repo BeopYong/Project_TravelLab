@@ -79,19 +79,19 @@ public class CartDao {
             while (rset.next()) {
             	Cart cart = new Cart();
             	cart.setNo(rset.getInt("no"));
-            	cart.setOrderCode(rset.getInt("order_code"));
-            	cart.setMemberId(rset.getString("member_id"));
-            	cart.setTotalBill(rset.getInt("total_bill"));
-            	cart.setPaymentDate(rset.getDate("payment_date"));
+            	cart.setProduct_name(rset.getString("product_name"));
+            	cart.setQuantity(rset.getInt("quantity"));
+            	cart.setMember_id(rset.getString("member_id"));
+            	cart.setProduct_bill(rset.getInt("product_bill"));
             	list.add(cart);
             }
         } catch (SQLException e) {
-            throw new OrderListException("조회 오류", e);
+            e.printStackTrace();
         } finally {
             close(rset);
             close(pstmt);
         }
-        return orderList;
+        return list;
 	}
 	}
 

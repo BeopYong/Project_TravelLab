@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.tlab.mvc.member.model.vo.Member;
-import com.tlab.mvc.orderlist.model.vo.OrderList;
 import com.tlab.mvc.payment.model.service.PaymentService;
+import com.tlab.mvc.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentServlet
  */
-@WebServlet("/PaymentServlet")
+@WebServlet("/member/payment")
 public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PaymentService paymentService = new PaymentService();
 
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -30,19 +31,16 @@ public class PaymentServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Member memberId = (Member) session.getAttribute("loginMember");
 			System.out.println("페이먼트서블릿멤버아이디 = " + memberId);
-//			List<OrderList> orderList = orderListService.selectAllOrderList(memberId);
-//			System.out.println("페이먼트서블릿오더리스트 = " + orderList);
-//			
-//			request.setAttribute("orderList", orderList);
+			List<Payment> list = paymentService.selectAllPayment(memberId);
+			System.out.println("페이먼트서블릿리스트 = " + list);
+			
+			request.setAttribute("list", list);
 			request
-				.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
+				.getRequestDispatcher("/WEB-INF/views/payment/payment.jsp")
 				.forward(request, response);
-		 } catch(Exception e){
-			 e.printStackTrace();
-			 throw e;
-		 }
-		
-		
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		
 	}

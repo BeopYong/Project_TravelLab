@@ -17,7 +17,7 @@ import com.tlab.mvc.member.model.vo.Member;
 /**
  * Servlet implementation class CartListServlet
  */
-@WebServlet("/CartListServlet")
+@WebServlet("/member/cartList")
 public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
@@ -35,7 +35,7 @@ public class CartListServlet extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request
-				.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
+				.getRequestDispatcher("/WEB-INF/views/cart/cartList.jsp")
 				.forward(request, response);
 		 } catch(Exception e){
 			 e.printStackTrace();

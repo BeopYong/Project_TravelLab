@@ -42,7 +42,7 @@ div#search-title {
 </style>
 
 <section id="magazineList-container">
-	<h2>상품관리</h2>
+	<h2>매거진관리</h2>
 
 	<div id="search-container">
 		<label for="searchType">검색타입 :</label> <select id="searchType">
