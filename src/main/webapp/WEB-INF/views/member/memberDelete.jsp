@@ -35,6 +35,7 @@
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/enroll.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
 <style>
+
 </style>
 	<script src="<%=request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 </head>
@@ -44,7 +45,7 @@
     <div class="wrap-contact100">
       <div class="intro_container">
         <div class="namebox">
-          <h1 class="main-name">DelLogin</h1>
+          <h1 class="main-name">ARE YOU SURE?</h1>
         </div>
           <div class="row">
             <!--<div class="signUpForm" onselectstart="return false">-->
@@ -60,7 +61,7 @@
                   <div class="wrap-input100">
                     <span class="label-input100">Id *</span>
                     <input class="input100" type="text" name="memberId" id="memberId" value="<%= loginMember.getMemberId() %>" readonly>
-                    <span class="focus-input100"></span>
+                    <!-- <span class="focus-input100"></span> -->
                   </div>
                   <div>
                     <span class="confirm" id="idConfirm">&nbsp; </span>
@@ -77,7 +78,7 @@
                     <div class="contact100-form-bgbtn"></div>
                     <button class="contact100-form-btn" id="signUpButton" onclick="signUpCheck();">
                       <span>
-                        SignUp
+                        Delete My Info
                       </span>
                     </button>
                   </div>

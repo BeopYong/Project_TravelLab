@@ -61,8 +61,7 @@ $(() => {
 	<%--  <a href="<%= request.getContextPath()%>/member/myInfo" class="p-explain">내정보</a> --%>
 	<a href="<%=request.getContextPath()%>/member/myInfo" class="p-explain"><b>내정보</b></a>
 	<%-- <a href="<%= request.getContextPath()%>/member/myScheduleList" class="p-explain">일정</a> --%>
-	<a href="<%=request.getContextPath()%>/member/mySchedule"
-		class="p-explain"><b>일정</b></a>
+	<a href="<%=request.getContextPath()%>/member/mySchedule" class="p-explain"><b>일정</b></a>
 </div>
 
 <!-- The flexible grid (content) -->
@@ -72,10 +71,8 @@ $(() => {
 			<a class="sub-link2" href="<%=request.getContextPath()%>/">TravelLab</a>
 		</h2>
 		<div class="profile-img" align="center">
-			<a >
-				<img class="profile"
+			<img class="profile"
 				src="https://api.cdn.visitjeju.net/photomng/thumbnailpath/202110/21/40916b0e-7ce7-4c3f-8ad1-59aeef46d4c6.png" />
-			</a>
 		</div>
 
 		<h3 align="center">Profile</h3>
@@ -109,26 +106,6 @@ $(() => {
     <button class="sideBarTag" style="height:60px;">My Interest</button> -->
 	</div>
 	<div class="main">
-		<h2>내 일정</h2>
-		<h5>최근 추가날짜 Sep 5, 2021</h5>
-		<!-- Photo Grid-->
-		<div class="w3-row-padding">
-			<div class="w3-third w3-container w3-margin-bottom">
-				<div class="w3-third w3-container w3-margin-bottom">
-					<a href="<%=request.getContextPath()%>/member/mySchedule"><img
-						src="https://api.cdn.visitjeju.net/photomng/thumbnailpath/202110/21/40916b0e-7ce7-4c3f-8ad1-59aeef46d4c6.png"
-						alt="내일정" style="width: 500%;" class="w3-hover-opacity"></a>
-					<div class="w3-container w3-white">
-						<p class="p-explain">
-							<b>01.11~01.13</b>
-						</p>
-						<p class="p-explain">
-							일정보러가기 <br> <br>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
 		<h2>여행지 찜목록</h2>
 		<h5>최근추가날짜, Dec 7, 2021</h5>
 		<br>
@@ -246,7 +223,7 @@ $(() => {
 						<b>애월더선셋</b>
 					</p>
 					<p class="p-explain">
-						애월해안 한담산책로 위 전망좋은 카페 <br> <br>#카페 #커피 #브런치
+						애월해안 한담산책로 위 전망좋은 카페 <br><br>#카페 #커피 #브런치 
 					</p>
 				</div>
 			</div>
@@ -258,7 +235,7 @@ $(() => {
 
 		<!-- Third Photo Grid-->
 		<div class="w3-row-padding">
-			<h2>액티비티 찜목록</h2>
+			<h2>액티비티  찜목록</h2>
 			<h5>최근 추가날짜 Sep 4, 2021</h5>
 			<div class="w3-third w3-container w3-margin-bottom">
 				<img
@@ -312,7 +289,9 @@ $(() => {
 					</p>
 				</div>
 			</div>
-
+			<div class="more" class="p-explain">
+				<a href="">더보기</a>
+			</div>
 		</div>
 
 	</div>

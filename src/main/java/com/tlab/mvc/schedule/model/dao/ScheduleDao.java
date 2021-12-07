@@ -20,10 +20,9 @@ import com.tlab.mvc.schedule.model.vo.Schedule;
 
 public class ScheduleDao {
 
-
 	private Properties prop = new Properties();
 	private Logger logger = Logger.getRootLogger();
-	
+
 	public ScheduleDao() {
 		String filepath = ScheduleDao.class.getResource("/schedule-query.properties").getPath();
 		System.out.println(filepath);
@@ -34,19 +33,19 @@ public class ScheduleDao {
 			logger.debug(e.getMessage());
 		}
 	}
-	
+
 	public List<Schedule> selectAllSchedule(Connection conn, String memberId) {
-		
-		PreparedStatement pstmt =  null;
+
+		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAllSchedule");
 		ResultSet rset = null;
 		List<Schedule> list = new ArrayList<>();
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,memberId);
+			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
-			
+
 			while (rset.next()) {
 				Schedule sch = new Schedule();
 				sch.setNo(rset.getInt("no"));
@@ -55,14 +54,38 @@ public class ScheduleDao {
 				sch.setMemberId(rset.getString("member_id"));
 				sch.setRegDate(rset.getDate("reg_date"));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ScheduleException("조회오류.",e);
+			throw new ScheduleException("조회오류.", e);
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public int updateSchedule(Connection conn, List<Schedule> sch) {
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertSchedule");
+		ResultSet rset = null;
+		int result = 0;
+		try {
+			for (Schedule schedule : sch) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, schedule.getOrderNum());
+				pstmt.setString(2, schedule.getItem());
+				pstmt.setString(3, schedule.getMemberId());
+				rset = pstmt.executeQuery();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ScheduleException("조회오류.", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

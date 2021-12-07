@@ -53,7 +53,7 @@ public class MemberChangeInfoServlet extends HttpServlet {
 				response.sendRedirect(request.getHeader("referer"));
 			}
 			session.setAttribute("msg", result > 0 ? "정보수정성공!" : "정보수정실패!" );
-			response.sendRedirect(request.getContextPath()+"/");
+			response.sendRedirect(request.getContextPath()+"/member/myPage");
 			
 		} catch(Exception e) {
 			 e.printStackTrace();

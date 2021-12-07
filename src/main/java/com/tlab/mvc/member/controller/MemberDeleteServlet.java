@@ -53,7 +53,6 @@ public class MemberDeleteServlet extends HttpServlet {
 				c.setPath(request.getContextPath());
 				c.setMaxAge(0);
 				response.addCookie(c);
-
 			}
 			response.sendRedirect(request.getContextPath() + "/");
 		} catch (Exception e) {

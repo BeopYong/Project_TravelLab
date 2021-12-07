@@ -20,7 +20,7 @@
 					<th width="300px" style="table-layout: fixed">-</th>
 				</tr>
 				<tr>
-					<td align="center"><img src="https://uc3474b5f2efa50ce5bc40635c2e.previews.dropboxusercontent.com/p/thumb/ABWhhtXoYkZhe_KZFq8u8eZ9c5tYbKs41FFy53UZVXyZY6A3oIdgSbYzRRh7KXBTqAMTrZscteSmJN6HUUYZaqHKWw4MWKNsnkfBsQPts_x1l4kIA2xa7xKE9exsrWcqwcJB5BTUqkEQAB73p8TCzcc062tBhMk0QjfCgn41UADbLpnktQrgHX9tiaeFhzST3A8wbaR913fe4hmJBOrqXk_HAQ3OORiSlh_A-wKUOmNXTJ6YzrKfHcrR6Vhhp2TN1ZONkz_SROni2VigD-pZOj27QSqerEKaa2HdkOYGS-C0KfWXNAJrJMaJPzM-9TFoRm4Yb6lgBSl7Dd-5gjK4WWTSspqaJ9puEehu-Gr8WAoJLKHYEp8xV0fhWe52Ei45CSA/p.png"  /></td>
+					<td align="center"><img src="https://api.cdn.visitjeju.net/photomng/thumbnailpath/202110/21/40916b0e-7ce7-4c3f-8ad1-59aeef46d4c6.png"  /></td>
 				</tr>
 				<tr>
 					<th width="300px" style="table-layout: fixed">파일첨부</th>
