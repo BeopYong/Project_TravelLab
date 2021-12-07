@@ -6,18 +6,46 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+
+
+<%
+	ProductAttachment productAttachment = new ProductAttachment();
+%>
+
+
 <section>
+	<td>
+            <form name="form" action="<%= request.getContextPath()%>/product/productList">
+			<select name="p_category" onchange="this.form.submit()">
+                <option value="">category</option>
+                <option value="101">교통/숙박</option>
+                <option value="301">맛집</option>
+                <option value="302">장소</option>
+			</select><br><br>
+            </td>
+          </tr>
+		  </form>
+	
+<script>
+
+$(p_category).change((e) => {
+	const v = $(e.target).val();
+	
+});
+
+</script>	
+	
+	
 
 	<table>
 	<tr>
       <td colspan="3">뜨는 맛집</td>
-      <td><a href="<%= request.getContextPath() %>/product/productFoodList">더 보기</a></td>
+      <td><a href="<%= request.getContextPath()%>/product/productList?p_category=301">더 보기</a></td>
     </tr>
     </table>
 
 	<div class="container">
    <%
-   	ProductAttachment productAttachment = new ProductAttachment();
    	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
    for(Product product : foodList) {
    %>
@@ -36,7 +64,7 @@
   <table class="product-table">
     <tr>
       <td colspan="3">많이 찾는 장소</td>
-      <td><a href="<%= request.getContextPath() %>/product/productPlaceList">더 보기</a></td>
+      <td><a href="<%= request.getContextPath()%>/product/productList?p_category=302">더 보기</a></td>
     </tr>   
   </table>
   <div class="container">
@@ -57,11 +85,13 @@
   <table>
 	<tr>
 		<td>
-	  <a href="<%= request.getContextPath()%>/product/productTest">바로가기</a>	
+	  <a href="<%= request.getContextPath()%>/product/productTest">상품 등록</a>	
 		</td>
 	</tr>
   </table>
 
 </section>
+
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

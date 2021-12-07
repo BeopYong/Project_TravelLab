@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.tlab.mvc.magazine.model.vo.Attachment;
-
 public class Product extends ProductEntity implements Serializable {
 	
 	public static final long serialVersionUID = 1L;

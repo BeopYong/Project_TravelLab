@@ -45,9 +45,9 @@ public class ProductService {
 		return list;
 	}
 
-	public int selectTotalFoodList(Map<String, Integer> param) {
+	public int selectTotalList(int p_category) {
 		Connection conn = getConnection();
-		int totalCount = productDao.selectTotalFoodList(conn, param);
+		int totalCount = productDao.selectTotalList(conn, p_category);
 		close(conn);
 		return totalCount;
 	}
@@ -79,13 +79,12 @@ public class ProductService {
 			conn = getConnection();
 			result = productDao.insertProduct(conn,product);
 			
-			//product_no 조회 : select seq_product_no.currval from dual
 			int product_no = productDao.selectLastProductNo(conn);
-			System.out.println("product_no = " + product_no);
+			product.setNo(product_no); //서블릿 참조용 코드
 			
 			List<ProductAttachment> productAttachments = product.getAttachments();
 			if(productAttachments != null) {
-				//insert into attachment values(seq_product_attachment_no.nextval, product_no, originalFilename, renamed_filename )
+
 				for(ProductAttachment pAtt : productAttachments) {
 					pAtt.setProductNo(product_no); //FK 컬럼값 설정
 					result = productDao.insertProductAttachment(conn, pAtt);
@@ -105,7 +104,9 @@ public class ProductService {
 	public Product selectOneProduct(int no) {
 		Connection conn = getConnection();
 		Product product = productDao.selectOneProduct(conn, no);
-		close(conn);
+		List<ProductAttachment> pAttach = productDao.selectAttachmentByProductNo(conn, no);
+		product.setAttachments(pAttach);
+		close(conn);	
 		
 		return product;
 	}
@@ -178,7 +179,7 @@ public class ProductService {
 		int result = 0;
 		try {
 			conn = getConnection();
-			result = productDao.deleteBoard(conn, productNo);
+			result = productDao.deleteProduct(conn, productNo);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -200,6 +201,38 @@ public class ProductService {
 	public List<Product> productTicketPassList(Map<String, Integer> param) {
 		Connection conn = getConnection();
 		List<Product> list = productDao.productTicketPassList(conn, param);
+		close(conn);
+		
+		return list;
+	}
+
+	public int updateProduct(Product product) {
+		Connection conn = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			result = productDao.updateProduct(conn, product);
+			
+			List<ProductAttachment> productAttachments = product.getAttachments();
+			if(productAttachments != null && ! productAttachments.isEmpty()) {
+				for(ProductAttachment pAttach : productAttachments) {
+					result = productDao.insertProductAttachment(conn, pAttach);
+				}
+			}
+			
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Product> selectAllProductList(Map<String, Integer> param, int p_category) {
+		Connection conn = getConnection();
+		List<Product> list = productDao.selectAllProductList(conn, param, p_category);
 		close(conn);
 		
 		return list;

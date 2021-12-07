@@ -67,7 +67,6 @@ public class ProductEnrollServlet extends HttpServlet {
 			
 			//attachment 객체
 			File uploadFile1 = multipartRequest.getFile("uploadFile1");
-			System.out.println(uploadFile1.getName()+"@Servlet~~~~~~");
 
 			if(uploadFile1 != null) {
 				List<ProductAttachment> productAttachments = new ArrayList<>();
@@ -83,7 +82,7 @@ public class ProductEnrollServlet extends HttpServlet {
 				pAttach.setOriginalFilename(attach.getOriginalFilename());
 				pAttach.setRenamedFilename(attach.getRenamedFilename());
 				//attach에서 가져온 getter를 다시 setter로 변환해서 pAttach 객체를 만들어줘야 함. 
-				
+			
 				productAttachments.add(pAttach);
 				
 				product.setAttachments(productAttachments);
@@ -99,7 +98,7 @@ public class ProductEnrollServlet extends HttpServlet {
 		            File origin_file_name 
 		            	= new File(saveDirectory+File.separator+pAttach.getRenamedFilename());
 		            //생성할 썸네일파일의 경로+썸네일파일명
-		            File thumb_file_name = new File(saveDirectory+"/thumbs"+File.separator+pAttach.getRenamedFilename()+"_thumb.jpg");
+		            File thumb_file_name = new File(saveDirectory+"/thumbs"+File.separator+pAttach.getRenamedFilename());
 		 
 		            BufferedImage buffer_original_image = ImageIO.read(origin_file_name);
 		            BufferedImage buffer_thumbnail_image = new BufferedImage(thumbnail_width, thumbnail_height, BufferedImage.TYPE_3BYTE_BGR);
@@ -110,7 +109,9 @@ public class ProductEnrollServlet extends HttpServlet {
 		        } catch (Exception e) {
 		            e.printStackTrace();
 		        }
-		}				
+		} else {
+			List<ProductAttachment> productAttachments = new ArrayList<>();
+		}
 			
 			//값 반환
 			int result = productService.insertProduct(product);
@@ -119,12 +120,12 @@ public class ProductEnrollServlet extends HttpServlet {
 			String msg = result > 0 ? "상품 등록 성공!" : "상품 등록 실패ㅠㅠ";
 			
 			request.getSession().setAttribute("msg", msg);
-			String location = request.getContextPath() + "/product/productList";
+			String location = request.getContextPath() + "/product/productView?no=" + product.getNo();
 			response.sendRedirect(location);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-//			throw e;
+			throw e;
 		}
 	
 	//redirect

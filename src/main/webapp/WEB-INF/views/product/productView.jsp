@@ -7,6 +7,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %> 
 
 <% 
+	session.getAttribute("msg");
 	ProductAttachment productAttachment = (ProductAttachment) request.getAttribute("productAttachment");
 	Product product = (Product) request.getAttribute("product");
 %>
@@ -46,25 +47,31 @@
           <tr>
             <th>가격</th>
             <td><p><%= product.getUnit_price() %></p></td>
-            <input type="hidden" name="unit_price" value="<%= product.getUnit_price()%>" />
+            <!-- 
+             <input type="hidden" name="unit_price" value="<%= product.getUnit_price()%>" />            
+             -->
             <td>
-              <select name="quantity" id="quantity">
-                <option value="0" selected>수량을 선택하세요. (최대 5개)</option>
+            <form name="form">
+			<select name="quantity" onChange="getSelectValue(this.form);">
+ 				<option value="0" selected>수량을 선택하세요. (최대 5개)</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-              </select>
+			</select><br><br>
             </td>
           </tr>
-          <tr>
-            <th colspan="3">총 결제 금액</th>
+		  <tr>
             <td>
-            <p></p>
-            <input type="hidden" name="product_bill" value="4000" />         
+			<label for="">총 결제금액 : </label>
+			<input type="text" name="product_bill" readonly>
             </td>
           </tr>
+            <!-- 
+             <input type="hidden" name="product_bill" value="optionValue" />                     
+             -->
+		</form>
           <tr>
             <td colspan="3"><div class="product-info"><p><%=product.getP_content() %></p></div></td>
           </tr>
@@ -90,9 +97,8 @@
     
     </form>
     
-   <form action="<%= request.getContextPath()%>/product/productDelete" method="POST">
+   <form action="<%= request.getContextPath()%>/product/productDelete" method="POST" name="ProductDelFrm">
    	<input type="hidden" name="no" value="<%= product.getNo()%>"/>
-   	<input type="submit" value="삭제하기" />
    </form>
     
     
@@ -101,6 +107,56 @@
 <!--	 <button type="submit" class="btn btn-secondary btn-lg" id="btn">장바구니</button> -->
 	 <button type="submit" class="btn btn-secondary btn-lg" id="btn">장바구니</button>
     </div>
+    
+    
+    <% 	if( loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>
+		<table>
+		<tr>
+			<%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
+			<th colspan="2">
+				<input type="button" value="수정하기" onclick="updateProduct()">
+				<input type="button" value="삭제하기" onclick="deleteProduct()">
+			</th>
+		</tr>
+		</table>
+		<% 	} %>
+
+
+<script>
+const deleteProduct = () => {
+	if(confirm("등록된 상품을 삭제하시겠습니까?")){
+		$(document.ProductDelFrm).submit();		
+	}
+};
+
+const updateProduct = () => {
+	location.href = "<%= request.getContextPath() %>/product/productUpdate?no=<%= product.getNo() %>";
+};
+
+function getSelectValue(frm) {
+ frm.product_bill.value = frm.quantity.options[frm.quantity.selectedIndex].value * <%=product.getUnit_price()%>;
+};
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
   
 

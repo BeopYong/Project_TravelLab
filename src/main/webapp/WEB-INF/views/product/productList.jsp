@@ -7,22 +7,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@page import="java.awt.Image"%>
+
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 
 <section>
 
+
 	<div class="container">
+	
    <%
-	ProductAttachment productAttachment = (ProductAttachment) session.getAttribute("pAttach");
-   	List<Product> foodList = (List<Product>) request.getAttribute("foodList");
+   	List<Product> productList = (List<Product>) request.getAttribute("productList");
  
-   	for(Product product : foodList) {
+   	for(Product product : productList) {
    %>
-   
       <div class="product-view">
 		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
-		 <img src="<%=request.getContextPath() %>/upload/product/<%=productAttachment.getRenamedFilename() %>" alt="">
+		 <img src="<%=request.getContextPath() %>/upload/product/TT.jpeg" alt="">
 		</a>
         <p><%=product.getP_name() %></p>
      </div>

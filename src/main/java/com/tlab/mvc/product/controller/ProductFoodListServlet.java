@@ -43,8 +43,6 @@ public class ProductFoodListServlet extends HttpServlet {
 		int start = (cPage - 1) * numPerPage + 1;
 		int end = cPage * numPerPage;
 		int air = 101;
-		int ktx = 102;
-		int bus = 103;
 		int hostel = 201;
 		int food = 301;
 		int place = 302;
@@ -53,8 +51,6 @@ public class ProductFoodListServlet extends HttpServlet {
 		param.put("start", start);
 		param.put("end", end);
 		param.put("101", air);
-		param.put("102", ktx);
-		param.put("103", bus);
 		param.put("201", hostel);
 		param.put("301", food);
 		param.put("302", place);
@@ -72,19 +68,21 @@ public class ProductFoodListServlet extends HttpServlet {
 		
 		String url = request.getRequestURI(); // /mvc/product/productFoodList
 //		System.out.println("productfoodlist@url = " + url);
-		
-		int totalContent = productService.selectTotalFoodList(param);
-		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
-		System.out.println("pagebar = " + pagebar);
+//		
+//		int totalContent = productService.selectTotalFoodList(param);
+//		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
+//		System.out.println("pagebar = " + pagebar);
 		
 		
 		
 		//view
 		HttpSession session = request.getSession();
 		
+		request.setAttribute("ticketPassList", ticketPassList);
 		request.setAttribute("foodList", foodList);
+		request.setAttribute("placeList", placeList);
 		session.setAttribute("pAttach", pAttach);
-		request.setAttribute("pagebar", pagebar);
+//		request.setAttribute("pagebar", pagebar);
 		request
 		.getRequestDispatcher("/WEB-INF/views/product/productFoodList.jsp")
 		.forward(request, response);
