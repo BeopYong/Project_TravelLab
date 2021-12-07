@@ -7,41 +7,32 @@
 List<OrderList> list = (List<OrderList>) request.getAttribute("orderList");
 %>	
 <style>
-tr th, td{
-	text-align: center;
-}
+    .table {
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 500px;
+        height: 200px;
+        margin: auto;
+        margin-top: 130px;
+    }
+    #test {
+	    text-align: center;
+	    margin-top: 70px;
+    }
+    .btn-pay {
+    	display: block;
+		margin: auto;
+		width: 60px;
+		transform: translate(0, -60px);
+    }
 </style>
-	<h1>구매내역</h1>
-	<form action="<%=request.getContextPath()%>/member/orderList"
-		name="orderListFrm"
-		method="get">
-		<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
-		<table id="memberOrderList">
-			<thead>
-				<tr>
-					<th style="table-layout: fixed">No</th>
-					<th style="table-layout: fixed">주문코드</th>
-					<th style="table-layout: fixed">회원아이디</th>
-					<th style="table-layout: fixed">결제금액</th>
-					<th style="table-layout: fixed">구매날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (OrderList orderList : list) {
-				%>
-				<tr>
-					<td width="100px" style="table-layout: fixed"><%=orderList.getNo()%></td>
-					<td width="100px" style="table-layout: fixed"><%=orderList.getOrderCode()%></td>
-					<td width="100px" style="table-layout: fixed"><%=orderList.getMemberId()%></td>
-					<td width="100px" style="table-layout: fixed"><%=orderList.getTotalBill()%></td>
-					<td width="100px" style="table-layout: fixed"><%=orderList.getPaymentDate()%></td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
-		</table>
-	</form>
+<body>
+    <div class="table">
+        <p id="test">
+            <strong><%= loginMember.getMemberId() %>님</strong>&nbsp;결제가 완료되었습니다.<br> 주문코드는<strong style="color: red;">123456</strong>입니다. 감사합니다.
+        </p>
+    </div>
+	<button type="button" class="btn-pay" onclick="location.href='<%=request.getContextPath()%>/member/payment'">확인</button>
+</body>
 	
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
