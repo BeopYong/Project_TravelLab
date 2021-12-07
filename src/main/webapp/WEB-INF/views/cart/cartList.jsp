@@ -91,8 +91,10 @@ table#memberCartList td {
 		return flag;
 	}
 	let payment = function(){
-		alert("결제가 진행중입니다....잠시만 기다려주세요");
-		location.href="<%=request.getContextPath()%>/member/orderList";
+		if(confirm("결제하시겠습니까?")){
+			alert("결제가 진행중입니다....잠시만 기다려주세요");
+			location.href="<%=request.getContextPath()%>/member/orderList";		
+		}
 	}
 </script>
 
