@@ -41,6 +41,13 @@ section{
 #tbl-magazine {
 	background-color: rgb(236, 236, 236);
 }
+/*
+* btn
+*/
+#btn {
+	width:10%;
+	padding : 5ps;
+}
 /*************
 * 페이징
 *************/
