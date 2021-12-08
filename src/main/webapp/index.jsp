@@ -5,9 +5,8 @@
     
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-			
-			<h2 align="center" style="margin-top:200px;">Tlab_Test</h2>
-			
-			
+		<div class="main-image" style="text-align: center;" padding="0px">
+			<img class="main-intro-img" src="<%=request.getContextPath() %>/images/bg/Finland_Turku_1.jpg" style="" height="auto" alt=""/>
+		</div>	
 				
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

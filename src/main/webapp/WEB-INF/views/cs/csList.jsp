@@ -71,7 +71,7 @@ div#pageBar a{margin-right: 5px;}
 			</table>
 		</div>
 		
-<% if(loginMember != null){ %>
+<%if(loginMember != null){ %>
 		<input type="button" value="글쓰기" class="btn btn-default"
 			onclick="location.href='<%=request.getContextPath()%>/cs/csForm'" />
 <% } %>	
