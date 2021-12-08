@@ -14,6 +14,13 @@ String searchKeyword = request.getParameter("searchKeyword");
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/memberList.css" />
 <style>
+.main-section{
+	text-align: center;
+	width:100%;
+	padding-left:40%;
+	padding-right:auto;
+}
+
 section#content {
 	background-color: #FAFDFF;
 	float: left;
@@ -37,6 +44,7 @@ div#search-memberName {
 	display: <%="memberName".equals(searchType) ? "inline-block" : "none"%>;
 }
 </style>
+<div class="main-section">
 <section id="memberList-container">
 	<h2>회원관리</h2>
 
@@ -129,6 +137,7 @@ div#search-memberName {
 		<%=request.getAttribute("pagebar")%>
 	</div>
 </section>
+</div>
 
 <script>
 /**
