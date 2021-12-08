@@ -32,12 +32,12 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Balay Template</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+	<title>당신의 여행을 응원합니다.</title>
+	
   <!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -70,6 +70,22 @@
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/style.css">
 
+<!-- 헤더부분 링크 -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+    <!-- Bootstrap core CSS -->
+    <link href="<%= request.getContextPath() %>/css/magazine/bootstrapv.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/product.css" />
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="<%= request.getContextPath() %>/css/magazine/blog.css" rel="stylesheet">
+    <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+    
+    <link rel="icon" href="<%= request.getContextPath() %>/images/icons/travel.png">
+<!-- 헤더부분 링크 -->
+
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
@@ -78,7 +94,6 @@
 	<![endif]-->
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
 	
-		<title>당신의 여행을 응원합니다</title>
 		<script>
 			$(() => {
 			
@@ -113,79 +128,103 @@
 			<% } %>
 			
 			});
-			</script>
-			
+</script>
+<!-- 헤더 css -->	
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>	
+    	
 	</head>
 	<body>
 	
-		<!-- 헤더시작 -->
-		<div id="container">
-			<header>
-				<h1>Travel Lab</h1>
-					<div class="login-container">
-	<% if(loginMember == null){ %>
-						<!-- 로그인폼 시작 -->
-						<form 
-							id="loginFrm" 
-							action="<%= request.getContextPath() %>/member/login"
-							method="POST">
-							<table>
-								<tr>
-									<td><input type="text" name="memberId" id="memberId" placeholder="아이디" tabindex="1" value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
-									<td><input type="submit" value="로그인" tabindex="3"></td>
-								</tr>
-								<tr>
-									<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="checkbox" name="saveId" id="saveId" <%= saveMemberId != null ? "checked" : "" %>/>
-										<label for="saveId">아이디저장</label>&nbsp;&nbsp;
-										<input 
-											type="button" 
-											value="회원가입" 
-											onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">
-									</td>
-								</tr>
-							</table>
-						</form>
-						<!-- 로그인폼 끝-->
-	<% } else { %>
-						<table id="login">
-							<tr>
-								<td><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
-							</tr>
-							<tr>
-								<td>
-									<input type="button" value="내정보보기" onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
-									<input type="button" value="로그아웃" onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
-								</td>
-							</tr>
-						</table>
-	<% } %>
-					</div>
-					
-					<!-- 메인메뉴 시작 -->
-					<nav>
-						<ul class="main-nav">
-							<li class="home"><a href="<%= request.getContextPath() %>">Home</a></li>
-							<li class="photo"><a href="<%= request.getContextPath() %>/product/productList">사진게시판</a></li>
-							<li class="magazine"><a href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
-							<li class="cs"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
-	<% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
-							<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
-							<li class="admin"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
-	<% } %>
-	 <%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
-							<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
-	<% } %>  --%>
-	
-						</ul>
-					</nav>
-					<!-- 메인메뉴 끝-->
-							
-			</header>
+<!-- 말머리헤더시작 -->
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 text-center">
+        <a class="blog-header-logo text-dark" href="<%= request.getContextPath() %>">Travel Lap</a>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <!-- 로그인 컨테이너 삽입 -->
+        <div class="login-container">
+          <% if(loginMember == null){ %>
+                    <!-- 로그인폼 시작 -->
+                    <form 
+                      id="loginFrm" 
+                      action="<%= request.getContextPath() %>/member/login"
+                      method="POST">
+                      <table>
+                        <tr>
+                          <td><input type="text" name="memberId" id="memberId" placeholder="아이디" tabindex="1" value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
+                          <td><input type="submit" class="btn btn-sm btn-outline-secondary" value="로그인" tabindex="3"></td>
+                        </tr>
+                        <tr>
+                          <td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <input type="checkbox" name="saveId" id="saveId" <%= saveMemberId != null ? "checked" : "" %>/>
+                            <label for="saveId">아이디저장</label>&nbsp;&nbsp;
+                            <input 
+                              type="button" 
+                              class="btn btn-sm btn-outline-secondary"
+                              value="회원가입" 
+                              onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">
+                          </td>
+                        </tr>
+                      </table>
+                    </form>
+                    <!-- 로그인폼 끝-->
+          <% } else { %>
+                    <table id="login">
+                      <tr>
+                        <td><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <input type="button" value="내정보보기" class="btn btn-sm btn-outline-secondary" onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
+                          <input type="button" value="로그아웃" class="btn btn-sm btn-outline-secondary" onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
+                        </td>
+                      </tr>
+                    </table>
+          <% } %>
+                  </div>
+                  <!-- 로그인 컨데이너 끝 -->
+        <a class="link-secondary" href="#" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+        </a>        
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>">Home</a>
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/product/productList">Product</a>
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/magazine/magazineList">Magazine</a>
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/cs/csList">FAQ</a>
+  <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>	
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/admin/memberList">회원관리</a>
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/admin/productList">상품관리</a>
+      <a class="p-2 link-secondary" href="<%= request.getContextPath() %>/admin/magazineList">매거진관리</a>
+  <% } %>
+    </nav>
+  </div>
+</div>
+<!-- 헤더영역 끝 -->
 		<!-- 헤더 끝 -->
 
 <!-- tlab project magazine list 추가 -->
@@ -289,72 +328,20 @@
 
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="<%=request.getContextPath()%>/magazine/magazineView?no=<%=magazine.getNo()%>">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/OUkkSnIQptRVw9a2P9BHTkUY_Wo=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1631817354775_image" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
+								
+							
+								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/OUkkSnIQptRVw9a2P9BHTkUY_Wo=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1631817354775_image" class="img-responsive" alt="<%= magazine.getNo() %>"></a>
+								<div class="desc"></a>
 									<span><small id="regDate-view"><%= magazine.getRegDate() %></small> | <small id="readcount-view">조회수 : <%= magazine.getReadCount() %></small> | <small id="writer-view"><%=magazine.getWriter()%></small> | <small><%= magazine.getRegion() %></small></span>
-									<h3 id="titler-view"><%=magazine.getTitle() %></h3>
+									<h3 id="titler-view"><a href="<%=request.getContextPath()%>/magazine/magazineView?no=<%=magazine.getNo()%>"><%=magazine.getTitle()%></a></h3>
 									<p class="content-view" id="content-view"><%=magazine.getContent() %></p>
-								</div></a>
+								</div>
 							</div>
 						</div>
 						<%
 						}
 						%>	
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/3pbr3btJDoM1008dCQ812-tyqu4=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/curation/1633148295396_1631148671492_image.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2021 </small> | <small> 조회수 : 4</small> | <small> Web Design </small> | <small> 조회수 : 부산</small></span>
-									<h3><a href="">Wordpress for a Beginner</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/V6AmhoY4_7grhfP2Fq6NJsDHsYc=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1578169568028_1577835472120-7.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2021 </small> | <small> 조회수 : 4</small> | <small> Inspiration </small> | <small> 부산</small></span>
-									<h3><a href="">Make website from scratch</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/fFq0jeNwB60JjGSTYGA2lin08Do=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1636088539390_%EB%B3%B4%EC%A0%95HGRP0831.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2021 </small> | <small> 조회수 : 4</small> | <small> Web Design </small> | <small>강원도</small></span>
-									<h3><a href="">Renovating National Gallery</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/2VoBnDjWUluDdAtD_AFglTvL82I=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1590998781889_da62f9d2-0281-4c7b-96cd-720002715625.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2021 </small> | <small> 조회수 : 4</small> | <small> Web Design </small> | <small> 강원도</small></span>
-									<h3><a href="">Wordpress for a Beginner</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="" class="blog-img"><img src="https://thumb.wishbeen.com/LohzGpIdU0j0-8ovFfrsjQhmlkY=/218x180/smart/wishbeen-seoul.s3.ap-northeast-2.amazonaws.com/plan/1604828240119_1604239678279.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2021 </small> | <small> 조회수 : 4</small> | <small> Inspiration </small> | <small>제주도</small></span>
-									<h3><a href="">Make website from scratch</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+						
 
 					
 	<!-- 매거진 글쓰기 로그인 안된사람에겐 버튼 보이지 않음 -->
