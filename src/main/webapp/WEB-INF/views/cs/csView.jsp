@@ -5,7 +5,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
 
 <style>
 div.comment-container button#btn-comment-enroll1 {width:60px; height:50px; color:white; background:#3300ff; position:relative; top:-20px;}
@@ -50,6 +50,7 @@ table#tbl-comment tr:hover button.btn-delete{display:inline;}
 <section id="board-container">
 <div class="row">
 	<table id="tbl-board-view">
+	<br />
 	<h2 style="font-family: 'paybooc-Bold';">고객센터</h2>
 	<br />
 	<table class="table .table" style="text-align: center; border: 1px solid #dddddd">
@@ -119,7 +120,7 @@ table#tbl-comment tr:hover button.btn-delete{display:inline;}
                 <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
                 <input type="hidden" name="commentLevel" value="1" />
                 <input type="hidden" name="commentRef" value="0" />    
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 				<textarea name="content" cols="60" rows="3" style="width: 80%;"></textarea>
 				&nbsp; &nbsp; &nbsp; 
                 <button type="submit" id="btn-comment-enroll1" style="vertical-align: middle;">등록</button>
