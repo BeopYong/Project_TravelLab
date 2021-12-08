@@ -3,29 +3,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+
+
+<style>
+div#pageBar{margin-top:10px; text-align:center; background-color:#fbe2a1; }
+div#pageBar span.cPage{color: #0066ff; margin-right: 5px;}
+div#pageBar a{margin-right: 5px;}
+
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}  
+    
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+</style>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.css" />
-<title>고객센터</title>
+	
+<title class=titlecs>고객센터</title>
 </head>
 <body>
 	<div>
-		<br />
-		<h1 style="margin-left: 50px">고객센터</h1>
-		<br />
-		<p align="center">Q&A 1:1문의 트래블 랩 서비스의 오류, 장애, 기타 공지사항을 안내드립니다.</p>
+
+		<h1 style="margin-left: 30px; font-family: 'paybooc-Bold';">고객센터</h1>
+		<p align="center" style="font-family: 'paybooc-Bold';">Q&A 1:1문의 트래블 랩 서비스의 오류, 장애, 기타 공지사항을 안내드립니다.</p>
 	</div>
 
 	<!-- 게시판 -->
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover"
-				style="text-align: center; border: 1px solid #dddddd">
+				style="text-align: center; width: 78%;">
 				<thead>
 					<tr>
-						<th style="background-color: #cecece; text-align: center; width:15%;">번호</th>
-						<th style="background-color: #cecece; text-align: center;">제목</th>
-						<th style="background-color: #cecece; text-align: center;">작성자</th>
-						<th style="background-color: #cecece; text-align: center;">작성일</th>
+						<th style="background-color: #c2cbdf; text-align: center; width:15%;">번호</th>
+						<th style="background-color: #c2cbdf; text-align: center; width:45%">제목</th>
+						<th style="background-color: #c2cbdf; text-align: center;">작성자</th>
+						<th style="background-color: #c2cbdf; text-align: center;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,7 +57,7 @@
 %>
 					<tr>
 						<td><%=cs.getNo()%></td>
-						<td>[<%=cs.getOptions()%>] 
+						<td style= "text-align: justify;">[<%=cs.getOptions()%>] 
 						<a href="<%=request.getContextPath()%>/cs/csView?no=<%=cs.getNo()%>"><%= cs.getTitle()%></a>
 						</td>
 						<td><%=cs.getWriter()%></td>
@@ -52,7 +74,7 @@
 		<input type="button" value="글쓰기" class="btn btn-default"
 			onclick="location.href='<%=request.getContextPath()%>/cs/csForm'" />
 <% } %>	
-
+<br /><br />
 	</div>
 	<div id='pageBar'><%=request.getAttribute("pagebar")%></div>
 	</section>
