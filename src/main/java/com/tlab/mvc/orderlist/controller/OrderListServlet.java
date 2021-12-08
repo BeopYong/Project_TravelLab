@@ -43,7 +43,7 @@ public class OrderListServlet extends HttpServlet {
 //			 throw e;
 //		 }
 		request
-		.getRequestDispatcher("/WEB-INF/views/orderList/orderList.jsp")
+		.getRequestDispatcher("/WEB-INF/views/orderList/orderListTest.jsp")
 		.forward(request, response);
 	}
 }

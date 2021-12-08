@@ -37,7 +37,6 @@ div#search-writer {
 div#search-title {
 	display: <%="title".equals(searchType) ? "inline-block" : "none"%>;
 }
-}
 
 </style>
 
