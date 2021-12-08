@@ -6,9 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" />
+
 <meta name="viewport" content="width-device-width", initial-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" />
 <title>고객센터</title>
 
 <%
@@ -16,19 +17,20 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/cs.css" />
 <section id="board-container">
+<div class="row">
 	<table id="tbl-board-view">
 	<h2>고객센터</h2>
 	<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 		<tr>
-			<th>글번호</th>
+			<th style="text-align: center;">글번호</th>
 			<td><%= cs.getNo() %></td>
 		</tr>
 		<tr>
-			<th>제 목</th>
+			<th style="text-align: center;">제 목</th>
 			<td><%= cs.getTitle() %></td>
 		</tr>
 		<tr>
-			<th>작성자</th>
+			<th style="text-align: center;">작성자</th>
 			<td><%= cs.getWriter() %></td>
 		</tr>
 		
@@ -50,7 +52,7 @@
 	} 
 %>
 		<tr>
-			<th>내 용</th>
+			<th style="text-align: center;">내 용</th>
 			<td>
 				<%= cs.getContent() %>
 			</td>
@@ -85,11 +87,11 @@
                 <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
                 <input type="hidden" name="commentLevel" value="1" />
                 <input type="hidden" name="commentRef" value="0" />    
-				<textarea name="content" cols="100" rows="3"></textarea>
-                <button type="submit" id="btn-comment-enroll1">등록</button>
+				<textarea name="content" cols="100" rows="3"></textarea> 
+                <button type="submit" id="btn-comment-enroll1" vertical-align: middle;">등록</button>
             </form>
         </div>
-		
+	</div>
 		<!--게시판 댓글!-->
 <% 
 	List<CsComment> commentList = (List<CsComment>) request.getAttribute("commentList"); 
@@ -112,7 +114,7 @@
 				<td>
 					<sub class="comment-writer"><%= cc.getWriter() %></sub>
 					<sub class="comment-date"><%= cc.getRegDate() %></sub>
-					<br />
+					<br /><br />
 					<%= cc.getContent() %>
 				</td>
 				<td>
@@ -130,7 +132,7 @@
 				<td>
 					<sub class="comment-writer"><%= cc.getWriter() %></sub>
 					<sub class="comment-date"><%= cc.getRegDate() %></sub>
-					<br />
+					<br /><br />
 					<%= cc.getContent() %>
 				</td>
 				<td>
