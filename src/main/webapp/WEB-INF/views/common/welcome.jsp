@@ -1139,7 +1139,7 @@ input, select, textarea {
 			<!-- Header -->
 			<header id="header">
 				<h1>
-					<a href="<%= request.getContextPath()%>" style="text-decoration: none;"> Travle lab</a>
+					<a href="<%= request.getContextPath()%>" style="text-decoration: none;"> Travel lab</a>
 				</h1>
 				<p>법정팀</p>
 				<p>

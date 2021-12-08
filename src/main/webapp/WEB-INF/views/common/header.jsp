@@ -27,9 +27,118 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>당신의 여행을 응원합니다</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
+<style>
+    .hheader {
+        position: relative;
+    }
+    .logo {
+        padding: 2% 2% 8% 2% ;
+        color: rgb(156, 156, 156);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .logo li a {
+        text-decoration: none;
+        color: black;
+    }
+    .traffic-hheader nav {
+        clear: both;
+        width: 99%;
+        height: 50px;
+        background-color : silver;
+        padding: 2px;
+        margin: 0;
+        position: absolute;
+        bottom : 0;
+        text-align: center;
+    }
+    .traffic-hheader .thn  {
+    position: absolute; top: 130px;
+    }
+    .traffic-hheader .thn a {
+        color : white;
+        margin : 60px;
+        text-decoration: none;
+    }
+    .traffic-hheader ul {
+        list-style-type: none;  
+    }
+    .traffic-hheader li {
+        padding-top: 10px; 
+    }
+    .link {
+        display: inline-block;
+        text-align: center;
+        padding-top: auto;
+    }
+    .link a {
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    ul {
+      margin-top : 1px;
+    }
+    nav {
+    	vertical-align: middle;
+    }
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.main-image {
+	overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: ;
+}
+#content {
+	padding-top:60px;
+	padding-right:0px;
+}
+.main-intro-img {
+	height: 800px;
+}
+div#pageBar{margin-top:10px; text-align:center; background-color:rgb(227,211,196); }
+div#pageBar span.cPage{color: #0066ff; margin-right: 5px;}
+div#pageBar a{margin-right: 5px;}
+div, section, header, aside, footer {padding:10px;}
+
+#memberId, #password {
+    width: 160px;
+}
+/********** header **********/
+header			{no-repeat; height:130px; position:relative; padding:0 0 0 0;}
+header h1 		{margin-left:10px;}
+
+/* 로그인컨테이너 */
+header div.login-container{width:250px; position:absolute; right: 0px; top: 10px;}
+
+/* 로그인테이블관련 : 탭순서를 고려한 배치 */
+#loginFrm table{empty-cells:hide;}
+#loginFrm input[type=submit]{height:50px; color:#888888; background:#FDFDFD; position:absolute; top:9.8px; border-color: #C0C0C0; margin-top:10px; font-family:sans-serif;}
+#loginFrm input[type=button]{border-radius:3px; color:#888888; background:#FDFDFD; border-color: #C0C0C0; text-align: center;}
+#saveId+label{font-size:12px;font-family:'고딕'}
+
+/* 로그인성공후 */
+div.login-container table#logged-in{border-spacing:10px;}
+div.login-container table#logged-in input[type=button]{border-radius:3px;}
+
+</style>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/product.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
@@ -71,7 +180,7 @@ $(() => {
 <body>
 	<div id="container">
 		<header>
-			<h1>Travel Lab</h1>
+			<h1 class="logo" style="font-family:'yg-jalnan';" font-size: 3em;">Travle lab</h1>
 				<div class="login-container">
 <% if(loginMember == null){ %>
 					<!-- 로그인폼 시작 -->
@@ -81,20 +190,21 @@ $(() => {
 						method="POST">
 						<table>
 							<tr>
-								<td><input type="text" name="memberId" id="memberId" placeholder="아이디" tabindex="1" value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
-								<td><input type="submit" value="로그인" tabindex="3"></td>
+								<td><input type="text" style="font-family: 'OTWelcomeRA';" name="memberId" id="memberId" placeholder="아이디" tabindex="1" value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
+								<td><input type="submit" style="font-family: 'OTWelcomeRA';" value="로그인" tabindex="3"></td>
 							</tr>
 							<tr>
-								<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
+								<td><input type="password" style="" name="password" id="password" placeholder="비밀번호" tabindex="2" ></td>
 								<td></td>
 							</tr>
 							<tr>
 								<td colspan="2">
 									<input type="checkbox" name="saveId" id="saveId" <%= saveMemberId != null ? "checked" : "" %>/>
-									<label for="saveId">아이디저장</label>&nbsp;&nbsp;
+									<label for="saveId" style="font-family: 'OTWelcomeRA';">아이디저장</label>&nbsp;&nbsp;
 									<input 
 										type="button" 
-										value="회원가입" 
+										value="회원가입"
+										style="font-family: 'OTWelcomeRA';" 
 										onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">
 								</td>
 							</tr>
@@ -104,38 +214,31 @@ $(() => {
 <% } else { %>
 					<table id="login">
 						<tr>
-							<td><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
+							<td style="font-family: 'OTWelcomeRA';"><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="button" value="내정보보기" onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
-								<input type="button" value="로그아웃" onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
+								<input type="button" color:#888888; background:#FDFDFD; value="내정보보기" style="font-family: 'OTWelcomeRA';"onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
+								<input type="button" color:#888888; background:#FDFDFD; value="로그아웃" style="font-family: 'OTWelcomeRA';" onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
 							</td>
 						</tr>
 					</table>
 <% } %>
 				</div>
-				
-				<!-- 메인메뉴 시작 -->
-				<nav>
-					<ul class="main-nav">
-						<li class="home"><a href="<%= request.getContextPath() %>">Home</a></li>
-						<li class="notice"><a href="#">공지사항</a></li>
-						<li class="board"><a href="<%= request.getContextPath() %>/board/boardList">게시판</a></li>
-						<li class="photo"><a href="<%= request.getContextPath() %>/product/productList">사진게시판</a></li>
-						<li class="magazine"><a href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
-						<li class="cs"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
-<% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
-						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
-						<li class="admin"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
-<% } %>
- <%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
-						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
-<% } %>  --%>
-
-					</ul>
-				</nav>
-				<!-- 메인메뉴 끝-->
+    <div class="traffic-hheader">
+        <nav class="thn">
+            <ul>
+              <li class="link"><a href="<%= request.getContextPath() %>" style="font-family: 'OTWelcomeRA';">Home</a></li>
+              <li class="link" style="font-family: 'OTWelcomeRA';"><a href="<%= request.getContextPath() %>/product/productMain">상품</a></li>
+              <li class="link" style="font-family: 'OTWelcomeRA';"><a href="<%= request.getContextPath() %>/magazine/magazineList">Magazine</a></li>
+              <li class="link" style="font-family: 'OTWelcomeRA';"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
+              <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>
+              <li class="link" style="font-family: 'OTWelcomeRA';"><a href="<%= request.getContextPath() %>//admin/memberList">회원관리</a></li>
+              <li class="link" style="font-family: 'OTWelcomeRA';"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
+            <% } %>
+            </ul>
+        </nav>
+    </div>
 						
 		</header>
 		

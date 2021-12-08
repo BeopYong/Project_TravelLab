@@ -31,7 +31,7 @@ System.out.println("saveMemberId@header.jsp = " + saveMemberId);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/css/mySchedule.css">
+<!-- <link rel="stylesheet" href="/css/mySchedule.css"> -->
 <style>
 * {
 	box-sizing: border-box;
@@ -398,7 +398,8 @@ img {
 		<a href="<%=request.getContextPath()%>/member/myInfo"
 			class="p-explain"><b>내정보</b></a>
 		<%-- <a href="<%= request.getContextPath()%>/member/myScheduleList" class="p-explain">일정</a> --%>
-		<a href="<%=request.getContextPath()%>/member/mySchedule" class="p-explain"><b>일정</b></a>
+		<a href="<%=request.getContextPath()%>/member/mySchedule"
+			class="p-explain"><b>일정</b></a>
 	</div>
 
 	<!-- The flexible grid (content) -->
@@ -418,23 +419,23 @@ img {
 			<p align="center" class="p-explain">안녕하세요</p>
 			<!-- <p>그린델왈드의 숨겨진 모래시계</p> -->
 			<button class="side-button" style="vertical-align: middle"
-			onclick="location.href='<%=request.getContextPath()%>/member/mySchedule';">
-			<span>Schedule</span>
-		</button>
-		<button class="side-button" style="vertical-align: middle"
-			onclick="location.href='<%=request.getContextPath()%>/member/myWishList';">
-			<span>WishList</span>
-		</button>
-		<button class="side-button" style="vertical-align: middle">
-			<span>Scrap List</span>
-		</button>
-		<button class="side-button" style="vertical-align: middle"
-			onclick="location.href='<%=request.getContextPath()%>/member/myInfo';">
-			<span>Infomation</span>
-		</button>
-		<button class="side-button" style="vertical-align: middle">
-			<span>Lab</span>
-		</button>
+				onclick="location.href='<%=request.getContextPath()%>/member/mySchedule';">
+				<span>Schedule</span>
+			</button>
+			<button class="side-button" style="vertical-align: middle"
+				onclick="location.href='<%=request.getContextPath()%>/member/myWishList';">
+				<span>WishList</span>
+			</button>
+			<button class="side-button" style="vertical-align: middle">
+				<span>Scrap List</span>
+			</button>
+			<button class="side-button" style="vertical-align: middle"
+				onclick="location.href='<%=request.getContextPath()%>/member/myInfo';">
+				<span>Infomation</span>
+			</button>
+			<button class="side-button" style="vertical-align: middle">
+				<span>Lab</span>
+			</button>
 			<!-- <button class="sideBarTag" style="height:60px;">My Routine</button><br>
     <button class="sideBarTag" style="height:60px;">My Scrap Board</button><br>
     <button class="sideBarTag" style="height:60px;">Update Infomation</button><br>
@@ -493,7 +494,7 @@ img {
 
 			</div>
 
-			<div class="column day2 " name="dayList2" id="dayList2">
+			<div class="column day2" name="dayList2" id="dayList2">
 				<h2>01.12</h2>
 				<div class="portlet">
 					<div class="portlet-header">
@@ -600,7 +601,52 @@ img {
 		</div>
 	</div>
 	<script>
-	$('#dayList1').children('') 
+	const day1List = $(".day1").find(".portlet-header p").text();
+	console.log(day1List);
+		
+$('.portlet-header').mouseup((e)=> {	
+	let $dayList1 = $(".day1").find(".portlet-header p.p-explain");
+	console.log($dayList1);
+	
+	$dayList1.each ((i,element)=>{
+		let $element = $(element).text();
+		console.log($element);
+	}); 
+	
+	let $dayList2 = $(".day2").find(".portlet-header p");
+	console.log($dayList2);
+	$dayList2.each ((i,element)=>{
+		let $element = $(element).text();
+		console.log($element);
+	}); 
+	
+	let $dayList3 = $(".day3").find(".portlet-header p");
+	console.log($dayList3);
+	$dayList3.each ((i,element)=>{
+		let $element = $(element).text();
+		console.log($element);
+	});
+	
+	const $memberId = "<%=loginMember.getMemberId()%>";
+	console.log($memberId);
+});	
+	 <%-- $.ajax ({
+		url :"<%=request.getContextPath()%>/schedule/myScheduleUpdate",
+		type:"post",
+		data:{
+				memberId: memberId
+				day1: dayList1,
+				day2: dayList2,
+				day3: dayList3
+			}
+		dataType:'json',
+		success(data){
+			console.log(data);
+		}
+		error: () => {
+			return false;
+		}		
+	});  --%>	
 	</script>
 </body>
 
