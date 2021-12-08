@@ -4,7 +4,7 @@
 <%@page import="com.tlab.mvc.magazine.model.vo.Magazine"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/Nheader.jsp"%>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -201,4 +201,4 @@ const loginAlert = () => {
     <script src="<%=request.getContextPath()%>/js/magazine/jquery.mCustomScrollbar.js"></script>
     <script src="<%=request.getContextPath()%>/js/magazine/theme.js"></script>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/common/Nfooter.jsp"%>
