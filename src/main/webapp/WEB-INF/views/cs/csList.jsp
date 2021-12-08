@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
 
 
 <style>
@@ -27,13 +27,14 @@ div#pageBar a{margin-right: 5px;}
 </style>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/bootstrap.css" />
-	
+	<br />
+	<br />
 <title class=titlecs>고객센터</title>
 </head>
 <body>
 	<div>
 
-		<h1 style="margin-left: 30px; font-family: 'paybooc-Bold';">고객센터</h1>
+		<h1 style="margin-left: 50px; font-family: 'paybooc-Bold';">고객센터</h1>
 		<p align="center" style="font-family: 'paybooc-Bold';">Q&A 1:1문의 트래블 랩 서비스의 오류, 장애, 기타 공지사항을 안내드립니다.</p>
 	</div>
 
@@ -41,13 +42,13 @@ div#pageBar a{margin-right: 5px;}
 	<div class="container">
 		<div class="row">
 			<table class="table table-hover"
-				style="text-align: center; width: 78%;">
+				style="text-align: center; width: 100%;">
 				<thead>
 					<tr>
-						<th style="background-color: #c2cbdf; text-align: center; width:15%;">번호</th>
-						<th style="background-color: #c2cbdf; text-align: center; width:45%">제목</th>
-						<th style="background-color: #c2cbdf; text-align: center;">작성자</th>
-						<th style="background-color: #c2cbdf; text-align: center;">작성일</th>
+						<th style="background-color: #d6dde8; text-align: center; width:15%;">번호</th>
+						<th style="background-color: #d6dde8; text-align: center; width:45%">제목</th>
+						<th style="background-color: #d6dde8; text-align: center;">작성자</th>
+						<th style="background-color: #d6dde8; text-align: center;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
