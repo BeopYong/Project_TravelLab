@@ -5,10 +5,41 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
+
+<style>
+div.comment-container button#btn-comment-enroll1 {width:60px; height:50px; color:white; background:#3300ff; position:relative; top:-20px;}
+
+table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse;} 
+table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid; padding:5px; text-align:left; line-height:120%;}
+table#tbl-comment tr td:first-of-type{padding: 5px 5px 5px 50px;}
+table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
+table#tbl-comment button.btn-reply{display:none;}
+table#tbl-comment tr:hover {background:lightgray;}
+table#tbl-comment tr:hover button.btn-reply{display:inline;}
+table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
+table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
+
+table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
+table#tbl-comment tr.level2 td:first-of-type{padding-left:100px;}
+table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
+table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
+
+table#tbl-comment textarea{margin: 4px 0 0 0;}
+table#tbl-comment button.btn-comment-enroll2{width:60px; height:23px; color:white; background:#3300ff; position:relative; top:-5px; left:10px;}
+
+table#tbl-comment button.btn-delete{background:red; color:white; display:none;}
+table#tbl-comment tr:hover button.btn-delete{display:inline;}
+
+@font-face {
+    font-family: 'paybooc-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}  
+</style>
 
 <meta name="viewport" content="width-device-width", initial-scale="1">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.css" />
 <title>고객센터</title>
 
@@ -19,19 +50,21 @@
 <section id="board-container">
 <div class="row">
 	<table id="tbl-board-view">
-	<h2>고객센터</h2>
-	<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+	<br />
+	<h2 style="font-family: 'paybooc-Bold';">고객센터</h2>
+	<br />
+	<table class="table .table" style="text-align: center; border: 1px solid #dddddd">
 		<tr>
-			<th style="text-align: center;">글번호</th>
-			<td><%= cs.getNo() %></td>
+			<th style="text-align: center; background-color: #d6dde8">글번호</th>
+			<td style="background-color: #ffffff;"><%= cs.getNo() %></td>
 		</tr>
 		<tr>
-			<th style="text-align: center;">제 목</th>
-			<td><%= cs.getTitle() %></td>
+			<th style="text-align: center; background-color: #d6dde8">글제목</th>
+			<td style="background-color: #ffffff;"><%= cs.getTitle() %></td>
 		</tr>
 		<tr>
-			<th style="text-align: center;">작성자</th>
-			<td><%= cs.getWriter() %></td>
+			<th style="text-align: center; background-color: #d6dde8">작성자</th>
+			<td style="background-color: #ffffff;"><%= cs.getWriter() %></td>
 		</tr>
 		
 <% 
@@ -41,7 +74,7 @@
 			CsAttachment attach = attachments.get(i);
 %>
 		<tr>
-			<th>첨부파일</th>
+			<th style="background-color: #d6dde8">첨부파일</th>
 			<td>
 				<%-- 첨부파일이 있을경우만, 이미지와 함께 original파일명 표시 --%>
 				<a href="<%= request.getContextPath() %>/cs/fileDownload?no=<%= attach.getNo() %>"><%= attach.getOriginalFilename() %></a>
@@ -52,8 +85,8 @@
 	} 
 %>
 		<tr>
-			<th style="text-align: center;">내 용</th>
-			<td>
+			<th style="text-align: center; background-color: #d6dde8; vertical-align: middle;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내 용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			<td colspan="2" style="height: 200px; text-align: left; background-color: #ffffff;">
 				<%= cs.getContent() %>
 			</td>
 		</tr>
@@ -87,11 +120,12 @@
                 <input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />
                 <input type="hidden" name="commentLevel" value="1" />
                 <input type="hidden" name="commentRef" value="0" />    
-				<textarea name="content" cols="100" rows="3"></textarea> 
-                <button type="submit" id="btn-comment-enroll1" vertical-align: middle;">등록</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				<textarea name="content" cols="60" rows="3" style="width: 80%;"></textarea>
+				&nbsp; &nbsp; &nbsp; 
+                <button type="submit" id="btn-comment-enroll1" style="vertical-align: middle;">등록</button>
             </form>
         </div>
-	</div>
 		<!--게시판 댓글!-->
 <% 
 	List<CsComment> commentList = (List<CsComment>) request.getAttribute("commentList"); 
@@ -151,9 +185,8 @@
 	}
 %>
 		</div>
-
+</div>
 </section>
-
 
 <form
 	name="csDelFrm"

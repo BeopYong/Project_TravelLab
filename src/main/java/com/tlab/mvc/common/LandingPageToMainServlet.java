@@ -1,4 +1,4 @@
-package com.tlab.mvc.member.controller;
+package com.tlab.mvc.common;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberWishList
+ * Servlet implementation class LandingPageToMainServlet
  */
-@WebServlet("/member/myWishList")
-public class MemberWishList extends HttpServlet {
+@WebServlet("/welcome")
+public class LandingPageToMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -20,7 +20,7 @@ public class MemberWishList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request
-			.getRequestDispatcher("/WEB-INF/views/member/myWishList.jsp")
+			.getRequestDispatcher("/WEB-INF/views/common/welcome.jsp")
 			.forward(request, response);
 	}
 

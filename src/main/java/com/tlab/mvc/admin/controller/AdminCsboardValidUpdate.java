@@ -26,9 +26,11 @@ public class AdminCsboardValidUpdate extends HttpServlet {
 		String boardNo = request.getParameter("boardno");
 		String boardValid = request.getParameter("boardValid");
 		
-		CsEntity csboard = new CsEntity(boardNo,boardValid);
-		
-		int result = csEntityService.updateCsBoardValid(csBoard);
+		/*
+		 * CsEntity csboard = new CsEntity(boardNo,boardValid);
+		 * 
+		 * int result = csEntityService.updateCsBoardValid(csBoard);
+		 */
 		
 		response.sendRedirect(request.getContextPath()+"/admin/magazineList");
 	}

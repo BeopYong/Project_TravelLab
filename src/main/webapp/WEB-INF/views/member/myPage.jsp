@@ -29,8 +29,289 @@ System.out.println("saveMemberId@header.jsp = " + saveMemberId);
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/myPage.css" />
+<link rel="stylesheet"href="<%=request.getContextPath()%>/css/my-page.css" />
+<!--스타일 적용 오류 -->
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.p-explain {
+   color: #6b645e; 
+   font-family: 'BBTreeGL';
+}
+
+@font-face {
+    font-family: 'BBTreeGL';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+h2, h5 {
+   color: #625E5D;
+   font-family: 'BBTreeGL';
+}
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #F8F3F2;
+  color: #D1CBCA;
+}
+
+/* Style the top navigation bar */
+.navbar {
+  display: flex;
+  background-color: rgb(253, 253, 253);
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  color: black;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+/*sub-link decoration*/
+.sub-link1 {
+    text-decoration: none;
+    color: #D1CBCA;
+    font-family: sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+}
+h3 {
+    text-decoration: none;
+    color: #D1CBCA;
+    font-family: sans-serif;
+}
+.sub-link2 {
+    text-decoration: none;
+    color: #A18F7F;
+}
+
+.sub-explain {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+/*main-container*/
+.w3-container:after,
+.w3-container:before,
+.w3-panel:after,
+.w3-panel:before,
+.w3-row:after,
+.w3-row:before,
+.w3-row-padding:after,
+.w3-row-padding:before,
+.w3-cell-row:before,
+.w3-cell-row:after,
+.w3-clear:after,
+.w3-clear:before,
+.w3-bar:before,
+.w3-bar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.w3-container,
+.w3-panel {
+  padding: 0.01em 16px;
+  width: 400px;
+}
+
+.w3-col,
+.w3-half,
+.w3-third,
+.w3-twothird,
+.w3-threequarter,
+.w3-quarter {
+  float: left;
+  width: 300px;
+  /* width: 100%; */
+}
+
+.w3-col.m4,
+.w3-third {
+  /* width: 25%; */
+  width: 25%;
+}
+
+.w3-row-padding > .w3-third{
+  padding: 0 8px;
+}
+
+.w3-margin-bottom {
+  margin-bottom: 16px !important;
+}
+
+.w3-row-padding,
+.w3-row-padding > .w3-half,
+.w3-row-padding > .w3-third,
+.w3-row-padding > .w3-twothird,
+.w3-row-padding > .w3-threequarter,
+.w3-row-padding > .w3-quarter,
+.w3-row-padding > .w3-col {
+  padding: 0 8px;
+}
+/*img controll*/
+img {
+  border-style: none;
+}
+img {
+  vertical-align: middle;
+}
+
+.w3-hover-opacity {
+    height: 300px;
+    border-radius: 1px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.w3-opacity,
+.w3-hover-opacity:hover {
+  opacity: 0.6;
+}
+.w3-opacity-off,
+.w3-hover-opacity-off:hover {
+  opacity: 1; 
+}
+
+/*Page Bar*/
+.w3-bar .w3-bar-item {
+  padding: 8px 16px;
+  float: left;
+  width: auto;
+  border: none;
+  display: block;
+  outline: 0;
+}
+
+.more {
+   text-align:right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 2%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* sideBarTag, just for this example */
+.sideBarTag {
+  background-color: white;
+  width: 12vw;
+  padding: 20px;
+  vertical-align: middle;
+}
+
+.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+.sideBarTag {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.sideBarTag:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.side-button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #c7c7c7;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 240px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.side-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.side-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.side-button:hover span {
+  padding-right: 25px;
+}
+
+.side-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row, .navbar {   
+    flex-direction: column;
+  }
+}
+
+</style>
 <title>MyPage</title>
 <meta name="author" content="jimmer" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
