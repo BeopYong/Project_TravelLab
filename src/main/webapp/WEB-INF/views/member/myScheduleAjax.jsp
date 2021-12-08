@@ -599,7 +599,11 @@ img {
 			</div>
 		</div>
 	</div>
+	<script>
+	$('#dayList1').children('') 
+	</script>
 </body>
+
 </html>
 
 
