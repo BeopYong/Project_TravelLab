@@ -98,24 +98,6 @@ Product product = (Product) request.getAttribute("product");
 	</tr>
 	<tr>
 			
-			<%
-			List<ProductAttachment> pAttach = product.getAttachments();
-			if (pAttach != null && !pAttach.isEmpty()) {
-			%>
-			<label for="username"><th>첨부된 파일</th></label>
-			<%
-			for (ProductAttachment pAttachs : pAttach) {
-			%>
-			<%=pAttachs.getOriginalFilename()%>
-			<label for="delFeil<%=pAttachs.getNo()%>">삭제하기</label> <input
-				type="checkbox" name="delFile" id="delFiel<%=pAttachs.getNo()%>"
-				value="<%=pAttachs.getNo()%>" />
-			<%
-			}
-			%>
-			<%
-			}
-			%>
 			<br>
 			<label for="username"><th>파일 추가</th></label> 
 			<td class="text-td">

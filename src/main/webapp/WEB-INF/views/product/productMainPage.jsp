@@ -70,14 +70,16 @@ $(p_category).change((e) => {
 			</div>
 	</div>
 	
-	  <table>
+	
 	<tr>
 		<td>
-	  <a href="<%= request.getContextPath()%>/product/productTest">상품 등록</a>	
+	  <a href="<%= request.getContextPath()%>/product/productTest">바로가기</a>	
 		</td>
 	</tr>
-  </table>
 
+   	<form action="<%= request.getContextPath()%>/product/productEnroll" method="POST" name="ProductEnrollFrm">
+   	<input type="hidden" name="no" value="">
+   </form>
 
     <div class="product-view-header">
       <div style="flex-grow: 1;"><p class="p-ad-ment"><a href="<%=request.getContextPath()%>/product/productList?p_category=101">여행을 떠나봅시다!<a></a></p></div>
@@ -144,6 +146,13 @@ $(p_category).change((e) => {
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script>
+const enrollProduct = () => {
+	if(confirm("상품을 등록하시겠습니까?")){
+		$(document.ProductEnrollFrm).submit();		
+	}
+};
+</script>
 
 </section>
 </div>

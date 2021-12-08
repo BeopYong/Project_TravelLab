@@ -101,7 +101,7 @@ body {
 /* product-info */
 
 .product-info-container {
-  width : 80%;
+  width : 90%;
   margin: 5% auto 5% auto;
   padding: 50px 20px 50px 20px;
   /* border : 1px solid black; */
@@ -111,25 +111,83 @@ body {
 }
 
 .product-info-container img {
-  width: 400px;
+  width: 360px;
   height: 480px;
   border-radius: 4px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 3px 5px rgba(36, 35, 35, 0.22);
-  display : block;
+/* display : block;
   margin-left : auto;
-  margin-right : auto;
+  margin-right : auto; */
+	background-size : cover;
 }
 
 .product-info-img-box {
-	  display : block;
+/*	  display : block;
   margin-left : auto;
-  margin-right : auto;
+  margin-right : auto; */
+  display : flex;
 }
 
 .product-info-box {
-  width : 500px;
-  height : 480px;
+  width : 900px;
+  height : 400px;
+  border : solid 1px black;
+  margin : auto;
+  margin-top : 0;
+ 
 }
+
+.product-info-box-left {
+	display : flex;
+	width : 580px;
+/*	border : 1px solid black; */
+}
+
+
+.product-info-box-left th, td {
+	width : 50px;
+	text-align : center;
+}
+
+.product-info-box-right {
+	/*border : 1px solid black;*/
+	width : 320px;
+	height : 250px;
+}
+
+
+table.type04, table#type04 {
+  border-collapse: separate;
+  border-spacing: 1px;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  margin : 20px 10px;
+}
+table.type04 th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+table.type04 td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .btnbox{
   position: absolute;

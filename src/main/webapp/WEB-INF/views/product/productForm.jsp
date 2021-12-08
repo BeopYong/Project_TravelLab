@@ -4,7 +4,7 @@
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/productHeader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/magazine.css" />
@@ -49,8 +49,8 @@ Product product = (Product) request.getAttribute("product");
 		<tr>
 			<label for="username"><th>지역</th></label> 
 		<td class="text-td">		
-			<select class="form-selected1" name="p_category" id="p_category" aria-label="Default select example"
-				selected="<%=product.getP_category()%>">
+			<select class="form-selected1" name="p_category" id="p_category"
+				">
 				<option value="101">항공패스</option>
 				<option value="102">버스패스</option>
 				<option value="103">기차패스</option>
@@ -62,7 +62,7 @@ Product product = (Product) request.getAttribute("product");
 			<tr>
 			<label for="username"><th>지역</th></label> 
 		<td class="text-td">
-			<select class="form-selected2" name="region" id="region" selected="<%=product.getRegion()%>">
+			<select class="form-selected2" name="region" id="region" selected="">
 				<option value="033">강원도</option>
 				<option value="051">부산</option>
 				<option value="064">제주</option>
@@ -73,7 +73,7 @@ Product product = (Product) request.getAttribute("product");
 			<label for="username"><th>상품명</th></label> 
 			<td class="text-td">
 			<input type="text" id="p_name"
-				name="p_name" value="<%=product.getP_name()%>" />
+				name="p_name" value="" />
 			</td>
 		
 	</tr>
@@ -83,7 +83,7 @@ Product product = (Product) request.getAttribute("product");
 			
 			<td class="text-td">
 			<input type="text" id="unit_price"
-				name="unit_price" value="<%=product.getUnit_price()%>" />
+				name="unit_price" value="" />
 			</td>
 	</tr>
 	
@@ -92,30 +92,11 @@ Product product = (Product) request.getAttribute("product");
 			<label for="username"><th>상품 수량</th></label> 
 			<td>			
 			<input type="text" id="p_stock"
-				name="p_stock" value="<%=product.getP_stock()%>" />		
+				name="p_stock" value="" />		
 			</td>
 	</tr>
 	<tr>
 			
-			<%
-			List<ProductAttachment> pAttach = product.getAttachments();
-			if (pAttach != null && !pAttach.isEmpty()) {
-			%>
-			<label for="username"><th>첨부된 파일</th></label>
-			<%
-			for (ProductAttachment pAttachs : pAttach) {
-			%>
-			<%=pAttachs.getOriginalFilename()%>
-			<label for="delFeil<%=pAttachs.getNo()%>">삭제하기</label> <input
-				type="checkbox" name="delFile" id="delFiel<%=pAttachs.getNo()%>"
-				value="<%=pAttachs.getNo()%>" />
-			<%
-			}
-			%>
-			<%
-			}
-			%>
-			<br>
 			<label for="username"><th>파일 추가</th></label> 
 			<td class="text-td">
 			<input type="file" name="uploadFile1"
@@ -126,7 +107,7 @@ Product product = (Product) request.getAttribute("product");
 		<tr>
 			<label for="username"><th>상품 소개</th></label>
 			<td class="text-td">
-			<textarea name="p_content" cols="30" rows="10" autocomplete="off"><%=product.getP_content()%></textarea>			
+			<textarea name="p_content" cols="30" rows="10" autocomplete="off" placeholder="상품의 상세 정보를 입력하세요."></textarea>			
 			</td>
 		</tr>
 			

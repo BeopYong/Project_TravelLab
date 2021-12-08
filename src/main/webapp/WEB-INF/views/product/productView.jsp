@@ -11,7 +11,7 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<%@ include file="/WEB-INF/views/common/productHeader.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <% 
 	session.getAttribute("msg");
@@ -36,17 +36,19 @@
       	<% } %>
       </div>
       <div class="product-info-box">
-        <table>
+        <div class="product-info-box-left">
+        
+        <table class="type04" id="type04">
           <tr>
             <th>상품명</th>
-            <td colspan="2">
+            <td colspan="">
             	<p><%=product.getP_name() %></p>
             	<input type="hidden" name="p_name" value="<%=product.getP_name()%>"/>
             </td>
           </tr>
           <tr>
             <th>지역</th>
-            <td colspan="2">
+            <td colspan="">
             	<p name="region"><%= product.getRegion() %></p>
             	<input type="hidden" name="region" value="<%=product.getRegion()%>"/>
             </td>
@@ -57,7 +59,9 @@
             <!-- 
              <input type="hidden" name="unit_price" value="<%= product.getUnit_price()%>" />            
              -->
-            <td>
+            </tr>
+            <tr>
+            <td colspan=>
             <form name="form">
 			<select name="quantity" onChange="getSelectValue(this.form);">
  				<option value="0" selected>수량을 선택하세요. (최대 5개)</option>
@@ -66,7 +70,7 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-			</select><br><br>
+			</select>
             </td>
           </tr>
 		  <tr>
@@ -79,11 +83,16 @@
              <input type="hidden" name="product_bill" value="optionValue" />                     
              -->
 		</form>
+        </table>
+        </div>
+        <div class="product-info-box-right">
+        <table>
           <tr>
             <td colspan="3"><div class="product-info"><p><%=product.getP_content() %></p></div></td>
           </tr>
           <tr>
           </tr>
+        </div>
 		<tr>	
 		<td>
 	    <input type="hidden" id="no" name="no" value="<%=product.getNo()%>"/>
