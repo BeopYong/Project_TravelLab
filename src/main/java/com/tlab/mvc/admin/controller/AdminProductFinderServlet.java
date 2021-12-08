@@ -62,7 +62,7 @@ public class AdminProductFinderServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
 			request
-				.getRequestDispatcher("/WEB-INF/views/admin/productList.jsp")
+				.getRequestDispatcher("/WEB-INF/views/admin/productListTest.jsp")
 				.forward(request, response);
 				
 	}

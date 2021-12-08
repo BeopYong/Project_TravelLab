@@ -19,6 +19,7 @@
 	color: black;
 	border-bottom: 3px solid #036;
 	text-align: center;
+	background-color: #d8c1ff5e;
 }
 table#memberCartList {
 	background: #efefef;
@@ -32,13 +33,23 @@ section#cartList-container table#memberCartList {
 	margin-right: auto;
 }
 table#memberCartList td {
-	border: 1px solid #FFF0F5;
+	border-bottom: 1px solid black;
 	padding: 10px;
+	background-color: #ffff;
 }
 .btn-pay {
 	display: block;
 	margin: auto;
 	width: 60px;
+	color: #000000;
+    border: #000000 solid 1px;
+    border-radius: 20%;
+    padding: 10px;
+    background-color: #ffffff;
+}
+.btn-pay:hover {
+    color: #ffffff;
+    background-color: #000000;
 }
 </style>
 <body>
@@ -69,7 +80,7 @@ table#memberCartList td {
 						<td width="200px" style="table-layout: fixed"><%=cart.getProduct_name()%></td>
 						<td width="100px" style="table-layout: fixed"><%=cart.getQuantity()%></td>
 						<td width="100px" style="table-layout: fixed"><%=cart.getMember_id()%></td>
-						<td width="100px" style="table-layout: fixed"><%=cart.getProduct_bill()%></td>
+						<td width="100px" style="table-layout: fixed"><%=cart.getProduct_bill()%>원</td>
 					</td>
 				</tr>
 				<%

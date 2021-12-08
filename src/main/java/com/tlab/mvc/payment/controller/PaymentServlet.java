@@ -36,7 +36,7 @@ public class PaymentServlet extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request
-				.getRequestDispatcher("/WEB-INF/views/payment/payment.jsp")
+				.getRequestDispatcher("/WEB-INF/views/payment/paymentTest.jsp")
 				.forward(request, response);
 		} catch(Exception e){
 			e.printStackTrace();
