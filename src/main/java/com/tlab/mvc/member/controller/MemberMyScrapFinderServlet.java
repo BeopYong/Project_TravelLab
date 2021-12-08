@@ -21,7 +21,7 @@ import com.tlab.mvc.member.model.vo.Member;
  * Servlet implementation class MemberMyScrapFinder
  */
 @WebServlet("/member/scrapFinder")
-public class MemberMyScrapFinder extends HttpServlet {
+public class MemberMyScrapFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazineService magazineService = new MagazineService();
 	/**
