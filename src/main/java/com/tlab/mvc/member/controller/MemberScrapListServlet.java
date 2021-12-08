@@ -19,7 +19,7 @@ import com.tlab.mvc.magazine.model.vo.Magazine;
  * Servlet implementation class MemberScrapList
  */
 @WebServlet("/member/magazineScrapList")
-public class MemberScrapList extends HttpServlet {
+public class MemberScrapListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazineService magazineService = new MagazineService();
 	/**
