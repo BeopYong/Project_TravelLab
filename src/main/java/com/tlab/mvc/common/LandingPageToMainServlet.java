@@ -20,7 +20,7 @@ public class LandingPageToMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request
-			.getRequestDispatcher("index.jsp")
+			.getRequestDispatcher("/WEB-INF/views/common/welcome.jsp")
 			.forward(request, response);
 	}
 
