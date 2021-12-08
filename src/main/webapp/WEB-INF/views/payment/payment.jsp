@@ -19,6 +19,7 @@
 	color: black;
 	border-bottom: 3px solid #036;
 	text-align: center;
+	background-color: #d8c1ff5e;
 }
 table#memberPaymentList {
 	background: #efefef;
@@ -32,8 +33,13 @@ section#paymentList-container table#memberPaymentList {
 	margin-right: auto;
 }
 table#memberPaymentList td {
-	border: 1px solid #FFF0F5;
+	border-bottom: 1px solid black;
 	padding: 10px;
+	background-color: #ffff;
+}
+tbody th {
+	border-bottom: 1px solid black;
+	background-color: #d8c1ff5e;
 }
 </style>
 <body>

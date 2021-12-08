@@ -61,7 +61,7 @@ public class AdminMagazineFinderServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pagebar", pagebar);
 		request
-			.getRequestDispatcher("/WEB-INF/views/admin/manageMagazineList.jsp")
+			.getRequestDispatcher("/WEB-INF/views/admin/manageMagazineListTest.jsp")
 			.forward(request, response);
 			
 }
