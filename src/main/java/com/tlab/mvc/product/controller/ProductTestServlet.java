@@ -15,7 +15,7 @@ import com.tlab.mvc.product.model.vo.Product;
  * Servlet implementation class ProductTest
  */
 @WebServlet("/product/productTest")
-public class ProductTest extends HttpServlet {
+public class ProductTestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService productService = new ProductService();
 

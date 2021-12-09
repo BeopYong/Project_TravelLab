@@ -28,13 +28,13 @@ public class ProductFinderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 사용자 입력값 처리
-				String region = request.getParameter("region");
-				String p_content = request.getParameter("p_content");
-				
-				Map<String, Object> searchParam = new HashMap<>();
-				searchParam.put("region", region);
-				searchParam.put("p_content", p_content);
-				System.out.println("param@servlet = " + searchParam);
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
+		
+		Map<String, Object> searchParam = new HashMap<>();
+		searchParam.put("searchType", searchType);
+		searchParam.put("searchKeyword", searchKeyword);
+		System.out.println("param@servlet = " + searchParam);
 				
 				//2. 업무로직
 				List<ProductEntity> list = productService.searchProduct(searchParam);
@@ -42,7 +42,7 @@ public class ProductFinderServlet extends HttpServlet {
 				
 				//3. view단 처리
 				request.setAttribute("list", list);
-				request.getRequestDispatcher("/WEB-INF/views/product/productList.jsp")
+				request.getRequestDispatcher("/WEB-INF/views/product/productSearchList.jsp")
 				.forward(request, response);
 	}
 

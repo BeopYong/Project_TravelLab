@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tlab.mvc.product.model.service.ProductService;
 import com.tlab.mvc.product.model.vo.Product;
+import com.tlab.mvc.product.model.vo.ProductAttachment;
 
 /**
  * Servlet implementation class ProductMainServlet
@@ -46,6 +47,9 @@ public class ProductMainServlet extends HttpServlet {
 			param.put("301", food);
 			param.put("302", festival);
 			
+			List<ProductAttachment> pAttach = productService.productAttachmentList();
+			System.out.println(pAttach + "@@@@@@@@@@@@@@@@");
+			
 			List<Product> foodList = productService.randomProductFoodList(param);
 			List<Product> placeList = productService.randomProductPlaceList(param);
 			List<Product> ticketList = productService.randomProductTicketList(param);
@@ -53,6 +57,7 @@ public class ProductMainServlet extends HttpServlet {
 			request.setAttribute("ticketList", ticketList);
 			request.setAttribute("foodList", foodList);
 			request.setAttribute("placeList", placeList);
+			request.setAttribute("pAttach", pAttach);
 			request
 			.getRequestDispatcher("/WEB-INF/views/product/productMainPage.jsp")
 			.forward(request, response);
