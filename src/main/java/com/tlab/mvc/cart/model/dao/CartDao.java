@@ -21,38 +21,36 @@ import com.tlab.mvc.product.model.dao.ProductDao;
 import com.tlab.mvc.product.model.exception.ProductExcpetion;
 
 public class CartDao {
-	
-    private Properties prop = new Properties();
-    
-    //기본 생성자에서 클래스 객체로 빌드패스를 통해 properties 가져오기
-    public CartDao() {
-        String filepath = ProductDao.class.getResource("/cart-query.properties").getPath();
-        System.out.println(filepath);
-        try {
-            prop.load(new FileReader(filepath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
+
+	private Properties prop = new Properties();
+
+	// 기본 생성자에서 클래스 객체로 빌드패스를 통해 properties 가져오기
+	public CartDao() {
+		String filepath = ProductDao.class.getResource("/cart-query.properties").getPath();
+		System.out.println(filepath);
+		try {
+			prop.load(new FileReader(filepath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int insertCart(Connection conn, Cart cart) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertCartList");
 		int result = 0;
-		
+
 		System.out.println(sql);
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, cart.getProduct_name());
 			pstmt.setInt(2, cart.getQuantity());
 			pstmt.setInt(3, cart.getProduct_bill());
 			pstmt.setString(4, cart.getMember_id());
-			
+
 			result = pstmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			throw new CartException("장바구니 등록 오류.", e);
@@ -63,36 +61,33 @@ public class CartDao {
 
 	}
 
-
 	public List<Cart> selectAllCartList(Connection conn, Member memberId) {
 		PreparedStatement pstmt = null;
-        String sql = prop.getProperty("selectMyCartList");
-        ResultSet rset = null;
-        List<Cart> list = new ArrayList<>();
-        try {
-            // 1.pstmt객체생성
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, memberId.getMemberId());
-            // 2.실행
-            rset = pstmt.executeQuery();
-            // 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
-            while (rset.next()) {
-            	Cart cart = new Cart();
-            	cart.setNo(rset.getInt("no"));
-            	cart.setProduct_name(rset.getString("product_name"));
-            	cart.setQuantity(rset.getInt("quantity"));
-            	cart.setMember_id(rset.getString("member_id"));
-            	cart.setProduct_bill(rset.getInt("product_bill"));
-            	list.add(cart);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-        return list;
+		String sql = prop.getProperty("selectMyCartList");
+		ResultSet rset = null;
+		List<Cart> list = new ArrayList<>();
+		try {
+			// 1.pstmt객체생성
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId.getMemberId());
+			// 2.실행
+			rset = pstmt.executeQuery();
+			// 3.rset처리 : 하나의 레코드 -> vo객체하나 -> list에 추가
+			while (rset.next()) {
+				Cart cart = new Cart();
+				cart.setNo(rset.getInt("no"));
+				cart.setProduct_name(rset.getString("product_name"));
+				cart.setQuantity(rset.getInt("quantity"));
+				cart.setMember_id(rset.getString("member_id"));
+				cart.setProduct_bill(rset.getInt("product_bill"));
+				list.add(cart);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
-	}
-
-
+}

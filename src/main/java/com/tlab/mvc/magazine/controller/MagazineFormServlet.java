@@ -13,17 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/magazine/magazineForm")
 public class MagazineFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
-			request
-				.getRequestDispatcher("/WEB-INF/views/magazine/magazineForm.jsp")
-				.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/magazine/magazineForm.jsp").forward(request, response);
 		} catch (ServletException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,6 +33,5 @@ public class MagazineFormServlet extends HttpServlet {
 			throw e;
 		}
 	}
-
 
 }

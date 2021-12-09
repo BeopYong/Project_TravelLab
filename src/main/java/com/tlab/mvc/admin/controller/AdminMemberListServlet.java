@@ -22,21 +22,23 @@ import com.tlab.mvc.member.model.vo.Member;
 public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// 1.사용자입력값
 		try {
-			final int numPerPage = 10;
+			final int numPerPage = 5;
 			int cPage = 1;
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
-			} catch (NumberFormatException e) {}
+			} catch (NumberFormatException e) {
+			}
 			int start = (cPage - 1) * numPerPage + 1;
 			int end = cPage * numPerPage;
 			Map<String, Integer> param = new HashMap<>();
 			param.put("start", start);
 			param.put("end", end);
-			
+
 			// 2.업무로직
 			// 2-a. content영역
 			List<Member> list = memberService.selectAllMember(param);
@@ -48,16 +50,14 @@ public class AdminMemberListServlet extends HttpServlet {
 			System.out.println(url);
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
 			System.out.println("pagebar@MemberListServlet = " + pagebar);
-			
+
 			// 3.view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
-			request
-				.getRequestDispatcher("/WEB-INF/views/admin/memberListTest.jsp")
-				.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/admin/memberListTest.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		} 
+		}
 	}
 }

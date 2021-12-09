@@ -1,6 +1,6 @@
 package com.tlab.mvc.schedule.model.exception;
 
-public class ScheduleException extends RuntimeException{
+public class ScheduleException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,5 +24,4 @@ public class ScheduleException extends RuntimeException{
 		super(cause);
 	}
 
-	
 }

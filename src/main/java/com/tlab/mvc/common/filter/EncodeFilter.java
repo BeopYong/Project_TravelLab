@@ -15,12 +15,12 @@ import javax.servlet.annotation.WebFilter;
 @WebFilter("/*")
 public class EncodeFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public EncodeFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public EncodeFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -32,7 +32,8 @@ public class EncodeFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// 공통코드 utf-8 인코딩 처리
 		request.setCharacterEncoding("utf-8");
 		System.out.println("......request utf-8 encoded.......");
@@ -45,7 +46,7 @@ public class EncodeFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		
+
 	}
 
 }

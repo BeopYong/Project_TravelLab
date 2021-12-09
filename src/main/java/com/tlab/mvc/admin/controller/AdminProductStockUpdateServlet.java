@@ -20,9 +20,11 @@ public class AdminProductStockUpdateServlet extends HttpServlet {
 	private ProductService productService = new ProductService();
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// 1. 사용자입력값처리
 		try {
 			String productName = request.getParameter("productName");
@@ -37,7 +39,7 @@ public class AdminProductStockUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 		// 3. redirect
 		response.sendRedirect(request.getContextPath() + "/admin/productList");
 	}

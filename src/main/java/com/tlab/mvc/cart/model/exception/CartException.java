@@ -26,7 +26,5 @@ public class CartException extends RuntimeException {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 }

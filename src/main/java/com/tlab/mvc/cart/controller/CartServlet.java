@@ -23,46 +23,46 @@ public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
 	private Product product = new Product();
-	
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		//폼이 multipartRequest로 잡혀있어서 그냥 request 요청으론 안 넘어감 ㅠㅠ
+
+		// 폼이 multipartRequest로 잡혀있어서 그냥 request 요청으론 안 넘어감 ㅠㅠ
 		String saveDirectory = getServletContext().getRealPath("/upload/product");
 		System.out.println("[product@directory] = " + saveDirectory);
-		
-		int maxPostSize = 1024 * 1024 * 10; //10mb
+
+		int maxPostSize = 1024 * 1024 * 10; // 10mb
 		String encoding = "utf-8";
-		
+
 		FileRenamePolicy policy = new DefaultFileRenamePolicy();
-		
-		MultipartRequest multipartRequest = 
-				new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-		
-		//변수 받기
+
+		MultipartRequest multipartRequest = new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
+
+		// 변수 받기
 		int no = Integer.parseInt(multipartRequest.getParameter("no"));
 		String product_name = multipartRequest.getParameter("p_name");
 		int quantity = Integer.parseInt(multipartRequest.getParameter("quantity"));
 		int product_bill = Integer.parseInt(multipartRequest.getParameter("product_bill"));
 		String memberId = multipartRequest.getParameter("memberId");
-		
-		//카트 객체 생성
+
+		// 카트 객체 생성
 		Cart cart = new Cart(0, product_name, quantity, product_bill, memberId);
 		System.out.println(cart);
-		
-		//값 반환
+
+		// 값 반환
 		int result = cartService.insertCart(cart);
-		
-		
+
 		String msg = result > 0 ? "선택하신 상품이 장바구니에 담겼습니다." : "상품 담기 실패!";
-				
-		//상품 상세 페이지 다시 보여줘야 함!!!!!!!!!! -> 리다이렉트
+
+		// 상품 상세 페이지 다시 보여줘야 함!!!!!!!!!! -> 리다이렉트
 		request.getSession().setAttribute("msg", msg);
 		String location = request.getContextPath() + "/product/productView?no=" + no;
-		
+
 		response.sendRedirect(location);
 	}
 

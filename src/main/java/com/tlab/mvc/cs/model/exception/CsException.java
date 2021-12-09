@@ -27,5 +27,4 @@ public class CsException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

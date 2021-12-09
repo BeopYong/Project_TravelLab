@@ -24,21 +24,24 @@ public class AdminProductListServlet extends HttpServlet {
 	private ProductService productService = new ProductService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			final int numPerPage = 10;
 			int cPage = 1;
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
-			} catch (NumberFormatException e) {}
+			} catch (NumberFormatException e) {
+			}
 			int start = (cPage - 1) * numPerPage + 1;
 			int end = cPage * numPerPage;
 			Map<String, Integer> param = new HashMap<>();
 			param.put("start", start);
 			param.put("end", end);
-			
+
 			// 2.업무로직
 			// 2-a. content영역
 			List<ProductEntity> list = productService.selectAllProduct(param);
@@ -50,13 +53,11 @@ public class AdminProductListServlet extends HttpServlet {
 			System.out.println(url);
 			String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
 			System.out.println("AdminProductListServlet.pagebar] = " + pagebar);
-			
+
 			// 3.view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
-			request
-				.getRequestDispatcher("/WEB-INF/views/admin/productListTest.jsp")
-				.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/admin/productListTest.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

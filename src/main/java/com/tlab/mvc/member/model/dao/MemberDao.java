@@ -61,8 +61,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.debug(e.getMessage() + pstmt.toString());
-		} finally {
-			// 4.자원반납
+		} finally {			
 			close(rset);
 			close(pstmt);
 		}

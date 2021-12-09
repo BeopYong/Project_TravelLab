@@ -36,58 +36,67 @@ System.out.println("saveMemberId@header.jsp = " + saveMemberId);
 <%-- <link rel="stylesheet" type="text/css" 
 	href="<%=request.getContextPath()%>/css/mySchedule.css"/> --%>
 <style>
-  body {
-    min-width: 520px;
-  }
-  .column {
-    width: 170px;
-    float: left;
-    padding-bottom: 100px;
-  
-  }
-  .portlet {
-    margin: 0 1em 1em 0;
-    padding: 0.3em;
-  }
-  .portlet-header {
-    padding: 0.2em 0.3em;
-    margin-bottom: 0.5em;
-    position: relative;
-  }
-  .portlet-toggle {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-top: -8px;
-  }
-  .portlet-content {
-    padding: 0.4em;
-    padding-left: 0.6em;
-  }
-  .portlet-placeholder {
-    border: 1px dotted black;
-    margin: 0 1em 1em 0;
-    height: 50px;
-  }
+body {
+	min-width: 520px;
+}
 
-  @font-face {
-    font-family: 'BBTreeGL';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+.column {
+	width: 170px;
+	float: left;
+	padding-bottom: 100px;
 }
+
+.portlet {
+	margin: 0 1em 1em 0;
+	padding: 0.3em;
+}
+
+.portlet-header {
+	padding: 0.2em 0.3em;
+	margin-bottom: 0.5em;
+	position: relative;
+}
+
+.portlet-toggle {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-top: -8px;
+}
+
+.portlet-content {
+	padding: 0.4em;
+	padding-left: 0.6em;
+}
+
+.portlet-placeholder {
+	border: 1px dotted black;
+	margin: 0 1em 1em 0;
+	height: 50px;
+}
+
+@font-face {
+	font-family: 'BBTreeGL';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGL.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html {
-    font-family: 'BBTreeGL'
+	font-family: 'BBTreeGL'
 }
+
 .p-explain {
-    font-family: 'BBTreeGL';
-    margin-bottom:2px;
-    margin-top: 5px;
+	font-family: 'BBTreeGL';
+	margin-bottom: 2px;
+	margin-top: 5px;
 }
-  </style>
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-  <script>
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script>
   $( function() {
     $( ".column" ).sortable({
       connectWith: ".column",
@@ -108,7 +117,7 @@ html {
       icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
     });
   } );
-  </script>	
+  </script>
 <title>MySchedule</title>
 <meta name="author" content="jimmer" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
@@ -137,8 +146,7 @@ $(() => {
 	<%-- <a href="<%= request.getContextPath()%>/member/myCartList" class="p-explain">카트보기</a> --%>
 	<a href="#"><b>카트보기</b></a>
 	<%--  <a href="<%= request.getContextPath()%>/member/myInfo" class="p-explain">내정보</a> --%>
-	<a href="<%=request.getContextPath()%>/member/myInfo"
-		class="p-explain"><b>내정보</b></a>
+	<a href="<%=request.getContextPath()%>/member/myInfo" class="p-explain"><b>내정보</b></a>
 	<%-- <a href="<%= request.getContextPath()%>/member/myScheduleList" class="p-explain">일정</a> --%>
 	<a href="#"><b>일정</b></a>
 </div>

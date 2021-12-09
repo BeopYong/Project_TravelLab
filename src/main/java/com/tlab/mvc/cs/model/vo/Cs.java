@@ -11,7 +11,6 @@ public class Cs extends CsEntity implements Serializable {
 	private List<CsAttachment> csAttachments;
 	private int commentCount;
 
-
 	public Cs() {
 		super();
 	}
@@ -41,7 +40,7 @@ public class Cs extends CsEntity implements Serializable {
 		super(no, options, title, writer, content, boardRef, regDate);
 		this.commentCount = commentCount;
 	}
-	 
+
 	public List<CsAttachment> getAttachments() {
 		return csAttachments;
 	}
@@ -58,10 +57,9 @@ public class Cs extends CsEntity implements Serializable {
 		this.commentCount = commentCount;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Cs [csAttachments=" + csAttachments + ", commentCount=" + commentCount + "]";
 	}
-	
+
 }

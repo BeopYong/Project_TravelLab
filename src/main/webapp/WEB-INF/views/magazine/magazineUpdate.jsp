@@ -38,44 +38,45 @@
 			$(document.magazineUpdateFrm).submit(magazineValidate);
 		});
 		</script>
-		
+
 <section id="magazineForm-container" class="magazine-container">
 
 	<h3 id="logo">Magazine Update</h3>
 	<div style="">
 		<!-- padding: 200px 300px; -->
-		<form name="magazineUpdateFrm"
-			method="post"
-			action="<%=request.getContextPath()%>/magazine/magazineUpdate" 
-			<input type="hidden" name="no" value="<%=magazine.getNo()%>" /> >
+		<form name="magazineUpdateFrm" method="post"
+			action="<%=request.getContextPath()%>/magazine/magazineUpdate"
+			<input type="hidden" name="no" value="<%=magazine.getNo()%>" />>
 			<!-- enctype="multipart/form-data"
 			accept-charset="UTF-8"   -->
-			
+
 			<!-- 매거진 게시물 수정 폼 시작 -->
-		<div>
+			<div>
 				<tr>
 					<label for="username"><th>지역</th></label>
 
-					<td class="text-td"><select name="region" id="region" class="form-select" aria-label="Default select example" selected="<%=magazine.getRegion()%>">
+					<td class="text-td"><select name="region" id="region"
+						class="form-select" aria-label="Default select example"
+						selected="<%=magazine.getRegion()%>">
 							<option value="강원도">강원도</option>
 							<option value="부산">부산</option>
 							<option value="제주도">제주도</option>
 					</select></td>
 				</tr>
-				
+
 				<tr>
 					<label for="username"><th>제 목</th></label>
 					<td class="text-td"><input type="text" name="title"
 						value="<%=magazine.getTitle()%>" style="width: 300px" required>
 					</td>
 				</tr>
-				
+
 				<tr>
 					<label for="username"><th>작성자</th></label>
 					<td class="text-td"><input type="text" name="writer"
 						value="<%=magazine.getWriter()%>" readonly /></td>
 				</tr>
-				
+
 				<%
 				if (attachments != null && !attachments.isEmpty()) {
 				%>
@@ -96,19 +97,19 @@
 				<%
 				}
 				%>
-				
+
 				<tr>
 					<label for="username"><th>첨부파일 추가</th></label>
 
 					<td><input type="file" name="upFile1"> <br>
 				</tr>
-				
+
 				<tr>
 					<label for="username"><th>내 용</th></label>
 
 					<td><textarea rows="5" cols="40" name="content"><%=magazine.getContent()%></textarea></td>
 				</tr>
-				
+
 				<tr>
 					<th colspan="2"><input type="submit" id="btn"
 						class="modified-btn" value="수정하기" /> <input type="button"
@@ -124,12 +125,13 @@
 @import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
 
 @import
-	url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+	url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap')
+	;
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-form { 
- font-family: 'Noto Sans KR', sans-serif;
+form {
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
@@ -160,7 +162,6 @@ form label {
 form label, form input {
 	float: left;
 	clear: both;
-
 }
 
 form input {
@@ -191,12 +192,12 @@ form input[type="submit"] {
 	font-size: 15px;
 	padding: 15px 50px;
 	width: auto;
-	background: rgb(128, 151, 194) ;
+	background: rgb(128, 151, 194);
 	border: none;
 	color: rgb(54, 54, 54);
 	cursor: pointer;
 	display: inline-block;
-	float : right;
+	float: right;
 	clear: right;
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
@@ -219,13 +220,13 @@ form input[type="button"] {
 	font-size: 15px;
 	padding: 15px 50px;
 	width: auto;
-	background: rgb(128, 151, 194) ;
+	background: rgb(128, 151, 194);
 	border: none;
 	color: rgb(54, 54, 54);
 	cursor: pointer;
 	position: relative;
 	display: inline-block;
-	float :left;
+	float: left;
 	clear: left;
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
@@ -233,8 +234,6 @@ form input[type="button"] {
 	-o-transition: 0.2s ease all;
 	transition: 0.2s ease all;
 	font-weight: bold;
-	
-
 }
 
 form textarea {
@@ -294,7 +293,7 @@ form select {
 	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
-	color: rgb(128, 151, 194) ;
+	color: rgb(128, 151, 194);
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
 	-ms-transition: 0.2s ease all;

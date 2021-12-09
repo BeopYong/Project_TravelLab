@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-
 public class Magazine extends MagazineEntity implements Serializable {
 
 	// DB테이블엔 없지만 필요한 것
@@ -17,12 +16,10 @@ public class Magazine extends MagazineEntity implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount) {
 		super(no, title, writer, content, regDate, readCount);
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region) {
 		super(no, title, writer, content, regDate, readCount, region);
@@ -32,22 +29,23 @@ public class Magazine extends MagazineEntity implements Serializable {
 		super(no, title, writer, content, region);
 	}
 
-	public Magazine( String title, String writer, String content, String region) {
-		super( title, writer, content, region);
+	public Magazine(String title, String writer, String content, String region) {
+		super(title, writer, content, region);
 	}
-	
 
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
 			String valid) {
 		super(no, title, writer, content, regDate, readCount, region, valid);
 		// TODO Auto-generated constructor stub
 	}
+
 	public Magazine(String title, String writer, String content, String region, List<MagazineAttachment> attachments,
 			int attachCount) {
 		super(title, writer, content, region);
 		this.attachments = attachments;
 		this.attachCount = attachCount;
 	}
+
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, String region,
 			String valid, int attachCount, List<MagazineAttachment> attachments, int commentCount) {
 		super(no, title, writer, content, regDate, readCount, region, valid);
@@ -56,7 +54,6 @@ public class Magazine extends MagazineEntity implements Serializable {
 		this.commentCount = commentCount;
 	}
 
-	
 	public Magazine(int no, String title, String writer, String content, Date regDate, int readCount, int attachCount,
 			List<MagazineAttachment> attachments, int commentCount) {
 		super(no, title, writer, content, regDate, readCount);
@@ -64,7 +61,6 @@ public class Magazine extends MagazineEntity implements Serializable {
 		this.attachments = attachments;
 		this.commentCount = commentCount;
 	}
-
 
 	public Magazine(int attachCount, List<MagazineAttachment> attachments, int commentCount) {
 		super();
@@ -96,23 +92,18 @@ public class Magazine extends MagazineEntity implements Serializable {
 		this.attachCount = attachCount;
 	}
 
-	
 	public int getCommentCount() {
 		return commentCount;
 	}
-
 
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Magazine [" + super.toString()
-			+ ", attachCount=" + attachCount
-			+ ", commentCount=" + commentCount
-			+ ", attachments=" + attachments  + "]";
+		return "Magazine [" + super.toString() + ", attachCount=" + attachCount + ", commentCount=" + commentCount
+				+ ", attachments=" + attachments + "]";
 	}
 
 }

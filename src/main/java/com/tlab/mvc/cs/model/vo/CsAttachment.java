@@ -7,12 +7,12 @@ import com.tlab.mvc.common.Attachment;
 public class CsAttachment extends Attachment {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int no;
 	private int csBoardno;
 	private String originalFilename;
 	private String renamedFilename;
-	
+
 	public CsAttachment() {
 		super();
 	}
@@ -63,5 +63,4 @@ public class CsAttachment extends Attachment {
 				+ ", renamedFilename=" + renamedFilename + "]";
 	}
 
-	
 }

@@ -27,11 +27,12 @@ import com.tlab.mvc.magazine.model.vo.Magazine;
 public class MagazineEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazineService magazineService = new MagazineService();
-	
-	//DML
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	// DML
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			//1)서버에 사용자 업로드파일저장
+			// 1)서버에 사용자 업로드파일저장
 //			String saveDirectory = getServletContext().getRealPath("/upload/magazine");
 //			System.out.println("[MagazineEnrollServlet] saveDirectory 서버에 업로드파일 저장=" + saveDirectory);
 //			
@@ -43,18 +44,19 @@ public class MagazineEnrollServlet extends HttpServlet {
 //			
 //			MultipartRequest multipartRequest = 
 //					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-			
-			//2)업로드파일 저장 :attachment에 파일하나당 1행저장
-			
-			//사용자입력값
+
+			// 2)업로드파일 저장 :attachment에 파일하나당 1행저장
+
+			// 사용자입력값
 			String title = request.getParameter("title");
 			String writer = request.getParameter("writer");
 			String content = request.getParameter("content");
 			String region = request.getParameter("region");
-			System.out.println("title, writer, content , region" + title+", "+writer+", "+content+","+region);
+			System.out
+					.println("title, writer, content , region" + title + ", " + writer + ", " + content + "," + region);
 			Magazine magazine = new Magazine(title, writer, content, region);
 			System.out.println("[magazineServlet] magazine 사용자입력값 = " + magazine);
-			
+
 //			//저장된 파일정보를 꺼내 어태치에 만들고 list어태치에 전달 후 매거진 객체에 추가
 //			File upFile1 = multipartRequest.getFile("upFile1");
 //			File upFile2 = multipartRequest.getFile("upFile2");
@@ -75,14 +77,13 @@ public class MagazineEnrollServlet extends HttpServlet {
 //				System.out.println("[MagazineenrollServlet] attachments = " + attachments);
 //			}
 //			System.out.println("[MagazineenrollServlet] magazine = " + magazine);
-						
-			
-			//업무로직
+
+			// 업무로직
 			int result = magazineService.insertMagazine(magazine);
 			System.out.println("[MagazineEnrollServlet] 업무로직 result" + result);
 			String msg = result > 0 ? "게시물 등록 성공" : "게시물 등록 실패";
-			
-			//redirect
+
+			// redirect
 			request.getSession().setAttribute("msg", msg);
 			String location = request.getContextPath() + "/magazine/magazineView?no=" + magazine.getNo();
 			response.sendRedirect(location);
@@ -90,7 +91,7 @@ public class MagazineEnrollServlet extends HttpServlet {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 }

@@ -20,8 +20,7 @@ public class MagazineAttachment extends Attachment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	/**
 	 * @param no
 	 * @param magazineNo
@@ -106,9 +105,7 @@ public class MagazineAttachment extends Attachment {
 
 	@Override
 	public String toString() {
-		return "MagazineAttachment [ "+super.toString()+", magazineNo=" + magazineNo + "]";
+		return "MagazineAttachment [ " + super.toString() + ", magazineNo=" + magazineNo + "]";
 	}
-	
-	
-	
+
 }

@@ -29,14 +29,11 @@ div#search-container {
 	border-radius: 10px;
 	background-color: #B6EAE4;
 }
-
 </style>
 <section id="memberList-container">
 	<h2>회원관리</h2>
 
-	<div id="search-container">
-		
-	</div>
+	<div id="search-container"></div>
 
 
 	<table id="tbl-member">
@@ -56,9 +53,7 @@ div#search-container {
 			<tr>
 				<td width="100px" style="table-layout: fixed"><%=magazine.getNo()%></td>
 				<td width="40px" style="table-layout: fixed"><%=magazine.getWriter()%></td>
-				<td style="table-layout: fixed">
-					<%=magazine.getTitle()%>
-				</td>
+				<td style="table-layout: fixed"><%=magazine.getTitle()%></td>
 				<td width="180px" style="table-layout: fixed"><%=magazine.getRegion()%></td>
 				<td style="table-layout: fixed"><%=magazine.getRegDate()%></td>
 			</tr>
@@ -73,8 +68,7 @@ div#search-container {
 </section>
 
 <script>
-
-
+	
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

@@ -1,8 +1,8 @@
 <%@page import="com.tlab.mvc.member.model.service.MemberService"%>
 <%@page import="com.tlab.mvc.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-    
+	pageEncoding="UTF-8"%>
+
 <%
 	String msg = (String) session.getAttribute("msg");
 	if(msg != null) session.removeAttribute("msg");
@@ -31,8 +31,10 @@
 
 <title>당신의 여행을 응원합니다</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" />
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/bootstrap.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/css/style.css" />
 <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
 $(() => {
@@ -74,82 +76,88 @@ $(() => {
 	<div id="container">
 		<header>
 			<h1>Travel Lab</h1>
-				<div class="login-container">
-<% if(loginMember == null){ %>
-					<!-- 로그인폼 시작 -->
-					<form 
-						id="loginFrm" 
-						action="<%= request.getContextPath() %>/member/login"
-						method="POST">
-						<table>
-							<tr>
-								<td><input type="text" name="memberId" id="memberId" placeholder="아이디" tabindex="1" value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
-								<td><input type="submit" value="로그인" tabindex="3"></td>
-							</tr>
-							<tr>
-								<td><input type="password" name="password" id="password" placeholder="비밀번호" tabindex="2"></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<input type="checkbox" name="saveId" id="saveId" <%= saveMemberId != null ? "checked" : "" %>/>
-									<label for="saveId">아이디저장</label>&nbsp;&nbsp;
-									<input 
-										type="button" 
-										value="회원가입" 
-										onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">
-								</td>
-							</tr>
-						</table>
-					</form>
-					<!-- 로그인폼 끝-->
-<% } else { %>
-					<table id="login">
+			<div class="login-container">
+				<% if(loginMember == null){ %>
+				<!-- 로그인폼 시작 -->
+				<form id="loginFrm"
+					action="<%= request.getContextPath() %>/member/login" method="POST">
+					<table>
 						<tr>
-							<td><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
+							<td><input type="text" name="memberId" id="memberId"
+								placeholder="아이디" tabindex="1"
+								value="<%= saveMemberId != null ? saveMemberId : "" %>"></td>
+							<td><input type="submit" value="로그인" tabindex="3"></td>
 						</tr>
 						<tr>
-							<td>
-								<input type="button" value="내정보보기" onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
-								<input type="button" value="로그아웃" onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
+							<td><input type="password" name="password" id="password"
+								placeholder="비밀번호" tabindex="2"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="checkbox" name="saveId"
+								id="saveId" <%= saveMemberId != null ? "checked" : "" %> /> <label
+								for="saveId">아이디저장</label>&nbsp;&nbsp; <input type="button"
+								value="회원가입"
+								onclick="location.href='<%= request.getContextPath() %>/member/memberEnroll';">
 							</td>
 						</tr>
 					</table>
-<% } %>
-				</div>
-				
-				<!-- 메인메뉴 시작 -->
-				<nav>
-					<ul class="main-nav">
-						<li class="home"><a href="<%= request.getContextPath() %>">Home</a></li>
-						<li class="notice"><a href="#">공지사항</a></li>
-						<li class="board"><a href="<%= request.getContextPath() %>/board/boardList">게시판</a></li>
-						<li class="photo"><a href="<%= request.getContextPath() %>/product/productList">사진게시판</a></li>
-						<li class="magazine"><a href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
-						<li class="cs"><a href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
-<% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
-						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
-						<li class="admin"><a href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
-<% } %>
- <%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
+				</form>
+				<!-- 로그인폼 끝-->
+				<% } else { %>
+				<table id="login">
+					<tr>
+						<td><%= loginMember.getMemberName() %>님, 안녕하세요.</td>
+					</tr>
+					<tr>
+						<td><input type="button" value="내정보보기"
+							onclick="location.href='<%= request.getContextPath() %>/member/myPage';">
+							<input type="button" value="로그아웃"
+							onclick="location.href='<%= request.getContextPath() %>/member/memberLogout';">
+						</td>
+					</tr>
+				</table>
+				<% } %>
+			</div>
+
+			<!-- 메인메뉴 시작 -->
+			<nav>
+				<ul class="main-nav">
+					<li class="home"><a href="<%= request.getContextPath() %>">Home</a></li>
+					<li class="notice"><a href="#">공지사항</a></li>
+					<li class="board"><a
+						href="<%= request.getContextPath() %>/board/boardList">게시판</a></li>
+					<li class="photo"><a
+						href="<%= request.getContextPath() %>/product/productList">사진게시판</a></li>
+					<li class="magazine"><a
+						href="<%= request.getContextPath() %>/magazine/magazineList">매거진</a></li>
+					<li class="cs"><a
+						href="<%= request.getContextPath() %>/cs/csList">고객센터</a></li>
+					<% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>
+					<li class="admin"><a
+						href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
+					<li class="admin"><a
+						href="<%= request.getContextPath() %>/admin/productList">상품관리</a></li>
+					<% } %>
+					<%-- <% if(loginMember != null && MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())){ %>						
 						<li class="admin"><a href="<%= request.getContextPath() %>/admin/memberList">회원관리</a></li>
 <% } %>  --%>
 
-					</ul>
-				</nav>
-				<!-- 메인메뉴 끝-->
-						
-		</header>
-		
-		<section id="content">
-<!-- 여기까지 header영역 -->
+				</ul>
+			</nav>
+			<!-- 메인메뉴 끝-->
 
-<!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" /> -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/magazine.css" />
-	
-	
-<script>
+		</header>
+
+		<section id="content">
+			<!-- 여기까지 header영역 -->
+
+			<!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" /> -->
+			<link rel="stylesheet"
+				href="<%=request.getContextPath()%>/css/magazine.css" />
+
+
+			<script>
         /**
          * magazine 유효성 검사(제목, 내용을 작성안한 경우 제출불가)
          */
@@ -179,89 +187,89 @@ $(() => {
         });
         </script>
 
-<section id="magazineForm-container" class="magazine-container">
+			<section id="magazineForm-container" class="magazine-container">
 
-	<div class="">
-		<form name="magazineEnrollFrm"
-		method="post"
-		action="<%=request.getContextPath()%>/magazine/magazineEnroll"
-		<input type="hidden" name="no" value="<%=loginMember.getMemberId()%>" /> >
-		<!-- enctype="multipart/form-data"
+				<div class="">
+					<form name="magazineEnrollFrm" method="post"
+						action="<%=request.getContextPath()%>/magazine/magazineEnroll"
+						<input type="hidden" name="no" value="<%=loginMember.getMemberId()%>" />>
+						<!-- enctype="multipart/form-data"
 			accept-charset="UTF-8" -->
-			
-			<h3 id="logo">Magazine Insert</h3>
-			<br>
-		<!-- 매거진 게시물 등록 폼 시작 -->
-		<tr>
-			<label for="username"><th>지역</th></label>
-			<td class="text-td"><select name="region" id="region" required class="form-select" aria-label="Default select example">
-					<option value="0">선택</option>
-					<option value="강원도">강원도</option>
-					<option value="부산">부산</option>
-					<option value="제주도">제주도</option>
-			</select></td>
-		</tr>
-		
-		<tr>
-			<label for="username"><th>제목</th></label>
 
-			<td class="text-td"><input type="text" name="title" id="title"
-				value="<%=loginMember.getMemberName()%>님의 레시피입니다." readonly /></td>
-		</tr>
-		
-		<tr>
-			<label for="username"><th>작성자</th></label>
+						<h3 id="logo">Magazine Insert</h3>
+						<br>
+						<!-- 매거진 게시물 등록 폼 시작 -->
+						<tr>
+							<label for="username"><th>지역</th></label>
+							<td class="text-td"><select name="region" id="region"
+								required class="form-select" aria-label="Default select example">
+									<option value="0">선택</option>
+									<option value="강원도">강원도</option>
+									<option value="부산">부산</option>
+									<option value="제주도">제주도</option>
+							</select></td>
+						</tr>
 
-			<td class="text-td"><input type="text" name="writer" id="writer"
-				value="<%=loginMember.getMemberId()%>" readonly /></td>
-		</tr>
-		
-		<!-- 파일 추후에 수정 -->
-		<tr>
-			<label for="username"><th>첨부파일</th></label>
+						<tr>
+							<label for="username"><th>제목</th></label>
 
-			<td class="text-td">
-			<input type="file" name="upFile1" id="upfile" />
-		</tr>
+							<td class="text-td"><input type="text" name="title"
+								id="title" value="<%=loginMember.getMemberName()%>님의 레시피입니다."
+								readonly /></td>
+						</tr>
 
-		<tr>
-			<label for="username"><th>내 용</th></label>
-			<td class="text-td"><textarea id="content" name="content"
-					id="content" rows="10" cols="40" autocomplete="off" required></textarea>
-			</td>
+						<tr>
+							<label for="username"><th>작성자</th></label>
 
-		</tr>
+							<td class="text-td"><input type="text" name="writer"
+								id="writer" value="<%=loginMember.getMemberId()%>" readonly /></td>
+						</tr>
 
-		<tr>
-			<th colspan="2">
-				<input type="submit" id="btn" class="insert-btn"
-				value="등록" /> 
-				<input type="button" id="btn" class="listback-btn"
-				value="취소" onclick="history.go(-1);" /></th>
-		</tr>
-		</table>
+						<!-- 파일 추후에 수정 -->
+						<tr>
+							<label for="username"><th>첨부파일</th></label>
 
+							<td class="text-td"><input type="file" name="upFile1"
+								id="upfile" />
+						</tr>
 
-	</form>
-	</div>
+						<tr>
+							<label for="username"><th>내 용</th></label>
+							<td class="text-td"><textarea id="content" name="content"
+									id="content" rows="10" cols="40" autocomplete="off" required></textarea>
+							</td>
 
-</section>
+						</tr>
+
+						<tr>
+							<th colspan="2"><input type="submit" id="btn"
+								class="insert-btn" value="등록" /> <input type="button" id="btn"
+								class="listback-btn" value="취소" onclick="history.go(-1);" /></th>
+						</tr>
+						</table>
 
 
+					</form>
+				</div>
+
+			</section>
 
 
 
 
-<style>
+
+
+			<style>
 @import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
 
 @import
-	url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+	url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap')
+	;
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-form { 
- font-family: 'Noto Sans KR', sans-serif;
+form {
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
@@ -292,7 +300,6 @@ form label {
 form label, form input {
 	float: left;
 	clear: both;
-
 }
 
 form input {
@@ -323,12 +330,12 @@ form input[type="submit"] {
 	font-size: 15px;
 	padding: 15px 50px;
 	width: auto;
-	background: rgb(128, 151, 194) ;
+	background: rgb(128, 151, 194);
 	border: none;
 	color: rgb(54, 54, 54);
 	cursor: pointer;
 	display: inline-block;
-	float : right;
+	float: right;
 	clear: right;
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
@@ -351,13 +358,13 @@ form input[type="button"] {
 	font-size: 15px;
 	padding: 15px 50px;
 	width: auto;
-	background: rgb(128, 151, 194) ;
+	background: rgb(128, 151, 194);
 	border: none;
 	color: rgb(54, 54, 54);
 	cursor: pointer;
 	position: relative;
 	display: inline-block;
-	float :left;
+	float: left;
 	clear: left;
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
@@ -365,8 +372,6 @@ form input[type="button"] {
 	-o-transition: 0.2s ease all;
 	transition: 0.2s ease all;
 	font-weight: bold;
-	
-
 }
 
 form textarea {
@@ -426,7 +431,7 @@ form select {
 	font-size: 60px;
 	font-weight: bold;
 	text-align: center;
-	color: rgb(128, 151, 194) ;
+	color: rgb(128, 151, 194);
 	-webkit-transition: 0.2s ease all;
 	-moz-transition: 0.2s ease all;
 	-ms-transition: 0.2s ease all;
@@ -441,21 +446,20 @@ form select {
 
 
 
-<!-- 여기까지 footer영역 -->		
-</section>
-			<footer>
-		<div class="footer">
-			<p>㈜ Travle Lap</p>
-			<p>서울특별시 강남구 강남구 테헤란로14길 6</p>
-			<p>사업자 등록번호: 001-01-0001</p>
-			<p>고객센터 02)1234-1234</p>
-		</div>
-	</footer>
+			<!-- 여기까지 footer영역 -->
+		</section>
+		<footer>
+			<div class="footer">
+				<p>㈜ Travle Lap</p>
+				<p>서울특별시 강남구 강남구 테헤란로14길 6</p>
+				<p>사업자 등록번호: 001-01-0001</p>
+				<p>고객센터 02)1234-1234</p>
+			</div>
+		</footer>
 	</div>
 	<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/popper.js"></script>
 	<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 </body>
 </html>
-	
-	
+

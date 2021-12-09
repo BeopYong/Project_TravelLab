@@ -2,7 +2,6 @@ package com.tlab.mvc.admin.exception;
 
 public class AdminException extends RuntimeException {
 
-
 	private static final long serialVersionUID = 1L;
 
 	public AdminException() {
@@ -30,5 +29,4 @@ public class AdminException extends RuntimeException {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

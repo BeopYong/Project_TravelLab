@@ -19,16 +19,18 @@ public class CsCommentDelete extends HttpServlet {
 	private CsService csService = new CsService();
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int csBoardno = Integer.parseInt(request.getParameter("csBoardno"));
 		int no = Integer.parseInt(request.getParameter("no"));
 		System.out.println("csBoardno=" + csBoardno + ", no = " + no);
 
 		int result = csService.deleteCsComment(no);
-		String msg = (result > 0) ? "댓글이 삭제 되었습니다." : "댓글 삭제에 실패하였습니다.";	
-		
+		String msg = (result > 0) ? "댓글이 삭제 되었습니다." : "댓글 삭제에 실패하였습니다.";
+
 		request.getSession().setAttribute("msg", msg);
 		String location = request.getContextPath() + "/cs/csView?no=" + csBoardno;
 		response.sendRedirect(location);

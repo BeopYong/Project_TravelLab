@@ -24,19 +24,20 @@ public class AdminFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		
+
 		HttpSession session = httpRequest.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		if(loginMember == null || !MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) {
+		if (loginMember == null || !MemberService.ADMIN_ROLE.equals(loginMember.getMemberRole())) {
 			session.setAttribute("msg", "관리자만 이용 가능합니다.");
 			String location = httpRequest.getContextPath();
 			httpResponse.sendRedirect(location);
 			return;
 		}
-		
+
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

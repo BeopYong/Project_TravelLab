@@ -604,50 +604,50 @@ img {
 	const day1List = $(".day1").find(".portlet-header p").text();
 	console.log(day1List);
 		
-$('.portlet-header').mouseup((e)=> {	
-	let $dayList1 = $(".day1").find(".portlet-header p.p-explain");
-	console.log($dayList1);
-	
-	$dayList1.each ((i,element)=>{
-		let $element = $(element).text();
-		console.log($element);
-	}); 
-	
-	let $dayList2 = $(".day2").find(".portlet-header p");
-	console.log($dayList2);
-	$dayList2.each ((i,element)=>{
-		let $element = $(element).text();
-		console.log($element);
-	}); 
-	
-	let $dayList3 = $(".day3").find(".portlet-header p");
-	console.log($dayList3);
-	$dayList3.each ((i,element)=>{
-		let $element = $(element).text();
-		console.log($element);
-	});
-	
-	const $memberId = "<%=loginMember.getMemberId()%>";
-	console.log($memberId);
-});	
-	 <%-- $.ajax ({
-		url :"<%=request.getContextPath()%>/schedule/myScheduleUpdate",
-		type:"post",
-		data:{
-				memberId: memberId
-				day1: dayList1,
-				day2: dayList2,
-				day3: dayList3
+	$('.portlet-header').mouseup((e)=> {	
+		let $dayList1 = $(".day1").find(".portlet-header p.p-explain");
+		console.log($dayList1); 
+		
+		$dayList1.each ((i,element)=>{
+			var $element = $(element).text();
+			/* console.log($element); */
+		}); 
+		
+		let $dayList2 = $(".day2").find(".portlet-header p");
+		console.log($dayList2);
+		$dayList2.each ((i,element)=>{
+			var $element = $(element).text();
+			/* console.log($element); */
+		}); 
+		
+		let $dayList3 = $(".day3").find(".portlet-header p");
+		console.log($dayList3);
+		$dayList3.each ((i,element)=>{
+			var $element = $(element).text();
+			/* console.log($element); */
+		});
+		
+		const $memberId = "<%=loginMember.getMemberId()%>";
+		console.log($memberId);
+	});	
+		 <%-- $.ajax ({
+			url :"<%=request.getContextPath()%>/schedule/myScheduleUpdate",
+			type:"post",
+			data:{
+					memberId: memberId
+					day1: dayList1,
+					day2: dayList2,
+					day3: dayList3
+				}
+			dataType:'json',
+			success(data){
+				console.log(data);
 			}
-		dataType:'json',
-		success(data){
-			console.log(data);
-		}
-		error: () => {
-			return false;
-		}		
-	});  --%>	
-	</script>
+			error: () => {
+				return false;
+			}		
+		});  --%>	
+		</script>
 </body>
 
 </html>
