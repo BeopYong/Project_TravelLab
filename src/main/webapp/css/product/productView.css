@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Cafe24Ssurround';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+.container {
+  width : 90%;
+  margin: 5% auto 5% auto;
+  padding: 50px 20px 50px 20px;
+  position : relative;
+   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(36, 35, 35, 0.22);
+  border-radius: 5%;
+}
+
+
+.img-box {
+  width : 360px;
+  height: 480px;
+  padding : 0;
+	display : inline-block;
+	  float : left;
+	  margin : 60px;
+	    	   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(36, 35, 35, 0.22);
+	  
+	
+}
+
+.img-box img {
+	width : 360px;
+	height : 480px;
+	border-radius : 6px;
+}
+
+.left {
+  width : 300px;
+  height: 500px;
+	display : inline-block;
+/*   margin-left: 25%; */
+/*   margin-top : 20px; */
+  font-family: 'Cafe24Ssurround';
+  	display : inline-block;
+  	margin-top : 50px;
+  	margin-left : 15px;
+  	position : relative;
+  	   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(36, 35, 35, 0.22);
+  	
+  
+}
+
+
+.left::before{ 
+  content : '';
+  position: absolute;
+  top : 0;
+  left : 0;
+  width: 100%;
+  height: 24px;
+  background : linear-gradient(-135deg, #f8f8f8 12px, transparent 0%), linear-gradient(135deg, #f8f8f8 12px, transparent 0%);
+  background-size: 24px;
+}
+
+.left::after{ 
+  content : '';
+  position: absolute;
+  bottom : 0;
+  left : 0;
+  width: 100%;
+  height: 24px;
+  background : linear-gradient(-45deg, #f8f8f8 12px, transparent 0%), linear-gradient(45deg, #f8f8f8 12px, transparent 0%);
+  background-size: 24px;
+}
+
+
+
+
+
+
+
+.right {
+  width : 400px;
+  height: 250px;
+  margin-left : 3%;
+/*   float: right; */
+	display : inline-block;
+  font-family: 'Cafe24Ssurround';
+  position : relative;
+  bottom : 250px;
+  color : aaa2a2;
+  
+  
+}
+
+.right h1 {
+	text-align : center;
+}
+
+.right p {
+	font-size : 25px;
+	margin-top : 15px;
+}
+
+
+#btn1, #btn2{
+	padding-right : 50px;
+	padding-left : 50px;
+	position : absolute;
+	bottom : -10%;
+}
+
+#btn1 {
+	right : 23%;
+}
+
+#btn2 {
+	right : 10%;
+}
+
+
+.product p {
+	display : inline-block;
+}
+
+
+.barcode {
+	font-family: 'Libre Barcode 39 Text', cursive;
+	font-size : 40px;
+	text-align : center;
+}
+
+
+
+
+

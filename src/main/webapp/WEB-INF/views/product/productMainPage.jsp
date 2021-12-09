@@ -69,13 +69,6 @@ $(p_category).change((e) => {
 				</form>
 			</div>
 	</div>
-	
-	
-	<tr>
-		<td>
-	  <a href="<%= request.getContextPath()%>/product/productTest">바로가기</a>	
-		</td>
-	</tr>
 
    	<form action="<%= request.getContextPath()%>/product/productEnroll" method="POST" name="ProductEnrollFrm">
    	<input type="hidden" name="no" value="">
