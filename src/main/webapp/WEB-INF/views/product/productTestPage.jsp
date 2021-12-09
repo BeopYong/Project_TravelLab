@@ -1,7 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@page import="java.util.List"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>당신의 여행을 응원합니다</title>
+</head>
+<body>
+
+
+<!-- 여기부터 쭉 시작 -->
 <%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -114,5 +126,192 @@
 
 
 </section>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Lily+Script+One);
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+form { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+	margin: 0;
+	font-family: arial, tahoma, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	direction: ltr;
+	background: white;
+}
+
+form {
+	margin: 10% auto 0 auto;
+	padding: 30px;
+	width: 800px;
+	height: auto;
+	overflow: hidden;
+	background: white;
+	border-radius: 10px;
+}
+
+form label {
+	font-size: 17px;
+	color: darkgray;
+	cursor: pointer;
+}
+
+form label, form input {
+	float: left;
+	clear: both;
+
+}
+
+form input {
+	margin: 19px 0;
+	padding: 15px 10px;
+	width: 100%;
+	outline: none;
+	border: 1px solid #bbb;
+	border-radius: 20px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+}
+
+form input[type="text"]:focus, form input[type="password"], form textarea :focus
+	{
+	border-color: cornflowerblue;
+}
+
+form input[type="submit"] {
+	vertical-align: middle;
+	font-size: 15px;
+	padding: 15px 50px;
+	width: auto;
+	background: rgb(128, 151, 194) ;
+	border: none;
+	color: rgb(54, 54, 54);
+	cursor: pointer;
+	display: inline-block;
+	float : right;
+	clear: right;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+	font-weight: bold;
+}
+
+form input[type="submit"] :hover {
+	opacity: 0.8;
+}
+
+form input[type="submit"] :active {
+	opacity: 0.4;
+}
+
+form input[type="button"] {
+	vertical-align: middle;
+	font-size: 15px;
+	padding: 15px 50px;
+	width: auto;
+	background: rgb(128, 151, 194) ;
+	border: none;
+	color: rgb(54, 54, 54);
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	float :left;
+	clear: left;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+	font-weight: bold;
+	
+
+}
+
+form textarea {
+	margin: 15px 0;
+	padding: 15px 10px;
+	width: 800px;
+	outline: none;
+	border: 1px solid #bbb;
+	border-radius: 20px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+	resize: vertical;
+}
+
+form select {
+	margin: 15px 0;
+	padding: 15px 10px;
+	width: 100%;
+	outline: none;
+	border: 1px solid #bbb;
+	border-radius: 20px;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+}
+
+.forgot, .register {
+	margin: 10px;
+	float: left;
+	clear: left;
+	display: inline-block;
+	color: cornflowerblue;
+	text-decoration: none;
+}
+
+.forgot:hover, .register:hover {
+	color: darkgray;
+}
+
+#logo {
+	margin: 100;
+	/* width: 200px;// */
+	font-family: 'Hammersmith One', sans-serif;
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+	color: rgb(128, 151, 194) ;
+	-webkit-transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-ms-transition: 0.2s ease all;
+	-o-transition: 0.2s ease all;
+	transition: 0.2s ease all;
+}
+
+#logo:hover {
+	color: rgb(143, 146, 148);
+}
+</style>
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

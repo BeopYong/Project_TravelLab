@@ -3,14 +3,26 @@
 <%@page import="com.tlab.mvc.magazine.model.vo.Magazine"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	Magazine magazine = (Magazine) request.getAttribute("magazine");
 	List<MagazineAttachment> attachments = magazine.getAttachments();
 %>
-<!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/board.css" /> -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/magazine.css" />
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
+    <link rel="icon" href="<%= request.getContextPath() %>/images/icons/tourist.png">
+    
+<!--  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine.css" /> -->
+ <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+    <!-- Bootstrap core CSS -->
+    <link href="<%= request.getContextPath() %>/css/magazine/bootstrapv.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="<%= request.getContextPath() %>/css/magazine/blog.css" rel="stylesheet">
+    <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+    
+<!-- javaScript -->
 <script>
 		/**
 		 * 유효성검사
@@ -236,42 +248,76 @@ form input[type="button"] {
 	font-weight: bold;
 }
 
-form textarea {
-	margin: 15px 0;
-	padding: 15px 10px;
-	width: 800px;
-	outline: none;
-	border: 1px solid #bbb;
-	border-radius: 20px;
-	display: inline-block;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: 0.2s ease all;
-	-moz-transition: 0.2s ease all;
-	-ms-transition: 0.2s ease all;
-	-o-transition: 0.2s ease all;
-	transition: 0.2s ease all;
-	resize: vertical;
-}
+	form textarea {
+		margin: 15px 0;
+		padding: 15px 10px;
+		width: 950px;
+		outline: none;
+		border: 1px solid #bbb;
+		border-radius: 20px;
+		display: inline-block;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		-webkit-transition: 0.2s ease all;
+		-moz-transition: 0.2s ease all;
+		-ms-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
+		transition: 0.2s ease all;
+		resize: vertical;
+	}
+	
+	form select {
+		margin: 15px 0;
+		padding: 15px 10px;
+		width: 100%;
+		outline: none;
+		border: 1px solid #bbb;
+		border-radius: 20px;
+		display: inline-block;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		-webkit-transition: 0.2s ease all;
+		-moz-transition: 0.2s ease all;
+		-ms-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
+		transition: 0.2s ease all;
+	}
+	
+	.forgot, .register {
+		margin: 10px;
+		float: left;
+		clear: left;
+		display: inline-block;
+		color: darkgray;
+		text-decoration: none;
+	}
+	
+	.forgot:hover, .register:hover {
+		color: rgb(255, 206, 100) ;
+	}
+	
+	#logo {
+		margin: 10%;
+		/* width: 200px;// */
+		font-family: 'Hammersmith One', sans-serif;
+		font-size: 60px;
+		font-weight: bold;
+		text-align: center;
+		color: rgb(255, 206, 100) ;
+		-webkit-transition: 0.2s ease all;
+		-moz-transition: 0.2s ease all;
+		-ms-transition: 0.2s ease all;
+		-o-transition: 0.2s ease all;
+		transition: 0.2s ease all;
+	}
+	
+	#logo:hover {
+		color: rgb(143, 146, 148);
+	}
+	</style>
 
-form select {
-	margin: 15px 0;
-	padding: 15px 10px;
-	width: 100%;
-	outline: none;
-	border: 1px solid #bbb;
-	border-radius: 20px;
-	display: inline-block;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: 0.2s ease all;
-	-moz-transition: 0.2s ease all;
-	-ms-transition: 0.2s ease all;
-	-o-transition: 0.2s ease all;
-	transition: 0.2s ease all;
-}
 
 .forgot, .register {
 	margin: 10px;

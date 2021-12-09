@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.List"%>
+<%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
+<%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -24,8 +27,14 @@
 	$(document.productEnrollFrm).submit(productValidate);
 </script>
 
+<section id="productForm-container" class="product-container">
 
-<section>
+<div class="write-box">
+	<form name="productEnrollFrm" method="post"
+		action="<%=request.getContextPath()%>/product/productEnroll"
+		enctype="multipart/form-data">
+		<h3 id="logo">상품 업로드</h3>
+			<br>
 
 	<form name="productEnrollFrm" method="post"
 		action="<%=request.getContextPath()%>/product/productEnroll"

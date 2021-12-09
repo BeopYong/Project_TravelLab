@@ -462,14 +462,12 @@ p#content-view {
 	</div>
 
 	<!-- 푸터 -->
-	<footer>
-		<div class="footer">
-			<p>㈜ Travle Lap</p>
-			<p>서울특별시 강남구 강남구 테헤란로14길 6</p>
-			<p>사업자 등록번호: 001-01-0001</p>
-			<p>고객센터 02)1234-1234</p>
-		</div>
-	</footer>
+<footer class="blog-footer">
+  <p>㈜ Travle Lap</p>
+  <p>서울특별시 강남구 강남구 테헤란로14길 6</p>
+  <p>사업자 등록번호: 001-01-0001</p>
+  <p>고객센터 02)1234-1234</p>
+</footer>
 	</section>
 	<script>
 		/**

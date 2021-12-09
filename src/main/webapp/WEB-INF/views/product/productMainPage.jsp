@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>당신의 여행을 응원합니다</title>
+</head>
+<body>
+
+
+<!-- 여기부터 쭉 시작 -->
 <%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -137,6 +149,7 @@ $(p_category).change((e) => {
 	</table>
 
 </section>
+</div>
 
 
 

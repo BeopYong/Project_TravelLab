@@ -1,4 +1,13 @@
-<%@page import="com.tlab.mvc.common.Attachment"%>
+<!DOCTYPE html>
+<%@page import="com.tlab.mvc.product.model.vo.ProductEntity"%>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>당신의 여행을 응원합니다</title>
+
+<!-- 여기부터 쭉 시작 -->
 <%@page import="com.tlab.mvc.product.model.vo.ProductAttachment"%>
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -11,6 +20,8 @@
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <section>
+
+<div p_container>
 	<td>
 		<form name="form"
 			action="<%=request.getContextPath()%>/product/productList">
@@ -32,7 +43,18 @@ $(p_category).change((e) => {
 	
 });
 
-</script>
+</script>	
+    
+    		<div id="product-container">
+			<div id="search-p_content" class="search-type">
+				<form action="<%=request.getContextPath()%>/product/productFinder">
+					<input type="hidden" name="searchType" value="p_content" />
+					<input type="text" name="searchKeyword" size = "25" placeholder="검색할 내용을 입력하세요." id="product-seaerch-bar" />
+					<button type="submit">검색</button>
+				</form>
+			</div>
+	</div>
+	
 
 
 	<div class="container">
