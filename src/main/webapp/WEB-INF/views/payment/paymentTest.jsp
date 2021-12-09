@@ -5,10 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = (Member) session.getAttribute("loginMember");
+	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 	List<Payment> list = (List<Payment>) request.getAttribute("list");
 	DecimalFormat dFormat = new DecimalFormat("###,###");
 %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
 <title>PaymentList</title>
 </head>
 <body>
-	<div class="wrap">
+	<%-- <div class="wrap">
 			<div class="container">
                 <!-- 우측으로 배치. 로그인해서 장바구니페이지로 넘어오면 loginMember.getMemberId() 찍히게 -->
 		        <div class="reg">
@@ -61,7 +62,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --%>
     <section class="ftco-section">
     	<div class="container">
     		<div class="row">

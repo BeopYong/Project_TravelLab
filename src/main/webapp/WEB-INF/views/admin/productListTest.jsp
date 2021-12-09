@@ -6,13 +6,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = (Member) session.getAttribute("loginMember");
+	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 	List<ProductEntity> list = (List<ProductEntity>) request.getAttribute("list");
 	System.out.println("productList@productList.jsp" + list);
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 	DecimalFormat dFormat = new DecimalFormat("###,###");
 %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/productList.css" />
 <style>
 section#content {
@@ -58,7 +59,7 @@ div#search-gdsName {
 <title>AdminProductList</title>
 </head>
 <body>
-	<div class="wrap">
+	<%-- <div class="wrap">
 			<div class="container">
 		        <div class="reg">
 		        	<p class="mb-0"><a href="#" class="mr-2">[ <%= loginMember.getMemberName() %> ]님, 안녕하세요</a></p>
@@ -92,7 +93,7 @@ div#search-gdsName {
           </div>
         </div>
       </div>
-    </section>
+    </section> --%>
 
     <section class="ftco-section">
     	<section id="productList-container">
@@ -287,9 +288,9 @@ $(".product-stock").change((e) => {
 
   <script src="<%=request.getContextPath() %>/js/cartList/jquery.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/cartList/jquery-migrate-3.0.1.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/popper.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/bootstrap.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.easing.1.3.js"></script>
+  <%-- <script src="<%=request.getContextPath() %>/js/cartList/popper.min.js"></script> --%>
+  <%-- <script src="<%=request.getContextPath() %>/js/cartList/bootstrap.min.js"></script> --%>
+  <%-- <script src="<%=request.getContextPath() %>/js/cartList/jquery.easing.1.3.js"></script> --%>
   <script src="<%=request.getContextPath() %>/js/cartList/jquery.waypoints.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/cartList/jquery.stellar.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/cartList/owl.carousel.min.js"></script>
@@ -297,8 +298,8 @@ $(".product-stock").change((e) => {
   <script src="<%=request.getContextPath() %>/js/cartList/jquery.animateNumber.min.js"></script>
   <script src="<%=request.getContextPath() %>/js/cartList/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/google-map.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath() %>/js/cartList/bootstrap-select.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/main.js"></script>
+  <%-- <script src="<%=request.getContextPath() %>/js/cartList/google-map.js"></script> --%>
+  <%-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath() %>/js/cartList/bootstrap-select.min.js"></script> --%>
+<script src="<%=request.getContextPath() %>/js/cartList/main.js"></script>
 </body>
 </html>

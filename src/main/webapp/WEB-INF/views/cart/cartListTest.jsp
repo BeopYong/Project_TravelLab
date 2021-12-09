@@ -5,10 +5,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = (Member) session.getAttribute("loginMember");
+	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 	List<Cart> list = (List<Cart>) request.getAttribute("list");
 	DecimalFormat dFormat = new DecimalFormat("###,###");
 %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
 <title>CartList</title>
 </head>
 <body>
-	<div class="wrap">
+	<%-- <div class="wrap">
 			<div class="container">
 		        <div class="reg">
 		        	<p class="mb-0"><a href="#" class="mr-2">[ <%= loginMember.getMemberName() %> ]님, 안녕하세요</a></p>
@@ -60,7 +61,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --%>
 
     <section class="ftco-section">
     	<form action="<%=request.getContextPath()%>/member/cartList"

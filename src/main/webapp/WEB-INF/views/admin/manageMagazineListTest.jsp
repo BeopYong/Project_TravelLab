@@ -4,11 +4,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = (Member) session.getAttribute("loginMember");
+	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 	List<Magazine> list = (List<Magazine>) request.getAttribute("list");
 	String searchType = request.getParameter("searchType");
 	String searchKeyword = request.getParameter("searchKeyword");
 %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/manageMagazineList.css" />
 <style>
 section#content {
@@ -57,7 +58,7 @@ div#search-title {
 <title>AdminProductList</title>
 </head>
 <body>
-	<div class="wrap">
+	<%-- <div class="wrap">
 			<div class="container">
 		        <div class="reg">
 		        	<p class="mb-0"><a href="#" class="mr-2">[ <%= loginMember.getMemberName() %> ]님, 안녕하세요</a></p>
@@ -91,11 +92,10 @@ div#search-title {
           </div>
         </div>
       </div>
-    </section>
+    </section> --%>
 
 <section id="magazineList-container">
-	<h2>매거진관리</h2>
-
+	<h2 style="margin-bottom: 40px">매거진관리</h2>
 	<div id="search-container">
 		<label for="searchType">검색타입 :</label> <select id="searchType">
 			<option value="cateCode"

@@ -7,7 +7,7 @@ List<Magazine> list = (List<Magazine>) request.getAttribute("list");
 String searchType = request.getParameter("searchType");
 String searchKeyword = request.getParameter("searchKeyword");
 %>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
 <!-- 관리자용 admin.css link -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/manageMagazineList.css" />
@@ -161,4 +161,4 @@ $(".magazine-valid").change((e) => {
 
 
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<%-- <%@ include file="/WEB-INF/views/common/footer.jsp"%> --%>

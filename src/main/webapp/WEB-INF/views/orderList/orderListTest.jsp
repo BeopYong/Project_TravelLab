@@ -5,8 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Member loginMember = (Member) session.getAttribute("loginMember");
+	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
 <title>OrderList</title>
 </head>
 <body>
-	<div class="wrap">
+	<%-- <div class="wrap">
 			<div class="container">
 		        <div class="reg">
 		        	<p class="mb-0"><a href="#" class="mr-2">[ <%= loginMember.getMemberName() %> ]님, 안녕하세요</a></p>
@@ -58,7 +59,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> --%>
 	<div class="row justify-content-end">
 		<div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate" style="display: block; margin: auto;">
 			<div class="cart-total mb-3">

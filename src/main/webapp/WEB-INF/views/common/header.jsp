@@ -180,7 +180,7 @@ $(() => {
 <body>
 	<div id="container">
 		<header>
-			<h1 class="logo" style="font-family:'yg-jalnan';" font-size: 3em;">Travle lab</h1>
+			<h1 class="logo" style="font-family:'yg-jalnan';" font-size: 3em;">Travel lab</h1>
 				<div class="login-container">
 <% if(loginMember == null){ %>
 					<!-- 로그인폼 시작 -->

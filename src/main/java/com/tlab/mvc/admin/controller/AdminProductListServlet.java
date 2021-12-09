@@ -28,7 +28,7 @@ public class AdminProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			final int numPerPage = 10;
+			final int numPerPage = 5;
 			int cPage = 1;
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));
