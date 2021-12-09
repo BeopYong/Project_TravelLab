@@ -37,7 +37,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
     <!-- Bootstrap core CSS -->
     <link href="<%= request.getContextPath() %>/css/magazine/bootstrapv.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/product.css" />
     
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
@@ -46,7 +45,7 @@
     <link href="<%= request.getContextPath() %>/css/magazine/blog.css" rel="stylesheet">
     <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
     
-    <link rel="icon" href="<%= request.getContextPath() %>/images/icons/travel.png">
+    <link rel="icon" href="<%= request.getContextPath() %>/images/icons/tourist.png">
 <!-- javaScript -->
 <script> 
 $(() => {
@@ -157,9 +156,8 @@ $(() => {
           <% } %>
                   </div>
                   <!-- 로그인 컨데이너 끝 -->
-        <a class="link-secondary" href="#" aria-label="Search">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
-        </a>        
+    
+               
       </div>
     </div>
   </header>

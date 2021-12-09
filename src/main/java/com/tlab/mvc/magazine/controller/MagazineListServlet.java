@@ -45,7 +45,7 @@ public class MagazineListServlet extends HttpServlet {
 		try {
 			//1. 사용자 입력값
 			int cPage = 1;
-			final int numPerPage = 5;
+			final int numPerPage = 6;
 			
 			try {
 				cPage = Integer.parseInt(request.getParameter("cPage"));

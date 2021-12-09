@@ -4,26 +4,39 @@
 <%@page import="com.tlab.mvc.magazine.model.vo.Magazine"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/Nheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/headerr.jsp"%>
 <head>
+    <link rel="icon" href="<%= request.getContextPath() %>/images/icons/tourist.png">
+ <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+    <!-- Bootstrap core CSS -->
+    <link href="<%= request.getContextPath() %>/css/magazine/bootstrapv.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="<%= request.getContextPath() %>/css/magazine/blog.css" rel="stylesheet">
+    <script src="<%= request.getContextPath() %>/js/jquery-3.6.0.js"></script>
+    
+<!-- javaScript -->
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <title>129 Beyond Travel Agency</title>
+    <title>Magazine view</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/bootstrap.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/beyond/bootstrap.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/style.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/font-awesome.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/owl.carousel.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/nice-select.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/animate.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/jquery-ui.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/font-awesome.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/owl.carousel.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/nice-select.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/animate.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/jquery-ui.css">
    <!-- <link rel="stylesheet" href="<%=request.getContextPath()%>/vendors/popup/magnific-popup.css">-->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/swiper.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/linericon/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/swiper.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/jquery.mCustomScrollbar.css">
     <!-- main css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/magazine/blog/beyondstyle.css">
 </head>
 
 <body>
@@ -127,14 +140,14 @@
             
                         <%-- 작성자와 관리자만 마지막행 수정/삭제버튼이 보일수 있게 할 것 --%>
             
-                        <input type="button" value="수정하기" class="btn-reply text-uppercase"
+                        <input type="button" value="수정하기" class="btn-reply"
                             onclick="updateMagazine()"> 
-                            <input type="button"
+                            <input type="button" class="btn-reply"
                             value="삭제하기" class="btn-reply text-uppercase" onclick="deleteMagazine()">
                         <%
                         }
                         %>
-                        <input type="button" value="목록" class="btn-reply text-uppercase"
+                        <input type="button" value="목록" class="btn-reply"
                             onclick="location.href = '<%=request.getContextPath()%>/magazine/magazineList';" />
 
                     <div class="navigation-area">
@@ -146,6 +159,23 @@
                 </div>
             </div>
         </div>
+<style>
+
+/*magazineView btn*/
+.btn-reply {
+	background-color : white;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+  a:hover, a:focus {
+    text-decoration: none;
+    outline: none; }
+.btn-reply:hover {
+      background-color: #f8b600;
+      color: #fff; }
+</style>
     </section>
     <!--================Blog Area =================-->
 <!-- 글쓴이 또는 관리자만 deletemagazine 권한생성 -->
