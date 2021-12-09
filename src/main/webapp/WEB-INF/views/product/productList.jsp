@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.tlab.mvc.product.model.vo.ProductEntity"%>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -78,9 +79,9 @@ $(p_category).change((e) => {
 	
    <%
     List<ProductAttachment> pAttach = (List<ProductAttachment>) request.getAttribute("pAttach");
-   	List<Product> productList = (List<Product>) request.getAttribute("productList");
+   	List<ProductEntity> productList = (List<ProductEntity>) request.getAttribute("productList");
  
-   	for(Product product : productList) {
+   	for(ProductEntity product : productList) {
    %>
       <div class="product-view">
 		<a href="<%= request.getContextPath() %>/product/productView?no=<%=product.getNo()%>">

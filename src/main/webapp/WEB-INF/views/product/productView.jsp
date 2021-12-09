@@ -29,6 +29,7 @@
 	action="<%= request.getContextPath()%>/cart/cartList">
     
     <div class="all-wrapper">
+    	 <button type="button" class="btn btn-danger" id="btn3" onclick="history.go(-1);">X</button>
     <div class="container">
       <div class="img-box">
 	 	<%
@@ -49,13 +50,13 @@
       	    
       	    <div class="product">
 			<label for="product">지역 : </label>
-      	  <p><%=product.getRegion()%></p>
+      	  <p><%= product.getRegion() != null ? product.getRegion() : "" %></p>
       	  <input type="hidden" name="region" value="<%=product.getRegion()%>"/>
       	  </div>
       	  
       	    <div class="product">
       	  <label for="product">가격 : </label>
-      	  <p><%=product.getUnit_price()%>원</p>
+      	  <p><%=product.getUnit_price()%></p>
       	  <input type="hidden" name="unit_price" value="<%= product.getUnit_price()%>"/>
       	  </div>
       	  
@@ -74,6 +75,10 @@
       	  <label for="">총 결제금액 : </label>
 			<input type="text" name="product_bill" readonly>
       	  </div>
+<!--       	  <div class="product"> -->
+<!--       	  <label for="">상세 정보 : </label> -->
+<%-- 			<p><%=product.getP_content() != null ? product.getP_content() : ""%></p> --%>
+<!--       	  </div> -->
       	  <div class="barcode">
       	  	<p>Travel Lab</p>
       	  </div>
@@ -82,8 +87,8 @@
       	  
       	  <div class="right">
       	  <h1>✔상세 정보✔</h1>
-      	  <p><%=product.getP_content() %></p>
-      	  </div>
+      	  <p><%=product.getP_content() != null ? product.getP_content() : ""%></p>
+      	
       	
       	
       		<tr>	
