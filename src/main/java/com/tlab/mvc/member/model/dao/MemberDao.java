@@ -17,12 +17,12 @@ import com.tlab.mvc.member.model.exception.MemberException;
 import com.tlab.mvc.member.model.vo.Member;
 import com.tlab.mvc.member.model.vo.MemberAttachment;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class MemberDao {
 
 	private Properties prop = new Properties();
-	private Logger logger = Logger.getRootLogger();
+//	private Logger logger = Logger.getRootLogger();
 
 	public MemberDao() {
 
@@ -32,7 +32,7 @@ public class MemberDao {
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 		}
 	}
 
@@ -60,7 +60,7 @@ public class MemberDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 		} finally {			
 			close(rset);
 			close(pstmt);
@@ -85,7 +85,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원가입 오류!", e);
 		} finally {
 			// 3.자원반납
@@ -106,7 +106,7 @@ public class MemberDao {
 			pstmt.setString(3,mAttach.getMemberId());
 		} catch(Exception e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage()+pstmt.toString());
+//			logger.debug(e.getMessage()+pstmt.toString());
 		} finally {
 			close(pstmt);
 		}
@@ -129,7 +129,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("업데이트 오류!", e);
 		} finally {
 			close(pstmt);
@@ -149,7 +149,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원 삭제 오류!", e);
 		} finally {
 			close(pstmt);
@@ -169,7 +169,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("비밀번호 수정 오류!", e);
 		} finally {
 			close(pstmt);
@@ -189,7 +189,7 @@ public class MemberDao {
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원권한변경 오류!", e);
 		} finally {
 			close(pstmt);
@@ -208,7 +208,7 @@ public class MemberDao {
 			pstmt.setString(2, member.getMemberId());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			throw new MemberException("회원유효성변경 오류!", e);
 		} finally {
 			close(pstmt);
@@ -250,7 +250,7 @@ public class MemberDao {
 				list.add(member);
 			}
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -287,7 +287,7 @@ public class MemberDao {
 				list.add(member);
 			}
 		} catch (SQLException e) {
-			logger.debug(e.getMessage() + pstmt.toString());
+//			logger.debug(e.getMessage() + pstmt.toString());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -307,7 +307,7 @@ public class MemberDao {
 			if (rset.next())
 				totalCount = rset.getInt(1); // 컬럼 인덱스
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			close(rset);

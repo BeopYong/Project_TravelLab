@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import com.tlab.mvc.schedule.model.exception.ScheduleException;
 import com.tlab.mvc.schedule.model.vo.Schedule;
@@ -21,7 +21,7 @@ import com.tlab.mvc.schedule.model.vo.Schedule;
 public class ScheduleDao {
 
 	private Properties prop = new Properties();
-	private Logger logger = Logger.getRootLogger();
+//	private Logger logger = Logger.getRootLogger();
 
 	public ScheduleDao() {
 		String filepath = ScheduleDao.class.getResource("/schedule-query.properties").getPath();
@@ -30,7 +30,7 @@ public class ScheduleDao {
 			prop.load(new FileReader(filepath));
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 		}
 	}
 

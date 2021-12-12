@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import com.tlab.mvc.member.model.service.MemberService;
 import com.tlab.mvc.member.model.vo.Member;
@@ -21,7 +21,7 @@ import com.tlab.mvc.member.model.vo.Member;
 public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	private Logger logger = Logger.getRootLogger();
+//	private Logger logger = Logger.getRootLogger();
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -61,7 +61,7 @@ public class MemberLoginServlet extends HttpServlet {
 				session.setAttribute("msg", "로그인 실패!");
 			}
 		} catch (Exception e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			e.printStackTrace();
 		}
 		

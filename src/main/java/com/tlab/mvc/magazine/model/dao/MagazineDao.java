@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import com.tlab.mvc.magazine.model.exception.MagazineException;
 import com.tlab.mvc.magazine.model.vo.Magazine;
@@ -28,7 +28,7 @@ import com.tlab.mvc.magazine.model.vo.MagazineEntity;
 public class MagazineDao {
 
 	private Properties prop = new Properties();
-	private Logger logger = Logger.getRootLogger();
+//	private Logger logger = Logger.getRootLogger();
 
 	// properties 접근 method
 	public MagazineDao() {
@@ -38,10 +38,10 @@ public class MagazineDao {
 			prop.load(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			logger.fatal(e.getMessage());
+//			logger.fatal(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 		}
 	}
 
@@ -496,7 +496,7 @@ public class MagazineDao {
 			pstmt.setInt(2, magazine.getNo());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			throw new MagazineException("매거진 유효성 변경오류!", e);
 
 		} finally {
@@ -517,7 +517,7 @@ public class MagazineDao {
 			if (rset.next())
 				totalCount = rset.getInt(1);
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -558,7 +558,7 @@ public class MagazineDao {
 				list.add(magazine);
 			}
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -590,7 +590,7 @@ public class MagazineDao {
 				magazine.setRegDate(rset.getDate("reg_date"));
 			}
 		} catch (SQLException e) {
-			logger.debug(e.getMessage());
+//			logger.debug(e.getMessage());
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
