@@ -9,24 +9,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 /**
  * static 자원을 사용하는 jdbc 공용클래스
  */
 public class JdbcTemplate {
-	
+
 	private static String driverClass;
 	private static String url; // 접속프로토콜@url:port:sid
 	private static String user;
 	private static String password;
-	
-	
+
 	static {
 		// build-path의 절대경로 가져오기
 		// / -> /src/main/webapp/WEB-INF/classes/
-		final String datasourceConfigPath = 
-				JdbcTemplate.class.getResource("/datasource.properties").getPath();
+		final String datasourceConfigPath = JdbcTemplate.class.getResource("/datasource.properties").getPath();
 		System.out.println(datasourceConfigPath);
 		Properties prop = new Properties();
 		try {
@@ -37,8 +35,9 @@ public class JdbcTemplate {
 			password = prop.getProperty("password");
 		} catch (IOException e) {
 			e.printStackTrace();
-		};
-		
+		}
+		;
+
 		try {
 			// 1. driver class 등록 : 프로그램 실행시 최초 1회만 처리
 			Class.forName(driverClass);
@@ -53,7 +52,7 @@ public class JdbcTemplate {
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,7 @@ public class JdbcTemplate {
 
 	public static void commit(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,7 +70,7 @@ public class JdbcTemplate {
 
 	public static void rollback(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,29 +79,29 @@ public class JdbcTemplate {
 
 	public static void close(Connection conn) {
 		try {
-			if(conn != null && !conn.isClosed())
+			if (conn != null && !conn.isClosed())
 				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	public static void close(PreparedStatement pstmt) {
 		try {
-			if(pstmt != null && !pstmt.isClosed())
+			if (pstmt != null && !pstmt.isClosed())
 				pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
-	
+
 	public static void close(ResultSet rset) {
 		try {
-			if(rset != null && !rset.isClosed())
+			if (rset != null && !rset.isClosed())
 				rset.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
-	
+
 }

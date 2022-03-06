@@ -315,9 +315,6 @@ public class ProductDao {
         case "gdsName":
             sql += " p_name like '%" + searchKeyword + "%'";
             break;
-        case "p_content" : 
-            sql += " p_content like '%" + searchKeyword + "%' or p_name like '%" + searchKeyword +"%'";
-            break;
         }
         try {
             pstmt = conn.prepareStatement(sql);

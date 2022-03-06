@@ -16,23 +16,23 @@ import com.tlab.mvc.cs.model.vo.CsEntity;
 public class AdminCsboardValidUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String boardNo = request.getParameter("boardno");
 		String boardValid = request.getParameter("boardValid");
-		
+
 		/*
 		 * CsEntity csboard = new CsEntity(boardNo,boardValid);
 		 * 
 		 * int result = csEntityService.updateCsBoardValid(csBoard);
 		 */
-		
-		response.sendRedirect(request.getContextPath()+"/admin/magazineList");
+
+		response.sendRedirect(request.getContextPath() + "/admin/magazineList");
 	}
 
 }

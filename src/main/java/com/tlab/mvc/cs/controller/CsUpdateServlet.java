@@ -30,28 +30,30 @@ public class CsUpdateServlet extends HttpServlet {
 	private CsService csService = new CsService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// 1.사용자입력값
 		int no = Integer.parseInt(request.getParameter("no"));
 		// 2.업무로직
 		Cs cs = csService.selectOneCs(no);
 		System.out.println("[csUpdateServlet] cs = " + cs);
-		
+
 		// 3.view단처리
 		request.setAttribute("cs", cs);
-		request
-			.getRequestDispatcher("/WEB-INF/views/cs/csUpdate.jsp")
-			.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/cs/csUpdate.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			
+
 			// A. server computer에 사용자 업로드파일 저장
 //			String saveDirectory = getServletContext().getRealPath("/upload/cs");
 //			System.out.println("[CsUpdateServlet] saveDirectory = " + saveDirectory);
@@ -65,24 +67,22 @@ public class CsUpdateServlet extends HttpServlet {
 //			
 //			MultipartRequest multipartRequest = 
 //					new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-			
-			
+
 			// B. 업로드한 파일 정보를 db에 저장 : attachment테이블 파일하나당 1행 저장
-			
-			
+
 			// 1.사용자입력값 -> Cs객체
 			// MultipartRequest객체 생성하는 경우, 기존 request가 아닌 MultipartRequest객체에서 값을 가져와야 한다.
 			String options = request.getParameter("qna");
 			String title = request.getParameter("csTitle");
 			String content = request.getParameter("csContent");
-			String memberId= request.getParameter("memberId");
-			System.out.println("options, title, content, memberId"+options+","+title+","+content+","+memberId);
-			
+			String memberId = request.getParameter("memberId");
+			System.out.println(
+					"options, title, content, memberId" + options + "," + title + "," + content + "," + memberId);
+
 			String[] delFiles = request.getParameterValues("delFile");
 			Cs cs = new Cs(0, options, title, memberId, content, null);
 			System.out.println(cs);
-			
-			
+
 //			// 저장된 파일정보 -> Attachment객체 생성 -> List<Attachment>객체에 추가 -> Cs객체에 추가
 //			Enumeration fileNames = multipartRequest.getFileNames();
 //			List<CsAttachment> attachments = new ArrayList<>();
@@ -118,7 +118,7 @@ public class CsUpdateServlet extends HttpServlet {
 //				cs.setAttachments(attachments);
 //				System.out.println("[CsUpdateServlet] attachments = " + attachments);
 //			}
-			
+
 //			System.out.println("[CsUpdateServlet] cs = " + cs);
 //			
 //			// 2.업무로직
@@ -141,19 +141,18 @@ public class CsUpdateServlet extends HttpServlet {
 //					
 //				}
 //			}
-			
 
 			// b. db 레코드 수정(update cs + insert attachment)
 			int result = csService.updateCs(cs);
 			System.out.println("[CsUpdateServlet] result = " + result);
 			String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패 ㅠㅠ";
-			
+
 			// 3.redirect: DML은 redirect해서 url을 변경한다.
 			// location: /mvc/cs/csList
 			request.getSession().setAttribute("msg", msg);
 			String location = request.getContextPath() + "/cs/csView?no=" + cs.getNo();
 			response.sendRedirect(location);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}

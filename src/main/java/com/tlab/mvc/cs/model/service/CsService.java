@@ -14,7 +14,6 @@ import com.tlab.mvc.cs.model.vo.Cs;
 import com.tlab.mvc.cs.model.vo.CsAttachment;
 import com.tlab.mvc.cs.model.vo.CsComment;
 
-
 public class CsService {
 
 	private CsDao csDao = new CsDao();
@@ -40,7 +39,7 @@ public class CsService {
 			conn = getConnection();
 			result = csDao.insertCs(conn, cs);
 
-			int csBoardno = csDao.selectLastCsNo(conn); 
+			int csBoardno = csDao.selectLastCsNo(conn);
 			System.out.println("[CsService] csBoardno = " + csBoardno);
 			cs.setNo(csBoardno);
 
@@ -103,7 +102,7 @@ public class CsService {
 		Connection conn = getConnection();
 		Cs cs = csDao.selectOneCs(conn, no);
 		close(conn);
-		
+
 		return cs;
 	}
 
@@ -114,7 +113,7 @@ public class CsService {
 			conn = getConnection();
 			// 트랙잭션처리할 코드
 			result = csDao.updateCs(conn, cs);
-			
+
 			// 2. attachment insert
 //			List<CsAttachment> attachments = cs.getAttachments();
 //			if(attachments != null && !attachments.isEmpty()) {
@@ -172,17 +171,16 @@ public class CsService {
 	}
 
 	public int deleteCsComment(int no) {
-		Connection conn = getConnection(); 
+		Connection conn = getConnection();
 		int result = 0;
 		try {
 			result = csDao.deleteCsComment(conn, no);
 			commit(conn);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			rollback(conn);
 			throw e;
 		}
 		return result;
 	}
-
 
 }

@@ -4,8 +4,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@page import="java.awt.Image"%>
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
@@ -15,30 +15,34 @@
 
 
 	<div class="container">
-   <%
-	ProductAttachment productAttachment = (ProductAttachment) session.getAttribute("pAttach");
-   	List<Product> list = (List<Product>) request.getAttribute("list");
- 
-   	for(Product product : list) {
-   %>
-   
-      <div class="product-view">
-		<a href="<%= request.getContextPath() %>/product/productView?no=<%= product.getNo()%>">
-		 <img src="<%=request.getContextPath() %>/upload/product/thumbs/<%=productAttachment.getRenamedFilename() %>" alt="">
-		</a>
-        <p><%=product.getP_name() %></p>
-     </div>
-    <% } 
-    %>
-    </div>
-    <div style="clear: both;"></div>
-    
+		<%
+		ProductAttachment productAttachment = (ProductAttachment) session.getAttribute("pAttach");
+		List<Product> list = (List<Product>) request.getAttribute("list");
 
-  
+		for (Product product : list) {
+		%>
+
+		<div class="product-view">
+			<a
+				href="<%=request.getContextPath()%>/product/productView?no=<%=product.getNo()%>">
+				<img
+				src="<%=request.getContextPath()%>/upload/product/thumbs/<%=productAttachment.getRenamedFilename()%>"
+				alt="">
+			</a>
+			<p><%=product.getP_name()%></p>
+		</div>
+		<%
+		}
+		%>
+	</div>
+	<div style="clear: both;"></div>
+
+
+
 
 </section>
-  
 
-<div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<div id='pageBar'><%=request.getAttribute("pagebar")%></div>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

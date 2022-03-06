@@ -24,15 +24,17 @@ public class MagazineDeleteServlet extends HttpServlet {
 	private MagazineService magazineService = new MagazineService();
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			// 1.사용자입력처리
 			int no = Integer.parseInt(request.getParameter("magazineNo"));
 
 			// 2.업무로직
-			// 	a. 업로드파일 삭제: java.io.File api 파일제거
+			// a. 업로드파일 삭제: java.io.File api 파일제거
 //			List<MagazineAttachment> attachments = magazineService.selectAttachmentByMagazineNo(no);
 //			if(attachments != null && !attachments.isEmpty()) {
 //				String saveDirectory = getServletContext().getRealPath("/upload/magazine");
@@ -43,11 +45,11 @@ public class MagazineDeleteServlet extends HttpServlet {
 //					System.out.println("[MagazineDeleteServlet] 파일삭제 (" + renamedFilename + ") : " + deleted);
 //				}
 //			}
-			
-			// 	b. magazine 레코드(행) 삭제 (attachment는 on delete cascade에 의해 자동으로 제거된다.)
+
+			// b. magazine 레코드(행) 삭제 (attachment는 on delete cascade에 의해 자동으로 제거된다.)
 			Magazine magazine = magazineService.selectOneMagazine(no);
 			System.out.println("magazinedeleteservlet /select no = " + no);
-			
+
 			int result = magazineService.deleteMagazine(no);
 			System.out.println("magazinedeleteservlet /delete no = " + no);
 			String msg = result > 0 ? "게시물 삭제 성공!" : "게시물 삭제 실패!";
@@ -59,7 +61,7 @@ public class MagazineDeleteServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			throw e;
-		}catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			throw e;
 		}

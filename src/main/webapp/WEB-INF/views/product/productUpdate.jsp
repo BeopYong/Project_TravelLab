@@ -4,10 +4,7 @@
 <%@page import="com.tlab.mvc.product.model.vo.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/productHeader.jsp"%>
-
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/magazine.css" />
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <%
 Product product = (Product) request.getAttribute("product");
@@ -47,10 +44,13 @@ Product product = (Product) request.getAttribute("product");
 		<h3 id="logo">상품 업로드</h3>
 			<br>
 
-		<tr>
-			<label for="username"><th>지역</th></label> 
-		<td class="text-td">		
-			<select class="form-selected1" name="p_category" id="p_category" aria-label="Default select example""
+	<form name="productUpdateFrm" method="post"
+		action="<%=request.getContextPath()%>/product/productUpdate"
+		enctype="multipart/form-data">
+		<input type="hidden" name="no" value="<%=product.getNo()%>" />
+
+		<div class="inputArea">
+			<label>카테고리</label> <select class="category1" name="p_category"
 				selected="<%=product.getP_category()%>">
 				<option value="101">항공패스</option>
 				<option value="102">버스패스</option>
@@ -58,74 +58,64 @@ Product product = (Product) request.getAttribute("product");
 				<option value="201">숙박패스</option>
 				<option value="301">맛집</option>
 				<option value="302">관광지</option>
-			</select> </td>
-			</tr>
-			<tr>
-			<label for="username"><th>지역</th></label> 
-		<td class="text-td">
-			<select class="form-selected2" name="region" id="region" selected="<%=product.getRegion()%>">
+			</select> <label>지역 코드</label> <select class="category2" name="region"
+				selected="<%=product.getRegion()%>">
 				<option value="033">강원도</option>
 				<option value="051">부산</option>
 				<option value="064">제주</option>
 			</select>
-		</td>
-		</tr>
-		<tr>
-			<label for="username"><th>상품명</th></label> 
-			<td class="text-td">
-			<input type="text" id="p_name"
-				name="p_name" value="<%=product.getP_name()%>" />
-			</td>
-		
-	</tr>
-	<tr>
-	
-			<label for="username"><th>가격</th></label> 
-			
-			<td class="text-td">
-			<input type="text" id="unit_price"
-				name="unit_price" value="<%=product.getUnit_price()%>" />
-			</td>
-	</tr>
-	
-		
-	<tr>
-			<label for="username"><th>상품 수량</th></label> 
-			<td>			
-			<input type="text" id="p_stock"
-				name="p_stock" value="<%=product.getP_stock()%>" />		
-			</td>
-	</tr>
-	<tr>
-			
-			<br>
-			<label for="username"><th>파일 추가</th></label> 
-			<td class="text-td">
-			<input type="file" name="uploadFile1"
-				id="uploadFile1" />
-			</td>
-		</tr>
-
-		<tr>
-			<label for="username"><th>상품 소개</th></label>
-			<td class="text-td">
-			<textarea name="p_content" cols="30" rows="10" autocomplete="off"><%=product.getP_content()%></textarea>			
-			</td>
-		</tr>
-			
-			
+		</div>
 
 		<div class="inputArea">
+			<label for="pName">상품명</label> <input type="text" id="p_name"
+				name="p_name" value="<%=product.getP_name()%>" />
+		</div>
 
-		
-		<th colspan="2"><input type="submit" id="btn"
-						class="modified-btn" value="수정" /> <input type="button"
-						id="btn" class="cancell-btn" value="취소" onclick="history.go(-1);" />
-					</th>
+		<div class="inputArea">
+			<label for="pPrice">상품가격</label> <input type="text" id="unit_price"
+				name="unit_price" value="<%=product.getUnit_price()%>" />
+		</div>
+
+		<div class="inputArea">
+			<label for="pStock">상품수량</label> <input type="text" id="p_stock"
+				name="p_stock" value="<%=product.getP_stock()%>" />
+		</div>
+
+		<div class="inputArea">
+			<%
+			List<ProductAttachment> pAttach = product.getAttachments();
+			if (pAttach != null && !pAttach.isEmpty()) {
+			%>
+			<label for="">첨부된 파일</label>
+			<%
+			for (ProductAttachment pAttachs : pAttach) {
+			%>
+			<%=pAttachs.getOriginalFilename()%>
+			<label for="delFeil<%=pAttachs.getNo()%>">삭제하기</label> <input
+				type="checkbox" name="delFile" id="delFiel<%=pAttachs.getNo()%>"
+				value="<%=pAttachs.getNo()%>" />
+			<%
+			}
+			%>
+
+			<%
+			}
+			%>
+			<br>
+			<label for="">파일 추가</label> <input type="file" name="uploadFile1"
+				id="uploadFile1" />
+		</div>
+
+		<div class="inputArea">
+			<label for="pDes">상품소개</label>
+			<textarea name="p_content"><%=product.getP_content()%></textarea>
+		</div>
+
+		<div class="inputArea">
+			<button type="submit" id="register_Btn" class="btn btn-primary">수정하기</button>
 		</div>
 
 	</form>
-</div>
 
 </section>
 
@@ -333,5 +323,4 @@ form select {
 </html>
 
 
-
-
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

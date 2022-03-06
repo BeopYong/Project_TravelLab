@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -28,7 +28,7 @@ import com.tlab.mvc.member.model.vo.MemberAttachment;
 public class MemberProfileEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberService();
-	private Logger logger = Logger.getRootLogger();
+//	private Logger logger = Logger.getRootLogger();
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -93,7 +93,7 @@ public class MemberProfileEnrollServlet extends HttpServlet {
 				response.sendRedirect(location);
 			}
 		} catch (Exception e) {
-			logger.debug(e.getMessage()+e.getCause());
+//			logger.debug(e.getMessage()+e.getCause());
 			e.printStackTrace();
 			throw e;
 		}

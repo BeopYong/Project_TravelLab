@@ -22,8 +22,7 @@ public class MagazineService {
 
 	private MagazineDao magazineDao = new MagazineDao();
 
-
-	//페이징처리a /게시물 목록조회
+	// 페이징처리a /게시물 목록조회
 
 	public List<Magazine> selectAllMagazine(Map<String, Integer> param) {
 		Connection conn = getConnection();
@@ -41,9 +40,9 @@ public class MagazineService {
 		return totalCount;
 	}
 
-	
 	/**
-	 * DML 트래잭션 
+	 * DML 트래잭션
+	 * 
 	 * @param magazine
 	 * @return
 	 */
@@ -52,12 +51,12 @@ public class MagazineService {
 		int result = 0;
 		try {
 			result = magazineDao.insertMagazine(conn, magazine);
-			
-			//보드넘버 조회해 맞는지 확인 : select seq_magazine_no.currval from dual
+
+			// 보드넘버 조회해 맞는지 확인 : select seq_magazine_no.currval from dual
 			int magazineNo = magazineDao.selectLastMagazineNo(conn);
 			System.out.println("[MagazineService insertMagazine()] magazineNo = " + magazineNo);
-			magazine.setNo(magazineNo); //servlet에서 참조
-			
+			magazine.setNo(magazineNo); // servlet에서 참조
+
 ////			//첨부파일
 //			List<MagazineAttachment> attachments = magazine.getAttachments();
 //			if(attachments != null) {
@@ -77,11 +76,10 @@ public class MagazineService {
 		return result;
 	}
 
-	
-	//관리자용 메뉴
+	// 관리자용 메뉴
 	public int updateMagazineValid(Magazine magazine) {
 		int result = 0;
-		Connection conn= null;
+		Connection conn = null;
 		try {
 			conn = getConnection();
 			result = magazineDao.updateMagazineValid(conn, magazine);
@@ -95,10 +93,10 @@ public class MagazineService {
 
 	public List<Magazine> selectAllMyScrap(Map<String, Integer> param, String memberId) {
 		List<Magazine> list = new ArrayList<>();
-		Connection conn=null;
+		Connection conn = null;
 		try {
-			conn= getConnection();
-			list = magazineDao.selectAllMyScrap(conn,param,memberId);
+			conn = getConnection();
+			list = magazineDao.selectAllMyScrap(conn, param, memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -106,14 +104,13 @@ public class MagazineService {
 		}
 		return list;
 	}
-	
-	
+
 	public int selectTotalMyScrapCount(String memberId) {
-		int result=0;
+		int result = 0;
 		Connection conn = null;
 		try {
 			conn = getConnection();
-			result =magazineDao.selectTotalMyScrapCount(conn,memberId);
+			result = magazineDao.selectTotalMyScrapCount(conn, memberId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -121,16 +118,16 @@ public class MagazineService {
 		}
 		return result;
 	}
-	
-	//DQL
+
+	// DQL
 	public Magazine selectOneMagazineAttachments(int no) {
 		Connection conn = getConnection();
 		Magazine magazine = magazineDao.selectOneMagazineAttachment(conn, no);
 		close(conn);
 		return magazine;
 	}
-	
-	//DML
+
+	// DML
 	public int updateReadCount(int no) {
 		Connection conn = null;
 		int result = 0;
@@ -146,9 +143,9 @@ public class MagazineService {
 		}
 		return result;
 	}
-	
-	//매거진 게시물 상세보기
-	//DQL
+
+	// 매거진 게시물 상세보기
+	// DQL
 	public Magazine selectOneMagazine(int no) {
 		Magazine magazine;
 		Connection conn = getConnection();
@@ -158,21 +155,22 @@ public class MagazineService {
 //		List<MagazineAttachment> attachments = magazineDao.selectAttachmentByMagazineNo(conn, no);
 //		magazine.setAttachments(attachments);
 		close(conn);
-		
+
 		return magazine;
 	}
-	//매거진 게시물 수정
+
+	// 매거진 게시물 수정
 	public int updateMagazine(Magazine magazine) {
 		Connection conn = null;
 		int result = 0;
-		
+
 		try {
 			conn = getConnection();
-			//트랙잭션
-			//1 매거진 업데이트
+			// 트랙잭션
+			// 1 매거진 업데이트
 			result = magazineDao.updateMagazine(conn, magazine);
-			
-			//2 attachment insert
+
+			// 2 attachment insert
 //			List<MagazineAttachment> attachments = magazine.getAttachments();
 //			if(attachments != null && !attachments.isEmpty()) {
 //				for(MagazineAttachment attach : attachments) {
@@ -183,11 +181,12 @@ public class MagazineService {
 		} catch (Exception e) {
 			rollback(conn);
 			throw e;
-		}finally {
+		} finally {
 			close(conn);
 		}
 		return result;
 	}
+
 	public int deleteAttachment(int delFileNo) {
 		Connection conn = null;
 		int result = 0;
@@ -198,31 +197,32 @@ public class MagazineService {
 		} catch (Exception e) {
 			rollback(conn);
 			throw e;
-		}finally {
+		} finally {
 			close(conn);
 		}
 		return result;
 	}
-	
+
 	public MagazineAttachment selectOneAttachment(int no) {
 		Connection conn = getConnection();
 		MagazineAttachment attach = magazineDao.selectOneAttachment(conn, no);
 		close(conn);
 		return attach;
 	}
-	
+
 	public int deleteMagazineComment(int no) {
-		Connection conn = getConnection(); 
+		Connection conn = getConnection();
 		int result = 0;
 		try {
 			result = magazineDao.deleteMagazineComment(conn, no);
 			commit(conn);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			rollback(conn);
 			throw e;
 		}
 		return result;
 	}
+
 	public int insertMagazineComment(MagazineComment mc) {
 		Connection conn = null;
 		int result = 0;
@@ -238,23 +238,25 @@ public class MagazineService {
 		}
 		return result;
 	}
+
 	public List<MagazineAttachment> selectAttachmentByMagazineNo(int no) {
 		Connection conn = getConnection();
 		List<MagazineAttachment> attachments = magazineDao.selectAttachmentByMagazineNo(conn, no);
 		close(conn);
 		return attachments;
 	}
-	
-	//매거진 게시물 삭제
-	//DML
+
+	// 매거진 게시물 삭제
+	// DML
 	public int deleteMagazine(int no) {
-		Connection conn = getConnection();;
+		Connection conn = getConnection();
+		;
 		int result = 0;
 		try {
 			conn = getConnection();
 			result = magazineDao.deleteMagazine(conn, no);
-			//에러 없으면 if절로 이동
-			if(result == 0)
+			// 에러 없으면 if절로 이동
+			if (result == 0)
 				throw new IllegalArgumentException("해당 게시글이 존재하지 않아 삭제할 수 없습니다. : " + no);
 			commit(conn);
 		} catch (Exception e) {
@@ -265,6 +267,7 @@ public class MagazineService {
 		}
 		return result;
 	}
+
 	public List<MagazineComment> selectMagazineCommentList(int magazineNo) {
 		Connection conn = getConnection();
 		List<MagazineComment> commentList = magazineDao.selectMagazineCommentList(conn, magazineNo);
@@ -274,11 +277,11 @@ public class MagazineService {
 
 	public List<Magazine> searchMyScrap(Map<String, Object> searchParam) {
 		List<Magazine> list = new ArrayList<>();
-		Connection conn= null;
-		
+		Connection conn = null;
+
 		try {
 			conn = getConnection();
-			list = magazineDao.searchMyScrap(conn,searchParam);
+			list = magazineDao.searchMyScrap(conn, searchParam);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -286,7 +289,6 @@ public class MagazineService {
 		}
 		return list;
 	}
-
 
 	public List<Magazine> searchMagazine(Map<String, Object> searchParam) {
 		List<Magazine> list;

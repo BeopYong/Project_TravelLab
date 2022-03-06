@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.tlab.mvc.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	/* Member loginMember = (Member) session.getAttribute("loginMember"); */
 	List<Payment> list = (List<Payment>) request.getAttribute("list");
@@ -14,16 +14,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/<%=request.getContextPath() %>/css/cartList/font-awesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/animate.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/owl.carousel.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/owl.theme.default.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/magnific-popup.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath() %>/css/cartList/bootstrap-select.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/flaticon.css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/cartList/style.css">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link
+	href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/<%=request.getContextPath()%>/css/cartList/font-awesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/animate.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/owl.theme.default.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/magnific-popup.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath()%>/css/cartList/bootstrap-select.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/flaticon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/cartList/style.css">
 <title>PaymentList</title>
 </head>
 <body>
@@ -107,36 +118,53 @@
 						      	<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				            	<span aria-hidden="true"><i class="fa fa-close"></i></span>
 				          	</button> -->
-				        	</td>
-						    </tr>
-					    <%
-						}
-						%>
-						  </tbody>
-						</table>
-					</div>
-    		</div>
-    	</div>
-    </section>    
-  
+								</td>
+							</tr>
+							<%
+							}
+							%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-  
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery-migrate-3.0.1.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/popper.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/bootstrap.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.easing.1.3.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.waypoints.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.stellar.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/owl.carousel.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.magnific-popup.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/jquery.animateNumber.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/google-map.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath() %>/js/cartList/bootstrap-select.min.js"></script>
-  <script src="<%=request.getContextPath() %>/js/cartList/main.js"></script>
+
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen">
+		<svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none"
+				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	</div>
+
+	<script src="<%=request.getContextPath()%>/js/cartList/jquery.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery-migrate-3.0.1.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/cartList/popper.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery.easing.1.3.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery.waypoints.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery.stellar.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/owl.carousel.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery.magnific-popup.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/jquery.animateNumber.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/js/cartList/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="<%=request.getContextPath()%>/js/cartList/google-map.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/<%=request.getContextPath()%>/js/cartList/bootstrap-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/cartList/main.js"></script>
 </body>
 </html>

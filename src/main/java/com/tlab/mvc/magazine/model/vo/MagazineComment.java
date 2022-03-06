@@ -3,13 +3,13 @@ package com.tlab.mvc.magazine.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class MagazineComment implements Serializable{
+public class MagazineComment implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int no;
 	private int commentLevel;
 	private String writer;
@@ -17,7 +17,7 @@ public class MagazineComment implements Serializable{
 	private int magazineNo;
 	private int commentRef;
 	private Date regDate;
-	
+
 	public MagazineComment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -96,7 +96,5 @@ public class MagazineComment implements Serializable{
 		return "MagazineComment [no=" + no + ", commentLevel=" + commentLevel + ", writer=" + writer + ", content="
 				+ content + ", magazineNo=" + magazineNo + ", commentRef=" + commentRef + ", regDate=" + regDate + "]";
 	}
-	
-	
-	
+
 }

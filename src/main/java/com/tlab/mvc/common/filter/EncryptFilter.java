@@ -15,15 +15,15 @@ import com.tlab.mvc.common.wrapper.EncryptWrapper;
 /**
  * Servlet Filter implementation class EncryptFilter
  */
-@WebFilter({ "/member/login", "/member/memberEnroll", "/member/updatePassword","/member/memberDelete" }) 
+@WebFilter({ "/member/login", "/member/memberEnroll", "/member/updatePassword", "/member/memberDelete" })
 public class EncryptFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public EncryptFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public EncryptFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -35,12 +35,13 @@ public class EncryptFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
 		EncryptWrapper encryptWrapper = new EncryptWrapper((HttpServletRequest) request);
 
 		System.out.println("암호화Wrapper처리됨@[EncryptFilter]");
-		
+
 		// pass the request along the filter chain
 		chain.doFilter(encryptWrapper, response);
 	}

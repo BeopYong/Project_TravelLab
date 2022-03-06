@@ -18,16 +18,21 @@ import com.tlab.mvc.magazine.model.vo.Magazine;
 public class AdminMagazineValidUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazineService magazineService = new MagazineService();
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			int no = Integer.parseInt(request.getParameter("magazine"));
 			String writer = request.getParameter("writer");
@@ -36,14 +41,14 @@ public class AdminMagazineValidUpdateServlet extends HttpServlet {
 			magazine.setNo(no);
 			magazine.setWriter(writer);
 			magazine.setValid(valid);
-					
+
 			int result = magazineService.updateMagazineValid(magazine);
-			
-			response.sendRedirect(request.getContextPath()+"/admin/magazineList");
+
+			response.sendRedirect(request.getContextPath() + "/admin/magazineList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		} 
+		}
 	}
 
 }

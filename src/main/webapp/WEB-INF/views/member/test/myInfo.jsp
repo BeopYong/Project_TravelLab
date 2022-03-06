@@ -1,52 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <section id=enroll-container>
 	<h2>회원 정보</h2>
 	<form id="memberUpdateFrm" method="post">
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td>
-					<input type="text" name="memberId" id="memberId" value="<%= loginMember.getMemberId() %>" readonly>
-				</td>
+				<td><input type="text" name="memberId" id="memberId"
+					value="<%=loginMember.getMemberId()%>" readonly></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td>	
-				<input type="text"  name="memberName" id="memberName" value="<%= loginMember.getMemberName() %>"  required><br>
+				<td><input type="text" name="memberName" id="memberName"
+					value="<%=loginMember.getMemberName()%>" required><br>
 				</td>
 			</tr>
-			
+
 			<tr>
 				<th>이메일</th>
-				<td>	
-					<input type="email" placeholder="abc@gmail.com" name="email" id="email" value="<%= loginMember.getEmail() %>"><br>
+				<td><input type="email" placeholder="abc@gmail.com"
+					name="email" id="email" value="<%=loginMember.getEmail()%>"><br>
 				</td>
 			</tr>
 			<tr>
 				<th>결제정보</th>
-				<td>	
-					<input type="text" placeholder="213221" name="payCode" id="payCode" value="<%= loginMember.getPayCode() %>"><br>
+				<td><input type="text" placeholder="213221" name="payCode"
+					id="payCode" value="<%=loginMember.getPayCode()%>"><br>
 				</td>
 			</tr>
-			
+
 			<tr>
 				<th>휴대폰</th>
-				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="tel" id="tel" maxlength="11" value="<%=loginMember.getTel() %>" required><br>
+				<td><input type="tel" placeholder="(-없이)01012345678" name="tel"
+					id="tel" maxlength="11" value="<%=loginMember.getTel()%>" required><br>
 				</td>
 			</tr>
 		</table>
-        <input type="button" onclick="updateMember();" value="정보수정"/>
-        <input type="button" onclick="updatePassword();" value="비밀번호 변경"/>
-        <%-- <input type="button" onclick="location.href='<%= request.getContextPath() %>/member/updatePassword';" value="비밀번호 변경"/> --%>
-        <input type="button" onclick="deleteMember();" value="탈퇴"/>
+		<input type="button" onclick="updateMember();" value="정보수정" /> <input
+			type="button" onclick="updatePassword();" value="비밀번호 변경" />
+		<%-- <input type="button" onclick="location.href='<%= request.getContextPath() %>/member/updatePassword';" value="비밀번호 변경"/> --%>
+		<input type="button" onclick="deleteMember();" value="탈퇴" />
 	</form>
 </section>
 <!-- 회원탈퇴폼 : POST /member/memberDelete 전송을 위해 시각화되지 않는 폼태그 이용 -->
-<form name="memberDelFrm" action="<%= request.getContextPath() %>/member/memberDelete" method="POST">
-	<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>" />
+<form name="memberDelFrm"
+	action="<%=request.getContextPath()%>/member/memberDelete"
+	method="POST">
+	<input type="hidden" name="memberId"
+		value="<%=loginMember.getMemberId()%>" />
 </form>
 
 <script>
@@ -59,13 +61,13 @@
 const updateMember = () => {
 	// 폼의 action값을 할당후 제출!
 	$(memberUpdateFrm)
-		.attr("action", "<%= request.getContextPath() %>/member/memberUpdate")
+		.attr("action", "<%=request.getContextPath()%>/member/memberUpdate")
 		.submit();
 };
 const updatePassword = () => {
 	//다른 경로 요청
 	$(memberUpdateFrm)
-		.attr("action","<%= request.getContextPath() %>/member/updatePassword")
+		.attr("action","<%=request.getContextPath()%>/member/updatePassword")
 		.attr("method","GET")
 		.submit();
 }
@@ -74,7 +76,7 @@ const deleteMember = () => {
 	// 폼의 action값을 할당후 제출!
 	const deleteChk = confirm("Confirm your secession")
 	$(memberUpdateFrm)
-		.attr("action", "<%= request.getContextPath() %>/member/memberDelete")
+		.attr("action", "<%=request.getContextPath()%>/member/memberDelete")
 		.submit();
 };
 
@@ -102,4 +104,4 @@ $(memberUpdateFrm).submit((e) => {
 	return true;
 });
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

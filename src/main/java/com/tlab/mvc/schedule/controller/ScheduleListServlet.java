@@ -19,24 +19,25 @@ import com.tlab.mvc.schedule.model.vo.Schedule;
 public class ScheduleListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ScheduleService scheduleService = new ScheduleService();
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		//without page bar , just show them as an cardboard
-		String memberId =request.getParameter("memberId");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// without page bar , just show them as an cardboard
+		String memberId = request.getParameter("memberId");
 		try {
-			 List<Schedule> list= scheduleService.selectAllSchedule(memberId);
-			 System.out.println("list@ScheduleListServlet = "+ list);
-			 request.setAttribute("list", list);
-			 request
-			 	.getRequestDispatcher("/WEB-INF/views/schedule/scheduleList.jsp")
-			 	.forward(request, response);
-		 } catch(Exception e){
-			 e.printStackTrace();
-			 throw e;
-		 }
+			List<Schedule> list = scheduleService.selectAllSchedule(memberId);
+			System.out.println("list@ScheduleListServlet = " + list);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/views/schedule/scheduleList.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
-		
+
 }

@@ -90,5 +90,4 @@ public class Schedule {
 				+ ", regDate=" + regDate + "]";
 	}
 
-	
 }

@@ -14,7 +14,7 @@ import com.tlab.mvc.member.model.vo.Member;
 import com.tlab.mvc.orderlist.model.vo.OrderList;
 
 public class CartService {
-	
+
 	private CartDao cartDao = new CartDao();
 
 	public int insertCart(Cart cart) {
@@ -22,7 +22,7 @@ public class CartService {
 		int result = 0;
 		try {
 			conn = getConnection();
-			result = cartDao.insertCart(conn,cart);
+			result = cartDao.insertCart(conn, cart);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

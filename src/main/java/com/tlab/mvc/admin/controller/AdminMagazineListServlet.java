@@ -55,9 +55,7 @@ public class AdminMagazineListServlet extends HttpServlet {
 			// 3.view단처리
 			request.setAttribute("list", list);
 			request.setAttribute("pagebar", pagebar);
-			request
-				.getRequestDispatcher("/WEB-INF/views/admin/manageMagazineListTest.jsp")
-				.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/admin/manageMagazineListTest.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

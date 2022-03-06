@@ -22,7 +22,7 @@ import com.tlab.mvc.cs.model.vo.CsComment;
 public class CsDao {
 
 	private Properties prop = new Properties();
-	
+
 	public CsDao() {
 		File file = new File(CsDao.class.getResource("/csboard-query.properties").getPath());
 		try {
@@ -37,16 +37,16 @@ public class CsDao {
 		String sql = prop.getProperty("selectAllCs");
 		ResultSet rset = null;
 		List<Cs> list = new ArrayList<>();
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(sql+"@csDao");
+			System.out.println(sql + "@csDao");
 			pstmt.setInt(1, param.get("start"));
 			pstmt.setInt(2, param.get("end"));
-			
+
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				Cs cs = new Cs();
 				cs.setNo(rset.getInt("no"));
 				cs.setOptions(rset.getString("options"));
@@ -57,7 +57,7 @@ public class CsDao {
 				cs.setCommentCount(rset.getInt("comment_count"));
 				list.add(cs);
 			}
-			
+
 		} catch (SQLException e) {
 			throw new CsException("게시글 목록 조회 오류!", e);
 		} finally {
@@ -72,11 +72,11 @@ public class CsDao {
 		String sql = prop.getProperty("selectTotalCsCount");
 		ResultSet rset = null;
 		int totalCount = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			if (rset.next()) {
 				totalCount = rset.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -93,21 +93,21 @@ public class CsDao {
 		String sql = prop.getProperty("insertCs");
 		System.out.println(sql);
 		int result = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cs.getOptions());
 			pstmt.setString(2, cs.getTitle());
 			pstmt.setString(3, cs.getContent());
 			pstmt.setString(4, cs.getWriter());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new CsException("게시물 등록 오류!", e);
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -119,7 +119,7 @@ public class CsDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			if (rset.next()) {
 				csNo = rset.getInt(1);
 			}
 		} catch (SQLException e) {
@@ -134,20 +134,20 @@ public class CsDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertCsAttachment");
 		int result = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, attach.getCsBoardno());
 			pstmt.setString(2, attach.getOriginalFilename());
 			pstmt.setString(3, attach.getRenamedFilename());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new CsException("첨부파일 등록 오류!", e);
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -156,13 +156,13 @@ public class CsDao {
 		String sql = prop.getProperty("selectAttachmentByCsNo");
 		ResultSet rset = null;
 		List<CsAttachment> csAttachments = new ArrayList<>();
-		
-		try{
+
+		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, csCsno);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()){
+
+			while (rset.next()) {
 				CsAttachment attach = new CsAttachment();
 				attach.setNo(rset.getInt("no"));
 				attach.setCsBoardno(rset.getInt("cs_board_no"));
@@ -170,9 +170,9 @@ public class CsDao {
 				attach.setRenamedFilename(rset.getString("renamed_filename"));
 				csAttachments.add(attach);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -184,14 +184,14 @@ public class CsDao {
 		Cs cs = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String query = prop.getProperty("selectOneCsAttachements");
-		try{
+		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, no);
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()){
+
+			if (rset.next()) {
 				cs = new Cs();
 				cs.setNo(rset.getInt("no"));
 				cs.setOptions(rset.getString("options"));
@@ -199,9 +199,9 @@ public class CsDao {
 				cs.setWriter(rset.getString("writer"));
 				cs.setContent(rset.getString("content"));
 				cs.setRegDate(rset.getDate("reg_date"));
-				
+
 				int attachNo = rset.getInt("attach_no");
-				if(attachNo != 0) {
+				if (attachNo != 0) {
 					List<CsAttachment> attachments = new ArrayList<>();
 					do {
 						CsAttachment attach = new CsAttachment();
@@ -214,9 +214,9 @@ public class CsDao {
 					cs.setAttachments(attachments);
 				}
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -228,22 +228,22 @@ public class CsDao {
 		String sql = prop.getProperty("selectOneAttachment");
 		ResultSet rset = null;
 		CsAttachment attach = null;
-		
-		try{
+
+		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()){
+
+			while (rset.next()) {
 				attach = new CsAttachment();
 				attach.setNo(rset.getInt("no"));
 				attach.setCsBoardno(rset.getInt("cs_borad_no"));
 				attach.setOriginalFilename(rset.getString("original_filename"));
 				attach.setRenamedFilename(rset.getString("renamed_filename"));
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new CsException("첨부파일 조회 오류!", e);
-		}finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -253,13 +253,13 @@ public class CsDao {
 	public int deleteCs(Connection conn, int no) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("deleteCs"); 
-		
+		String query = prop.getProperty("deleteCs");
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, no);
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -273,13 +273,13 @@ public class CsDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = prop.getProperty("selectOneCs");
-		
-		try{
+
+		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, no);
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()){
+
+			if (rset.next()) {
 				cs = new Cs();
 				cs.setNo(rset.getInt("no"));
 				cs.setTitle(rset.getString("title"));
@@ -287,9 +287,9 @@ public class CsDao {
 				cs.setContent(rset.getString("content"));
 				cs.setRegDate(rset.getDate("reg_date"));
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -299,8 +299,8 @@ public class CsDao {
 	public int updateCs(Connection conn, Cs cs) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateCs"); 
-		
+		String sql = prop.getProperty("updateCs");
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cs.getTitle());
@@ -308,7 +308,7 @@ public class CsDao {
 			pstmt.setInt(3, cs.getNo());
 
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -320,13 +320,13 @@ public class CsDao {
 	public int deleteAttachment(Connection conn, int delFileNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("deleteAttachment"); 
-		
+		String query = prop.getProperty("deleteAttachment");
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, delFileNo);
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -340,14 +340,14 @@ public class CsDao {
 		String sql = prop.getProperty("selectCsCommentList");
 		ResultSet rset = null;
 		List<CsComment> commentList = new ArrayList<>();
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, csBoardno);
-			
+
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				CsComment cc = new CsComment();
 				cc.setNo(rset.getInt("no"));
 				cc.setCommentLevel(rset.getInt("comment_level"));
@@ -372,23 +372,22 @@ public class CsDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertBoardComment");
 		int result = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, cc.getCommentLevel()); 	// 번호
-			pstmt.setString(2, cc.getWriter()); 	// 작성자
-			pstmt.setString(3, cc.getContent()); 	// 댓글 내용
-			pstmt.setInt(4, cc.getCsBoardno());		// CsBoardno
+			pstmt.setInt(1, cc.getCommentLevel()); // 번호
+			pstmt.setString(2, cc.getWriter()); // 작성자
+			pstmt.setString(3, cc.getContent()); // 댓글 내용
+			pstmt.setInt(4, cc.getCsBoardno()); // CsBoardno
 			pstmt.setObject(5, cc.getCommentRef() == 0 ? null : cc.getCommentRef());
-			
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 

@@ -251,6 +251,5 @@ public class ProductService {
 		List<ProductAttachment> list = productDao.productAttachment(conn);
 		return list;
 	}
-
 	
 }

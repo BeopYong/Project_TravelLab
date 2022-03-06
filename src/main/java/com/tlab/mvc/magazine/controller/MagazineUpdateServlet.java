@@ -29,27 +29,29 @@ public class MagazineUpdateServlet extends HttpServlet {
 	private MagazineService magazineService = new MagazineService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//사용자입력값
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 사용자입력값
 		int no = Integer.parseInt(request.getParameter("no"));
-		
-		//업무로직
+
+		// 업무로직
 		Magazine magazine = magazineService.selectOneMagazine(no);
 //		System.out.println("[magazineUpdateServlet] magazine = " + magazine);
-		
-		//view단
+
+		// view단
 		request.setAttribute("magazine", magazine);
-		request
-			.getRequestDispatcher("/WEB-INF/views/magazine/magazineUpdate.jsp")
-			.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/magazine/magazineUpdate.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 //		//A. server에 사용자 업로드파일 저장
 //		String saveDirectory = getServletContext().getRealPath("/upload/magazine");
@@ -63,20 +65,20 @@ public class MagazineUpdateServlet extends HttpServlet {
 //		
 //		MultipartRequest multipartRequest = 
 //				new MultipartRequest(request, saveDirectory, maxPostSize, encoding, policy);
-		
-		//B. 업로드한 파일정보 db에 저장 
-		
-		//사용자입력값
-		int no = Integer.parseInt(request.getParameter("no"));
-		String title = request.getParameter("title");
-		String writer = request.getParameter("writer");
-		String content = request.getParameter("content");
-		String region = request.getParameter("region");
-		
+
+			// B. 업로드한 파일정보 db에 저장
+
+			// 사용자입력값
+			int no = Integer.parseInt(request.getParameter("no"));
+			String title = request.getParameter("title");
+			String writer = request.getParameter("writer");
+			String content = request.getParameter("content");
+			String region = request.getParameter("region");
+
 //		String[] delFiles = request.getParameterValues("delFile");
-		
-		Magazine magazine = new Magazine(no, title, writer, content, region);
-		
+
+			Magazine magazine = new Magazine(no, title, writer, content, region);
+
 //		//저장된 파일정보 -> Attach객체 생성 -> list<attach>객체에추가 -> magazine객체 추가
 //		Enumeration fileNames = multipartRequest.getFileNames();
 //		List<MagazineAttachment> attachments = new ArrayList<>();
@@ -114,17 +116,17 @@ public class MagazineUpdateServlet extends HttpServlet {
 //				
 //			}
 //		}
-		
-		//b db레코드 수정(update magazine + insert attachment)
-		int result = magazineService.updateMagazine(magazine);
-		System.out.println("[MagazineUpdateServlet] result = " + result);
-		String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
-		
-		//DML redirect로 경로변경
-		request.getSession().setAttribute("msg", msg);
-		String location = request.getContextPath() + "/magazine/magazineView?no=" + magazine.getNo();
-		response.sendRedirect(location);		
-		}catch (NumberFormatException e) {
+
+			// b db레코드 수정(update magazine + insert attachment)
+			int result = magazineService.updateMagazine(magazine);
+			System.out.println("[MagazineUpdateServlet] result = " + result);
+			String msg = result > 0 ? "게시물 수정 성공!" : "게시물 수정 실패!";
+
+			// DML redirect로 경로변경
+			request.getSession().setAttribute("msg", msg);
+			String location = request.getContextPath() + "/magazine/magazineView?no=" + magazine.getNo();
+			response.sendRedirect(location);
+		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;

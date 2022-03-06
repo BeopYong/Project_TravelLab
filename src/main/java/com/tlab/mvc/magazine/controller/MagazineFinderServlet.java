@@ -25,33 +25,36 @@ public class MagazineFinderServlet extends HttpServlet {
 	private MagazineService magazineService = new MagazineService();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		final int numPerPage = 10;
 		int cPage = 1;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch (NumberFormatException e) {}
+		} catch (NumberFormatException e) {
+		}
 		int start = (cPage - 1) * numPerPage + 1;
 		int end = cPage * numPerPage;
 		Map<String, Integer> param = new HashMap<>();
 		param.put("start", start);
 		param.put("end", end);
-	// 1. 사용자 입력값 처리
+		// 1. 사용자 입력값 처리
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
-		
+
 		Map<String, Object> searchParam = new HashMap<>();
 		searchParam.put("searchType", searchType);
 		searchParam.put("searchKeyword", searchKeyword);
-		System.out.println("param@servlet = "+ searchParam);
-		
+		System.out.println("param@servlet = " + searchParam);
+
 		// 2. 업무로직
 		List<Magazine> list = magazineService.searchMagazine(searchParam);
 		System.out.println("magazineList@servlet = " + list);
-		
+
 		// 3.
 		// 2-b. pagebar영역
 		int totalContent = 1;
@@ -60,14 +63,12 @@ public class MagazineFinderServlet extends HttpServlet {
 		System.out.println(url);
 		String pagebar = MvcUtils.getPagebar(cPage, numPerPage, totalContent, url);
 		System.out.println("magazineList@servlet.pagebar = " + pagebar);
-		
+
 		// 3.view단처리
 		request.setAttribute("list", list);
 		request.setAttribute("pagebar", pagebar);
-		request
-			.getRequestDispatcher("/WEB-INF/views/magazine/magazineList.jsp")
-			.forward(request, response);
-		
+		request.getRequestDispatcher("/WEB-INF/views/magazine/magazineList.jsp").forward(request, response);
+
 	}
 
 }

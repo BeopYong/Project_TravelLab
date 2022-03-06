@@ -13,48 +13,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link rel="stylesheet" href="/tlab/css/product/main.css" />
- <link rel="stylesheet" href="/tlab/css/product.css" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap"
-	rel="stylesheet">
-<!-- 위에 지키고 여기에 헤더 넣으면 됨 -->
-<style>
-.p_container {
-	margin : 10px;
-	width : 80%;
-}
-</style>
-</head>
-<body>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@page import="java.awt.Image"%>
+
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 <section>
 
 <div p_container>
 	<td>
-    <form name="form"
+		<form name="form"
 			action="<%=request.getContextPath()%>/product/productList">
-      <select name="p_category" onchange="this.form.submit()">
-        <option value="">category</option>
-        <option value="101">항공</option>
-        <option value="102">버스</option>
-        <option value="103">KTX</option>
-        <option value="201">숙박</option>
-        <option value="301">맛집</option>
-        <option value="302">장소</option>
-      </select>
-    </form>
-    
-    <script>
+			<select name="p_category" onchange="this.form.submit()">
+				<option value="">category</option>
+				<option value="101">교통/숙박</option>
+				<option value="301">맛집</option>
+				<option value="302">장소</option>
+			</select><br>
+			<br>
+	</td>
+	</tr>
+	</form>
+
+	<script>
 
 $(p_category).change((e) => {
 	const v = $(e.target).val();
@@ -76,32 +58,34 @@ $(p_category).change((e) => {
 
 
 	<div class="container">
-	
-   <%
-    List<ProductAttachment> pAttach = (List<ProductAttachment>) request.getAttribute("pAttach");
-   	List<ProductEntity> productList = (List<ProductEntity>) request.getAttribute("productList");
- 
-   	for(ProductEntity product : productList) {
-   %>
-      <div class="product-view">
-		<a href="<%= request.getContextPath() %>/product/productView?no=<%=product.getNo()%>">
-		 <img src="<%=request.getContextPath() %>/upload/product/travel_lab.jpg" alt="">
-		</a>
-        <p><%=product.getP_name() %></p>
-     </div>
-    <% }
-    %>
-    </div>
-    <div style="clear: both;"></div>
-    
 
-</div>
-  
+		<%
+		List<ProductAttachment> pAttach = (List<ProductAttachment>) request.getAttribute("pAttach");
+		List<Product> productList = (List<Product>) request.getAttribute("productList");
+
+		for (Product product : productList) {
+		%>
+		<div class="product-view">
+			<a
+				href="<%=request.getContextPath()%>/product/productView?no=<%=product.getNo()%>">
+				<img
+				src="<%=request.getContextPath()%>/upload/product/travel_lab.jpg"
+				alt="">
+			</a>
+			<p><%=product.getP_name()%></p>
+		</div>
+		<%
+		}
+		%>
+	</div>
+	<div style="clear: both;"></div>
+
+
+
 
 </section>
-  
 
-<div id='pageBar'><%= request.getAttribute("pagebar") %></div>
 
-</body>
-</html>
+<div id='pageBar'><%=request.getAttribute("pagebar")%></div>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

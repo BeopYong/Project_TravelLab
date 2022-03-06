@@ -3,10 +3,10 @@ package com.tlab.mvc.cs.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class CsComment implements Serializable{
+public class CsComment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int no;
 	private int commentLevel;
 	private String writer;
@@ -14,7 +14,7 @@ public class CsComment implements Serializable{
 	private int csBoardno;
 	private int commentRef;
 	private Date regDate;
-	
+
 	public CsComment() {
 		super();
 	}
@@ -92,5 +92,5 @@ public class CsComment implements Serializable{
 		return "CsComment [no=" + no + ", commentLevel=" + commentLevel + ", writer=" + writer + ", content=" + content
 				+ ", csBoardno=" + csBoardno + ", commentRef=" + commentRef + ", regDate=" + regDate + "]";
 	}
-	
+
 }

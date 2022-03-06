@@ -21,27 +21,26 @@ import com.tlab.mvc.member.model.vo.Member;
 public class CartListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CartService cartService = new CartService();
-	
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession();
 			Member memberId = (Member) session.getAttribute("loginMember");
 			System.out.println("[CartListServlet] = " + memberId);
 			List<Cart> list = cartService.selectAllCartList(memberId);
 			System.out.println("[CartListServlet] = " + list);
-			
-			request.setAttribute("list", list);
-			request
-				.getRequestDispatcher("/WEB-INF/views/cart/cartListTest.jsp")
-				.forward(request, response);
-		 } catch(Exception e){
-			 e.printStackTrace();
-			 throw e;
-		 }
-	}
 
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/WEB-INF/views/cart/cartListTest.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
 }

@@ -5,16 +5,14 @@ import java.util.Objects;
 
 import com.tlab.mvc.member.model.vo.Member;
 
-public class Admin extends Member{
+public class Admin extends Member {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	private String memberRole;
 
+	private String memberRole;
 
 	public Admin() {
 		super();
@@ -38,16 +36,13 @@ public class Admin extends Member{
 		super(memberId, memberName, payCode, email, tel);
 	}
 
-
 	public Admin(String memberId, String password, String memberName, String email, int payCode, String tel) {
 		super(memberId, password, memberName, email, payCode, tel);
 	}
 
-
 	public Admin(String memberId, String password) {
 		super(memberId, password);
 	}
-
 
 	public String getMemberRole() {
 		return memberRole;
@@ -57,12 +52,9 @@ public class Admin extends Member{
 		this.memberRole = memberRole;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Admin ["+super.toString()+", memberRole=" + memberRole + "]";
+		return "Admin [" + super.toString() + ", memberRole=" + memberRole + "]";
 	}
 
-	
-		
 }
